@@ -11,17 +11,17 @@ void setup() {
 void loop() {
   lettura = digitalRead(pinSwitch);  //leggiamo il valore del pin 11 e salviamolo
 
-  if(lettura == HIGH){                    //se la lettura è alta
+  if(lettura == HIGH){                    //SE la lettura è alta
     stato = !stato;                       //cambia lo stato
     delay(200);                           //aspetta qualche secondo
   }
 
-  if(stato == HIGH){                    //se lo stato è alta
+  if(stato == HIGH){                    //SE lo stato è alta
     
       digitalWrite(pinLed, HIGH);        //accendi il led
       
     }
-    else{                                //altrimenti
+    else{                                //ALTRIMENTI
       
       digitalWrite(pinLed, LOW);         //tieni spento il led
       
