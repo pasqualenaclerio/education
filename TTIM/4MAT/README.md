@@ -1,8 +1,8 @@
-# TEEA — 4MAT
+# TTIM — 4MAT
 
 🇮🇹 Italiano | [🇬🇧 English](README.en.md)
 
-Questa cartella raccoglie il materiale didattico di **TEEA – Tecnologie elettrico-elettroniche e applicazioni** destinato alla **classe 4ª MAT** del percorso **Manutenzione e Assistenza Tecnica**.
+Questa cartella raccoglie il materiale didattico di **TTIM – Tecnologie e tecniche di installazione e manutenzione** destinato alla **classe 4ª MAT** del percorso **Manutenzione e Assistenza Tecnica**.
 
 Le dispense, le esercitazioni, gli esempi e gli eventuali progetti presenti in questa cartella fanno parte del **programma didattico della classe 4ª** e possono essere aggiornati o integrati nel corso dell'anno scolastico.
 

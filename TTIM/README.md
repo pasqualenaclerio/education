@@ -1,10 +1,10 @@
-# TEEA
+# TTIM
 
 🇮🇹 Italiano | [🇬🇧 English](README.en.md)
 
-**TEEA** significa **Tecnologie elettrico-elettroniche e applicazioni**.
+**TTIM** significa **Tecnologie e tecniche di installazione e manutenzione**.
 
-La disciplina fa parte del percorso **MAT – Manutenzione e Assistenza Tecnica** e riguarda lo studio dei principi dell'elettrotecnica e dell'elettronica, dei componenti e dei circuiti, delle misure elettriche ed elettroniche e delle loro applicazioni pratiche.
+La disciplina fa parte del percorso **MAT – Manutenzione e Assistenza Tecnica** e affronta le tecniche di installazione, manutenzione, verifica e gestione di impianti, apparati e sistemi tecnici, con attenzione alla diagnostica dei guasti, alla sicurezza, alla documentazione tecnica e alla pianificazione degli interventi.
 
 Questa cartella raccoglie dispense, esercitazioni, esempi e materiali utilizzati durante le lezioni e le attività di laboratorio delle classi **3ª, 4ª e 5ª MAT**.
 
