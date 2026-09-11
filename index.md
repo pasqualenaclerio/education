@@ -7,7 +7,9 @@ title: education
 
 ### Materiali didattici — Prof. Pasquale Naclerio
 
-🇮🇹 Italiano | [🇬🇧 English](index.en.md)
+🇮🇹 Italiano | [🇬🇧 English](/education/index.en.html)
+
+[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
 
 Benvenuto in **education**, un progetto didattico che raccoglie dispense, esercitazioni, programmi, esempi e progetti utilizzati durante le lezioni e le attività di laboratorio.
 
@@ -19,15 +21,13 @@ Il materiale è rivolto principalmente al percorso **MAT – Manutenzione e Assi
 
 **Tecnologie elettrico-elettroniche e applicazioni**
 
-Materiali dedicati allo studio dell'elettrotecnica, dell'elettronica, dei circuiti, delle misure e delle applicazioni pratiche.
+Materiali dedicati a elettrotecnica, elettronica, circuiti, misure e applicazioni pratiche.
 
-### Classi
+- [3MAT](/education/TEEA/3MAT/)
+- [4MAT](/education/TEEA/4MAT/)
+- [5MAT](/education/TEEA/5MAT/)
 
-- [3MAT](TEEA/3MAT/README.md)
-- [4MAT](TEEA/4MAT/README.md)
-- [5MAT](TEEA/5MAT/README.md)
-
-➡️ [Vai alla sezione TEEA](TEEA/README.md)
+➡️ [Vai alla sezione TEEA](/education/TEEA/)
 
 ---
 
@@ -35,38 +35,26 @@ Materiali dedicati allo studio dell'elettrotecnica, dell'elettronica, dei circui
 
 **Tecnologie e tecniche di installazione e manutenzione**
 
-Materiali dedicati all'installazione, alla manutenzione, alla diagnostica dei guasti, alla sicurezza e alla gestione di impianti e sistemi tecnici.
+Materiali dedicati a installazione, manutenzione, diagnostica, sicurezza e gestione di impianti e sistemi tecnici.
 
-### Classi
+- [3MAT](/education/TTIM/3MAT/)
+- [4MAT](/education/TTIM/4MAT/)
+- [5MAT](/education/TTIM/5MAT/)
 
-- [3MAT](TTIM/3MAT/README.md)
-- [4MAT](TTIM/4MAT/README.md)
-- [5MAT](TTIM/5MAT/README.md)
-
-➡️ [Vai alla sezione TTIM](TTIM/README.md)
+➡️ [Vai alla sezione TTIM](/education/TTIM/)
 
 ---
 
 ## 🤖 ARDUINO
 
-Progetti ed esercitazioni sviluppati con **Arduino** per applicare in laboratorio concetti di elettronica, programmazione, sensoristica, acquisizione dati, automazione e controllo.
+Progetti ed esercitazioni sviluppati con Arduino per attività di elettronica, programmazione, sensoristica, acquisizione dati, automazione e controllo.
 
-➡️ [Vai ai progetti Arduino](ARDUINO/README.md)
-
----
-
-## 📂 Repository GitHub
-
-Tutti i file, i sorgenti e la cronologia del progetto sono disponibili nel repository:
-
-[github.com/pasqualenaclerio/education](https://github.com/pasqualenaclerio/education)
+➡️ [Vai ai progetti Arduino](/education/ARDUINO/)
 
 ---
 
 ## Utilizzo del materiale
 
-Il materiale è disponibile gratuitamente per finalità didattiche e formative.
-
-Può essere consultato, copiato, adattato e riutilizzato citando chiaramente la fonte e l'autore.
+Il materiale è disponibile gratuitamente per finalità didattiche e formative e può essere riutilizzato citando chiaramente la fonte e l'autore.
 
 **Autore:** Prof. Pasquale Naclerio

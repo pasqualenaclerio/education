@@ -7,9 +7,11 @@ title: education
 
 ### Teaching Materials — Professor Pasquale Naclerio
 
-[🇮🇹 Italiano](index.md) | 🇬🇧 English
+[🇮🇹 Italiano](/education/) | 🇬🇧 English
 
-Welcome to **education**, a teaching project that collects lecture notes, exercises, programmes, examples, and projects used during lessons and laboratory activities.
+[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
+
+Welcome to **education**, a teaching project collecting lecture notes, exercises, programmes, examples, and projects used during lessons and laboratory activities.
 
 The materials are mainly intended for the **MAT – Manutenzione e Assistenza Tecnica** (*Maintenance and Technical Assistance*) vocational pathway and are organized by subject and class.
 
@@ -22,13 +24,11 @@ The materials are mainly intended for the **MAT – Manutenzione e Assistenza Te
 
 Materials covering electrical engineering, electronics, circuits, measurements, and practical applications.
 
-### Classes
+- [3MAT](/education/TEEA/3MAT/index.en.html)
+- [4MAT](/education/TEEA/4MAT/index.en.html)
+- [5MAT](/education/TEEA/5MAT/index.en.html)
 
-- [3MAT](TEEA/3MAT/README.en.md)
-- [4MAT](TEEA/4MAT/README.en.md)
-- [5MAT](TEEA/5MAT/README.en.md)
-
-➡️ [Go to TEEA](TEEA/README.en.md)
+➡️ [Go to TEEA](/education/TEEA/index.en.html)
 
 ---
 
@@ -37,38 +37,26 @@ Materials covering electrical engineering, electronics, circuits, measurements, 
 **Tecnologie e tecniche di installazione e manutenzione**  
 *Installation and Maintenance Technologies and Techniques*
 
-Materials covering installation, maintenance, fault diagnosis, safety, and the management of technical systems and equipment.
+Materials covering installation, maintenance, diagnostics, safety, and technical systems management.
 
-### Classes
+- [3MAT](/education/TTIM/3MAT/index.en.html)
+- [4MAT](/education/TTIM/4MAT/index.en.html)
+- [5MAT](/education/TTIM/5MAT/index.en.html)
 
-- [3MAT](TTIM/3MAT/README.en.md)
-- [4MAT](TTIM/4MAT/README.en.md)
-- [5MAT](TTIM/5MAT/README.en.md)
-
-➡️ [Go to TTIM](TTIM/README.en.md)
+➡️ [Go to TTIM](/education/TTIM/index.en.html)
 
 ---
 
 ## 🤖 ARDUINO
 
-Projects and laboratory activities developed with **Arduino** to apply concepts of electronics, programming, sensors, data acquisition, automation, and control.
+Arduino projects and exercises for electronics, programming, sensors, data acquisition, automation, and control.
 
-➡️ [Go to Arduino projects](ARDUINO/README.en.md)
-
----
-
-## 📂 GitHub repository
-
-All files, source code, and project history are available in the repository:
-
-[github.com/pasqualenaclerio/education](https://github.com/pasqualenaclerio/education)
+➡️ [Go to Arduino projects](/education/ARDUINO/index.en.html)
 
 ---
 
 ## Use of the material
 
-The material is available free of charge for educational and training purposes.
-
-It may be consulted, copied, adapted, and reused provided that the source and the author are clearly cited.
+The material is available free of charge for educational and training purposes and may be reused provided that the source and author are clearly cited.
 
 **Author:** Professor Pasquale Naclerio
