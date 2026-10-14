@@ -21,6 +21,12 @@ Questa sezione raccoglie il materiale didattico destinato alle classi del percor
 - [4MAT](/education/TEEA/4MAT/)
 - [5MAT](/education/TEEA/5MAT/)
 
+## Laboratorio
+
+Le **web app didattiche** utilizzate nelle attività di laboratorio, raccolte in un'unica pagina e organizzate per classe.
+
+➡️ [Vai al laboratorio TEEA](/education/TEEA/laboratorio/)
+
 ---
 
 **Autore:** Prof. Pasquale Naclerio

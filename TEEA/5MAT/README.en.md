@@ -18,6 +18,10 @@ Add the programme topics here, for example:
 
 _Programme currently being updated._
 
+## Laboratory
+
+The class laboratory web apps are stored in the [`laboratorio`](laboratorio/) folder.
+
 ---
 
 **Author:** Professor Pasquale Naclerio  

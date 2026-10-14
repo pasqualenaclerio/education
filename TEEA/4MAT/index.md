@@ -27,6 +27,18 @@ _Programma in aggiornamento._
 
 _Materiali in aggiornamento._
 
+## Laboratorio
+
+<!--
+Aggiungere qui le web app di laboratorio della classe, ad esempio:
+
+- [Nome web app](/education/TEEA/4MAT/laboratorio/nome-web-app/) — breve descrizione
+-->
+
+_Web app in aggiornamento._
+
+➡️ [Tutte le web app di laboratorio TEEA](/education/TEEA/laboratorio/)
+
 ---
 
 [← Torna a TEEA](/education/TEEA/)

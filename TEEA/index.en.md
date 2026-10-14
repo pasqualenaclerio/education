@@ -23,6 +23,12 @@ This section contains teaching materials for the **MAT – Manutenzione e Assist
 - [4MAT](/education/TEEA/4MAT/index.en.html)
 - [5MAT](/education/TEEA/5MAT/index.en.html)
 
+## Laboratory
+
+The **educational web apps** used during laboratory activities, collected on a single page and organised by class.
+
+➡️ [Go to the TEEA laboratory](/education/TEEA/laboratorio/index.en.html)
+
 ---
 
 **Author:** Professor Pasquale Naclerio

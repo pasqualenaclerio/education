@@ -13,6 +13,9 @@ This folder contains lecture notes, exercises, examples, and materials used duri
 - [`3MAT`](3MAT/) — materials for the 3rd-year MAT class
 - [`4MAT`](4MAT/) — materials for the 4th-year MAT class
 - [`5MAT`](5MAT/) — materials for the 5th-year MAT class
+- [`laboratorio`](laboratorio/) — page listing all laboratory web apps
+
+Each class folder also contains a `laboratorio` folder with its web apps.
 
 ---
 

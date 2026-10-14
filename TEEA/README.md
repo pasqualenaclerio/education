@@ -13,6 +13,9 @@ Questa cartella raccoglie dispense, esercitazioni, esempi e materiali utilizzati
 - [`3MAT`](3MAT/) — materiali per la classe 3ª MAT
 - [`4MAT`](4MAT/) — materiali per la classe 4ª MAT
 - [`5MAT`](5MAT/) — materiali per la classe 5ª MAT
+- [`laboratorio`](laboratorio/) — pagina con tutte le web app di laboratorio
+
+Ogni classe contiene inoltre una cartella `laboratorio` con le relative web app.
 
 ---
 

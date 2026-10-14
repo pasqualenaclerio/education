@@ -27,6 +27,18 @@ _Programme currently being updated._
 
 _Materials currently being updated._
 
+## Laboratory
+
+<!--
+Add the class laboratory web apps here, for example:
+
+- [Web app name](/education/TEEA/3MAT/laboratorio/web-app-name/) — short description
+-->
+
+_Web apps currently being updated._
+
+➡️ [All TEEA laboratory web apps](/education/TEEA/laboratorio/index.en.html)
+
 ---
 
 [← Back to TEEA](/education/TEEA/index.en.html)

@@ -18,6 +18,10 @@ Aggiungere qui gli argomenti del programma, ad esempio:
 
 _Programma in aggiornamento._
 
+## Laboratorio
+
+Le web app di laboratorio della classe si trovano nella cartella [`laboratorio`](laboratorio/).
+
 ---
 
 **Autore:** Prof. Pasquale Naclerio  
