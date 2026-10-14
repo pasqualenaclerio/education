@@ -7,10 +7,6 @@ title: TEEA — 3MAT
 
 ### Electrical and Electronic Technologies and Applications
 
-[🇮🇹 Italiano](/education/TEEA/3MAT/) | 🇬🇧 English
-
-[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
-
 This page contains **TEEA** teaching materials for the **3rd-year MAT class**.
 
 The lecture notes, exercises, examples, and projects in this section form part of the **teaching programme for the 3rd year** and may be updated during the school year.
@@ -30,17 +26,16 @@ _Materials currently being updated._
 ## Laboratory
 
 <!--
-Add the class laboratory web apps here, for example:
-
-- [Web app name](/education/TEEA/3MAT/laboratorio/web-app-name/) — short description
+To add a web app copy this line inside <div class="app-grid"> and change address, name and description:
+<a class="app" href="/education/TEEA/3MAT/laboratorio/web-app-name/"><strong>Web app name</strong><span>Short description</span><em>▶ START</em></a>
 -->
 
-_Web apps currently being updated._
+<div class="app-grid">
+<div class="vuoto">WEB APPS COMING SOON…</div>
+</div>
 
 ➡️ [All TEEA laboratory web apps](/education/TEEA/laboratorio/index.en.html)
 
 ---
 
 [← Back to TEEA](/education/TEEA/index.en.html)
-
-**Author:** Professor Pasquale Naclerio

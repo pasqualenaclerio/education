@@ -7,10 +7,6 @@ title: TTIM — 3MAT
 
 ### Tecnologie e tecniche di installazione e manutenzione
 
-🇮🇹 Italiano | [🇬🇧 English](/education/TTIM/3MAT/index.en.html)
-
-[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
-
 Questa pagina raccoglie il materiale didattico di **TTIM** destinato alla **classe 3ª MAT**.
 
 Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezione fanno parte del **programma didattico della classe 3ª** e possono essere aggiornati durante l'anno scolastico.
@@ -30,5 +26,3 @@ _Materiali in aggiornamento._
 ---
 
 [← Torna a TTIM](/education/TTIM/)
-
-**Autore:** Prof. Pasquale Naclerio

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{%- assign en = false -%}
+{%- if page.name contains '.en.' -%}{%- assign en = true -%}{%- endif -%}
+{%- if en -%}{%- assign suf = 'index.en.html' -%}{%- else -%}{%- assign suf = '' -%}{%- endif -%}
+{%- assign base = site.baseurl -%}
+<html lang="{% if en %}en{% else %}it{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title and page.title != site.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="author" content="Prof. Pasquale Naclerio">
+  <link rel="icon" href="{{ base }}/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ base }}/assets/css/arcade.css">
+</head>
+<body>
+  <a class="salta" href="#contenuto">{% if en %}Skip to content{% else %}Vai al contenuto{% endif %}</a>
+
+  <header class="testata">
+    <div class="testata-in">
+      <a class="logo" href="{{ base }}/{{ suf }}">EDUCATION</a>
+      <span class="giocatore">PLAYER 1 · MAT</span>
+    </div>
+    <nav class="menu" aria-label="{% if en %}Main menu{% else %}Menu principale{% endif %}">
+      <a href="{{ base }}/{{ suf }}"{% if page.url == '/' or page.url == '/index.en.html' %} class="qui"{% endif %}>HOME</a>
+      <a href="{{ base }}/TEEA/{{ suf }}"{% if page.url contains '/TEEA/' %} class="qui"{% endif %}>TEEA</a>
+      <a href="{{ base }}/TTIM/{{ suf }}"{% if page.url contains '/TTIM/' %} class="qui"{% endif %}>TTIM</a>
+      <a href="{{ base }}/ARDUINO/{{ suf }}"{% if page.url contains '/ARDUINO/' %} class="qui"{% endif %}>ARDUINO</a>
+      <a href="https://github.com/pasqualenaclerio/education">GITHUB</a>
+      {%- if page.name == 'index.md' %}
+      <a class="lingua" href="{{ base }}{{ page.url }}index.en.html" hreflang="en" lang="en">EN</a>
+      {%- elsif page.name == 'index.en.md' %}
+      <a class="lingua" href="{{ base }}{{ page.url | replace: 'index.en.html', '' }}" hreflang="it" lang="it">IT</a>
+      {%- endif %}
+    </nav>
+  </header>
+
+  <main id="contenuto" class="pagina">
+{{ content }}
+  </main>
+
+  <footer class="piede">
+    <p>© PROF. PASQUALE NACLERIO · <a href="https://github.com/pasqualenaclerio/education">GITHUB</a></p>
+    <p class="piede-nota">{% if en %}Free to reuse for teaching, citing the source and the author.{% else %}Materiale riutilizzabile per la didattica citando fonte e autore.{% endif %}</p>
+    <p class="lampeggia">INSERT COIN TO CONTINUE</p>
+  </footer>
+</body>
+</html>

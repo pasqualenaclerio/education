@@ -7,11 +7,7 @@ title: Direct and alternating electrical signals — TEEA 4MAT
 
 ### TEEA — 4MAT · Topic 1
 
-[🇮🇹 Italiano](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/) | 🇬🇧 English
-
-[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
-
-📄 **[Download the explanation as PDF](pdf/01-dc-ac-signals.pdf)**
+<a class="btn btn-pdf" href="pdf/01-dc-ac-signals.pdf" download>Download the explanation as PDF</a>
 
 ---
 
@@ -142,5 +138,3 @@ For the domestic mains *f* = 50 Hz:
 ➡️ To see sine waves, phasors and phase shift in motion, use the [Alternating current](/education/TEEA/4MAT/laboratorio/ca/) web app *(in Italian)*.
 
 [← Back to TEEA — 4MAT](/education/TEEA/4MAT/index.en.html)
-
-**Author:** Professor Pasquale Naclerio

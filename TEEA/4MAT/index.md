@@ -7,10 +7,6 @@ title: TEEA — 4MAT
 
 ### Tecnologie elettrico-elettroniche e applicazioni
 
-🇮🇹 Italiano | [🇬🇧 English](/education/TEEA/4MAT/index.en.html)
-
-[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
-
 Questa pagina raccoglie il materiale didattico di **TEEA** destinato alla **classe 4ª MAT**.
 
 Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezione fanno parte del **programma didattico della classe 4ª** e possono essere aggiornati durante l'anno scolastico.
@@ -31,13 +27,13 @@ _Materiali in aggiornamento._
 
 ## Laboratorio
 
-- [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/) — fasori, sinusoidi, sfasamento, impedenza (R, L, C, RLC serie), potenza e valori efficaci
-- [Filtri RC](/education/TEEA/4MAT/laboratorio/filtri_rc/) — filtri passivi RC passa basso, passa alto e passa banda applicati a segnali con armoniche e a un brano audio con rumore
+<div class="app-grid">
+<a class="app" href="/education/TEEA/4MAT/laboratorio/ca/"><strong>Corrente alternata</strong><span>Fasori, sinusoidi, sfasamento, impedenza R-L-C, potenza e valori efficaci.</span><em>▶ START</em></a>
+<a class="app" href="/education/TEEA/4MAT/laboratorio/filtri_rc/"><strong>Filtri RC</strong><span>Filtri passa basso, passa alto e passa banda su segnali con armoniche e su audio con rumore.</span><em>▶ START</em></a>
+</div>
 
 ➡️ [Tutte le web app di laboratorio TEEA](/education/TEEA/laboratorio/)
 
 ---
 
 [← Torna a TEEA](/education/TEEA/)
-
-**Autore:** Prof. Pasquale Naclerio

@@ -7,11 +7,7 @@ title: Segnali elettrici continui e alternati — TEEA 4MAT
 
 ### TEEA — 4MAT · Argomento 1
 
-🇮🇹 Italiano | [🇬🇧 English](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html)
-
-[Home](/education/) · [TEEA](/education/TEEA/) · [TTIM](/education/TTIM/) · [Arduino](/education/ARDUINO/) · [GitHub](https://github.com/pasqualenaclerio/education)
-
-📄 **[Scarica la spiegazione in PDF](pdf/01-segnali-continui-alternati.pdf)**
+<a class="btn btn-pdf" href="pdf/01-segnali-continui-alternati.pdf" download>Scarica la spiegazione in PDF</a>
 
 ---
 
@@ -142,5 +138,3 @@ Per la rete domestica *f* = 50 Hz:
 ➡️ Per vedere sinusoidi, fasori e sfasamento in movimento usa la web app [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/).
 
 [← Torna a TEEA — 4MAT](/education/TEEA/4MAT/)
-
-**Autore:** Prof. Pasquale Naclerio
