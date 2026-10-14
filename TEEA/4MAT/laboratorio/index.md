@@ -15,13 +15,8 @@ Questa pagina raccoglie le **web app di laboratorio** di TEEA per la **classe 4�
 
 ## Web app
 
-<!--
-Aggiungere qui le web app, ad esempio:
-
-- [Nome web app](nome-web-app/) — breve descrizione
--->
-
-_Web app in aggiornamento._
+- [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/) — fasori, sinusoidi, sfasamento, impedenza (R, L, C, RLC serie), potenza e valori efficaci
+- [Filtri RC](/education/TEEA/4MAT/laboratorio/filtri_rc/) — filtri passivi RC passa basso, passa alto e passa banda applicati a segnali con armoniche e a un brano audio con rumore
 
 ---
 

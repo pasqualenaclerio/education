@@ -29,13 +29,8 @@ _Materiali in aggiornamento._
 
 ## Laboratorio
 
-<!--
-Aggiungere qui le web app di laboratorio della classe, ad esempio:
-
-- [Nome web app](/education/TEEA/4MAT/laboratorio/nome-web-app/) — breve descrizione
--->
-
-_Web app in aggiornamento._
+- [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/) — fasori, sinusoidi, sfasamento, impedenza (R, L, C, RLC serie), potenza e valori efficaci
+- [Filtri RC](/education/TEEA/4MAT/laboratorio/filtri_rc/) — filtri passivi RC passa basso, passa alto e passa banda applicati a segnali con armoniche e a un brano audio con rumore
 
 ➡️ [Tutte le web app di laboratorio TEEA](/education/TEEA/laboratorio/)
 

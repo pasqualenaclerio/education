@@ -36,13 +36,11 @@ _Web apps currently being updated._ · [3MAT laboratory →](/education/TEEA/3MA
 ## 4MAT
 
 <div class="lab-apps">
-<!--
-  Add a button here for each web app of the 4th-year MAT class, for example:
-  <a class="lab-btn" href="/education/TEEA/4MAT/laboratorio/web-app-name/">Web app name</a>
--->
+  <a class="lab-btn" href="/education/TEEA/4MAT/laboratorio/ca/">Alternating current</a>
+  <a class="lab-btn" href="/education/TEEA/4MAT/laboratorio/filtri_rc/">RC filters</a>
 </div>
 
-_Web apps currently being updated._ · [4MAT laboratory →](/education/TEEA/4MAT/laboratorio/index.en.html)
+[4MAT laboratory →](/education/TEEA/4MAT/laboratorio/index.en.html)
 
 ## 5MAT
 

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratorio filtri RC</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="testata">
+  <div>
+    <h1>Laboratorio filtri RC</h1>
+    <p>Un segnale con componenti indesiderate entra in un filtro fatto solo di resistenze e condensatori.
+       Scegli il filtro, cambia i valori, guarda e ascolta che cosa ne esce.</p>
+  </div>
+  <label class="volume">Volume
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.6">
+  </label>
+</header>
+
+<main class="percorso">
+
+  <!-- ============ 1. INGRESSO ============ -->
+  <section class="stadio" id="sez-ingresso" aria-labelledby="t-ingresso">
+    <h2 class="nodo" id="t-ingresso"><span class="num">1</span>Segnale in ingresso</h2>
+    <div class="griglia">
+      <div class="comandi">
+        <fieldset class="scelta">
+          <legend>Sorgente</legend>
+          <label><input type="radio" name="sorgente" value="armoniche" checked> Segnale con armoniche</label>
+          <label><input type="radio" name="sorgente" value="audio"> Brano audio con rumore bianco</label>
+        </fieldset>
+
+        <div id="pannello-armoniche" class="comandi">
+          <label class="campo">Esempio pronto
+            <select id="preset"></select>
+          </label>
+          <p class="nota" id="descr-preset"></p>
+
+          <fieldset>
+            <legend>Segnale utile</legend>
+            <div class="riga">
+              <label>f₀ <input type="number" id="f0" min="1" max="20000" step="1"> Hz</label>
+              <label>A <input type="number" id="a0" min="0" max="5" step="0.05"> V</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Componenti indesiderate (al massimo 5)</legend>
+            <table class="disturbi">
+              <thead><tr><th><span class="sr">Attiva</span></th><th>f (Hz)</th><th>A (V)</th><th>f / f₀</th></tr></thead>
+              <tbody id="tab-disturbi"></tbody>
+            </table>
+          </fieldset>
+        </div>
+
+        <div id="pannello-audio" class="comandi" hidden>
+          <label class="campo">Brano
+            <select id="brano">
+              <option value="esempio">Fra Martino (esempio)</option>
+              <option value="utente" hidden>File caricato</option>
+            </select>
+          </label>
+          <label class="campo">Carica un tuo file audio
+            <input type="file" id="file-audio" accept="audio/*">
+          </label>
+          <label class="campo">Rumore bianco
+            <span class="riga-slider">
+              <input type="range" id="rumore" min="0" max="150" step="1">
+              <output id="rumore-val"></output>
+            </span>
+          </label>
+          <button type="button" class="secondario" id="rigenera">Genera un nuovo rumore</button>
+          <p class="nota" id="info-audio"></p>
+        </div>
+
+        <div class="ascolto">
+          <button type="button" class="play" data-play="pulito" data-etichetta="Ascolta il brano senza rumore" data-modo="audio" hidden aria-pressed="false"><span class="icona">▶</span><span class="testo">Ascolta il brano senza rumore</span></button>
+          <button type="button" class="play" data-play="ingresso" data-etichetta="Ascolta l'ingresso" aria-pressed="false"><span class="icona">▶</span><span class="testo">Ascolta l'ingresso</span></button>
+        </div>
+      </div>
+
+      <div class="vista">
+        <div class="schede" role="tablist" aria-label="Vista dell'ingresso" data-lato="in">
+          <button type="button" role="tab" data-vista="tempo">Nel tempo</button>
+          <button type="button" role="tab" data-vista="componenti" data-modo="armoniche">Componenti</button>
+          <button type="button" role="tab" data-vista="spettro">Spettro</button>
+        </div>
+        <canvas id="cv-in" class="grafico" aria-label="Grafico del segnale in ingresso"></canvas>
+        <div class="legenda" id="leg-in"></div>
+        <div class="opzioni">
+          <label data-modo="armoniche" title="Periodi della componente a frequenza più bassa">Periodi visibili
+            <input type="range" id="periodi" min="1" max="12" step="1" value="3"><output id="periodi-val">3</output>
+          </label>
+          <label data-modo="audio" hidden>Finestra
+            <input type="range" id="finestra" min="2" max="300" step="1" value="30"><output id="finestra-val">30 ms</output>
+          </label>
+          <label data-modo="audio" hidden>Punto del brano
+            <input type="range" id="posizione" min="0" max="100" step="0.5" value="30">
+          </label>
+          <label>Scala dello spettro
+            <select id="scala"><option value="db">decibel</option><option value="lin">lineare</option></select>
+          </label>
+          <label><input type="checkbox" id="mostra-filtro" checked> Filtro sullo spettro</label>
+          <label data-modo="audio" hidden><input type="checkbox" id="mostra-pulito" checked> Brano senza rumore</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. FILTRO ============ -->
+  <section class="stadio" id="sez-filtro" aria-labelledby="t-filtro">
+    <h2 class="nodo" id="t-filtro"><span class="num">2</span>Filtro RC</h2>
+    <div class="griglia">
+      <div class="comandi">
+        <fieldset class="scelta">
+          <legend>Tipo di filtro</legend>
+          <label><input type="radio" name="tipo" value="lp" checked> Passa basso</label>
+          <label><input type="radio" name="tipo" value="hp"> Passa alto</label>
+          <label><input type="radio" name="tipo" value="bp"> Passa banda</label>
+        </fieldset>
+
+        <div id="gruppi-rc" class="comandi"></div>
+
+        <label class="campo" id="campo-stadi">Stadi uguali in cascata
+          <select id="stadi">
+            <option value="1">1 stadio (primo ordine)</option>
+            <option value="2">2 stadi separati da buffer</option>
+            <option value="3">3 stadi separati da buffer</option>
+          </select>
+        </label>
+        <label class="spunta" id="campo-buffer" hidden>
+          <input type="checkbox" id="buffer"> Separa le due sezioni con un buffer
+        </label>
+
+        <p class="esito" id="esito-filtro"></p>
+      </div>
+
+      <div class="vista">
+        <figure class="schema">
+          <svg id="schema" role="img" aria-label="Schema elettrico del filtro"></svg>
+        </figure>
+        <canvas id="cv-modulo" class="grafico" aria-label="Diagramma di Bode del modulo"></canvas>
+        <canvas id="cv-fase" class="grafico" aria-label="Diagramma di Bode della fase"></canvas>
+        <div class="legenda" id="leg-bode"></div>
+        <p class="lettura" id="lettura-bode">Passa il puntatore sul diagramma di Bode per leggere guadagno e fase.</p>
+        <div class="scorri"><table class="effetto" id="tab-effetto"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. USCITA ============ -->
+  <section class="stadio" id="sez-uscita" aria-labelledby="t-uscita">
+    <h2 class="nodo" id="t-uscita"><span class="num">3</span>Segnale in uscita</h2>
+    <div class="griglia">
+      <div class="comandi">
+        <p class="risultato" id="risultato"></p>
+        <div class="ascolto">
+          <button type="button" class="play" data-play="uscita" data-etichetta="Ascolta l'uscita" aria-pressed="false"><span class="icona">▶</span><span class="testo">Ascolta l'uscita</span></button>
+        </div>
+        <p class="nota">Passa da ingresso a uscita mentre ascolti: il suono riprende dallo stesso punto, così il confronto è immediato.
+           Il volume non viene ritoccato, quindi senti anche quanto il filtro attenua.</p>
+        <label class="spunta"><input type="checkbox" id="sovrapponi" checked> Mostra l'ingresso in trasparenza</label>
+      </div>
+
+      <div class="vista">
+        <div class="schede" role="tablist" aria-label="Vista dell'uscita" data-lato="out">
+          <button type="button" role="tab" data-vista="tempo">Nel tempo</button>
+          <button type="button" role="tab" data-vista="componenti" data-modo="armoniche">Componenti</button>
+          <button type="button" role="tab" data-vista="spettro">Spettro</button>
+        </div>
+        <canvas id="cv-out" class="grafico" aria-label="Grafico del segnale in uscita"></canvas>
+        <div class="legenda" id="leg-out"></div>
+        <p class="nota">Assi, finestra di tempo e scala dello spettro sono gli stessi dell'ingresso.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="formule" aria-labelledby="t-formule">
+  <div class="formule-testa">
+    <div>
+      <h2 id="t-formule">Le formule</h2>
+      <p class="nota">Gli esempi usano gli stessi valori degli esempi pronti: puoi controllarli sui grafici qui sopra.</p>
+    </div>
+    <a class="scarica" href="docs/formulario-filtri-rc.pdf" download="formulario-filtri-rc.pdf">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+      Scarica il formulario in PDF
+    </a>
+  </div>
+
+  <div class="carte">
+    <article class="carta">
+      <h3>Frequenza di taglio</h3>
+      <div class="eq">f<sub>c</sub> = <span class="fr"><span>1</span><span>2π R C</span></span></div>
+      <p>Separa ciò che passa da ciò che viene attenuato. A f<sub>c</sub> l'uscita vale <b>0,707</b> volte l'ingresso (<b>−3 dB</b>) ed è sfasata di <b>45°</b>.</p>
+      <div class="eq piccola">R = <span class="fr"><span>1</span><span>2π f<sub>c</sub> C</span></span> <span class="commento">per progettare</span></div>
+      <p class="esempio"><b>Esempio</b> R = 4,7 kΩ, C = 100 nF → f<sub>c</sub> ≈ 339 Hz</p>
+    </article>
+
+    <article class="carta">
+      <h3>Passa basso</h3>
+      <div class="eq">|H| = <span class="fr"><span>1</span><span><span class="rad"><span>1 + (f / f<sub>c</sub>)<sup>2</sup></span></span></span></span></div>
+      <div class="eq piccola">φ = −arctan(f / f<sub>c</sub>)</div>
+      <p>Sotto f<sub>c</sub> passa quasi tutto. Sopra, ogni decade di frequenza toglie <b>20 dB</b>; la fase va da 0° a −90°.</p>
+      <p class="esempio"><b>Esempio</b> f<sub>c</sub> = 339 Hz, f = 1760 Hz → |H| ≈ 0,189 (−14,5 dB), φ ≈ −79°</p>
+    </article>
+
+    <article class="carta">
+      <h3>Passa alto</h3>
+      <div class="eq">|H| = <span class="fr"><span>f / f<sub>c</sub></span><span><span class="rad"><span>1 + (f / f<sub>c</sub>)<sup>2</sup></span></span></span></span></div>
+      <div class="eq piccola">φ = 90° − arctan(f / f<sub>c</sub>)</div>
+      <p>Il condensatore in serie blocca le frequenze basse. Sotto f<sub>c</sub> si perdono <b>20 dB</b> per decade; la fase va da +90° a 0°.</p>
+      <p class="esempio"><b>Esempio</b> f<sub>c</sub> = 339 Hz, f = 50 Hz → |H| ≈ 0,146 (−16,7 dB), φ ≈ +82°</p>
+    </article>
+
+    <article class="carta">
+      <h3>Guadagno in decibel</h3>
+      <div class="eq">G = 20 · log<sub>10</sub> <span class="fr"><span>V<sub>out</sub></span><span>V<sub>in</sub></span></span></div>
+      <table class="db">
+        <tr><th>dB</th><td>0</td><td>−3</td><td>−6</td><td>−20</td><td>−40</td></tr>
+        <tr><th>volte</th><td>1</td><td>0,707</td><td>0,5</td><td>0,1</td><td>0,01</td></tr>
+      </table>
+      <p class="esempio"><b>Esempio</b> V<sub>in</sub> = 2 V, V<sub>out</sub> = 0,5 V → G = 20 · log<sub>10</sub> 0,25 ≈ −12 dB</p>
+    </article>
+
+    <article class="carta">
+      <h3>Celle in cascata</h3>
+      <div class="eq">|H<sub>tot</sub>| = |H|<sup>n</sup> <span class="sep"></span> G<sub>tot</sub> = n · G</div>
+      <div class="eq piccola">f<sub>−3 dB</sub> = f<sub>c</sub> · <span class="rad"><span>2<sup>1/n</sup> − 1</span></span> <span class="commento">passa basso</span></div>
+      <p>Con n celle separate da buffer la pendenza diventa <b>20 · n dB</b> per decade, ma il taglio a −3 dB si sposta.</p>
+      <p class="esempio"><b>Esempio</b> 3 celle, f = 1760 Hz → 0,189<sup>3</sup> ≈ 0,0067 (−43,4 dB); taglio a 173 Hz</p>
+    </article>
+
+    <article class="carta">
+      <h3>Passa banda</h3>
+      <div class="eq"><span class="nw">f<sub>L</sub> = <span class="fr"><span>1</span><span>2π R<sub>1</sub>C<sub>1</sub></span></span></span> <span class="sep"></span> <span class="nw">f<sub>H</sub> = <span class="fr"><span>1</span><span>2π R<sub>2</sub>C<sub>2</sub></span></span></span></div>
+      <div class="eq piccola">f<sub>0</sub> = <span class="rad"><span>f<sub>L</sub> · f<sub>H</sub></span></span> <span class="sep"></span> B = f<sub>H</sub> − f<sub>L</sub></div>
+      <p>Passa la banda tra f<sub>L</sub> e f<sub>H</sub>. Senza buffer le due celle si caricano: conviene R<sub>2</sub> ≥ 10 · R<sub>1</sub>.</p>
+      <p class="esempio"><b>Esempio</b> f<sub>L</sub> ≈ 219 Hz, f<sub>H</sub> ≈ 2,19 kHz → f<sub>0</sub> ≈ 693 Hz, B ≈ 1,97 kHz</p>
+    </article>
+  </div>
+
+  <p class="nota piede">Brano di esempio: «Fra Martino», melodia tradizionale di pubblico dominio, sintetizzata appositamente per questo laboratorio.
+     Puoi usarlo e modificarlo liberamente.</p>
+</section>
+
+<script src="js/config.js"></script>
+<script src="js/formato.js"></script>
+<script src="js/fft.js"></script>
+<script src="js/filtri.js"></script>
+<script src="js/segnali.js"></script>
+<script src="js/grafici.js"></script>
+<script src="js/schema.js"></script>
+<script src="js/riproduttore.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

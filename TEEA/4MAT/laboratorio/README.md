@@ -14,7 +14,8 @@ laboratorio/
 
 ## Web app
 
-_Web app in aggiornamento._
+- [`ca`](ca/) — **Corrente alternata**: fasori, sinusoidi, sfasamento, impedenza (R, L, C, RLC serie), potenza e valori efficaci
+- [`filtri_rc`](filtri_rc/) — **Filtri RC**: filtri passivi RC passa basso, passa alto e passa banda applicati a segnali con armoniche e a un brano audio con rumore
 
 ---
 

@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratorio di corrente alternata</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzFDMkEzMyIvPjxwYXRoIGQ9Ik0zIDE2IEM3IDMsIDExIDMsIDE2IDE2IFMyNSAyOSwgMjkgMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzcyQTZGRiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4K" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+<style>
+/* css/tema.css */
+/* ==========================================================================
+   TEMA: colori e caratteri.
+   Per cambiare i colori basta modificare le variabili qui sotto.
+   --volt = tensione, --curr = corrente, --phase = sfasamento, --power = potenza
+   ========================================================================== */
+
+/* Tema chiaro */
+:root{
+  --paper:#EEF2EF; --panel:#FFFFFF; --ink:#1C2A33; --muted:#5B6B73; --grid:#DCE4E0; --line:#B9C6C0;
+  --volt:#1F5FBF; --curr:#C2352B; --phase:#B87C00; --power:#7A3FA0; --soft:#E6ECEA;
+  color-scheme:light;
+}
+
+/* Tema scuro (segue l'impostazione del dispositivo) */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
+    --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --power:#C792EA; --soft:#1F2C32;
+    color-scheme:dark;
+  }
+}
+/* Tema scuro forzato con <html data-theme="dark"> */
+:root[data-theme="dark"]{
+  --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
+  --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --power:#C792EA; --soft:#1F2C32;
+  color-scheme:dark;
+}
+
+body{
+  font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.5;
+}
+h1,h2{font-family:"Bricolage Grotesque","Atkinson Hyperlegible",system-ui,sans-serif;font-weight:700}
+
+</style>
+<style>
+/* css/layout.css */
+/* ==========================================================================
+   LAYOUT: struttura della pagina (colonne, spaziature, adattamento a mobile)
+   ========================================================================== */
+
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink)}
+
+.wrap{max-width:1440px;margin:0 auto;padding:20px clamp(12px,3vw,32px) 40px}
+
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 20px;margin-bottom:16px}
+h1{font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:-.02em;line-height:1.1;margin:0}
+header p{margin:0;color:var(--muted);max-width:60ch}
+h2{font-size:1.15rem;margin:0 0 10px}
+
+/* Due colonne: check list a sinistra, oscilloscopio a destra */
+.layout{display:grid;grid-template-columns:minmax(300px,360px) minmax(0,1fr);gap:20px;align-items:start}
+.stage{display:grid;gap:20px;min-width:0}
+/* Sotto l'oscilloscopio: carico e formule affiancati */
+.lower{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+
+@media (max-width:1100px){ .lower{grid-template-columns:1fr} }
+/* Su schermi stretti l'oscilloscopio va in alto e la check list sotto */
+@media (max-width:920px){ .layout{grid-template-columns:1fr} .stage{order:-1} }
+
+</style>
+<style>
+/* css/componenti.css */
+/* ==========================================================================
+   COMPONENTI: pannelli, check list, slider, pulsanti, oscilloscopio, schede
+   ========================================================================== */
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+:focus-visible{outline:2px solid var(--volt);outline-offset:2px}
+
+/* ---------- Check list ---------- */
+.checklist{padding:14px 14px 6px}
+.checklist>p{margin:0 0 12px;color:var(--muted);font-size:.92rem}
+.item{border-top:1px solid var(--grid);padding:10px 0}
+.item:first-of-type{border-top:0}
+.item-head{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:700}
+.item-head input{width:20px;height:20px;margin:0;accent-color:var(--c,var(--ink));flex:none}
+.swatch{width:14px;height:4px;border-radius:2px;background:var(--c,var(--ink));flex:none}
+.item-body{display:none;padding:8px 0 2px 30px}
+.item.on .item-body{display:block}
+/* colore associato a ogni voce */
+.item[data-c="v"]{--c:var(--volt)}
+.item[data-c="i"]{--c:var(--curr)}
+.item[data-c="p"]{--c:var(--phase)}
+.item[data-c="w"]{--c:var(--power)}
+
+/* ---------- Riga con slider + casella numerica ---------- */
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;margin:6px 0 10px}
+.row label{font-size:.92rem}
+.row input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--c,var(--ink));margin:0}
+.num{display:flex;align-items:center;gap:4px;font-size:.92rem;color:var(--muted)}
+.num input,.num select{padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font:inherit}
+.num input{width:5.8em;font-variant-numeric:tabular-nums;text-align:right}
+.row.locked input{opacity:.6}
+
+.note{font-size:.88rem;color:var(--muted);margin:4px 0 8px}
+.sub{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:.95rem;cursor:pointer}
+.sub input{accent-color:var(--ink);width:17px;height:17px;margin:0}
+
+/* ---------- Scelta a pillole (tipo di carico, cosa ascoltare) ---------- */
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.seg label{padding:5px 11px;font-size:.88rem;cursor:pointer;border:1px solid var(--line);border-radius:999px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);color:var(--panel);border-color:var(--ink);font-weight:700}
+.seg label:has(input:focus-visible){outline:2px solid var(--volt);outline-offset:2px}
+
+.res{background:var(--soft);border-radius:8px;padding:8px 10px;font-size:.92rem;margin:4px 0 8px}
+.res .btn{margin-top:6px}
+.live-phase{font-variant-numeric:tabular-nums;font-size:.95rem}
+
+/* ---------- Pulsanti e barra comandi ---------- */
+.btn{font:inherit;font-weight:700;padding:7px 14px;border-radius:8px;border:1px solid var(--line);
+  background:var(--paper);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink);min-width:6.5em}
+.btn.small{padding:5px 10px;font-size:.88rem}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:8px}
+.tl{display:flex;align-items:center;gap:8px;font-size:.92rem;color:var(--muted)}
+.tl input[type=range]{width:130px;accent-color:var(--ink)}
+.tl.check{cursor:pointer;color:var(--ink)}
+.tl.check input{width:17px;height:17px;margin:0;accent-color:var(--ink)}
+.tl output{min-width:4.2em;color:var(--ink);font-variant-numeric:tabular-nums}
+.tl select{font:inherit;padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+
+/* ---------- Oscilloscopio ---------- */
+.scope{padding:12px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:.9rem;margin:4px 2px 6px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:16px;height:3px;border-radius:2px;background:var(--lc);vertical-align:middle;margin-right:6px}
+.canvas-box{width:100%;position:relative}
+#scope{display:block;width:100%}
+.live{font-variant-numeric:tabular-nums;font-size:.95rem;margin:6px 2px 0;display:flex;flex-wrap:wrap;gap:4px 22px}
+
+/* ---------- Scheda del carico ---------- */
+.card{padding:16px}
+.circ{width:100%;max-width:440px;display:block;color:var(--ink)}
+.circ text{font-family:inherit;font-size:12px;fill:currentColor}
+.comp{transition:opacity .4s ease}
+@media (prefers-reduced-motion:reduce){.comp{transition:none}}
+.zstate{font-weight:700;margin:6px 0 10px}
+#zplane{display:block;width:100%;height:200px}
+.zvals{font-size:.92rem;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+
+/* ---------- Scheda formule ---------- */
+.eq{font-size:1.05rem;margin:2px 0;font-variant-numeric:tabular-nums;overflow-x:auto;white-space:nowrap}
+.eq.v{color:var(--volt)}
+.eq.i{color:var(--curr)}
+dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px 16px;margin:14px 0}
+dl div{border-left:3px solid var(--grid);padding-left:8px}
+dt{font-size:.85rem;color:var(--muted)}
+dd{margin:0;font-variant-numeric:tabular-nums;font-weight:700}
+.explain{background:var(--soft);border-radius:8px;padding:12px 14px;margin:0;max-width:72ch}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Laboratorio di corrente alternata</h1>
+  <p>Un vettore che ruota sulla circonferenza disegna una sinusoide. Cambia ampiezza, fase, frequenza e carico e guarda come si spostano tensione e corrente.</p>
+</header>
+
+<div class="layout">
+  <!-- ===================== CHECK LIST (colonna sinistra) ===================== -->
+  <aside class="panel checklist" aria-label="Cosa mostrare">
+    <h2>Cosa vuoi vedere</h2>
+    <p>Spunta una voce per attivarla e impostarne i valori.</p>
+
+    <section class="item on" data-c="v">
+      <label class="item-head"><input type="checkbox" id="chkV" checked><span class="swatch"></span>Tensione v(t)</label>
+      <div class="item-body"><div id="bodyV"></div><p class="note" id="fNote"></p></div>
+    </section>
+
+    <section class="item on" data-c="i">
+      <label class="item-head"><input type="checkbox" id="chkI" checked><span class="swatch"></span>Corrente i(t)</label>
+      <div class="item-body">
+        <p class="note" id="iNote">Imposta tu ampiezza e fase della corrente.</p>
+        <div id="bodyI"></div>
+      </div>
+    </section>
+
+    <section class="item" data-c="z">
+      <label class="item-head"><input type="checkbox" id="chkZ"><span class="swatch" style="background:var(--ink)"></span>Impedenza Z (carico)</label>
+      <div class="item-body">
+        <p class="note">La corrente viene calcolata dalla legge di Ohm: I = V / Z.</p>
+        <div class="seg" role="radiogroup" aria-label="Tipo di carico">
+          <label><input type="radio" name="zt" value="R" checked>Resistore</label>
+          <label><input type="radio" name="zt" value="L">Induttore</label>
+          <label><input type="radio" name="zt" value="C">Condensatore</label>
+          <label><input type="radio" name="zt" value="RLC">RLC serie</label>
+          <label><input type="radio" name="zt" value="Z">Z libera</label>
+        </div>
+        <div id="bodyZ"></div>
+        <div class="res" id="resBox"></div>
+      </div>
+    </section>
+
+    <section class="item on" data-c="f">
+      <label class="item-head"><input type="checkbox" id="chkF" checked><span class="swatch"></span>Fasori sulla circonferenza</label>
+      <div class="item-body">
+        <label class="sub"><input type="checkbox" id="chkAngle" checked>Angolo ωt + θ</label>
+        <label class="sub"><input type="checkbox" id="chkProj" checked>Proiezione verso la sinusoide</label>
+        <label class="sub"><input type="checkbox" id="chkTrace" checked>Disegna la curva mentre ruota</label>
+      </div>
+    </section>
+
+    <section class="item on" data-c="p">
+      <label class="item-head"><input type="checkbox" id="chkPh" checked><span class="swatch"></span>Sfasamento φ</label>
+      <div class="item-body"><div class="live-phase" id="phaseLive"></div></div>
+    </section>
+
+    <section class="item" data-c="w">
+      <label class="item-head"><input type="checkbox" id="chkPw"><span class="swatch"></span>Potenza istantanea p(t)</label>
+      <div class="item-body"><p class="note">p(t) = v(t) · i(t). La linea tratteggiata è la potenza media P. Quando p è negativa il carico restituisce energia al generatore.</p></div>
+    </section>
+
+    <section class="item" data-c="r">
+      <label class="item-head"><input type="checkbox" id="chkRms"><span class="swatch" style="background:var(--muted)"></span>Valori efficaci</label>
+      <div class="item-body"><p class="note" id="rmsNote"></p></div>
+    </section>
+
+    <section class="item" data-c="s">
+      <label class="item-head"><input type="checkbox" id="chkAudio"><span class="swatch"></span>Suono delle onde</label>
+      <div class="item-body">
+        <p class="note">Ascolta le sinusoidi alla frequenza impostata. Il volume segue l'ampiezza di ciascuna onda.</p>
+        <div class="seg" role="radiogroup" aria-label="Cosa ascoltare">
+          <label><input type="radio" name="au" value="v" checked>Tensione</label>
+          <label><input type="radio" name="au" value="i">Corrente</label>
+          <label><input type="radio" name="au" value="st">Stereo: v a sinistra, i a destra</label>
+          <label><input type="radio" name="au" value="sum">Somma v + i</label>
+        </div>
+        <div id="bodyAudio"></div>
+        <p class="note" id="audioNote"></p>
+        <button class="btn small" type="button" id="la440">Prova con 440 Hz (la nota La)</button>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ===================== OSCILLOSCOPIO E PANNELLI (colonna destra) ===================== -->
+  <div class="stage">
+    <section class="panel scope" aria-label="Fasori e sinusoidi">
+      <div class="toolbar">
+        <button class="btn primary" id="play" type="button">Pausa</button>
+        <button class="btn" id="reset" type="button">Riporta a t = 0</button>
+        <label class="tl"><span id="tlab">Tempo</span> <input type="range" id="tslider" min="0" max="1000" step="1" value="0"><output id="tout">0</output></label>
+        <label class="tl">Un giro in <input type="range" id="spd" min="0.25" max="12" step="0.25" value="4"><output id="spdout">4 s</output></label>
+      </div>
+      <div class="toolbar">
+        <label class="tl">Asse orizzontale
+          <select id="xaxis"><option value="time">tempo t</option><option value="deg">angolo ωt (sempre 2 periodi)</option></select>
+        </label>
+        <label class="tl" id="tbWrap">Base dei tempi <select id="tbase"></select></label>
+        <button class="btn" id="fit" type="button">Adatta alla frequenza</button>
+        <label class="tl check"><input type="checkbox" id="chkAuto" checked>Scala verticale automatica</label>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="canvas-box"><canvas id="scope" aria-label="Circonferenza con i fasori a sinistra e sinusoidi generate a destra"></canvas></div>
+      <div class="live" id="live"></div>
+    </section>
+
+    <div class="lower">
+      <section class="panel card" aria-label="Carico">
+        <h2>Il carico</h2>
+        <svg class="circ" viewBox="0 0 340 150" role="img" aria-label="Circuito con generatore e carico">
+          <!-- filo del circuito -->
+          <path d="M40 50 V25 H310 V125 H40 V90" fill="none" stroke="currentColor" stroke-width="2"/>
+          <!-- generatore -->
+          <circle cx="40" cy="70" r="20" fill="var(--panel)" stroke="currentColor" stroke-width="2"/>
+          <path d="M28 70 q6 -13 12 0 t12 0" fill="none" stroke="var(--volt)" stroke-width="2"/>
+          <text x="8" y="58">+</text><text x="6" y="98" style="fill:var(--volt);font-weight:700;font-size:14px">v</text>
+          <!-- resistore -->
+          <g id="gR" class="comp">
+            <rect x="75" y="16" width="56" height="18" rx="1" fill="var(--panel)" stroke="currentColor" stroke-width="2"/>
+            <text id="tR" x="103" y="54" text-anchor="middle">R</text>
+          </g>
+          <!-- induttore -->
+          <g id="gL" class="comp">
+            <rect x="160" y="17" width="60" height="10" fill="var(--panel)"/>
+            <path d="M160 25 a7.5 7.5 0 0 1 15 0 a7.5 7.5 0 0 1 15 0 a7.5 7.5 0 0 1 15 0 a7.5 7.5 0 0 1 15 0" fill="none" stroke="currentColor" stroke-width="2"/>
+            <text id="tL" x="186" y="54" text-anchor="middle">L</text>
+          </g>
+          <!-- condensatore -->
+          <g id="gC" class="comp">
+            <rect x="267" y="18" width="10" height="14" fill="var(--panel)"/>
+            <path d="M266 10 V40 M278 10 V40" stroke="currentColor" stroke-width="3"/>
+            <text id="tC" x="272" y="54" text-anchor="middle">C</text>
+          </g>
+          <!-- verso della corrente -->
+          <path d="M310 64 v18 M304 76 l6 8 l6 -8" fill="none" stroke="var(--curr)" stroke-width="2"/>
+          <text x="320" y="80" style="fill:var(--curr);font-weight:700;font-size:14px">i</text>
+        </svg>
+        <p class="zstate" id="zstate"></p>
+        <canvas id="zplane" aria-label="Triangolo dell'impedenza nel piano complesso"></canvas>
+        <div class="zvals" id="zvals"></div>
+      </section>
+
+      <section class="panel card" aria-label="Valori e spiegazione">
+        <h2>Le formule</h2>
+        <div class="eq v" id="eqV"></div>
+        <div class="eq i" id="eqI"></div>
+        <dl id="vals"></dl>
+        <p class="explain" id="explain"></p>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- L'ordine degli script conta: ogni file usa ciò che è definito nei precedenti. -->
+<script>
+/* js/stato.js */
+/* ==========================================================================
+   STATO DELL'APPLICAZIONE
+   Qui ci sono tutti i valori iniziali. Cambiali per far partire la pagina
+   con impostazioni diverse (per esempio un altro carico o un'altra frequenza).
+   Le grandezze fisiche sono in unità SI: V, A, Hz, Ω, H, F, secondi.
+   ========================================================================== */
+window.LAB = window.LAB || {};
+
+(function (L) {
+  L.D2R = Math.PI / 180;          // gradi -> radianti
+  L.TAU = Math.PI * 2;
+
+  // Valori di riferimento per il volume del suono (non per il grafico,
+  // che adatta la scala da solo: vedi fisica.js)
+  L.FONDO_SCALA_V = 400;          // volt
+  L.FONDO_SCALA_I_MANUALE = 10;   // ampere, quando la corrente si imposta a mano
+
+  // Margine sopra il picco quando la scala verticale è automatica (1.15 = +15%)
+  L.MARGINE_SCALA = 1.15;
+
+  // Con la scala automatica la corrente viene disegnata sempre più bassa della
+  // tensione: al massimo questa frazione della sua altezza (0.75 = tre quarti).
+  // È solo una scelta grafica, gli assi riportano comunque i valori veri.
+  L.RAPPORTO_VISIVO_CORRENTE = 0.75;
+
+  const movimentoRidotto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  L.S = {
+    // Tensione
+    Vm: 325, thv: 0, f: 50,
+    // Corrente impostata a mano
+    Im: 4, thi: -30,
+    // Impedenza: zType = 'R' | 'L' | 'C' | 'RLC' | 'Z'
+    useZ: false, zType: 'R', R: 50, L: 0.1, C: 100e-6, Zmod: 80, Zphi: 45,
+    // Cosa mostrare
+    showV: true, showI: true, showPh: true, showF: true,
+    showAngle: true, showProj: true, trace: true,
+    showPw: false, showRms: false,
+    // Oscilloscopio: xaxis = 'time' | 'deg', tb = base dei tempi (s/div)
+    xaxis: 'time', tb: 5e-3, secPerTurn: 4, playing: !movimentoRidotto, t: 0,
+    // Scala verticale: automatica oppure bloccata sui valori VsFix / IsFix
+    autoScale: true, VsFix: 400, IsFix: 10,
+    // Suono: audioMode = 'v' | 'i' | 'st' | 'sum', audioVol in %
+    audioOn: false, audioMode: 'v', audioVol: 30
+  };
+
+  L.$ = s => document.querySelector(s);
+})(window.LAB);
+
+</script>
+<script>
+/* js/formato.js */
+/* ==========================================================================
+   FORMATTAZIONE DEI NUMERI (stile italiano: virgola decimale)
+   ========================================================================== */
+(function (L) {
+  // Numero con 3 cifre significative
+  L.fmt = (x, d = 3) => {
+    if (!isFinite(x)) return '∞';
+    const a = Math.abs(x);
+    if (a !== 0 && (a >= 1e6 || a < 1e-3)) return x.toExponential(2).replace('.', ',').replace('-', '−');
+    return x.toLocaleString('it-IT', { maximumSignificantDigits: d }).replace('-', '−');
+  };
+
+  // Angolo in gradi
+  L.deg = x => x.toLocaleString('it-IT', { maximumFractionDigits: 1 }).replace('-', '−') + '°';
+
+  // Riporta un angolo nell'intervallo [-180°, 180°)
+  L.wrap180 = d => ((d + 180) % 360 + 360) % 360 - 180;
+
+  // " + 30°" oppure " − 30°" per scrivere le equazioni
+  L.sgnDeg = d => (d < 0 ? ' − ' : ' + ') + L.deg(Math.abs(d));
+
+  // Tempo con unità adatta (µs, ms, s)
+  L.fmtT = s => {
+    const a = Math.abs(s);
+    if (a === 0) return '0';
+    if (a < 1e-3) return L.fmt(s * 1e6) + ' µs';
+    if (a < 1) return L.fmt(s * 1e3) + ' ms';
+    return L.fmt(s) + ' s';
+  };
+
+  // Frequenza in Hz o kHz
+  L.fmtF = f => f >= 1000 ? L.fmt(f / 1000) + ' kHz' : L.fmt(f) + ' Hz';
+
+  // Valore "tondo" (1, 2, 2,5, 5, 10 × potenza di dieci) maggiore o uguale a x
+  L.niceCeil = (x, ms = [1, 2, 2.5, 5, 10]) => {
+    if (!(x > 0) || !isFinite(x)) return 1;
+    const e = Math.pow(10, Math.floor(Math.log10(x)));
+    for (const m of ms) if (m * e >= x * 0.9999) return +(m * e).toPrecision(12);
+    return 10 * e;
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* js/fisica.js */
+/* ==========================================================================
+   FISICA: calcolo di impedenza, corrente, sfasamento e potenze
+   ========================================================================== */
+(function (L) {
+  const { D2R, TAU } = L;
+
+  // Durata della finestra visibile sull'oscilloscopio (secondi)
+  L.windowT = () => L.S.xaxis === 'deg' ? 2 / L.S.f : 8 * L.S.tb;
+
+  // Fondo scala "tondo" appena sopra il picco (1; 1,5; 2; 2,5; 3; 4; 5; 6; 8 × 10ⁿ):
+  // l'onda occupa sempre tra circa il 65% e l'87% dell'altezza
+  const PASSI_SCALA = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
+  const scalaPer = x => (x > 0 && isFinite(x)) ? L.niceCeil(x * L.MARGINE_SCALA, PASSI_SCALA) : 1;
+
+  // Restituisce tutte le grandezze derivate dallo stato attuale
+  L.compute = function () {
+    const S = L.S;
+    const w = TAU * S.f, T = 1 / S.f;
+    let Zre, Zim, Zmag, phiZ, Im, thi, XL = null, XC = null;
+
+    if (S.useZ) {
+      // La corrente nasce dall'impedenza scelta: I = V / Z
+      const zt = S.zType;
+      if (zt === 'R')        { Zre = S.R; Zim = 0; }
+      else if (zt === 'L')   { XL = w * S.L; Zre = 0; Zim = XL; }
+      else if (zt === 'C')   { XC = 1 / (w * S.C); Zre = 0; Zim = -XC; }
+      else if (zt === 'RLC') { XL = w * S.L; XC = 1 / (w * S.C); Zre = S.R; Zim = XL - XC; }
+      else                   { Zre = S.Zmod * Math.cos(S.Zphi * D2R); Zim = S.Zmod * Math.sin(S.Zphi * D2R); }
+      Zmag = Math.hypot(Zre, Zim);
+      phiZ = Math.atan2(Zim, Zre) / D2R;
+      Im = S.Vm / Zmag;
+      thi = L.wrap180(S.thv - phiZ);
+    } else {
+      // Corrente impostata a mano: si ricava l'impedenza equivalente V / I
+      Im = S.Im; thi = S.thi;
+      phiZ = L.wrap180(S.thv - thi);
+      Zmag = Im > 0 ? S.Vm / Im : Infinity;
+      Zre = isFinite(Zmag) ? Zmag * Math.cos(phiZ * D2R) : Infinity;
+      Zim = isFinite(Zmag) ? Zmag * Math.sin(phiZ * D2R) : 0;
+    }
+
+    let phi = L.wrap180(S.thv - thi);             // sfasamento tensione-corrente
+    if (Math.abs(phi) < 0.01) phi = 0;            // elimina i residui di arrotondamento
+    const Vrms = S.Vm / Math.SQRT2, Irms = Im / Math.SQRT2;
+    const f0 = 1 / (TAU * Math.sqrt(S.L * S.C));  // risonanza RLC
+
+    // Fondo scala del grafico. Con la scala automatica la tensione si adatta al
+    // suo picco; la corrente si adatta in modo da apparire sempre un po' più
+    // piccola della tensione (vedi RAPPORTO_VISIVO_CORRENTE in stato.js).
+    let Vs, Is;
+    if (S.autoScale) {
+      Vs = scalaPer(S.Vm);
+      const hv = S.Vm / Vs;                       // altezza della tensione (0..1)
+      Is = (hv > 0 && Im > 0 && isFinite(Im))
+        ? L.niceCeil(Im / (hv * L.RAPPORTO_VISIVO_CORRENTE), PASSI_SCALA)
+        : scalaPer(Im);
+    } else {
+      Vs = S.VsFix; Is = S.IsFix;
+    }
+
+    return {
+      w, T, Zre, Zim, Zmag, phiZ, Im, thi, phi, Vrms, Irms, XL, XC, f0,
+      P: Vrms * Irms * Math.cos(phi * D2R),
+      Q: Vrms * Irms * Math.sin(phi * D2R),
+      Sa: Vrms * Irms,
+      Vs, Is,
+      // riferimenti per il volume del suono
+      VsRef: L.FONDO_SCALA_V,
+      IsRef: S.useZ ? scalaPer(Im) : L.FONDO_SCALA_I_MANUALE,
+      Wt: L.windowT()
+    };
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* js/testi.js */
+/* ==========================================================================
+   TESTI DINAMICI
+   Tutte le frasi che cambiano in base alla situazione sono qui:
+   il nome del carico, la spiegazione e le note sul suono.
+   ========================================================================== */
+(function (L) {
+  const { D2R } = L;
+
+  // Nome del carico mostrato sotto lo schema del circuito
+  L.loadName = function (d) {
+    const S = L.S, p = d.phiZ, ap = Math.abs(p);
+    if (!isFinite(d.Zmag)) return 'Circuito aperto';
+    if (S.useZ && S.zType === 'RLC' && ap < 1) return 'Circuito RLC in risonanza: si comporta come un resistore';
+    const pre = S.useZ && S.zType === 'RLC' ? 'RLC serie, ' : '';
+    if (ap > 90.5) return 'Bipolo attivo: cede potenza al generatore';
+    if (ap < 1) return 'Carico resistivo puro';
+    if (ap > 89) return pre + (p > 0 ? 'carico induttivo puro' : 'carico capacitivo puro');
+    return pre + (p > 0 ? 'prevale l\u2019induttore (ohmico-induttivo)' : 'prevale il condensatore (ohmico-capacitivo)');
+  };
+
+  // Spiegazione nel riquadro "Le formule"
+  L.explain = function (d) {
+    const S = L.S, fmt = L.fmt;
+    if (S.Vm === 0 || d.Im === 0) return 'Con un\u2019ampiezza nulla non c\u2019è nulla da confrontare: aumenta V<sub>max</sub> o I<sub>max</sub>.';
+    const p = d.phi, ap = Math.abs(p), dt = L.fmtT(ap / 360 * d.T);
+    let pre = '';
+    if (S.useZ && S.zType === 'RLC') {
+      if (ap < 1) return `Siamo alla <b>risonanza</b> (f₀ = ${L.fmtF(d.f0)}): X<sub>L</sub> = X<sub>C</sub>, le due reattanze si annullano, l\u2019impedenza vale solo R ed è minima, quindi la corrente è massima e in fase con la tensione.`;
+      pre = d.XL > d.XC
+        ? `Sopra la frequenza di risonanza (f₀ = ${L.fmtF(d.f0)}) X<sub>L</sub> supera X<sub>C</sub>: prevale l\u2019induttore. `
+        : `Sotto la frequenza di risonanza (f₀ = ${L.fmtF(d.f0)}) X<sub>C</sub> supera X<sub>L</sub>: prevale il condensatore. `;
+    }
+    if (ap < 1) return 'Tensione e corrente sono <b>in fase</b>: passano per lo zero e raggiungono il massimo negli stessi istanti. È il comportamento di un resistore: tutta la potenza è attiva (cos φ = 1).';
+    if (ap > 90.5) return `Con |φ| > 90° la potenza media diventa negativa: il bipolo restituisce energia, come farebbe un generatore. Un carico passivo fatto di R, L e C non può farlo: lo sfasamento resta sempre tra −90° e +90°.`;
+    if (ap > 89 && p > 0) return pre + `La corrente è <b>in ritardo di 90°</b>, cioè di un quarto di periodo (T/4 = ${dt}). È l\u2019induttore ideale: la reattanza X<sub>L</sub> = ωL cresce con la frequenza. La potenza media è nulla: l\u2019energia entra nel campo magnetico e poi torna al generatore.`;
+    if (ap > 89) return pre + `La corrente è <b>in anticipo di 90°</b>, cioè di un quarto di periodo (T/4 = ${dt}). È il condensatore ideale: la reattanza X<sub>C</sub> = 1/(ωC) diminuisce quando la frequenza aumenta. La potenza media è nulla: l\u2019energia viene accumulata nel campo elettrico e restituita.`;
+    if (p > 0) return pre + `La corrente è <b>in ritardo di ${L.deg(ap)}</b> sulla tensione (Δt = ${dt}): il carico è ohmico-induttivo. Solo una parte della potenza apparente diventa potenza attiva, il fattore di potenza è cos φ = ${fmt(Math.cos(p * D2R))}.`;
+    return pre + `La corrente è <b>in anticipo di ${L.deg(ap)}</b> sulla tensione (Δt = ${dt}): il carico è ohmico-capacitivo. Solo una parte della potenza apparente diventa potenza attiva, il fattore di potenza è cos φ = ${fmt(Math.cos(p * D2R))}.`;
+  };
+
+  // Nota sotto i controlli del suono
+  L.audioNote = function (d) {
+    const S = L.S, f = S.f;
+    let t = '';
+    if (f < 20) t = 'Sotto i 20 Hz l\u2019orecchio umano non percepisce il suono. ';
+    else if (f < 120) t = 'A frequenze così basse gli altoparlanti di portatili e smartphone riproducono poco o niente: usa cuffie o casse, oppure prova con 440 Hz. ';
+    else if (f > 15000) t = 'Sopra i 15\u201320 kHz molte persone non sentono più nulla. ';
+    if (S.audioMode === 'st') t += 'Con le cuffie lo sfasamento tra tensione e corrente sposta il suono tra le due orecchie.';
+    if (S.audioMode === 'sum') t += `Con la somma (le due onde portate alla stessa ampiezza) senti l\u2019interferenza: in fase le onde si rinforzano, a 180° si annullano. Ora φ = ${L.deg(d.phi)}.`;
+    return t;
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* js/disegno/strumenti.js */
+/* ==========================================================================
+   STRUMENTI DI DISEGNO comuni ai due canvas
+   ========================================================================== */
+(function (L) {
+  L.FONT = 'px "Atkinson Hyperlegible", system-ui, sans-serif';
+
+  // Colori letti dalle variabili CSS (css/tema.css)
+  L.C = {};
+  L.readColors = function () {
+    const cs = getComputedStyle(document.documentElement);
+    ['paper', 'panel', 'ink', 'muted', 'grid', 'line', 'volt', 'curr', 'phase', 'power']
+      .forEach(k => L.C[k] = cs.getPropertyValue('--' + k).trim());
+  };
+
+  // Freccia da (x0,y0) a (x1,y1)
+  L.arrow = function (c, x0, y0, x1, y1, color, w) {
+    const len = Math.hypot(x1 - x0, y1 - y0); if (len < 2) return;
+    const ux = (x1 - x0) / len, uy = (y1 - y0) / len, h = Math.min(12, len * 0.4);
+    c.strokeStyle = color; c.fillStyle = color; c.lineWidth = w; c.setLineDash([]);
+    c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1 - ux * h * 0.8, y1 - uy * h * 0.8); c.stroke();
+    c.beginPath(); c.moveTo(x1, y1);
+    c.lineTo(x1 - ux * h - uy * h * 0.45, y1 - uy * h + ux * h * 0.45);
+    c.lineTo(x1 - ux * h + uy * h * 0.45, y1 - uy * h - ux * h * 0.45);
+    c.closePath(); c.fill();
+  };
+
+  L.dot = function (c, x, y, r, color) {
+    c.fillStyle = color; c.beginPath(); c.arc(x, y, r, 0, L.TAU); c.fill();
+  };
+
+  L.text = function (c, t, x, y, color, size = 12, align = 'left', base = 'alphabetic', bold = false) {
+    c.fillStyle = color; c.font = (bold ? '700 ' : '') + size + L.FONT;
+    c.textAlign = align; c.textBaseline = base; c.fillText(t, x, y);
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* js/disegno/oscilloscopio.js */
+/* ==========================================================================
+   OSCILLOSCOPIO: circonferenza con i fasori (a sinistra)
+   e sinusoidi generate dalla loro proiezione (a destra)
+   ========================================================================== */
+(function (L) {
+  const { D2R, TAU } = L;
+  const cv = L.$('#scope'), ctx = cv.getContext('2d');
+  const liveEl = L.$('#live');
+  let W = 0, H = 0;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    W = cv.parentElement.clientWidth;
+    H = Math.round(Math.max(250, Math.min(460, W < 600 ? W * 0.78 : W * 0.44)));
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw() {
+    const S = L.S, d = L.D, C = L.C, fmt = L.fmt;
+    if (!d || !W) return;
+    const text = (...a) => L.text(ctx, ...a), arrow = (...a) => L.arrow(ctx, ...a), dot = (...a) => L.dot(ctx, ...a);
+    const Wt = L.windowT();
+    ctx.clearRect(0, 0, W, H);
+
+    // Geometria: raggio della circonferenza e area delle sinusoidi
+    const narrow = W < 600;
+    const R = Math.max(40, Math.min(H / 2 - 30, W * (narrow ? 0.2 : 0.18)));
+    const cx = 10 + R, cy = H / 2;
+    const x0 = cx + R + (narrow ? 30 : 46), x1 = W - (narrow ? 26 : 40), ww = x1 - x0;
+    const aW = d.w * Wt;                 // larghezza della finestra espressa come angolo ωt
+    const X = a => x0 + a / aW * ww;     // angolo -> coordinata x
+    const ac = d.w * S.t;                // angolo del cursore
+    const tv = S.thv * D2R, ti = d.thi * D2R;
+    // lunghezza dei fasori nella stessa scala dell'asse Y (con la scala bloccata non escono dal cerchio)
+    const rv = Math.min(S.Vm / d.Vs, 1.05) * R, ri = Math.min(d.Im / d.Is, 1.05) * R;
+    const Yv = v => cy - v / d.Vs * R, Yi = i => cy - i / d.Is * R;
+    const periods = aW / TAU;
+    const dense = ww / periods < 6;      // troppi periodi per essere leggibili
+
+    /* --- griglia --- */
+    ctx.lineWidth = 1; ctx.setLineDash([]); ctx.strokeStyle = C.grid;
+    ctx.beginPath();
+    for (const k of [-1, -0.5, 0.5, 1]) { ctx.moveTo(x0, cy - k * R); ctx.lineTo(x1, cy - k * R); }
+    for (let k = 0; k <= 8; k++) { const x = x0 + k * ww / 8; ctx.moveTo(x, cy - R - 6); ctx.lineTo(x, cy + R + 6); }
+    ctx.stroke();
+    ctx.strokeStyle = C.line; ctx.beginPath();
+    ctx.moveTo(x0, cy); ctx.lineTo(x1 + 8, cy); ctx.moveTo(x0, cy - R - 10); ctx.lineTo(x0, cy + R + 10); ctx.stroke();
+
+    const ls = narrow ? 10 : 11;
+    for (let k = 0; k <= 8; k += (narrow ? 2 : 1)) {
+      const x = x0 + k * ww / 8;
+      const lab = S.xaxis === 'deg' ? (k * 90) + '°' : L.fmtT(k * S.tb);
+      text(lab, x, cy + R + 10, C.muted, ls, 'center', 'top');
+    }
+    text(S.xaxis === 'deg' ? 'ωt' : 't', x1 + 2, cy - 4, C.muted, ls, 'left', 'bottom', true);
+    // etichette dell'asse Y: tensione a sinistra, corrente a destra (fondo scala e metà)
+    for (const k of [1, 0.5, -0.5, -1]) {
+      const y = cy - k * R, segno = k < 0 ? '−' : '';
+      if (S.showV) text(segno + fmt(Math.abs(k) * d.Vs) + (k === 1 ? ' V' : ''), x0 - 4, y, C.volt, ls, 'right', 'middle');
+      if (S.showI) text(segno + fmt(Math.abs(k) * d.Is) + (k === 1 ? ' A' : ''), x1 + 4, y, C.curr, ls, 'left', 'middle');
+    }
+    // avviso quando la scala è bloccata e un'onda esce dal grafico
+    const fuori = [];
+    if (S.showV && S.Vm > d.Vs * 1.0001) fuori.push('tensione');
+    if (S.showI && d.Im > d.Is * 1.0001) fuori.push('corrente');
+    if (fuori.length) text('Fuori scala: ' + fuori.join(' e ') + '. Riattiva la scala automatica.', x0 + 6, cy - R - 14, C.ink, ls, 'left', 'bottom', true);
+
+    /* --- banda dello sfasamento tra due passaggi per lo zero --- */
+    const phOK = S.showPh && S.showV && S.showI && d.Im > 0 && S.Vm > 0;
+    if (phOK && !dense) {
+      const ph = d.phi * D2R, av0 = ((-tv) % TAU + TAU) % TAU;
+      let pick = null, first = null;
+      for (let k = 0; k < 60; k++) {
+        const av = av0 + k * TAU, ai = av + ph;
+        if (Math.min(av, ai) < 0) continue;
+        if (Math.max(av, ai) > aW) break;
+        if (first === null) first = [av, ai];
+        if (av >= Math.PI) { pick = [av, ai]; break; }
+      }
+      pick = pick || first;
+      if (pick) {
+        const xa = X(pick[0]), xb = X(pick[1]);
+        ctx.globalAlpha = 0.14; ctx.fillStyle = C.phase;
+        ctx.fillRect(Math.min(xa, xb), cy - R, Math.abs(xb - xa), 2 * R); ctx.globalAlpha = 1;
+        ctx.setLineDash([4, 4]); ctx.strokeStyle = C.phase; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(xa, cy - R); ctx.lineTo(xa, cy + R); ctx.moveTo(xb, cy - R); ctx.lineTo(xb, cy + R); ctx.stroke();
+        ctx.setLineDash([]);
+        if (Math.abs(xb - xa) > 6) {
+          const yb = cy + R * 0.72;
+          arrow((xa + xb) / 2, yb, xb, yb, C.phase, 1.5); arrow((xa + xb) / 2, yb, xa, yb, C.phase, 1.5);
+          text('Δt = ' + L.fmtT(Math.abs(d.phi) / 360 * d.T), (xa + xb) / 2, yb - 5, C.phase, ls + 1, 'center', 'bottom', true);
+        }
+        dot(xa, cy, 3.5, C.volt); dot(xb, cy, 3.5, C.curr);
+      }
+    }
+
+    /* --- valori efficaci --- */
+    if (S.showRms) {
+      ctx.setLineDash([2, 4]); ctx.lineWidth = 1;
+      if (S.showV) {
+        ctx.strokeStyle = C.volt; ctx.beginPath();
+        for (const s of [1, -1]) { ctx.moveTo(x0, Yv(s * d.Vrms)); ctx.lineTo(x1, Yv(s * d.Vrms)); }
+        ctx.stroke(); text('V eff', x1 - 2, Yv(d.Vrms) - 3, C.volt, ls, 'right', 'bottom');
+      }
+      if (S.showI) {
+        ctx.strokeStyle = C.curr; ctx.beginPath();
+        for (const s of [1, -1]) { ctx.moveTo(x0, Yi(s * d.Irms)); ctx.lineTo(x1, Yi(s * d.Irms)); }
+        ctx.stroke(); text('I eff', x1 - 2, Yi(-d.Irms) + 3, C.curr, ls, 'right', 'top');
+      }
+      ctx.setLineDash([]);
+    }
+
+    /* --- sinusoidi (ritagliate sull'area del grafico) --- */
+    ctx.save();
+    ctx.beginPath(); ctx.rect(x0, cy - R - 12, ww, 2 * R + 24); ctx.clip();
+    const curve = (fy, color, width, from, to, alpha = 1) => {
+      if (to <= from) return;
+      ctx.globalAlpha = alpha; ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash([]);
+      ctx.beginPath();
+      const frac = (to - from) / aW;
+      const n = Math.max(2, Math.ceil(frac * Math.min(40000, Math.max(ww * 1.5, periods * 32))));
+      for (let k = 0; k <= n; k++) {
+        const al = from + (to - from) * k / n, x = X(al), y = fy(al);
+        k ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    };
+    const fv = al => Yv(S.Vm * Math.sin(al + tv));
+    const fi = al => Yi(d.Im * Math.sin(al + ti));
+    const VI = S.Vm * d.Im;
+    const fp = al => cy - (S.Vm * Math.sin(al + tv)) * (d.Im * Math.sin(al + ti)) / VI * R;
+    const series = [];
+    if (S.showPw && VI > 0) series.push([fp, C.power, 2]);
+    if (S.showI) series.push([fi, C.curr, 2.5]);
+    if (S.showV) series.push([fv, C.volt, 2.5]);
+    for (const [f, col, w] of series) {
+      if (S.trace && !dense) { curve(f, col, w * 0.6, 0, aW, 0.22); curve(f, col, w, 0, ac); }
+      else curve(f, col, dense ? 1 : w, 0, aW, dense ? 0.5 : 1);
+    }
+    if (S.showPw && VI > 0) {
+      const yP = cy - d.P / VI * R;
+      ctx.setLineDash([6, 4]); ctx.strokeStyle = C.power; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(x0, yP); ctx.lineTo(x1, yP); ctx.stroke(); ctx.setLineDash([]);
+      text('P', x0 + 4, yP - 3, C.power, ls, 'left', 'bottom', true);
+    }
+    ctx.restore();
+    if (dense) {
+      const msg = `${fmt(periods)} periodi nella finestra: troppo fitti. Premi «Adatta alla frequenza».`;
+      ctx.font = '700 ' + (ls + 1) + L.FONT; const tw = ctx.measureText(msg).width;
+      ctx.fillStyle = C.panel; ctx.globalAlpha = 0.9;
+      ctx.fillRect((x0 + x1) / 2 - tw / 2 - 8, cy - R - 2, tw + 16, 22); ctx.globalAlpha = 1;
+      text(msg, (x0 + x1) / 2, cy - R + 9, C.ink, ls + 1, 'center', 'middle', true);
+    }
+
+    /* --- cursore del tempo --- */
+    const xc = X(ac);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(xc, cy - R - 8); ctx.lineTo(xc, cy + R + 8); ctx.stroke();
+
+    /* --- circonferenza --- */
+    ctx.strokeStyle = C.grid; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, R / 2, 0, TAU); ctx.stroke();
+    ctx.strokeStyle = C.line; ctx.beginPath();
+    ctx.moveTo(cx - R - 6, cy); ctx.lineTo(cx + R + 6, cy); ctx.moveTo(cx, cy - R - 6); ctx.lineTo(cx, cy + R + 6); ctx.stroke();
+
+    /* --- fasori --- */
+    if (S.showF) {
+      const av = ac + tv, ai = ac + ti;
+      const pv = [cx + rv * Math.cos(av), cy - rv * Math.sin(av)];
+      const pi = [cx + ri * Math.cos(ai), cy - ri * Math.sin(ai)];
+      if (S.showAngle && S.showV) {
+        const span = ((av % TAU) + TAU) % TAU, r0 = Math.max(14, Math.min(24, R * 0.2));
+        ctx.strokeStyle = C.muted; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(cx, cy, r0, 0, -span, true); ctx.stroke();
+        const mid = span / 2;
+        text('ωt+θv', cx + (r0 + 6) * Math.cos(mid), cy - (r0 + 6) * Math.sin(mid), C.muted, 10, Math.cos(mid) >= 0 ? 'left' : 'right', 'middle');
+      }
+      if (phOK) {
+        const r1 = Math.max(18, Math.min(rv, ri, R) * 0.55), ph = d.phi * D2R;
+        ctx.fillStyle = C.phase; ctx.globalAlpha = 0.25;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r1, -ai, -(ai + ph), ph > 0); ctx.closePath(); ctx.fill();
+        ctx.globalAlpha = 1; ctx.strokeStyle = C.phase; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(cx, cy, r1, -ai, -(ai + ph), ph > 0); ctx.stroke();
+        const m = ai + ph / 2;
+        text('φ', cx + (r1 + 9) * Math.cos(m), cy - (r1 + 9) * Math.sin(m), C.phase, 14, 'center', 'middle', true);
+      }
+      const proj = (p, col) => {
+        ctx.setLineDash([2, 3]); ctx.strokeStyle = col; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(p[0], cy); ctx.stroke();
+        ctx.setLineDash([5, 4]); ctx.globalAlpha = 0.8;
+        ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(xc, p[1]); ctx.stroke();
+        ctx.globalAlpha = 1; ctx.setLineDash([]);
+        dot(xc, p[1], 4.5, col);
+      };
+      if (S.showProj) { if (S.showI) proj(pi, C.curr); if (S.showV) proj(pv, C.volt); }
+      if (S.showI) { arrow(cx, cy, pi[0], pi[1], C.curr, 2.5); text('I', pi[0] + 6 * Math.cos(ai), pi[1] - 6 * Math.sin(ai), C.curr, 14, Math.cos(ai) >= 0 ? 'left' : 'right', 'middle', true); }
+      if (S.showV) { arrow(cx, cy, pv[0], pv[1], C.volt, 2.5); text('V', pv[0] + 6 * Math.cos(av), pv[1] - 6 * Math.sin(av), C.volt, 14, Math.cos(av) >= 0 ? 'left' : 'right', 'middle', true); }
+      dot(cx, cy, 3, C.ink);
+    } else {
+      text('Fasori nascosti', cx, cy + R + 10, C.muted, 11, 'center', 'top');
+    }
+
+    /* --- valori istantanei sotto il grafico --- */
+    L.$('#tslider').value = Math.round(S.t / Wt * 1000);
+    L.$('#tout').textContent = S.xaxis === 'deg' ? Math.round(ac / D2R) + '°' : L.fmtT(S.t);
+    const vi = S.Vm * Math.sin(ac + tv), ii = d.Im * Math.sin(ac + ti);
+    let h = `<span>t = <b>${L.fmtT(S.t)}</b></span>`;
+    if (S.showV) h += `<span style="color:var(--volt)">v = <b>${fmt(vi)}</b> V</span>`;
+    if (S.showI) h += `<span style="color:var(--curr)">i = <b>${fmt(ii)}</b> A</span>`;
+    if (S.showPw) h += `<span style="color:var(--power)">p = <b>${fmt(vi * ii)}</b> W</span>`;
+    liveEl.innerHTML = h;
+  }
+
+  L.scope = { resize, draw };
+})(window.LAB);
+
+</script>
+<script>
+/* js/disegno/piano-impedenza.js */
+/* ==========================================================================
+   PIANO COMPLESSO DELL'IMPEDENZA: triangolo R, jX, Z con l'angolo φ
+   ========================================================================== */
+(function (L) {
+  const zc = L.$('#zplane'), zx = zc.getContext('2d');
+  let ZW = 0;
+  const ZH = 200;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    ZW = zc.clientWidth;
+    zc.width = Math.round(ZW * dpr); zc.height = Math.round(ZH * dpr);
+    zx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  function draw() {
+    const S = L.S, d = L.D, C = L.C;
+    if (!d || !ZW) return;
+    const text = (...a) => L.text(zx, ...a), arrow = (...a) => L.arrow(zx, ...a);
+    zx.clearRect(0, 0, ZW, ZH);
+    if (!isFinite(d.Zmag)) { text('Corrente nulla: impedenza infinita (circuito aperto)', ZW / 2, ZH / 2, C.muted, 12, 'center', 'middle'); return; }
+
+    const rlc = S.useZ && S.zType === 'RLC';
+    const neg = d.Zre < -1e-9;                 // parte reale negativa: bipolo attivo
+    const ox = neg ? ZW / 2 : 34, oy = ZH / 2;
+    const availX = neg ? ox - 40 : ZW - ox - 70, availY = oy - 22;
+    const up = rlc ? d.XL : Math.max(0, d.Zim);
+    const down = rlc ? Math.max(0, d.XC - d.XL) : Math.max(0, -d.Zim);
+    const k = Math.min(availX / Math.max(Math.abs(d.Zre), 1e-12), availY / Math.max(up, down, 1e-12));
+
+    // assi
+    zx.strokeStyle = C.line; zx.lineWidth = 1;
+    zx.beginPath(); zx.moveTo(neg ? 10 : ox - 10, oy); zx.lineTo(ZW - 10, oy); zx.moveTo(ox, 8); zx.lineTo(ox, ZH - 8); zx.stroke();
+    text('Re', ZW - 12, oy - 9, C.muted, 12, 'right', 'middle');
+    text('Im', ox + 6, 12, C.muted, 12, 'left', 'middle');
+
+    // parte reale R
+    const rx = ox + d.Zre * k, ex = rx, ey = oy - d.Zim * k;
+    zx.setLineDash([4, 3]); zx.strokeStyle = C.muted; zx.lineWidth = 1.5;
+    zx.beginPath(); zx.moveTo(ox, oy); zx.lineTo(rx, oy); zx.stroke(); zx.setLineDash([]);
+    if (Math.abs(d.Zre * k) > 14) text('R', (ox + rx) / 2, oy + (d.Zim >= 0 ? 12 : -12), C.muted, 12, 'center', 'middle');
+
+    // parte immaginaria: nel circuito RLC si vedono X_L e X_C separate
+    if (rlc) {
+      const yL = oy - d.XL * k;
+      arrow(rx, oy, rx, yL, C.muted, 1.5);
+      arrow(rx + 10, yL, rx + 10, ey, C.muted, 1.5);
+      text('jX', rx - 6, (oy + yL) / 2, C.muted, 12, 'right', 'middle'); text('L', rx - 6, (oy + yL) / 2 + 5, C.muted, 9, 'left', 'top');
+      text('−jX', rx + 16, (yL + ey) / 2, C.muted, 12, 'left', 'middle'); text('C', rx + 38, (yL + ey) / 2 + 5, C.muted, 9, 'left', 'top');
+    } else {
+      zx.setLineDash([4, 3]); zx.strokeStyle = C.muted;
+      zx.beginPath(); zx.moveTo(rx, oy); zx.lineTo(ex, ey); zx.stroke(); zx.setLineDash([]);
+      if (Math.abs(d.Zim * k) > 14) text(d.Zim >= 0 ? 'jX' : '−jX', ex + (neg ? -6 : 6), (oy + ey) / 2, C.muted, 12, neg ? 'right' : 'left', 'middle');
+    }
+
+    // angolo φ
+    const ang = Math.atan2(d.Zim, d.Zre);
+    if (Math.abs(ang) > 0.02) {
+      const r = 28; zx.strokeStyle = C.phase; zx.lineWidth = 2;
+      zx.beginPath(); zx.arc(ox, oy, r, 0, -ang, ang > 0); zx.stroke();
+      text('φ', ox + (r + 10) * Math.cos(ang / 2), oy - (r + 10) * Math.sin(ang / 2), C.phase, 14, 'center', 'middle', true);
+    }
+
+    // vettore Z
+    arrow(ox, oy, ex, ey, C.ink, 2.5);
+    text('Z', ex + (neg ? -8 : (rlc ? 22 : 8)), ey + (d.Zim >= 0 ? -6 : 6), C.ink, 14, neg ? 'right' : 'left', 'middle', true);
+  }
+
+  L.zplane = { resize, draw };
+})(window.LAB);
+
+</script>
+<script>
+/* js/disegno/circuito.js */
+/* ==========================================================================
+   SCHEMA DEL CIRCUITO: i simboli R, L, C compaiono e scompaiono
+   in base al carico scelto (con la "Z libera" sfumano uno nell'altro)
+   ========================================================================== */
+(function (L) {
+  const { D2R } = L;
+  // Scrive un pedice dentro un testo SVG, per esempio X con pedice L
+  const sub = (base, s) => `${base}<tspan dy="3" font-size="9">${s}</tspan><tspan dy="-3">`;
+  const fmtL = v => v < 1e-3 ? L.fmt(v * 1e6) + ' µH' : v < 1 ? L.fmt(v * 1e3) + ' mH' : L.fmt(v) + ' H';
+  const fmtC = v => v < 1e-6 ? L.fmt(v * 1e9) + ' nF' : v < 1e-3 ? L.fmt(v * 1e6) + ' µF' : L.fmt(v * 1e3) + ' mF';
+
+  L.updateCircuit = function (d) {
+    const S = L.S, zt = S.zType, fmt = L.fmt;
+    // peso di ciascun componente (0 = invisibile, 1 = pieno)
+    let wR, wL, wC;
+    if (S.useZ && zt === 'R')        { wR = 1; wL = 0; wC = 0; }
+    else if (S.useZ && zt === 'L')   { wR = 0; wL = 1; wC = 0; }
+    else if (S.useZ && zt === 'C')   { wR = 0; wL = 0; wC = 1; }
+    else if (S.useZ && zt === 'RLC') { wR = 1; wL = 1; wC = 1; }
+    else {
+      const a = d.phiZ * D2R, s = Math.sin(a);
+      wR = Math.min(1, Math.abs(Math.cos(a))); wL = s > 0 ? s : 0; wC = s < 0 ? -s : 0;
+    }
+    const op = w => w < 0.03 ? 0 : 0.25 + 0.75 * w;
+    L.$('#gR').style.opacity = op(wR);
+    L.$('#gL').style.opacity = op(wL);
+    L.$('#gC').style.opacity = op(wC);
+
+    // etichette sotto i simboli
+    L.$('#tR').innerHTML = 'R = ' + fmt(Math.abs(d.Zre)) + ' Ω';
+    L.$('#tL').innerHTML = sub('X', 'L') + ' = ' + fmt(Math.abs(d.Zim)) + ' Ω</tspan>';
+    L.$('#tC').innerHTML = sub('X', 'C') + ' = ' + fmt(Math.abs(d.Zim)) + ' Ω</tspan>';
+    if (S.useZ && (zt === 'L' || zt === 'RLC')) L.$('#tL').innerHTML = 'L = ' + fmtL(S.L);
+    if (S.useZ && (zt === 'C' || zt === 'RLC')) L.$('#tC').innerHTML = 'C = ' + fmtC(S.C);
+
+    L.$('#zstate').textContent = (S.useZ ? '' : 'Impedenza equivalente V/I: ') + L.loadName(d);
+
+    // valori sotto il piano complesso
+    let zv = '';
+    if (isFinite(d.Zmag)) {
+      zv = `Z = ${fmt(d.Zre)} ${d.Zim < 0 ? '−' : '+'} j${fmt(Math.abs(d.Zim))} Ω = ${fmt(d.Zmag)} Ω ∠ ${L.deg(d.phiZ)}`;
+      if (S.useZ && (zt === 'L' || zt === 'RLC')) zv += `<br>X<sub>L</sub> = ωL = ${fmt(d.w)} · ${fmt(S.L)} = ${fmt(d.XL)} Ω`;
+      if (S.useZ && (zt === 'C' || zt === 'RLC')) zv += `<br>X<sub>C</sub> = 1/(ωC) = 1/(${fmt(d.w)} · ${fmt(S.C)}) = ${fmt(d.XC)} Ω`;
+      if (S.useZ && zt === 'RLC') zv += `<br>X = X<sub>L</sub> − X<sub>C</sub> = ${fmt(d.XL - d.XC)} Ω`;
+    }
+    L.$('#zvals').innerHTML = zv;
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* js/audio.js */
+/* ==========================================================================
+   SUONO DELLE ONDE (Web Audio API)
+   Due oscillatori, uno per la tensione e uno per la corrente, alla frequenza
+   impostata. Partono nello stesso istante e cambiano frequenza insieme, così
+   il loro sfasamento è esattamente φ. La fase di ciascuno si imposta con una
+   PeriodicWave: sin(ωt + θ) = sinθ·cos(ωt) + cosθ·sin(ωt).
+   ========================================================================== */
+(function (L) {
+  const A = { ctx: null, waveKey: { v: null, i: null }, stopTimer: null };
+  const TC = 0.03;                  // costante di tempo delle transizioni (s): evita i "clic"
+  const VOLUME_MAX = 0.6;           // guadagno massimo con il volume al 100%
+
+  // Crea il motore audio al primo uso (i browser lo permettono solo dopo un clic)
+  function ensure() {
+    if (A.ctx) return true;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    const ctx = new AC();
+    const master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+    const channel = () => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      g.gain.value = 0;
+      const p = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      o.connect(g);
+      if (p) { g.connect(p); p.connect(master); } else g.connect(master);
+      return { o, g, p };
+    };
+    const v = channel(), i = channel();
+    const t0 = ctx.currentTime + 0.05;
+    v.o.start(t0); i.o.start(t0);   // stessa partenza = stessa origine dei tempi
+    Object.assign(A, { ctx, master, v, i });
+    return true;
+  }
+
+  function setPhase(ch, key, thetaDeg) {
+    const k = Math.round(thetaDeg * 10);
+    if (A.waveKey[key] === k) return;
+    A.waveKey[key] = k;
+    const th = thetaDeg * L.D2R;
+    const real = new Float32Array([0, Math.sin(th)]);
+    const imag = new Float32Array([0, Math.cos(th)]);
+    ch.o.setPeriodicWave(A.ctx.createPeriodicWave(real, imag, { disableNormalization: true }));
+  }
+
+  function update(d) {
+    const S = L.S;
+    if (!S.audioOn) {
+      if (A.ctx) {
+        A.master.gain.setTargetAtTime(0, A.ctx.currentTime, TC);
+        clearTimeout(A.stopTimer);
+        A.stopTimer = setTimeout(() => { if (!L.S.audioOn) A.ctx.suspend(); }, 300);
+      }
+      return;
+    }
+    if (!ensure()) return;
+    clearTimeout(A.stopTimer);
+    if (A.ctx.state === 'suspended') A.ctx.resume();
+
+    const now = A.ctx.currentTime;
+    const f = Math.min(S.f, A.ctx.sampleRate / 2 - 1);
+    A.v.o.frequency.setTargetAtTime(f, now, TC);
+    A.i.o.frequency.setTargetAtTime(f, now, TC);
+    setPhase(A.v, 'v', S.thv);
+    setPhase(A.i, 'i', d.thi);
+
+    // ampiezze relative ai valori di riferimento (stato.js)
+    const av = Math.min(1, S.Vm / d.VsRef);
+    const ai = isFinite(d.Im) ? Math.min(1, d.Im / d.IsRef) : 0;
+    let gv = 0, gi = 0, pv = 0, pi = 0;
+    switch (S.audioMode) {
+      case 'v':  gv = av; break;
+      case 'i':  gi = ai; break;
+      case 'st': gv = av; gi = ai; pv = -1; pi = 1; break;
+      case 'sum': gv = av > 0 ? 0.5 : 0; gi = ai > 0 ? 0.5 : 0; break; // stessa ampiezza: si sente solo l'effetto della fase
+    }
+    A.v.g.gain.setTargetAtTime(gv, now, TC);
+    A.i.g.gain.setTargetAtTime(gi, now, TC);
+    if (A.v.p) { A.v.p.pan.setTargetAtTime(pv, now, TC); A.i.p.pan.setTargetAtTime(pi, now, TC); }
+    A.master.gain.setTargetAtTime(S.audioVol / 100 * VOLUME_MAX, now, TC);
+  }
+
+  L.audio = { update };
+})(window.LAB);
+
+</script>
+<script>
+/* js/aggiorna.js */
+/* ==========================================================================
+   AGGIORNAMENTO: ricalcola tutto e aggiorna i pannelli.
+   Viene chiamata ogni volta che si cambia un valore o una spunta.
+   (Il grafico animato invece si ridisegna da solo a ogni fotogramma, vedi main.js)
+   ========================================================================== */
+(function (L) {
+  const { D2R } = L;
+  const $ = L.$;
+
+  L.update = function () {
+    const S = L.S, fmt = L.fmt, rows = L.rows;
+    L.D = L.compute();
+    const d = L.D, zt = S.zType;
+    if (S.t > d.Wt) S.t = 0;
+
+    /* --- corrente: bloccata quando la decide l'impedenza --- */
+    const lock = S.useZ;
+    ['Im', 'thi'].forEach(k => {
+      rows[k].row.classList.toggle('locked', lock);
+      rows[k].num.disabled = lock; rows[k].rng.disabled = lock;
+    });
+    if (lock) {
+      rows.Im.num.value = +d.Im.toPrecision(3); rows.Im.rng.value = Math.min(10, d.Im);
+      rows.thi.num.value = +d.thi.toFixed(1); rows.thi.rng.value = d.thi;
+    }
+    $('#iNote').textContent = lock ? 'Calcolata dall\u2019impedenza: I = V / |Z| e θi = θv − φZ.' : 'Imposta tu ampiezza e fase della corrente.';
+
+    /* --- righe visibili in base al tipo di carico --- */
+    rows.R.row.style.display = (zt === 'R' || zt === 'RLC') ? '' : 'none';
+    rows.L.row.style.display = (zt === 'L' || zt === 'RLC') ? '' : 'none';
+    rows.C.row.style.display = (zt === 'C' || zt === 'RLC') ? '' : 'none';
+    rows.Zmod.row.style.display = rows.Zphi.row.style.display = zt === 'Z' ? '' : 'none';
+
+    /* --- risonanza RLC --- */
+    const resBox = $('#resBox');
+    resBox.style.display = zt === 'RLC' ? '' : 'none';
+    if (zt === 'RLC') {
+      resBox.innerHTML = `Frequenza di risonanza<br>f₀ = 1 / (2π√(LC)) = <b>${L.fmtF(d.f0)}</b><br><button class="btn small" type="button" id="goRes">Porta f alla risonanza</button>`;
+      $('#goRes').onclick = () => L.setFrequency(+d.f0.toPrecision(4));
+    }
+
+    /* --- nota sulla frequenza: la finestra è fissa, l'onda si stringe --- */
+    const nP = d.Wt / d.T;
+    $('#fNote').innerHTML = `T = 1/f = <b>${L.fmtT(d.T)}</b>. ` + (S.xaxis === 'time'
+      ? `Nella finestra di ${L.fmtT(d.Wt)} entrano <b>${fmt(nP)}</b> periodi: se aumenti f l\u2019onda si stringe.`
+      : `Con l\u2019asse in angoli si vedono sempre 2 periodi: scegli l\u2019asse dei tempi per vedere l\u2019onda stringersi.`);
+    $('#tbWrap').style.display = $('#fit').style.display = S.xaxis === 'time' ? '' : 'none';
+    $('#tlab').textContent = S.xaxis === 'time' ? 'Tempo' : 'Angolo ωt';
+
+    /* --- sfasamento e valori efficaci nella check list --- */
+    const dir = Math.abs(d.phi) < 1 ? 'in fase' : (d.phi > 0 ? 'corrente in ritardo' : 'corrente in anticipo');
+    $('#phaseLive').innerHTML = `φ = θ<sub>v</sub> − θ<sub>i</sub> = <b>${L.deg(d.phi)}</b><br>${dir}, Δt = ${L.fmtT(Math.abs(d.phi) / 360 * d.T)}`;
+    $('#rmsNote').innerHTML = `V<sub>eff</sub> = V<sub>max</sub>/√2 = <b>${fmt(d.Vrms)} V</b><br>I<sub>eff</sub> = I<sub>max</sub>/√2 = <b>${fmt(d.Irms)} A</b>`;
+    $('#audioNote').innerHTML = L.audioNote(d);
+
+    /* --- legenda dell'oscilloscopio --- */
+    let lg = '';
+    if (S.showV) lg += `<span style="--lc:var(--volt)">tensione v(t), fondo scala ${fmt(d.Vs)} V</span>`;
+    if (S.showI) lg += `<span style="--lc:var(--curr)">corrente i(t), fondo scala ${fmt(d.Is)} A</span>`;
+    if (S.showPw) lg += `<span style="--lc:var(--power)">potenza p(t)</span>`;
+    if (S.showPh) lg += `<span style="--lc:var(--phase)">sfasamento</span>`;
+    if (!S.autoScale) lg += `<span style="--lc:var(--muted)">scala bloccata</span>`;
+    $('#legend').innerHTML = lg;
+
+    /* --- circuito, piano complesso, suono --- */
+    L.updateCircuit(d);
+    L.zplane.draw();
+    L.audio.update(d);
+
+    /* --- formule e spiegazione --- */
+    $('#eqV').innerHTML = `v(t) = ${fmt(S.Vm)} · sin(${fmt(d.w)} t${L.sgnDeg(S.thv)}) V`;
+    $('#eqI').innerHTML = `i(t) = ${fmt(d.Im)} · sin(${fmt(d.w)} t${L.sgnDeg(d.thi)}) A`;
+    const items = [
+      ['Frequenza f', L.fmtF(S.f)], ['Periodo T = 1/f', L.fmtT(d.T)], ['Pulsazione ω = 2πf', fmt(d.w) + ' rad/s'],
+      ['Sfasamento φ', L.deg(d.phi)], ['Ritardo Δt = φ/360° · T', L.fmtT(Math.abs(d.phi) / 360 * d.T)], ['Fattore di potenza cos φ', fmt(Math.cos(d.phi * D2R))],
+      ['Potenza attiva P', fmt(d.P) + ' W'], ['Potenza reattiva Q', fmt(d.Q) + ' var'], ['Potenza apparente S', fmt(d.Sa) + ' VA']
+    ];
+    $('#vals').innerHTML = items.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
+    $('#explain').innerHTML = L.explain(d);
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* js/controlli.js */
+/* ==========================================================================
+   CONTROLLI: slider, caselle numeriche, spunte della check list e barra comandi
+   ========================================================================== */
+(function (L) {
+  const S = L.S, $ = L.$;
+  L.rows = {};
+
+  /* ---------------------------------------------------------------------
+     makeRow crea una riga "etichetta + casella numerica + slider".
+     Opzioni:
+       min, max   limiti dello slider
+       step       passo (slider lineare)
+       log: true  slider logaritmico (utile per frequenza, L, C)
+       nmin, nmax limiti accettati scrivendo nella casella (se diversi)
+       unit       unità singola, oppure
+       units      elenco [nome, fattore] in ordine crescente, es. [['Hz',1],['kHz',1e3]]
+     --------------------------------------------------------------------- */
+  function makeRow(parent, key, label, o) {
+    const units = o.units || [[o.unit || '', 1]];
+    let ui = 0;
+    const row = document.createElement('div'); row.className = 'row';
+    const id = 'in_' + key;
+    const unitHtml = units.length > 1
+      ? `<select aria-label="Unità">${units.map(u => `<option>${u[0]}</option>`).join('')}</select>`
+      : units[0][0];
+    const rMin = o.log ? 0 : o.min, rMax = o.log ? 1000 : o.max, rStep = o.log ? 1 : o.step;
+    row.innerHTML = `<label for="${id}">${label}</label>
+      <span class="num"><input type="number" id="${id}" step="any"> ${unitHtml}</span>
+      <input type="range" min="${rMin}" max="${rMax}" step="${rStep}" aria-label="${label.replace(/<[^>]+>/g, '')}">`;
+    parent.appendChild(row);
+
+    const num = row.querySelector('input[type=number]');
+    const rng = row.querySelector('input[type=range]');
+    const sel = row.querySelector('select');
+    const nmin = o.nmin ?? o.min, nmax = o.nmax ?? o.max;
+    const toR = v => o.log ? 1000 * Math.log(v / o.min) / Math.log(o.max / o.min) : v;
+    const fromR = r => o.log ? o.min * Math.pow(o.max / o.min, r / 1000) : r;
+    const autoUnit = v => {
+      if (units.length < 2) return;
+      ui = 0; units.forEach((u, i) => { if (Math.abs(v) / u[1] >= 1) ui = i; });
+      sel.selectedIndex = ui;
+    };
+    const show = v => { num.value = +(v / units[ui][1]).toPrecision(4); };
+    const set = v => { autoUnit(v); show(v); rng.value = Math.min(rMax, Math.max(rMin, toR(v))); };
+    set(S[key]);
+
+    rng.addEventListener('input', () => {
+      let v = fromR(+rng.value); if (o.log) v = +v.toPrecision(3);
+      S[key] = v; autoUnit(v); show(v); L.update();
+    });
+    num.addEventListener('change', () => {
+      let v = parseFloat(String(num.value).replace(',', '.')) * units[ui][1];
+      if (!isFinite(v)) v = S[key];
+      v = Math.min(nmax, Math.max(nmin, v)); S[key] = v; set(v); L.update();
+    });
+    if (sel) sel.addEventListener('change', () => { ui = sel.selectedIndex; show(S[key]); });
+    L.rows[key] = { row, num, rng, set };
+  }
+
+  /* --- valori impostabili nella check list --- */
+  makeRow($('#bodyV'), 'Vm', 'Ampiezza V<sub>max</sub>', { min: 0, max: 400, nmax: 1e6, step: 1, unit: 'V' });
+  makeRow($('#bodyV'), 'thv', 'Fase iniziale θ<sub>v</sub>', { min: -180, max: 180, step: 1, unit: '°' });
+  makeRow($('#bodyV'), 'f', 'Frequenza f', { min: 1, max: 1e5, nmin: 0.1, nmax: 1e6, log: true, units: [['Hz', 1], ['kHz', 1e3]] });
+  makeRow($('#bodyI'), 'Im', 'Ampiezza I<sub>max</sub>', { min: 0, max: 10, nmax: 1e5, step: 0.1, unit: 'A' });
+  makeRow($('#bodyI'), 'thi', 'Fase iniziale θ<sub>i</sub>', { min: -180, max: 180, step: 1, unit: '°' });
+  makeRow($('#bodyZ'), 'R', 'Resistenza R', { min: 0.1, max: 1e4, nmin: 0.01, nmax: 1e7, log: true, units: [['Ω', 1], ['kΩ', 1e3]] });
+  makeRow($('#bodyZ'), 'L', 'Induttanza L', { min: 1e-6, max: 10, nmin: 1e-9, nmax: 100, log: true, units: [['µH', 1e-6], ['mH', 1e-3], ['H', 1]] });
+  makeRow($('#bodyZ'), 'C', 'Capacità C', { min: 1e-9, max: 1e-2, nmin: 1e-12, nmax: 1, log: true, units: [['nF', 1e-9], ['µF', 1e-6], ['mF', 1e-3]] });
+  makeRow($('#bodyZ'), 'Zmod', 'Modulo |Z|', { min: 1, max: 500, step: 1, unit: 'Ω' });
+  makeRow($('#bodyZ'), 'Zphi', 'Argomento φ<sub>Z</sub>', { min: -90, max: 90, step: 1, unit: '°' });
+  makeRow($('#bodyAudio'), 'audioVol', 'Volume', { min: 0, max: 100, step: 1, unit: '%' });
+
+  /* --- spunte --- */
+  function bindChk(id, key) {
+    const el = $(id);
+    el.checked = S[key];
+    el.addEventListener('change', () => {
+      S[key] = el.checked;
+      if (el.closest('.item-head')) el.closest('.item').classList.toggle('on', el.checked);
+      L.update();
+    });
+  }
+  bindChk('#chkV', 'showV'); bindChk('#chkI', 'showI'); bindChk('#chkZ', 'useZ'); bindChk('#chkF', 'showF');
+  bindChk('#chkPh', 'showPh'); bindChk('#chkPw', 'showPw'); bindChk('#chkRms', 'showRms');
+  bindChk('#chkAngle', 'showAngle'); bindChk('#chkProj', 'showProj'); bindChk('#chkTrace', 'trace');
+  bindChk('#chkAudio', 'audioOn');
+
+  document.querySelectorAll('input[name=zt]').forEach(r =>
+    r.addEventListener('change', () => { S.zType = r.value; L.update(); }));
+  document.querySelectorAll('input[name=au]').forEach(r =>
+    r.addEventListener('change', () => { S.audioMode = r.value; L.update(); }));
+
+  /* --- base dei tempi: valori 1-2-5 da 1 µs/div a 0,5 s/div --- */
+  const TBS = [];
+  for (let e = -6; e <= -1; e++) for (const m of [1, 2, 5]) TBS.push(m * Math.pow(10, e));
+  const tbSel = $('#tbase');
+  tbSel.innerHTML = TBS.map((v, i) => `<option value="${i}">${L.fmtT(v)}/div</option>`).join('');
+  const setTbSel = () => {
+    let best = 0;
+    TBS.forEach((v, i) => { if (Math.abs(Math.log(v / S.tb)) < Math.abs(Math.log(TBS[best] / S.tb))) best = i; });
+    tbSel.value = best;
+  };
+  setTbSel();
+  tbSel.addEventListener('change', () => { S.tb = TBS[+tbSel.value]; S.t = 0; L.update(); });
+
+  // Sceglie la base dei tempi che mostra circa 2 periodi
+  L.fitTimebase = function () {
+    const target = 2 / S.f / 8;
+    S.tb = TBS.find(v => v >= target * 0.9999) ?? TBS[TBS.length - 1];
+    setTbSel(); S.t = 0;
+  };
+  $('#fit').addEventListener('click', () => { L.fitTimebase(); L.update(); });
+
+  // Cambia la frequenza da codice (pulsanti "risonanza" e "440 Hz")
+  L.setFrequency = function (f) {
+    S.f = f; L.rows.f.set(f);
+    if (S.xaxis === 'time') L.fitTimebase();
+    L.update();
+  };
+  $('#la440').addEventListener('click', () => L.setFrequency(440));
+
+  /* --- animazione --- */
+  const playBtn = $('#play');
+  L.setPlaying = function (p) { S.playing = p; playBtn.textContent = p ? 'Pausa' : 'Avvia'; };
+  L.setPlaying(S.playing);
+  playBtn.addEventListener('click', () => L.setPlaying(!S.playing));
+  $('#reset').addEventListener('click', () => { S.t = 0; L.setPlaying(false); });
+  $('#tslider').addEventListener('input', e => { L.setPlaying(false); S.t = +e.target.value / 1000 * L.windowT(); });
+  $('#spd').addEventListener('input', e => { S.secPerTurn = +e.target.value; $('#spdout').textContent = L.fmt(S.secPerTurn) + ' s'; });
+  $('#xaxis').addEventListener('change', e => { S.xaxis = e.target.value; S.t = 0; L.update(); });
+
+  // Scala verticale: togliendo la spunta si blocca quella attuale,
+  // così si può confrontare come cresce o cala un'ampiezza
+  const chkAuto = $('#chkAuto');
+  chkAuto.checked = S.autoScale;
+  chkAuto.addEventListener('change', () => {
+    if (!chkAuto.checked && L.D) { S.VsFix = L.D.Vs; S.IsFix = L.D.Is; }
+    S.autoScale = chkAuto.checked; L.update();
+  });
+
+  // Barra spaziatrice = avvia / pausa
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space' && !/INPUT|SELECT|BUTTON|TEXTAREA/.test(document.activeElement.tagName)) {
+      e.preventDefault(); L.setPlaying(!S.playing);
+    }
+  });
+})(window.LAB);
+
+</script>
+<script>
+/* js/main.js */
+/* ==========================================================================
+   AVVIO: colori, dimensioni dei grafici e ciclo di animazione
+   ========================================================================== */
+(function (L) {
+  L.readColors();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    L.readColors(); L.zplane.draw();
+  });
+
+  function resizeAll() { L.scope.resize(); L.zplane.resize(); }
+  new ResizeObserver(resizeAll).observe(L.$('.canvas-box'));
+
+  L.update();
+  resizeAll();
+
+  // A ogni fotogramma il tempo avanza: un giro del fasore dura "secPerTurn" secondi
+  let last = null;
+  function frame(ts) {
+    if (last === null) last = ts;
+    const dt = Math.min(0.1, (ts - last) / 1000); last = ts;
+    if (L.S.playing) L.S.t = (L.S.t + dt / L.S.secPerTurn / L.S.f) % L.windowT();
+    L.scope.draw();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})(window.LAB);
+
+</script>
+</body>
+</html>

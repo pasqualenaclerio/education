@@ -14,7 +14,8 @@ laboratorio/
 
 ## Web apps
 
-_Web apps currently being updated._
+- [`ca`](ca/) — **Alternating current**: phasors, sine waves, phase shift, impedance (R, L, C, series RLC), power and RMS values
+- [`filtri_rc`](filtri_rc/) — **RC filters**: passive RC low-pass, high-pass and band-pass filters applied to signals with harmonics and to an audio track with noise
 
 ---
 

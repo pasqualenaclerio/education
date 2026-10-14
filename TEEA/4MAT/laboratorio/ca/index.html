@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratorio di corrente alternata</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tema.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/componenti.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Laboratorio di corrente alternata</h1>
+  <p>Un vettore che ruota sulla circonferenza disegna una sinusoide. Cambia ampiezza, fase, frequenza e carico e guarda come si spostano tensione e corrente.</p>
+</header>
+
+<div class="layout">
+  <!-- ===================== CHECK LIST (colonna sinistra) ===================== -->
+  <aside class="panel checklist" aria-label="Cosa mostrare">
+    <h2>Cosa vuoi vedere</h2>
+    <p>Spunta una voce per attivarla e impostarne i valori.</p>
+
+    <section class="item on" data-c="v">
+      <label class="item-head"><input type="checkbox" id="chkV" checked><span class="swatch"></span>Tensione v(t)</label>
+      <div class="item-body"><div id="bodyV"></div><p class="note" id="fNote"></p></div>
+    </section>
+
+    <section class="item on" data-c="i">
+      <label class="item-head"><input type="checkbox" id="chkI" checked><span class="swatch"></span>Corrente i(t)</label>
+      <div class="item-body">
+        <p class="note" id="iNote">Imposta tu ampiezza e fase della corrente.</p>
+        <div id="bodyI"></div>
+      </div>
+    </section>
+
+    <section class="item" data-c="z">
+      <label class="item-head"><input type="checkbox" id="chkZ"><span class="swatch" style="background:var(--ink)"></span>Impedenza Z (carico)</label>
+      <div class="item-body">
+        <p class="note">La corrente viene calcolata dalla legge di Ohm: I = V / Z.</p>
+        <div class="seg" role="radiogroup" aria-label="Tipo di carico">
+          <label><input type="radio" name="zt" value="R" checked>Resistore</label>
+          <label><input type="radio" name="zt" value="L">Induttore</label>
+          <label><input type="radio" name="zt" value="C">Condensatore</label>
+          <label><input type="radio" name="zt" value="RLC">RLC serie</label>
+          <label><input type="radio" name="zt" value="Z">Z libera</label>
+        </div>
+        <div id="bodyZ"></div>
+        <div class="res" id="resBox"></div>
+      </div>
+    </section>
+
+    <section class="item on" data-c="f">
+      <label class="item-head"><input type="checkbox" id="chkF" checked><span class="swatch"></span>Fasori sulla circonferenza</label>
+      <div class="item-body">
+        <label class="sub"><input type="checkbox" id="chkAngle" checked>Angolo ωt + θ</label>
+        <label class="sub"><input type="checkbox" id="chkProj" checked>Proiezione verso la sinusoide</label>
+        <label class="sub"><input type="checkbox" id="chkTrace" checked>Disegna la curva mentre ruota</label>
+      </div>
+    </section>
+
+    <section class="item on" data-c="p">
+      <label class="item-head"><input type="checkbox" id="chkPh" checked><span class="swatch"></span>Sfasamento φ</label>
+      <div class="item-body"><div class="live-phase" id="phaseLive"></div></div>
+    </section>
+
+    <section class="item" data-c="w">
+      <label class="item-head"><input type="checkbox" id="chkPw"><span class="swatch"></span>Potenza istantanea p(t)</label>
+      <div class="item-body"><p class="note">p(t) = v(t) · i(t). La linea tratteggiata è la potenza media P. Quando p è negativa il carico restituisce energia al generatore.</p></div>
+    </section>
+
+    <section class="item" data-c="r">
+      <label class="item-head"><input type="checkbox" id="chkRms"><span class="swatch" style="background:var(--muted)"></span>Valori efficaci</label>
+      <div class="item-body"><p class="note" id="rmsNote"></p></div>
+    </section>
+
+    <section class="item" data-c="s">
+      <label class="item-head"><input type="checkbox" id="chkAudio"><span class="swatch"></span>Suono delle onde</label>
+      <div class="item-body">
+        <p class="note">Ascolta le sinusoidi alla frequenza impostata. Il volume segue l'ampiezza di ciascuna onda.</p>
+        <div class="seg" role="radiogroup" aria-label="Cosa ascoltare">
+          <label><input type="radio" name="au" value="v" checked>Tensione</label>
+          <label><input type="radio" name="au" value="i">Corrente</label>
+          <label><input type="radio" name="au" value="st">Stereo: v a sinistra, i a destra</label>
+          <label><input type="radio" name="au" value="sum">Somma v + i</label>
+        </div>
+        <div id="bodyAudio"></div>
+        <p class="note" id="audioNote"></p>
+        <button class="btn small" type="button" id="la440">Prova con 440 Hz (la nota La)</button>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ===================== OSCILLOSCOPIO E PANNELLI (colonna destra) ===================== -->
+  <div class="stage">
+    <section class="panel scope" aria-label="Fasori e sinusoidi">
+      <div class="toolbar">
+        <button class="btn primary" id="play" type="button">Pausa</button>
+        <button class="btn" id="reset" type="button">Riporta a t = 0</button>
+        <label class="tl"><span id="tlab">Tempo</span> <input type="range" id="tslider" min="0" max="1000" step="1" value="0"><output id="tout">0</output></label>
+        <label class="tl">Un giro in <input type="range" id="spd" min="0.25" max="12" step="0.25" value="4"><output id="spdout">4 s</output></label>
+      </div>
+      <div class="toolbar">
+        <label class="tl">Asse orizzontale
+          <select id="xaxis"><option value="time">tempo t</option><option value="deg">angolo ωt (sempre 2 periodi)</option></select>
+        </label>
+        <label class="tl" id="tbWrap">Base dei tempi <select id="tbase"></select></label>
+        <button class="btn" id="fit" type="button">Adatta alla frequenza</button>
+        <label class="tl check"><input type="checkbox" id="chkAuto" checked>Scala verticale automatica</label>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="canvas-box"><canvas id="scope" aria-label="Circonferenza con i fasori a sinistra e sinusoidi generate a destra"></canvas></div>
+      <div class="live" id="live"></div>
+    </section>
+
+    <div class="lower">
+      <section class="panel card" aria-label="Carico">
+        <h2>Il carico</h2>
+        <svg class="circ" viewBox="0 0 340 150" role="img" aria-label="Circuito con generatore e carico">
+          <!-- filo del circuito -->
+          <path d="M40 50 V25 H310 V125 H40 V90" fill="none" stroke="currentColor" stroke-width="2"/>
+          <!-- generatore -->
+          <circle cx="40" cy="70" r="20" fill="var(--panel)" stroke="currentColor" stroke-width="2"/>
+          <path d="M28 70 q6 -13 12 0 t12 0" fill="none" stroke="var(--volt)" stroke-width="2"/>
+          <text x="8" y="58">+</text><text x="6" y="98" style="fill:var(--volt);font-weight:700;font-size:14px">v</text>
+          <!-- resistore -->
+          <g id="gR" class="comp">
+            <rect x="75" y="16" width="56" height="18" rx="1" fill="var(--panel)" stroke="currentColor" stroke-width="2"/>
+            <text id="tR" x="103" y="54" text-anchor="middle">R</text>
+          </g>
+          <!-- induttore -->
+          <g id="gL" class="comp">
+            <rect x="160" y="17" width="60" height="10" fill="var(--panel)"/>
+            <path d="M160 25 a7.5 7.5 0 0 1 15 0 a7.5 7.5 0 0 1 15 0 a7.5 7.5 0 0 1 15 0 a7.5 7.5 0 0 1 15 0" fill="none" stroke="currentColor" stroke-width="2"/>
+            <text id="tL" x="186" y="54" text-anchor="middle">L</text>
+          </g>
+          <!-- condensatore -->
+          <g id="gC" class="comp">
+            <rect x="267" y="18" width="10" height="14" fill="var(--panel)"/>
+            <path d="M266 10 V40 M278 10 V40" stroke="currentColor" stroke-width="3"/>
+            <text id="tC" x="272" y="54" text-anchor="middle">C</text>
+          </g>
+          <!-- verso della corrente -->
+          <path d="M310 64 v18 M304 76 l6 8 l6 -8" fill="none" stroke="var(--curr)" stroke-width="2"/>
+          <text x="320" y="80" style="fill:var(--curr);font-weight:700;font-size:14px">i</text>
+        </svg>
+        <p class="zstate" id="zstate"></p>
+        <canvas id="zplane" aria-label="Triangolo dell'impedenza nel piano complesso"></canvas>
+        <div class="zvals" id="zvals"></div>
+      </section>
+
+      <section class="panel card" aria-label="Valori e spiegazione">
+        <h2>Le formule</h2>
+        <div class="eq v" id="eqV"></div>
+        <div class="eq i" id="eqI"></div>
+        <dl id="vals"></dl>
+        <p class="explain" id="explain"></p>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- L'ordine degli script conta: ogni file usa ciò che è definito nei precedenti. -->
+<script src="js/stato.js"></script>
+<script src="js/formato.js"></script>
+<script src="js/fisica.js"></script>
+<script src="js/testi.js"></script>
+<script src="js/disegno/strumenti.js"></script>
+<script src="js/disegno/oscilloscopio.js"></script>
+<script src="js/disegno/piano-impedenza.js"></script>
+<script src="js/disegno/circuito.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/aggiorna.js"></script>
+<script src="js/controlli.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

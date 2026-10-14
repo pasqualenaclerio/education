@@ -15,13 +15,8 @@ This page collects the TEEA **laboratory web apps** for the **4th-year MAT class
 
 ## Web apps
 
-<!--
-Add the web apps here, for example:
-
-- [Web app name](web-app-name/) — short description
--->
-
-_Web apps currently being updated._
+- [Alternating current](/education/TEEA/4MAT/laboratorio/ca/) — phasors, sine waves, phase shift, impedance (R, L, C, series RLC), power and RMS values *(in Italian)*
+- [RC filters](/education/TEEA/4MAT/laboratorio/filtri_rc/) — passive RC low-pass, high-pass and band-pass filters applied to signals with harmonics and to an audio track with noise *(in Italian)*
 
 ---
 
