@@ -1,7 +1,6 @@
 title: education
 description: Teaching materials, lecture notes, Arduino projects and laboratory resources for the MAT vocational pathway.
-theme: jekyll-theme-cayman
-show_downloads: false
+baseurl: /education
 
 author:
   name: Pasquale Naclerio
@@ -11,3 +10,5 @@ lang: it-IT
 github:
   is_project_page: true
   repository_url: https://github.com/pasqualenaclerio/education
+
+# Stile del sito: layout in _layouts/default.html, colori e caratteri in assets/css/arcade.css
