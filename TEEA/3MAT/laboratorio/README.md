@@ -14,7 +14,7 @@ laboratorio/
 
 ## Web app
 
-_Web app in aggiornamento._
+- [`laboratorio-legge-ohm`](laboratorio-legge-ohm/) — **Legge di Ohm**: generatore e resistenze, legge di Ohm, caratteristica V–I, codice colori, serie e parallelo, potenza ed energia
 
 ---
 

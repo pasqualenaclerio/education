@@ -15,7 +15,9 @@ The lecture notes, exercises, examples, and projects in this section form part o
 
 <!-- Add the programme topics here -->
 
-_Programme currently being updated._
+1. [**Voltage, current, resistance and Ohm's law**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) — voltage, ideal and real voltage sources, current, resistance, Ohm's law and V–I characteristic · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf)
+
+_More topics coming soon._
 
 ## Materials
 
@@ -31,7 +33,7 @@ To add a web app copy this line inside <div class="app-grid"> and change address
 -->
 
 <div class="app-grid">
-<div class="vuoto">WEB APPS COMING SOON…</div>
+<a class="app" href="/education/TEEA/3MAT/laboratorio/laboratorio-legge-ohm/"><strong>Ohm's law</strong><span>Source and resistors: Ohm's law, V–I characteristic, colour code, series and parallel, power and energy (in Italian).</span><em>▶ START</em></a>
 </div>
 
 ➡️ [All TEEA laboratory web apps](/education/TEEA/laboratorio/index.en.html)

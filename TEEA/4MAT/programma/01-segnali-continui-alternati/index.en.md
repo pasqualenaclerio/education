@@ -135,6 +135,8 @@ For the domestic mains *f* = 50 Hz:
 
 ---
 
+✏️ Practice: [exercises](/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf) and [solutions](/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf) on sine waves, oscilloscope and phasors *(in Italian)*.
+
 ➡️ To see sine waves, phasors and phase shift in motion, use the [Alternating current](/education/TEEA/4MAT/laboratorio/ca/) web app *(in Italian)*.
 
 [← Back to TEEA — 4MAT](/education/TEEA/4MAT/index.en.html)

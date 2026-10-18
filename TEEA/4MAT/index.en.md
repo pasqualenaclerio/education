@@ -23,7 +23,13 @@ _More topics coming soon._
 
 <!-- Add links to lecture notes, exercises, and projects here -->
 
-_Materials currently being updated._
+### Exercises: sine waves, oscilloscope and phasors
+
+12 exercises on topic [LV01 – Direct and alternating electrical signals](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html): from the function *v*(*t*) to the oscilloscope (phase in degrees and radians) and from the oscilloscope to the function, with phasors and phasor form *(in Italian)*.
+
+<a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Solutions</a>
+
+_More materials coming soon._
 
 ## Laboratory
 

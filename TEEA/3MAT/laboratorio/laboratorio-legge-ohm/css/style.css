@@ -1,0 +1,297 @@
+/* =========================================================
+   COLORI — ogni grandezza ha il suo colore, uguale ovunque:
+   nello schema, nelle formule, nei grafici e nei comandi.
+   ========================================================= */
+:root {
+  --carta: #E9EFEC;          /* sfondo pagina */
+  --superficie: #F8FAF9;     /* sfondo dei pannelli */
+  --inchiostro: #1B2936;     /* testo e fili dello schema */
+  --tenue: #586976;          /* testo secondario */
+  --griglia: #DDE5E1;
+  --griglia-forte: #BFCDC6;
+  --bordo: #BDCAC3;
+  --tensione: #2152C0;       /* V */
+  --corrente: #B3205F;       /* I */
+  --resistenza: #0B7A62;     /* R */
+  --potenza: #A86A00;        /* P ed E */
+  --calore: #E8601C;         /* resistenza che si scalda */
+  --errore: #C0322B;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --carta: #121A20;
+    --superficie: #18222A;
+    --inchiostro: #E2E9E5;
+    --tenue: #93A4AE;
+    --griglia: #24313A;
+    --griglia-forte: #33444F;
+    --bordo: #33434D;
+    --tensione: #7AA2FF;
+    --corrente: #F27AB0;
+    --resistenza: #41C9A2;
+    --potenza: #F0B43C;
+    --calore: #FF8A4C;
+    --errore: #FF7A70;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { background: var(--carta); }
+body {
+  margin: 0;
+  font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--inchiostro);
+  background: var(--carta);
+}
+:focus-visible { outline: 3px solid var(--tensione); outline-offset: 2px; }
+button, input, select { font: inherit; color: inherit; }
+
+/* ---------- testata ---------- */
+.testata {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.testata h1 {
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  line-height: 1.05;
+  margin: 0 0 10px;
+  letter-spacing: -0.015em;
+}
+.testata p { margin: 0; max-width: 64ch; color: var(--tenue); }
+
+/* interruttore potenza ed energia */
+.interruttore {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 700; cursor: pointer;
+  padding: 8px 14px 8px 8px;
+  border: 1.5px solid var(--bordo); border-radius: 999px;
+  background: var(--superficie);
+}
+.interruttore input {
+  appearance: none; -webkit-appearance: none; margin: 0;
+  width: 46px; height: 26px; border-radius: 999px;
+  background: var(--griglia-forte); position: relative; cursor: pointer;
+  transition: background .15s;
+}
+.interruttore input::after {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--superficie); transition: transform .15s;
+}
+.interruttore input:checked { background: var(--potenza); }
+.interruttore input:checked::after { transform: translateX(20px); }
+
+/* ---------- scelta del circuito ---------- */
+.modi {
+  max-width: 1280px; margin: 0 auto; padding: 4px 24px 0;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.modi button {
+  padding: 10px 20px;
+  border: 1.5px solid var(--bordo); border-radius: 999px;
+  background: var(--superficie); cursor: pointer; font-weight: 700;
+}
+.modi button:hover { border-color: var(--inchiostro); }
+.modi button[aria-pressed="true"] { background: var(--inchiostro); color: var(--carta); border-color: var(--inchiostro); }
+
+/* ---------- banco di lavoro ---------- */
+.banco {
+  max-width: 1280px; margin: 0 auto; padding: 18px 24px 32px;
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 20px; align-items: start;
+}
+.colonna { display: grid; gap: 20px; }
+.pannello {
+  background: var(--superficie);
+  border: 1px solid var(--bordo);
+  border-radius: 16px;
+  padding: 20px 22px 22px;
+}
+.pannello h2 { font-size: 1.3rem; margin: 0 0 12px; letter-spacing: -0.01em; }
+.pannello h3 { font-size: 1.1rem; margin: 0 0 6px; }
+.potenza { grid-column: 1 / -1; }
+.nota { color: var(--tenue); font-size: .95rem; margin: 8px 0 0; max-width: 70ch; }
+.tenue { color: var(--tenue); font-size: .95rem; }
+
+/* ---------- schema elettrico ---------- */
+.schema { width: 100%; height: auto; display: block; }
+.schema text { font-size: 16px; fill: var(--inchiostro); }
+.schema .forte { font-weight: 700; font-size: 18px; }
+.schema .segno { font-size: 22px; font-weight: 700; }
+.zigzag { stroke-width: 3; stroke-linejoin: miter; stroke-miterlimit: 10; }
+.filo { fill: none; stroke: var(--inchiostro); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.comp { fill: var(--superficie); stroke: var(--inchiostro); stroke-width: 2.5; }
+.comp-fondo { fill: var(--superficie); }
+.contorno { fill: none; stroke: var(--inchiostro); stroke-width: 2.5; }
+.cancella { stroke: var(--superficie); stroke-width: 10; }
+.calore { fill: var(--calore); }
+.massa { fill: none; stroke: var(--inchiostro); stroke-width: 2.5; stroke-linejoin: round; }
+.nodo { fill: var(--inchiostro); }
+.pallino { fill: var(--corrente); }
+.freccia { fill: var(--corrente); }
+.t-v { fill: var(--tensione) !important; }
+.t-i { fill: var(--corrente) !important; }
+.t-r { fill: var(--resistenza) !important; }
+.t-p { fill: var(--potenza) !important; }
+
+/* barra dell'intensità della corrente */
+.metro { margin-top: 8px; }
+.metro-testa { display: flex; justify-content: space-between; align-items: baseline; font-size: .95rem; }
+.metro-testa strong { font-size: 1.15rem; }
+.metro-scala {
+  height: 10px; border-radius: 999px; margin-top: 4px;
+  background: var(--griglia); overflow: hidden;
+}
+.metro-barra { height: 100%; background: var(--corrente); border-radius: 999px; transition: width .2s; }
+.metro-tacche { position: relative; height: 20px; font-size: .8rem; color: var(--tenue); }
+.metro-tacche span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.metro-tacche span:first-child { transform: none; }
+.metro-tacche span:last-child { transform: translateX(-100%); }
+
+/* ---------- comandi ---------- */
+.comandi { display: grid; gap: 12px; margin-top: 16px; }
+#comandiR { margin-top: 0; }
+.comando {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, auto) minmax(0, 1fr) auto auto;
+  gap: 8px 14px; align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--bordo); border-left: 4px solid var(--tinta);
+  border-radius: 10px;
+  background: var(--carta);
+}
+.comando .nome { font-weight: 700; }
+.comando input[type="range"] { width: 100%; accent-color: var(--tinta); }
+.campo { display: inline-flex; align-items: center; gap: 6px; }
+.comando input[type="text"] {
+  width: 7.5em; padding: 6px 8px; text-align: right;
+  border: 1.5px solid var(--bordo); border-radius: 8px; background: var(--superficie);
+}
+.comando input.errore { border-color: var(--errore); }
+.comando select { padding: 6px 8px; border: 1.5px solid var(--bordo); border-radius: 8px; background: var(--superficie); }
+.unita { color: var(--tenue); }
+.messaggio { grid-column: 1 / -1; margin: 0; color: var(--errore); font-size: .9rem; }
+.rimuovi {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--bordo); background: var(--superficie);
+  cursor: pointer; font-size: 1.2rem; line-height: 1;
+}
+.rimuovi:hover { border-color: var(--errore); color: var(--errore); }
+.mini { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.mini-svg svg { width: 150px; display: block; }
+.comando.compatto { grid-template-columns: minmax(7.5rem, auto) auto auto; justify-content: start; margin: 12px 0; }
+
+.bottone {
+  padding: 9px 16px; border-radius: 10px; cursor: pointer; font-weight: 700;
+  border: 1.5px solid var(--inchiostro); background: var(--superficie);
+}
+.bottone:hover:not(:disabled) { background: var(--inchiostro); color: var(--carta); }
+.bottone:disabled { cursor: default; border-color: var(--bordo); color: var(--tenue); font-weight: 400; }
+.bottone.piccolo { padding: 4px 10px; font-size: .9rem; }
+.aggiungi { justify-self: start; border-style: dashed; }
+
+/* ---------- formule ---------- */
+.q { font-weight: 700; white-space: nowrap; }
+.q-v { color: var(--tensione); }
+.q-i { color: var(--corrente); }
+.q-r { color: var(--resistenza); }
+.q-p { color: var(--potenza); }
+.q sub { font-size: .7em; }
+
+.formule { display: grid; }
+.riga {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 2px 14px;
+  padding: 10px 0; border-top: 1px solid var(--griglia);
+}
+.riga:first-child { border-top: 0; padding-top: 0; }
+.riga .descr { flex: 1 0 100%; margin: 0; font-size: .85rem; color: var(--tenue); }
+.riga .simb { font-size: 1.2rem; white-space: nowrap; min-width: 8.5rem; }
+.riga .val { font-size: 1.05rem; line-height: 2; white-space: nowrap; max-width: 100%; overflow-x: auto; padding: 2px 0; }
+.riga.principale .simb { font-size: 1.55rem; }
+.riga.principale .val { font-size: 1.2rem; }
+
+.fr {
+  display: inline-flex; flex-direction: column; align-items: stretch; text-align: center;
+  vertical-align: middle; margin: 0 .2em; line-height: 1.25;
+}
+.fr > span { padding: 1px .25em; white-space: nowrap; }
+.fr > span:first-child { border-bottom: 1.5px solid var(--inchiostro); }
+
+/* ---------- grafico V–I ---------- */
+.caratteristica { margin: 16px 0 0; }
+.caratteristica svg { width: 100%; max-width: 460px; height: auto; display: block; }
+.caratteristica figcaption { color: var(--tenue); font-size: .9rem; margin-top: 4px; max-width: 60ch; }
+.caratteristica text { font-size: 12px; fill: var(--inchiostro); }
+.caratteristica .forte { font-weight: 700; font-size: 14px; }
+.caratteristica .tacca { fill: var(--tenue); }
+.griglia { stroke: var(--griglia); stroke-width: 1; }
+.asse { stroke: var(--griglia-forte); stroke-width: 1.5; }
+.retta { stroke: var(--resistenza); stroke-width: 3; stroke-linecap: round; }
+.retta-secondaria { stroke: var(--tenue); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.guida { stroke: var(--corrente); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.punto { fill: var(--corrente); stroke: var(--superficie); stroke-width: 2; }
+
+/* ---------- codice colori ---------- */
+.testa-pannello { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.testa-pannello h2 { margin: 0; }
+.selettore { display: inline-flex; border: 1.5px solid var(--bordo); border-radius: 999px; overflow: hidden; }
+.selettore button { padding: 5px 14px; border: 0; background: transparent; cursor: pointer; font-weight: 700; }
+.selettore button + button { border-left: 1.5px solid var(--bordo); }
+.selettore button[aria-pressed="true"] { background: var(--inchiostro); color: var(--carta); }
+.intro-colori { margin: 0 0 6px; }
+.resistore-grande svg { width: 100%; max-width: 440px; display: block; margin: 0 auto; }
+.bande { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: .95rem; }
+.bande th { text-align: left; color: var(--tenue); font-weight: 400; font-size: .85rem; padding: 4px 6px; border-bottom: 1px solid var(--griglia-forte); }
+.bande td { padding: 5px 6px; border-bottom: 1px solid var(--griglia); }
+.campione {
+  display: inline-block; width: 18px; height: 18px; border-radius: 4px;
+  vertical-align: -4px; margin-right: 8px; border: 1px solid rgba(0, 0, 0, .3);
+}
+.lettura { margin: 12px 0; }
+
+/* ---------- potenza ed energia ---------- */
+.potenza-griglia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; }
+.potenza-griglia .formule { margin-top: 12px; }
+.tabella-potenza { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: .95rem; }
+.tabella-potenza th { text-align: left; color: var(--tenue); font-weight: 400; font-size: .85rem; padding: 4px 6px; border-bottom: 1px solid var(--griglia-forte); }
+.tabella-potenza td { padding: 6px; border-bottom: 1px solid var(--griglia); }
+.tabella-potenza tr.troppa td { background: color-mix(in srgb, var(--calore) 14%, transparent); }
+.avviso {
+  margin: 14px 0 0; padding: 10px 14px; border-radius: 10px;
+  border-left: 4px solid var(--calore);
+  background: color-mix(in srgb, var(--calore) 12%, var(--superficie));
+}
+
+/* ---------- piede ---------- */
+.piede { max-width: 1280px; margin: 0 auto; padding: 0 24px 40px; color: var(--tenue); font-size: .95rem; }
+
+/* ---------- schermi stretti ---------- */
+@media (max-width: 980px) {
+  .banco { grid-template-columns: minmax(0, 1fr); }
+  .potenza-griglia { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .testata, .modi, .banco, .piede { padding-left: 14px; padding-right: 14px; }
+  .pannello { padding: 16px 14px; }
+  .comando { grid-template-columns: 1fr auto; }
+  .comando input[type="range"] { grid-column: 1 / -1; grid-row: 2; }
+  .comando.compatto { grid-template-columns: 1fr auto auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

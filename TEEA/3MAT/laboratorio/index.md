@@ -17,7 +17,7 @@ Per aggiungere una web app copia questa riga dentro <div class="app-grid"> e cam
 -->
 
 <div class="app-grid">
-<div class="vuoto">WEB APP IN ARRIVO…</div>
+<a class="app" href="/education/TEEA/3MAT/laboratorio/laboratorio-legge-ohm/"><strong>Legge di Ohm</strong><span>Generatore e resistenze: legge di Ohm, caratteristica V–I, codice colori, serie e parallelo, potenza ed energia.</span><em>▶ START</em></a>
 </div>
 
 ---

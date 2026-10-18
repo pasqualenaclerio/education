@@ -135,6 +135,8 @@ Per la rete domestica *f* = 50 Hz:
 
 ---
 
+✏️ Per allenarti: [esercizi](/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf) e [soluzioni](/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf) su sinusoidi, oscilloscopio e fasori.
+
 ➡️ Per vedere sinusoidi, fasori e sfasamento in movimento usa la web app [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/).
 
 [← Torna a TEEA — 4MAT](/education/TEEA/4MAT/)

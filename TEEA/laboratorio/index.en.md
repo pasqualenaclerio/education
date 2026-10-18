@@ -14,7 +14,7 @@ The web apps are interactive tools that run directly in the browser during labor
 ## 3MAT
 
 <div class="app-grid">
-<div class="vuoto">WEB APPS COMING SOON…</div>
+<a class="app" href="/education/TEEA/3MAT/laboratorio/laboratorio-legge-ohm/"><strong>Ohm's law</strong><span>Source and resistors: Ohm's law, V–I characteristic, colour code, series and parallel, power and energy (in Italian).</span><em>▶ START</em></a>
 </div>
 
 [3MAT laboratory page](/education/TEEA/3MAT/laboratorio/index.en.html)

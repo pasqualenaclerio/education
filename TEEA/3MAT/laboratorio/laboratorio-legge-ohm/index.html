@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratorio legge di Ohm</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="testata">
+  <div>
+    <h1>Laboratorio legge di Ohm</h1>
+    <p>Un generatore spinge la corrente attraverso una o più resistenze.
+       Cambia la tensione e i valori delle resistenze: guarda come cambia la corrente
+       e come lo raccontano le formule.</p>
+  </div>
+  <label class="interruttore">
+    <input type="checkbox" id="mostraPotenza">
+    <span>Potenza ed energia</span>
+  </label>
+</header>
+
+<nav class="modi" aria-label="Tipo di circuito">
+  <button type="button" data-modo="singola" aria-pressed="true">Una resistenza</button>
+  <button type="button" data-modo="serie" aria-pressed="false">Resistenze in serie</button>
+  <button type="button" data-modo="parallelo" aria-pressed="false">Resistenze in parallelo</button>
+</nav>
+
+<main class="banco">
+
+  <div class="colonna">
+  <!-- ============ CIRCUITO E COMANDI ============ -->
+  <section class="pannello circuito" aria-labelledby="titoloCircuito">
+    <h2 id="titoloCircuito">Il circuito</h2>
+    <svg id="schema" class="schema" viewBox="0 0 720 320" role="img"
+         aria-label="Schema elettrico con generatore di tensione e resistenze"></svg>
+
+    <div class="metro">
+      <div class="metro-testa">
+        <span>Intensità della corrente</span>
+        <strong class="q q-i" id="metroValore"></strong>
+      </div>
+      <div class="metro-scala"><div class="metro-barra" id="metroBarra"></div></div>
+      <div class="metro-tacche" id="metroTacche"></div>
+    </div>
+    <p class="nota">I pallini mostrano la corrente nel verso convenzionale: esce dal polo + del generatore,
+       attraversa il circuito e rientra dall'altro polo. Più la corrente è intensa, più vanno veloci.</p>
+
+    <div class="comandi">
+      <div class="comando" style="--tinta: var(--tensione)">
+        <label class="nome" for="cursoreV">Generatore <span class="q q-v">V</span></label>
+        <input type="range" id="cursoreV">
+        <span class="campo"><input type="text" id="testoV" inputmode="decimal" aria-label="Tensione in volt"><span class="unita">V</span></span>
+        <p class="messaggio" id="messaggioV" hidden></p>
+      </div>
+      <div id="comandiR" class="comandi"></div>
+    </div>
+  </section>
+
+    <!-- ============ CODICE COLORI ============ -->
+    <section class="pannello" aria-labelledby="titoloColori">
+      <div class="testa-pannello">
+        <h2 id="titoloColori">Codice colori</h2>
+        <div class="selettore" role="group" aria-label="Serie commerciale" id="selettoreSerie">
+          <button type="button" data-serie="E12">E12</button>
+          <button type="button" data-serie="E24">E24</button>
+          <button type="button" data-serie="E96">E96</button>
+        </div>
+      </div>
+      <p id="coloriIntro" class="intro-colori"></p>
+      <div id="resistoreGrande" class="resistore-grande"></div>
+      <table class="bande" id="tabellaBande">
+        <thead><tr><th>Banda</th><th>Colore</th><th>Significato</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p id="coloriLettura" class="lettura"></p>
+      <button type="button" class="bottone" id="usaCommerciale" hidden></button>
+    </section>
+  </div>
+
+  <div class="colonna">
+    <!-- ============ FORMULE ============ -->
+    <section class="pannello" aria-labelledby="titoloFormule">
+      <h2 id="titoloFormule">Legge di Ohm</h2>
+      <div id="formule" class="formule"></div>
+      <p class="nota" id="notaFormule"></p>
+      <figure class="caratteristica">
+        <svg id="caratteristica" role="img" aria-label="Grafico della corrente in funzione della tensione"></svg>
+        <figcaption id="didascaliaGrafico"></figcaption>
+      </figure>
+    </section>
+
+  </div>
+
+  <!-- ============ POTENZA ED ENERGIA ============ -->
+  <section class="pannello potenza" id="pannelloPotenza" aria-labelledby="titoloPotenza" hidden>
+    <h2 id="titoloPotenza">Potenza ed energia</h2>
+    <div class="potenza-griglia">
+      <div>
+        <h3>Potenza</h3>
+        <p class="nota">La potenza dice quanta energia al secondo la resistenza trasforma in calore.
+           Si misura in watt (W).</p>
+        <div id="formulePotenza" class="formule"></div>
+        <div id="tabellaPotenza"></div>
+        <p id="avvisoPotenza" class="avviso" hidden></p>
+      </div>
+      <div>
+        <h3>Energia</h3>
+        <p class="nota">L'energia è la potenza moltiplicata per il tempo in cui il circuito resta acceso.</p>
+        <div class="comando compatto" style="--tinta: var(--potenza)">
+          <label class="nome" for="tempo">Tempo acceso</label>
+          <input type="text" id="tempo" inputmode="decimal">
+          <select id="unitaTempo" aria-label="Unità di tempo">
+            <option value="s">secondi</option>
+            <option value="min">minuti</option>
+            <option value="h">ore</option>
+            <option value="giorni">giorni</option>
+          </select>
+        </div>
+        <div id="formuleEnergia" class="formule"></div>
+        <div class="comando compatto" style="--tinta: var(--potenza)">
+          <label class="nome" for="prezzo">Prezzo dell'energia</label>
+          <input type="text" id="prezzo" inputmode="decimal">
+          <span class="unita">€/kWh</span>
+        </div>
+        <p id="costo" class="lettura"></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="piede">
+  <p>Le formule usano i simboli: <span class="q q-v">V</span> tensione in volt,
+     <span class="q q-i">I</span> corrente in ampere, <span class="q q-r">R</span> resistenza in ohm,
+     <span class="q q-p">P</span> potenza in watt.</p>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/formato.js"></script>
+<script src="js/circuito.js"></script>
+<script src="js/codice-colori.js"></script>
+<script src="js/schema.js"></script>
+<script src="js/caratteristica.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

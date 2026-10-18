@@ -14,7 +14,7 @@ laboratorio/
 
 ## Web apps
 
-_Web apps currently being updated._
+- [`laboratorio-legge-ohm`](laboratorio-legge-ohm/) — **Ohm's law**: source and resistors, Ohm's law, V–I characteristic, colour code, series and parallel, power and energy
 
 ---
 

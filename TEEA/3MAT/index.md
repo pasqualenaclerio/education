@@ -15,7 +15,9 @@ Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezion
 
 <!-- Aggiungere qui gli argomenti del programma -->
 
-_Programma in aggiornamento._
+1. [**Tensione, corrente, resistenza e legge di Ohm**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/) — tensione, generatori di tensione ideali e reali, corrente, resistenza, legge di Ohm e caratteristica V–I · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-tensione-corrente-resistenza.pdf)
+
+_Altri argomenti in aggiornamento._
 
 ## Materiali
 
@@ -31,7 +33,7 @@ Per aggiungere una web app copia questa riga dentro <div class="app-grid"> e cam
 -->
 
 <div class="app-grid">
-<div class="vuoto">WEB APP IN ARRIVO…</div>
+<a class="app" href="/education/TEEA/3MAT/laboratorio/laboratorio-legge-ohm/"><strong>Legge di Ohm</strong><span>Generatore e resistenze: legge di Ohm, caratteristica V–I, codice colori, serie e parallelo, potenza ed energia.</span><em>▶ START</em></a>
 </div>
 
 ➡️ [Tutte le web app di laboratorio TEEA](/education/TEEA/laboratorio/)

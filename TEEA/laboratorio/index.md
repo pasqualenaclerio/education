@@ -14,7 +14,7 @@ Le web app sono strumenti interattivi da utilizzare direttamente nel browser dur
 ## 3MAT
 
 <div class="app-grid">
-<div class="vuoto">WEB APP IN ARRIVO…</div>
+<a class="app" href="/education/TEEA/3MAT/laboratorio/laboratorio-legge-ohm/"><strong>Legge di Ohm</strong><span>Generatore e resistenze: legge di Ohm, caratteristica V–I, codice colori, serie e parallelo, potenza ed energia.</span><em>▶ START</em></a>
 </div>
 
 [Pagina del laboratorio 3MAT](/education/TEEA/3MAT/laboratorio/)
