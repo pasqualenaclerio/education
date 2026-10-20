@@ -122,6 +122,76 @@ Nel diagramma fasoriale lo sfasamento è semplicemente l'**angolo tra i due faso
 
 Lo sfasamento si può esprimere anche come ritardo nel tempo: Δ*t* = Δ*φ* / *ω*.
 
+## Leggere un segnale sull'oscilloscopio
+
+L'**oscilloscopio** disegna la tensione in funzione del tempo. Lo schermo è diviso da un reticolo in **divisioni** (di solito 10 in orizzontale e 8 in verticale) e ogni divisione è a sua volta suddivisa in **5 parti**, le tacche sugli assi centrali. Una parte vale quindi **1/5 di divisione = 0,2 div**.
+
+Per trasformare le divisioni in volt e in secondi bisogna conoscere le due impostazioni dell'oscilloscopio:
+
+- **V/div** (volt per divisione, comando verticale): quanti volt vale **una divisione in verticale**. Ogni canale ha il suo V/div.
+- **Time/div** (tempo per divisione, comando orizzontale): quanto tempo vale **una divisione in orizzontale**. È lo stesso per tutti i canali.
+
+### Contare divisioni e parti
+
+Si contano prima le **divisioni intere**, poi le **parti** che restano, e si sommano:
+
+> **Divisioni lette:** *n* = divisioni intere + parti · 0,2
+
+| Parti | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| **Divisioni** | 0,2 | 0,4 | 0,6 | 0,8 | 1 |
+
+Per esempio 2 divisioni e 3 parti valgono 2 + 3 · 0,2 = **2,6 div**.
+
+### Tensione, periodo e frequenza
+
+Le divisioni lette si trasformano in valori moltiplicando per l'impostazione dell'oscilloscopio:
+
+> **Tensione:** *V* = *n*<sub>verticali</sub> · V/div
+>
+> **Tempo:** *t* = *n*<sub>orizzontali</sub> · Time/div
+>
+> **Frequenza:** *f* = 1 / *T*
+
+- **Ampiezza *V*<sub>M</sub>:** si contano le divisioni verticali dall'asse centrale (lo zero) fino al picco. È più preciso misurare il valore picco-picco *V*<sub>pp</sub>, dal picco alla valle, e dividere per 2: *V*<sub>M</sub> = *V*<sub>pp</sub> / 2.
+- **Periodo *T*:** si contano le divisioni orizzontali tra due punti uguali e consecutivi della sinusoide, per esempio due passaggi per lo zero in salita.
+- **Frequenza *f*:** si ricava dal periodo, *f* = 1 / *T*.
+
+![Lettura di ampiezza e periodo sullo schermo dell'oscilloscopio](img/oscilloscopio-lettura.svg){: width="460"}
+
+**Esempio.** Impostazioni: **2 V/div** e **1 ms/div**.
+
+- **ampiezza:** il picco è a 2 divisioni e 3 parti = 2,6 div → *V*<sub>M</sub> = 2,6 · 2 V = **5,2 V** (*V*<sub>pp</sub> = 10,4 V)
+- **periodo:** tra due passaggi per lo zero in salita ci sono 4 div → *T* = 4 · 1 ms = **4 ms**
+- **frequenza:** *f* = 1 / *T* = 1 / 0,004 s = **250 Hz**
+- **pulsazione:** *ω* = 2π · *f* = 2π · 250 ≈ **1571 rad/s**
+- la sinusoide passa per lo zero in salita al centro dello schermo (*t* = 0), quindi *φ* = 0 e **v(t) = 5,2 · sin(1571 t) V**
+
+### Lo sfasamento tra due segnali
+
+Con due segnali della **stessa frequenza** visualizzati sui due canali:
+
+- **1.** si misura il **periodo *T***, che è lo stesso per i due segnali;
+- **2.** si misura la **distanza orizzontale Δ*t*** tra due punti corrispondenti, per esempio i due passaggi per lo zero in salita;
+- **3.** si divide Δ*t* per il periodo e si moltiplica per 360°.
+
+> **Sfasamento:** Δ*φ* = (Δ*t* / *T*) · 360°
+>
+> **In radianti:** Δ*φ* = (Δ*t* / *T*) · 2π
+
+Il segnale che passa per primo per lo zero in salita, cioè quello **più a sinistra**, è **in anticipo**; l'altro è **in ritardo**.
+
+![Due segnali sfasati: periodo T e differenza temporale Δt](img/oscilloscopio-sfasamento.svg){: width="460"}
+
+**Esempio.** Impostazioni: CH1 **2 V/div**, CH2 **1 V/div**, **1 ms/div**.
+
+- **ampiezze:** *v*<sub>1</sub> arriva a 3 div → 3 · 2 V = **6 V**; *v*<sub>2</sub> arriva a 2 div → 2 · 1 V = **2 V** (attenzione: i due canali hanno V/div diversi)
+- **periodo:** *T* = 4 div · 1 ms = **4 ms**, quindi *f* = **250 Hz**
+- **differenza temporale:** Δ*t* = 3 parti = 0,6 div → 0,6 · 1 ms = **0,6 ms**
+- **sfasamento:** Δ*φ* = (0,6 / 4) · 360° = **54°** (≈ 0,94 rad): *v*<sub>1</sub> è **in anticipo** di 54° su *v*<sub>2</sub>
+
+**Consiglio:** scegli V/div e Time/div in modo che il segnale occupi buona parte dello schermo in altezza e che si vedano uno o due periodi. Così le letture sono più precise.
+
 ## Esempio: la rete elettrica
 
 Per la rete domestica *f* = 50 Hz:

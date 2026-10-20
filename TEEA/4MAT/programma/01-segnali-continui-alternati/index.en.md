@@ -122,6 +122,76 @@ In the phasor diagram the phase shift is simply the **angle between the two phas
 
 The phase shift can also be expressed as a time delay: Δ*t* = Δ*φ* / *ω*.
 
+## Reading a signal on the oscilloscope
+
+The **oscilloscope** plots voltage against time. The screen is divided by a grid into **divisions** (usually 10 horizontally and 8 vertically), and each division is further split into **5 parts**, the ticks on the central axes. One part is therefore **1/5 of a division = 0.2 div**.
+
+To turn divisions into volts and seconds you need to know the two oscilloscope settings:
+
+- **V/div** (volts per division, vertical control): how many volts **one vertical division** is worth. Each channel has its own V/div.
+- **Time/div** (time per division, horizontal control): how much time **one horizontal division** is worth. It is the same for all channels.
+
+### Counting divisions and parts
+
+First count the **whole divisions**, then the remaining **parts**, and add them:
+
+> **Divisions read:** *n* = whole divisions + parts · 0.2
+
+| Parts | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| **Divisions** | 0.2 | 0.4 | 0.6 | 0.8 | 1 |
+
+For example 2 divisions and 3 parts give 2 + 3 · 0.2 = **2.6 div**.
+
+### Voltage, period and frequency
+
+The divisions read are turned into values by multiplying by the oscilloscope setting:
+
+> **Voltage:** *V* = *n*<sub>vertical</sub> · V/div
+>
+> **Time:** *t* = *n*<sub>horizontal</sub> · Time/div
+>
+> **Frequency:** *f* = 1 / *T*
+
+- **Amplitude *V*<sub>M</sub>:** count the vertical divisions from the central axis (zero) up to the peak. It is more accurate to measure the peak-to-peak value *V*<sub>pp</sub>, from peak to trough, and divide by 2: *V*<sub>M</sub> = *V*<sub>pp</sub> / 2.
+- **Period *T*:** count the horizontal divisions between two identical consecutive points of the sine wave, for example two rising zero crossings.
+- **Frequency *f*:** it is found from the period, *f* = 1 / *T*.
+
+![Reading amplitude and period on the oscilloscope screen](img/oscilloscopio-lettura.svg){: width="460"}
+
+**Example.** Settings: **2 V/div** and **1 ms/div**.
+
+- **amplitude:** the peak is at 2 divisions and 3 parts = 2.6 div → *V*<sub>M</sub> = 2.6 · 2 V = **5.2 V** (*V*<sub>pp</sub> = 10.4 V)
+- **period:** there are 4 div between two rising zero crossings → *T* = 4 · 1 ms = **4 ms**
+- **frequency:** *f* = 1 / *T* = 1 / 0.004 s = **250 Hz**
+- **angular frequency:** *ω* = 2π · *f* = 2π · 250 ≈ **1571 rad/s**
+- the sine wave crosses zero rising at the centre of the screen (*t* = 0), so *φ* = 0 and **v(t) = 5.2 · sin(1571 t) V**
+
+### Phase shift between two signals
+
+With two signals of the **same frequency** shown on the two channels:
+
+- **1.** measure the **period *T***, which is the same for both signals;
+- **2.** measure the **horizontal distance Δ*t*** between two corresponding points, for example the two rising zero crossings;
+- **3.** divide Δ*t* by the period and multiply by 360°.
+
+> **Phase shift:** Δ*φ* = (Δ*t* / *T*) · 360°
+>
+> **In radians:** Δ*φ* = (Δ*t* / *T*) · 2π
+
+The signal that crosses zero rising first, i.e. the one **further left**, is **leading**; the other one is **lagging**.
+
+![Two phase-shifted signals: period T and time difference Δt](img/oscilloscopio-sfasamento.svg){: width="460"}
+
+**Example.** Settings: CH1 **2 V/div**, CH2 **1 V/div**, **1 ms/div**.
+
+- **amplitudes:** *v*<sub>1</sub> reaches 3 div → 3 · 2 V = **6 V**; *v*<sub>2</sub> reaches 2 div → 2 · 1 V = **2 V** (careful: the two channels have different V/div)
+- **period:** *T* = 4 div · 1 ms = **4 ms**, so *f* = **250 Hz**
+- **time difference:** Δ*t* = 3 parts = 0.6 div → 0.6 · 1 ms = **0.6 ms**
+- **phase shift:** Δ*φ* = (0.6 / 4) · 360° = **54°** (≈ 0.94 rad): *v*<sub>1</sub> **leads** *v*<sub>2</sub> by 54°
+
+**Tip:** choose V/div and Time/div so that the signal fills most of the screen height and one or two periods are visible. This makes the readings more accurate.
+
 ## Example: the mains supply
 
 For the domestic mains *f* = 50 Hz:

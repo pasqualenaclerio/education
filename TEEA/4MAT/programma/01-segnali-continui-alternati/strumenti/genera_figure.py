@@ -159,3 +159,67 @@ ad.text(0.62, -0.08, r'$\bar{V}_2$', color=VERDE, fontsize=17, va='top')
 ad.add_patch(Arc((0, 0), 0.7, 0.7, theta1=0, theta2=60, color=ROSSO, lw=1.3))
 ad.text(0.4, 0.25, r'$\Delta\varphi$', color=ROSSO, fontsize=16)
 salva(fig, 'sfasamento.svg')
+
+
+# ---------- 5) e 6) Lettura sullo schermo dell'oscilloscopio ----------
+SCHERMO = '#10241b'      # fondo dello schermo
+RETICOLO = '#4f7a63'     # griglia
+CH1 = '#ffd23f'          # canale 1 (giallo, come sugli oscilloscopi)
+CH2 = '#4fd6e8'          # canale 2 (ciano)
+TESTO_S = '#e8f3ec'
+
+
+def schermo(ax, vdiv, tdiv, ch2=None):
+    """Schermo 10 x 8 divisioni; gli assi centrali hanno 5 parti per divisione."""
+    ax.set_xlim(-5.15, 5.15); ax.set_ylim(-4.9, 4.15); ax.set_aspect('equal'); ax.axis('off')
+    ax.add_patch(matplotlib.patches.FancyBboxPatch((-5, -4), 10, 8, boxstyle='round,pad=0.08,rounding_size=0.25',
+                                                   facecolor=SCHERMO, edgecolor='#0b1712', lw=3))
+    for x in range(-5, 6):
+        ax.plot([x, x], [-4, 4], color=RETICOLO, lw=0.7, ls=(0, (1, 2)) if x not in (-5, 5) else '-')
+    for y in range(-4, 5):
+        ax.plot([-5, 5], [y, y], color=RETICOLO, lw=0.7, ls=(0, (1, 2)) if y not in (-4, 4) else '-')
+    ax.plot([-5, 5], [0, 0], color=RETICOLO, lw=1.1)
+    ax.plot([0, 0], [-4, 4], color=RETICOLO, lw=1.1)
+    for k in np.arange(-5, 5.01, 0.2):           # tacche delle parti (1/5 di divisione)
+        ax.plot([k, k], [-0.1, 0.1], color=RETICOLO, lw=0.9)
+    for k in np.arange(-4, 4.01, 0.2):
+        ax.plot([-0.1, 0.1], [k, k], color=RETICOLO, lw=0.9)
+    # impostazioni sotto lo schermo
+    ax.text(-5, -4.55, f'CH1  {vdiv}/div', color='#8a6d00', fontsize=12, fontweight='bold', va='center')
+    if ch2:
+        ax.text(-1.6, -4.55, f'CH2  {ch2}/div', color='#137a87', fontsize=12, fontweight='bold', va='center')
+    ax.text(5, -4.55, f'{tdiv}/div', color=INCHIOSTRO, fontsize=12, fontweight='bold', va='center', ha='right')
+
+
+def freccia_s(ax, p1, p2, colore, testo, dx=0, dy=0, **kw):
+    ax.annotate('', xy=p2, xytext=p1, arrowprops=dict(arrowstyle='<|-|>', color=colore, lw=1.6, shrinkA=0, shrinkB=0,
+                                                      mutation_scale=14))
+    xm, ym = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
+    ax.text(xm + dx, ym + dy, testo, color=colore, fontsize=15, fontweight='bold', **kw)
+
+
+# 5) un segnale: VM = 2,6 div (2 div + 3 parti), T = 4 div
+fig, ax = plt.subplots(figsize=(7.2, 6.4))
+schermo(ax, '2 V', '1 ms')
+x = np.linspace(-5, 5, 800)
+VM, T = 2.6, 4.0
+ax.plot(x, VM * np.sin(2 * np.pi * x / T), color=CH1, lw=2.6)
+freccia_s(ax, (1, 0), (1, VM), CH1, r'$V_M$', dx=0.15, ha='left', va='center')
+ax.plot([0, 4], [0, 0], 'o', color=CH1, ms=6)
+ax.plot([0, 0], [0, -3.2], ls=':', color=TESTO_S, lw=1); ax.plot([4, 4], [0, -3.2], ls=':', color=TESTO_S, lw=1)
+freccia_s(ax, (0, -3.1), (4, -3.1), TESTO_S, r'$T$', dy=0.12, ha='center', va='bottom')
+salva(fig, 'oscilloscopio-lettura.svg')
+
+# 6) due segnali sfasati: T = 4 div, delta t = 0,6 div (3 parti)
+fig, ax = plt.subplots(figsize=(7.2, 6.4))
+schermo(ax, '2 V', '1 ms', ch2='1 V')
+ax.plot(x, 3 * np.sin(2 * np.pi * x / T), color=CH1, lw=2.6)
+ax.plot(x, 2 * np.sin(2 * np.pi * (x - 0.6) / T), color=CH2, lw=2.6)
+ax.text(-4.75, 3.45, r'$v_1$', color=CH1, fontsize=16, fontweight='bold')
+ax.text(-4.75, 2.75, r'$v_2$', color=CH2, fontsize=16, fontweight='bold')
+ax.plot([0], [0], 'o', color=CH1, ms=6); ax.plot([0.6], [0], 'o', color=CH2, ms=6)
+ax.plot([0, 0], [0, 3.7], ls=':', color=TESTO_S, lw=1); ax.plot([0.6, 0.6], [0, 3.7], ls=':', color=TESTO_S, lw=1)
+freccia_s(ax, (0, 3.6), (0.6, 3.6), TESTO_S, r'$\Delta t$', dx=0.45, ha='left', va='center')
+ax.plot([4, 4], [0, -3.4], ls=':', color=TESTO_S, lw=1)
+freccia_s(ax, (0, -3.3), (4, -3.3), TESTO_S, r'$T$', dy=0.12, ha='center', va='bottom')
+salva(fig, 'oscilloscopio-sfasamento.svg')
