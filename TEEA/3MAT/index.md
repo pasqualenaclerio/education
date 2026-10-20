@@ -23,7 +23,13 @@ _Altri argomenti in aggiornamento._
 
 <!-- Aggiungere qui i collegamenti a dispense, esercitazioni e progetti -->
 
-_Materiali in aggiornamento._
+### Formulario: tensione, corrente, resistenza e legge di Ohm
+
+Tutte le formule dell'argomento [LV01](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/) in una pagina, senza spiegazioni.
+
+<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-formulario-tensione-corrente-resistenza.pdf" download>Formulario</a>
+
+_Altri materiali in aggiornamento._
 
 ## Laboratorio
 

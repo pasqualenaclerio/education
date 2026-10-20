@@ -23,6 +23,12 @@ _Altri argomenti in aggiornamento._
 
 <!-- Aggiungere qui i collegamenti a dispense, esercitazioni e progetti -->
 
+### Formulario: segnali elettrici continui e alternati
+
+Tutte le formule dell'argomento [LV01](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/) in una pagina, senza spiegazioni.
+
+<a class="btn btn-pdf" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf" download>Formulario</a>
+
 ### Esercitazione: segnali sinusoidali, oscilloscopio e fasori
 
 12 esercizi sull'argomento [LV01 – Segnali elettrici continui e alternati](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/): dalla funzione *v*(*t*) all'oscilloscopio (fase in gradi e in radianti) e dall'oscilloscopio alla funzione, con fasori e forma fasoriale.

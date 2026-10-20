@@ -23,7 +23,13 @@ _More topics coming soon._
 
 <!-- Add links to lecture notes, exercises, and projects here -->
 
-_Materials currently being updated._
+### Formula sheet: voltage, current, resistance and Ohm's law
+
+All the formulas of topic [LV01](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) on one page, without explanations *(in Italian)*.
+
+<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-formulario-tensione-corrente-resistenza.pdf" download>Formula sheet</a>
+
+_More materials coming soon._
 
 ## Laboratory
 
