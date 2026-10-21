@@ -16,6 +16,7 @@ The lecture notes, exercises, examples, and projects in this section form part o
 <!-- Add the programme topics here -->
 
 1. [**Voltage, current, resistance and Ohm's law**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) — voltage, ideal and real voltage sources, current, resistance, Ohm's law and V–I characteristic · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf)
+2. [**Voltage and current dividers, power and energy**](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html) — voltage and current dividers with two resistances, potentiometer, power in watts and energy in watt-hours · [📄 PDF](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf)
 
 _More topics coming soon._
 
@@ -28,6 +29,17 @@ _More topics coming soon._
 All the formulas of topic [LV01](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) on one page, without explanations *(in Italian)*.
 
 <a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-formulario-tensione-corrente-resistenza.pdf" download>Formula sheet</a>
+### Formula sheet: dividers, power and energy
+
+All the formulas of topic [LV02](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html) on one page, without explanations *(in Italian)*.
+
+<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-formulario-partitori-potenza-energia.pdf" download>Formula sheet</a>
+
+### Exercises: dividers, power and energy
+
+8 exercises on topic [LV02](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html): voltage and current dividers, designing a divider, potentiometer, rated power of resistors, energy in Wh and kWh and cost *(in Italian)*.
+
+<a class="btn btn-pdf" href="/education/TEEA/3MAT/materiali/esercitazione-partitori-potenza-energia-3MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-partitori-potenza-energia-3MAT.pdf" download>Solutions</a>
 
 _More materials coming soon._
 

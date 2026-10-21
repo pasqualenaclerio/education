@@ -1,0 +1,31 @@
+% Schemi degli esercizi (usati sia nell'esercitazione sia nelle soluzioni)
+\newcommand{\partitoreV}[3]{% #1 = V, #2 = R1, #3 = R2
+\begin{circuitikz}[scale=0.8, transform shape, line width=0.6pt]
+  \rail{(0,4.4)}{$V = #1$}
+  \draw (0,4.4) -- (0,4.2) to[R, l_={$R_1 = #2$}] (0,2.2) to[short, *-] (0,2.2)
+        to[R, l_={$R_2 = #3$}] (0,0.2) -- (0,0) node[sground]{};
+  \draw (0,2.2) to[short, -o] (1.4,2.2) node[right]{X};
+\end{circuitikz}}
+
+\newcommand{\partitoreI}[3]{% #1 = I, #2 = R1, #3 = R2
+\begin{circuitikz}[scale=0.8, transform shape, line width=0.6pt]
+  \draw (0,4.4) node[ocirc]{} to[short, i>^={$I = #1$}] (0,3.2);
+  \draw (-1.6,3.2) -- (1.6,3.2); \draw (0,3.2) node[circ]{};
+  \draw (-1.6,3.2) to[short, i>^={$I_1$}] (-1.6,2.6) to[R, l_={$R_1 = #2$}] (-1.6,0.6) -- (-1.6,0.3) -- (1.6,0.3);
+  \draw (1.6,3.2) to[short, i>_={$I_2$}] (1.6,2.6) to[R, l^={$R_2 = #3$}] (1.6,0.6) -- (1.6,0.3);
+  \draw (0,0.3) node[circ]{} -- (0,0.1) node[sground]{};
+\end{circuitikz}}
+
+\newcommand{\partitorePot}{%
+\begin{circuitikz}[scale=0.8, transform shape, line width=0.6pt]
+  \rail{(0,4.4)}{$V = 10\,\mathrm{V}$}
+  \draw (0,4.4) -- (0,4.2) to[R, l_={$R_1 = 1\,\mathrm{k\Omega}$}] (0,2.2) to[short, *-] (0,2.2)
+        to[vR, l_={$R_2 = 0 \div 4{,}7\,\mathrm{k\Omega}$}] (0,0.2) -- (0,0) node[sground]{};
+  \draw (0,2.2) to[short, -o] (1.4,2.2) node[right]{X};
+\end{circuitikz}}
+
+\newcommand{\resistenzaSola}[2]{% #1 = V, #2 = R
+\begin{circuitikz}[scale=0.8, transform shape, line width=0.6pt]
+  \rail{(0,3.4)}{$V = #1$}
+  \draw (0,3.4) -- (0,3.2) to[R, l_={$R = #2$}, i>^={$I$}] (0,0.8) -- (0,0.6) node[sground]{};
+\end{circuitikz}}

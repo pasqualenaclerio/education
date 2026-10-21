@@ -1,0 +1,74 @@
+% Soluzioni dell'esercitazione TEEA 3MAT — Argomento 2: partitori, potenza ed energia
+% Per rigenerare il PDF (dalla cartella strumenti, due volte):
+%   pdflatex -output-directory=../../../materiali -jobname=soluzioni-esercitazione-partitori-potenza-energia-3MAT soluzioni.tex
+\input{stile-esercitazione}
+\input{schemi-esercizi}
+\piede{Soluzioni esercitazione TEEA 3MAT}
+\newcommand{\pas}[1]{\par\hspace*{4mm}$\displaystyle #1$\par}
+\newcommand{\ris}[1]{\par\vspace{1mm}\hspace*{4mm}\colorbox{grigio}{\strut\ #1\ }\par}
+
+\begin{document}
+
+\intestazione{SOLUZIONI ESERCITAZIONE}{Partitori, potenza ed energia -- Soluzioni}
+
+\nota{I valori sono arrotondati a tre cifre significative. Le resistenze in k$\Omega$ con le correnti in mA
+danno direttamente le tensioni in V (V = k$\Omega$ $\cdot$ mA).}
+
+\tipo{Partitore di tensione}
+
+\esercizio{1}{$V = 24\U{V}$, $R_1 = 3{,}3\U{k\Omega}$, $R_2 = 4{,}7\U{k\Omega}$}
+\pas{I = \frac{V}{R_1 + R_2} = \frac{24\U{V}}{3{,}3 + 4{,}7\U{k\Omega}} = \frac{24}{8} = 3\U{mA}}
+\pas{V_X = V \cdot \frac{R_2}{R_1 + R_2} = 24 \cdot \frac{4{,}7}{8} = 14{,}1\U{V} \qquad V_1 = 24 \cdot \frac{3{,}3}{8} = 9{,}9\U{V} \qquad 9{,}9 + 14{,}1 = 24\U{V}\ \checkmark}
+\pas{P_1 = V_1 \cdot I = 9{,}9 \cdot 0{,}003 = 29{,}7\U{mW} \qquad P_2 = V_X \cdot I = 14{,}1 \cdot 0{,}003 = 42{,}3\U{mW}}
+\pas{P_{tot} = V \cdot I = 24 \cdot 0{,}003 = 72\U{mW} = 29{,}7 + 42{,}3\ \checkmark}
+\ris{$I = 3\U{mA}$ \quad $V_1 = 9{,}9\U{V}$ \quad $V_X = 14{,}1\U{V}$ \quad $P_1 = 29{,}7\U{mW}$ \quad $P_2 = 42{,}3\U{mW}$ \quad $P_{tot} = 72\U{mW}$}
+
+\esercizio{2}{$V = 15\U{V}$, $V_X = 5\U{V}$, $R_2 = 2{,}2\U{k\Omega}$}
+\pas{\text{Su } R_2 \text{ ci sono } 5\U{V}: \ I = \frac{V_X}{R_2} = \frac{5}{2{,}2} = 2{,}27\U{mA} \qquad \text{su } R_1: \ V_1 = 15 - 5 = 10\U{V}}
+\pas{R_1 = \frac{V_1}{I} = \frac{10\U{V}}{2{,}27\U{mA}} = 4{,}4\U{k\Omega} \qquad \Big(\text{oppure } R_1 = R_2 \cdot \frac{V - V_X}{V_X} = 2{,}2 \cdot \frac{10}{5} = 4{,}4\U{k\Omega}\Big)}
+\pas{\text{valore E12 più vicino: } 4{,}7\U{k\Omega} \quad\Rightarrow\quad V_X = 15 \cdot \frac{2{,}2}{4{,}7 + 2{,}2} = 15 \cdot \frac{2{,}2}{6{,}9} = 4{,}78\U{V}}
+\ris{$R_1 = 4{,}4\U{k\Omega}$ \quad commerciale $4{,}7\U{k\Omega}$ \quad $V_X = 4{,}78\U{V}$}
+
+\tipo{Partitore di corrente}
+
+\esercizio{3}{$I = 30\U{mA}$, $R_1 = 2\U{k\Omega}$, $R_2 = 3\U{k\Omega}$}
+\pas{I_1 = I \cdot \frac{R_2}{R_1 + R_2} = 30 \cdot \frac{3}{5} = 18\U{mA} \qquad I_2 = I \cdot \frac{R_1}{R_1 + R_2} = 30 \cdot \frac{2}{5} = 12\U{mA} \qquad 18 + 12 = 30\ \checkmark}
+\pas{R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{2 \cdot 3}{5} = 1{,}2\U{k\Omega} \qquad V = R_{eq} \cdot I = 1{,}2\U{k\Omega} \cdot 30\U{mA} = 36\U{V}}
+\pas{\text{controllo: } R_1 \cdot I_1 = 2 \cdot 18 = 36\U{V} \qquad R_2 \cdot I_2 = 3 \cdot 12 = 36\U{V}\ \checkmark}
+\ris{$I_1 = 18\U{mA}$ \quad $I_2 = 12\U{mA}$ \quad $R_{eq} = 1{,}2\U{k\Omega}$ \quad $V = 36\U{V}$}
+
+\esercizio{4}{$I = 50\U{mA}$, $R_1 = 100\U{\Omega}$, $R_2 = 400\U{\Omega}$}
+\pas{I_1 = 50 \cdot \frac{400}{500} = 40\U{mA} \qquad I_2 = 50 \cdot \frac{100}{500} = 10\U{mA} \qquad V = R_1 \cdot I_1 = 100 \cdot 0{,}04 = 4\U{V}}
+\pas{P_1 = V \cdot I_1 = 4 \cdot 0{,}04 = 0{,}16\U{W} \qquad P_2 = V \cdot I_2 = 4 \cdot 0{,}01 = 0{,}04\U{W}}
+\pas{\text{con margine: } 2 \cdot 0{,}16 = 0{,}32\U{W} > 0{,}25\U{W} \ \Rightarrow\ \text{per } R_1 \text{ serve un resistore da } 1/2\U{W}}
+\ris{$I_1 = 40\U{mA}$ \quad $I_2 = 10\U{mA}$ \quad $V = 4\U{V}$ \quad $P_1 = 0{,}16\U{W}$ \quad $P_2 = 0{,}04\U{W}$ \quad $R_1$: meglio $1/2\U{W}$}
+
+\newpage
+\tipo{Potenziometro}
+
+\esercizio{5}{$V = 10\U{V}$, $R_1 = 1\U{k\Omega}$ fissa, $R_2$ potenziometro da $0$ a $4{,}7\U{k\Omega}$}
+\pas{\text{a) } R_2 = 0: \ V_{X\,min} = 0\U{V}, \quad I_{max} = \frac{V}{R_1} = \frac{10}{1} = 10\U{mA} \qquad R_2 = 4{,}7\U{k\Omega}: \ V_{X\,max} = 10 \cdot \frac{4{,}7}{5{,}7} = 8{,}25\U{V}}
+\pas{\text{b) per arrivare fino a } V = 10\U{V} \text{ il potenziometro va al posto di } R_1 \text{ (verso l'alimentazione), con } R_2 \text{ fissa}}
+\pas{V_{X\,min} = V \cdot \frac{R_2}{R_{1\,max} + R_2} = 2\U{V} \ \Rightarrow\ R_{1\,max} + 1 = \frac{10 \cdot 1}{2} = 5 \ \Rightarrow\ R_{1\,max} = 4\U{k\Omega}}
+\pas{\text{con un potenziometro commerciale da } 4{,}7\U{k\Omega}: \ V_{X\,min} = 10 \cdot \frac{1}{5{,}7} = 1{,}75\U{V}}
+\ris{a) $0 \div 8{,}25\U{V}$, \ $I_{max} = 10\U{mA}$ \qquad b) al posto di $R_1$, \ $R_{1\,max} = 4\U{k\Omega}$ (commerciale $4{,}7\U{k\Omega}$)}
+
+\tipo{Potenza ed energia}
+
+\esercizio{6}{$R = 470\U{\Omega}$, $V = 12\U{V}$}
+\pas{I = \frac{V}{R} = \frac{12}{470} = 0{,}0255\U{A} = 25{,}5\U{mA} \qquad P = \frac{V^2}{R} = \frac{144}{470} = 0{,}306\U{W}}
+\pas{0{,}306\U{W} > 0{,}25\U{W} \Rightarrow 1/4\U{W} \text{ non va bene;} \quad 2 \cdot 0{,}306 = 0{,}61\U{W} > 0{,}5\U{W} \Rightarrow \text{ si sceglie } 1\U{W}}
+\ris{$I = 25{,}5\U{mA}$ \quad $P = 0{,}306\U{W}$ \quad $1/4\U{W}$ no \quad scelta: $1\U{W}$}
+
+\esercizio{7}{$R = 100\U{\Omega}$, $I = 0{,}2\U{A}$, $t = 5\U{h}$}
+\pas{V = R \cdot I = 100 \cdot 0{,}2 = 20\U{V} \qquad P = R \cdot I^2 = 100 \cdot 0{,}2^2 = 4\U{W} \quad (= V \cdot I = 20 \cdot 0{,}2)}
+\pas{E = P \cdot t = 4\U{W} \cdot 5\U{h} = 20\U{Wh} = 0{,}02\U{kWh}}
+\ris{$V = 20\U{V}$ \quad $P = 4\U{W}$ \quad $E = 20\U{Wh} = 0{,}02\U{kWh}$}
+
+\esercizio{8}{$P = 1500\U{W}$, $V = 230\U{V}$, $4\U{h}$ al giorno per $30$ giorni, $0{,}25$ euro/kWh}
+\pas{I = \frac{P}{V} = \frac{1500}{230} = 6{,}52\U{A} \qquad R = \frac{V^2}{P} = \frac{230^2}{1500} = \frac{52\,900}{1500} = 35{,}3\U{\Omega}}
+\pas{t = 4 \cdot 30 = 120\U{h} \qquad E = P \cdot t = 1500 \cdot 120 = 180\,000\U{Wh} = 180\U{kWh}}
+\pas{\text{costo} = 180\U{kWh} \cdot 0{,}25 \text{ euro/kWh} = 45 \text{ euro}}
+\ris{$I = 6{,}52\U{A}$ \quad $R = 35{,}3\U{\Omega}$ \quad $E = 180\,000\U{Wh} = 180\U{kWh}$ \quad costo $= 45$ euro}
+
+\end{document}

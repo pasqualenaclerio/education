@@ -1,0 +1,149 @@
+% Formulario TEEA 3MAT — Argomento 2: partitori di tensione e di corrente, potenza ed energia
+% Per rigenerare il PDF (dalla cartella strumenti, due volte per il numero di pagine):
+%   pdflatex -output-directory=../pdf -jobname=02-formulario-partitori-potenza-energia formulario.tex
+% ---------------------------------------------------------------------------
+%  Stile comune dei formulari TEEA (pdfLaTeX, solo pacchetti standard
+%  presenti in TeX Live e MiKTeX). Testo in Computer Modern Sans.
+% ---------------------------------------------------------------------------
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper, top=14mm, bottom=16mm, left=14mm, right=14mm, headheight=0pt, footskip=8mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\ohm}{\ensuremath{\Omega}}
+\newcommand{\uA}{\ensuremath{\mu}}
+\newcommand{\per}{\ensuremath{\cdot}}
+\usepackage{xcolor, tikz, multicol, booktabs, array, fancyhdr, lastpage, tabularx}
+\usepackage[most]{tcolorbox}
+\usepackage[siunitx, american resistors, american currents]{circuitikz}
+\ctikzset{bipoles/thickness=1, current/distance=0.35}
+\usetikzlibrary{arrows.meta}
+
+\definecolor{verde}{HTML}{159957}
+\definecolor{blu}{HTML}{155799}
+\definecolor{inchiostro}{HTML}{1B2936}
+\definecolor{tenue}{HTML}{606C71}
+\definecolor{fondo}{HTML}{EEF3F0}
+\definecolor{tensione}{HTML}{2152C0}
+\definecolor{corrente}{HTML}{B3205F}
+\definecolor{resistenza}{HTML}{0B7A62}
+\color{inchiostro}
+
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{7mm}
+\renewcommand{\arraystretch}{1.25}
+
+% unità di misura in tondo e virgola decimale
+\newcommand{\U}[1]{\,\mathrm{#1}}
+\newcommand{\virg}{{,}}
+
+% riquadro di un argomento
+\newtcolorbox{blocco}[1]{enhanced, breakable=false, colback=white, colframe=verde, boxrule=0.6pt,
+  leftrule=3pt, arc=1.5pt, left=6pt, right=6pt, top=4pt, bottom=5pt,
+  title={\bfseries #1}, coltitle=verde, colbacktitle=fondo, fonttitle=\normalsize,
+  toptitle=1pt, bottomtitle=1pt, before skip=0pt, after skip=4.5mm}
+
+% formula grande centrata
+\newcommand{\F}[1]{\par\smallskip{\centering\Large$\displaystyle #1$\par}\smallskip}
+% legenda dei simboli
+\newcommand{\leg}[1]{{\small\color{tenue}#1}\par}
+
+% intestazione del formulario
+\newcommand{\intestazione}[3]{%
+  {\color{verde}\bfseries\small #1}\par\vspace{1mm}
+  {\fontsize{19}{23}\selectfont\bfseries #2}\par\vspace{1mm}
+  {\small\color{tenue} #3}\par\vspace{2mm}
+  {\color{verde}\rule{\linewidth}{1.6pt}}\par\vspace{4mm}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\scriptsize\color{tenue}Prof. Pasquale Naclerio \per{} TEEA 3MAT \per{} Formulario}
+\fancyfoot[R]{\scriptsize\color{tenue}Pagina \thepage\ di \pageref{LastPage}}
+
+\begin{document}
+
+\intestazione{TEEA --- 3MAT \per{} Argomento 2 \per{} FORMULARIO}
+             {Partitori di tensione e di corrente, potenza ed energia}
+             {Prof. Pasquale Naclerio \per{} Manutenzione e Assistenza Tecnica}
+
+\begin{multicols}{2}
+
+\begin{blocco}{Partitore di tensione (a vuoto)}
+\begin{minipage}[c]{0.38\linewidth}\centering
+\begin{circuitikz}[scale=0.85, transform shape, line width=0.7pt]
+  \draw[line width=1.1pt] (-0.6,4.4) -- (0.6,4.4); \node[above] at (0,4.4) {$V$};
+  \draw (0,4.4) to[R, l_=$R_1$, i>^=$I$] (0,2.2) to[R, l_=$R_2$, *-] (0,0) node[sground]{};
+  \draw (0,2.2) to[short, -o] (1.3,2.2) node[right]{$X$};
+\end{circuitikz}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.60\linewidth}
+\F{I = \frac{V}{R_1 + R_2}}
+\F{V_X = V \cdot \frac{R_2}{R_1 + R_2}}
+\F{V_1 = V \cdot \frac{R_1}{R_1 + R_2}}
+\F{V_1 + V_X = V}
+\end{minipage}
+\end{blocco}
+
+\begin{blocco}{Partitore di corrente}
+\begin{minipage}[c]{0.44\linewidth}\centering
+\begin{circuitikz}[scale=0.85, transform shape, line width=0.7pt]
+  \draw (0,4.2) node[ocirc]{} to[short, i>^=$I$] (0,3.3);
+  \draw (-1.1,3.3) -- (1.1,3.3); \draw (0,3.3) node[circ]{};
+  \draw (-1.1,3.3) to[short, i>^=$I_1$] (-1.1,2.8) to[R, l_=$R_1$] (-1.1,0.8) -- (-1.1,0.4) -- (1.1,0.4);
+  \draw (1.1,3.3) to[short, i>_=$I_2$] (1.1,2.8) to[R, l^=$R_2$] (1.1,0.8) -- (1.1,0.4);
+  \draw (0,0.4) node[circ]{} -- (0,0.2) node[sground]{};
+\end{circuitikz}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.54\linewidth}
+\F{I_1 = I \cdot \frac{R_2}{R_1 + R_2}}
+\F{I_2 = I \cdot \frac{R_1}{R_1 + R_2}}
+\F{I_1 + I_2 = I}
+\F{R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2}}
+\end{minipage}
+\end{blocco}
+
+\begin{blocco}{Potenziometro}
+\textbf{al posto di $R_2$} (verso massa):
+\F{0 \le V_X \le V \cdot \frac{R_{2\,max}}{R_1 + R_{2\,max}}}
+\textbf{al posto di $R_1$} (verso $V$):
+\F{V \cdot \frac{R_2}{R_{1\,max} + R_2} \le V_X \le V}
+\F{I_{max} = \frac{V}{R_{\mathrm{fissa}}}}
+\end{blocco}
+
+\columnbreak
+
+\begin{blocco}{Potenza}
+\F{P = V \cdot I}
+\F{P = R \cdot I^2 \qquad P = \frac{V^2}{R}}
+\leg{$P$ [W] \quad $V$ [V] \quad $I$ [A] \quad $R$ [\ohm]}
+\leg{resistori: $\frac{1}{4}\U{W} = 0\virg25\U{W}$ \quad $\frac{1}{2}\U{W}$ \quad $1\U{W}$}
+\end{blocco}
+
+\begin{blocco}{Energia}
+\F{E = P \cdot t}
+\leg{$E$ [Wh] \quad $P$ [W] \quad $t$ [h]}
+\F{1\U{kWh} = 1000\U{Wh}}
+\F{1\U{Wh} = 3600\U{J} \qquad 1\U{J} = 1\U{W}\cdot 1\U{s}}
+\leg{costo $=$ energia [kWh] $\cdot$ prezzo [euro/kWh]}
+\end{blocco}
+
+\begin{blocco}{Tempo in ore}
+\begin{tabularx}{\linewidth}{@{}X X X X@{}}
+\toprule
+\textbf{min} & 10 & 15 & 30\\
+\midrule
+\textbf{h} & $\approx 0\virg167$ & $0\virg25$ & $0\virg5$\\
+\bottomrule
+\end{tabularx}
+\leg{$t\,[\mathrm{h}] = t\,[\mathrm{min}] / 60$}
+\end{blocco}
+
+\begin{blocco}{Multipli}
+\leg{$1\U{kW} = 1000\U{W}$ \quad $1\U{mW} = 0\virg001\U{W}$}
+\leg{$1\U{k\Omega} = 1000\U{\Omega}$ \quad $1\U{mA} = 0\virg001\U{A}$}
+\end{blocco}
+
+\end{multicols}
+
+\end{document}

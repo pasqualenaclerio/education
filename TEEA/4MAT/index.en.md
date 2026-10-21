@@ -35,6 +35,12 @@ All the formulas of topic [LV01](/education/TEEA/4MAT/programma/01-segnali-conti
 
 <a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Solutions</a>
 
+### Review: voltage and current dividers
+
+From the 3rd year: voltage and current dividers with two resistances and potentiometer, with power and energy.
+
+<a class="btn" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html">Go to the explanation</a> <a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf" download>PDF</a>
+
 _More materials coming soon._
 
 ## Laboratory

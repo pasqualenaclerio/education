@@ -35,6 +35,12 @@ Tutte le formule dell'argomento [LV01](/education/TEEA/4MAT/programma/01-segnali
 
 <a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" download>Esercizi</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Soluzioni</a>
 
+### Ripasso: partitori di tensione e di corrente
+
+Dalla 3ª: partitore di tensione e di corrente con due resistenze e potenziometro, con potenza ed energia.
+
+<a class="btn" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/">Vai alla spiegazione</a> <a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-partitori-potenza-energia.pdf" download>PDF</a>
+
 _Altri materiali in aggiornamento._
 
 ## Laboratorio
