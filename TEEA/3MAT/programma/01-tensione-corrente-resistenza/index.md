@@ -182,6 +182,35 @@ Più resistenze sono **in parallelo** quando sono collegate **tra gli stessi due
 
 Il simbolo ∥ si legge "in parallelo con": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
 
+### Esempio: due resistenze in serie con il generatore
+
+*V* = 12 V, *R*<sub>1</sub> = 2 kΩ e *R*<sub>2</sub> = 4 kΩ in serie.
+
+![Due resistenze in serie con il generatore: la corrente è la stessa](img/serie-generatore.svg){: width="420"}
+
+In serie c'è **un solo percorso**: la corrente che esce dal generatore attraversa prima *R*<sub>1</sub> e poi *R*<sub>2</sub>, quindi **la corrente è la stessa** in tutte e due: *I* = *I*<sub>1</sub> = *I*<sub>2</sub>. Le tensioni invece sono **diverse** e si sommano.
+
+- **resistenza equivalente:** *R*<sub>eq</sub> = *R*<sub>1</sub> + *R*<sub>2</sub> = 2 + 4 = **6 kΩ**
+- **corrente:** *I* = *V* / *R*<sub>eq</sub> = 12 V / 6 kΩ = **2 mA**
+- **stessa corrente:** *I*<sub>1</sub> = *I*<sub>2</sub> = *I* = **2 mA**
+- **tensione su *R*<sub>1</sub>:** *V*<sub>1</sub> = *R*<sub>1</sub> · *I* = 2 kΩ · 2 mA = **4 V**
+- **tensione su *R*<sub>2</sub>:** *V*<sub>2</sub> = *R*<sub>2</sub> · *I* = 4 kΩ · 2 mA = **8 V**
+- **verifica:** *V*<sub>1</sub> + *V*<sub>2</sub> = 4 + 8 = 12 V = *V* ✓ (la resistenza più grande prende la tensione più grande)
+
+### Esempio: due resistenze in parallelo al generatore
+
+*V* = 12 V, *R*<sub>1</sub> = 3 kΩ e *R*<sub>2</sub> = 6 kΩ in parallelo.
+
+![Due resistenze in parallelo al generatore: la tensione è la stessa](img/parallelo-generatore.svg){: width="460"}
+
+In parallelo le due resistenze sono collegate **agli stessi due nodi**, cioè direttamente ai morsetti del generatore: **la tensione è la stessa** su tutte e due, *V*<sub>1</sub> = *V*<sub>2</sub> = *V*. Le correnti invece sono **diverse** e si sommano.
+
+- **stessa tensione:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V* = **12 V**
+- **corrente in *R*<sub>1</sub>:** *I*<sub>1</sub> = *V* / *R*<sub>1</sub> = 12 V / 3 kΩ = **4 mA**
+- **corrente in *R*<sub>2</sub>:** *I*<sub>2</sub> = *V* / *R*<sub>2</sub> = 12 V / 6 kΩ = **2 mA**
+- **corrente totale:** *I* = *I*<sub>1</sub> + *I*<sub>2</sub> = 4 + 2 = **6 mA** (nella resistenza più piccola passa la corrente più grande)
+- **verifica con la resistenza equivalente:** *R*<sub>eq</sub> = 3 · 6 / (3 + 6) = **2 kΩ** → *I* = 12 V / 2 kΩ = 6 mA ✓
+
 ### Come si risolve un circuito con resistenze in serie e in parallelo
 
 - **1.** **Riconosci i gruppi** di resistenze sicuramente in serie o in parallelo, partendo dalla parte del circuito **più lontana dal generatore**.
@@ -191,7 +220,7 @@ Il simbolo ∥ si legge "in parallelo con": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
 - **5.** **Torna indietro** sugli schemi ridisegnati e calcola tensioni e correnti di ogni resistenza con la legge di Ohm: nella serie la corrente è la stessa, nel parallelo la tensione è la stessa.
 - **6.** **Verifica** i risultati: la somma delle tensioni in serie deve dare la tensione totale, la somma delle correnti in parallelo la corrente totale.
 
-### Esempio svolto 1
+### Esempio misto 1
 
 *V* = 12 V, *R*<sub>1</sub> = 1 kΩ in serie al parallelo di *R*<sub>2</sub> = 3 kΩ e *R*<sub>3</sub> = 6 kΩ.
 
@@ -205,7 +234,7 @@ Il simbolo ∥ si legge "in parallelo con": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
 - **correnti nel parallelo:** *I*<sub>2</sub> = 8 V / 3 kΩ ≈ **2,67 mA** · *I*<sub>3</sub> = 8 V / 6 kΩ ≈ **1,33 mA**
 - **verifiche:** 4 + 8 = 12 V ✓ · 2,67 + 1,33 = 4 mA ✓
 
-### Esempio svolto 2
+### Esempio misto 2
 
 *V* = 24 V, *R*<sub>1</sub> = 2 kΩ in serie al parallelo tra *R*<sub>2</sub> = 6 kΩ e la serie di *R*<sub>3</sub> = 1 kΩ e *R*<sub>4</sub> = 2 kΩ.
 

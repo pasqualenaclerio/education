@@ -210,6 +210,32 @@ FIGURE = {
   \end{scope}
 \end{circuitikz}
 """,
+
+# 10) solo due resistenze in serie con il generatore
+'serie-generatore': r"""
+\begin{circuitikz}[scale=1]
+  \draw (0,0) to[european voltage source, l^={\color{tensione}$V = 12\,\mathrm{V}$}, color=tensione] (0,3.6);
+  \piu{(0.36,2.32)} \draw (0,0) node[sground]{};
+  \draw (0,3.6) to[short, i>^={\color{corrente}$I = I_1 = I_2$}] (1.0,3.6)
+        to[R, l_={\color{resistenza}$R_1 = 2\,\mathrm{k\Omega}$}, color=resistenza] (3.6,3.6) -- (4.4,3.6)
+        to[R, l_={\color{resistenza}$R_2 = 4\,\mathrm{k\Omega}$}, color=resistenza] (4.4,0) -- (0,0);
+  \draw[tensione, -{Latex[length=2.5mm]}] (3.5,4.4) -- node[above]{$V_1$} (1.1,4.4);
+  \draw[tensione, -{Latex[length=2.5mm]}] (5.2,0.6) -- node[right]{$V_2$} (5.2,3.0);
+\end{circuitikz}
+""",
+
+'parallelo-generatore': r"""
+\begin{circuitikz}[scale=1]
+  \draw (0,0) to[european voltage source, l^={\color{tensione}$V = 12\,\mathrm{V}$}, color=tensione] (0,3.6);
+  \piu{(0.36,2.32)} \draw (0,0) node[sground]{};
+  \draw (0,3.6) to[short, i>^={\color{corrente}$I$}] (2.6,3.6) -- (5.0,3.6);
+  \draw (2.6,3.6) to[short, *-, i>_={\color{corrente}$I_1$}] (2.6,3.0)
+        to[R, l_={\color{resistenza}$R_1 = 3\,\mathrm{k\Omega}$}, color=resistenza] (2.6,0.6) to[short, -*] (2.6,0);
+  \draw (5.0,3.6) to[short, i>^={\color{corrente}$I_2$}] (5.0,3.0)
+        to[R, l^={\color{resistenza}$R_2 = 6\,\mathrm{k\Omega}$}, color=resistenza] (5.0,0.6) -- (5.0,0) -- (0,0);
+  \draw[tensione, -{Latex[length=2.5mm]}] (7.4,0.4) -- node[right]{$V_1 = V_2 = V$} (7.4,3.2);
+\end{circuitikz}
+""",
 }
 
 

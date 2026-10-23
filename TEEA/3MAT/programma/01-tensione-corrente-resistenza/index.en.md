@@ -182,6 +182,35 @@ Resistances are **in parallel** when they are connected **between the same two n
 
 The symbol ∥ reads "in parallel with": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
 
+### Example: two resistances in series with the source
+
+*V* = 12 V, *R*<sub>1</sub> = 2 kΩ and *R*<sub>2</sub> = 4 kΩ in series.
+
+![Two resistances in series with the source: the current is the same](img/serie-generatore.svg){: width="420"}
+
+In series there is **only one path**: the current leaving the source flows first through *R*<sub>1</sub> and then through *R*<sub>2</sub>, so **the current is the same** in both: *I* = *I*<sub>1</sub> = *I*<sub>2</sub>. The voltages are **different** and add up.
+
+- **equivalent resistance:** *R*<sub>eq</sub> = *R*<sub>1</sub> + *R*<sub>2</sub> = 2 + 4 = **6 kΩ**
+- **current:** *I* = *V* / *R*<sub>eq</sub> = 12 V / 6 kΩ = **2 mA**
+- **same current:** *I*<sub>1</sub> = *I*<sub>2</sub> = *I* = **2 mA**
+- **voltage across *R*<sub>1</sub>:** *V*<sub>1</sub> = *R*<sub>1</sub> · *I* = 2 kΩ · 2 mA = **4 V**
+- **voltage across *R*<sub>2</sub>:** *V*<sub>2</sub> = *R*<sub>2</sub> · *I* = 4 kΩ · 2 mA = **8 V**
+- **check:** *V*<sub>1</sub> + *V*<sub>2</sub> = 4 + 8 = 12 V = *V* ✓ (the larger resistance takes the larger voltage)
+
+### Example: two resistances in parallel with the source
+
+*V* = 12 V, *R*<sub>1</sub> = 3 kΩ and *R*<sub>2</sub> = 6 kΩ in parallel.
+
+![Two resistances in parallel with the source: the voltage is the same](img/parallelo-generatore.svg){: width="460"}
+
+In parallel the two resistances are connected **to the same two nodes**, i.e. directly to the source terminals: **the voltage is the same** across both, *V*<sub>1</sub> = *V*<sub>2</sub> = *V*. The currents are **different** and add up.
+
+- **same voltage:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V* = **12 V**
+- **current in *R*<sub>1</sub>:** *I*<sub>1</sub> = *V* / *R*<sub>1</sub> = 12 V / 3 kΩ = **4 mA**
+- **current in *R*<sub>2</sub>:** *I*<sub>2</sub> = *V* / *R*<sub>2</sub> = 12 V / 6 kΩ = **2 mA**
+- **total current:** *I* = *I*<sub>1</sub> + *I*<sub>2</sub> = 4 + 2 = **6 mA** (the smaller resistance carries the larger current)
+- **check with the equivalent resistance:** *R*<sub>eq</sub> = 3 · 6 / (3 + 6) = **2 kΩ** → *I* = 12 V / 2 kΩ = 6 mA ✓
+
 ### How to solve a circuit with series and parallel resistances
 
 - **1.** **Find the groups** of resistances that are clearly in series or in parallel, starting from the part of the circuit **furthest from the source**.
@@ -191,7 +220,7 @@ The symbol ∥ reads "in parallel with": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
 - **5.** **Go back** through the redrawn circuits and calculate the voltage and current of each resistance with Ohm's law: in series the current is the same, in parallel the voltage is the same.
 - **6.** **Check** the results: the voltages in series must add up to the total voltage, the currents in parallel to the total current.
 
-### Worked example 1
+### Mixed example 1
 
 *V* = 12 V, *R*<sub>1</sub> = 1 kΩ in series with the parallel of *R*<sub>2</sub> = 3 kΩ and *R*<sub>3</sub> = 6 kΩ.
 
@@ -205,7 +234,7 @@ The symbol ∥ reads "in parallel with": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
 - **currents in the parallel:** *I*<sub>2</sub> = 8 V / 3 kΩ ≈ **2.67 mA** · *I*<sub>3</sub> = 8 V / 6 kΩ ≈ **1.33 mA**
 - **checks:** 4 + 8 = 12 V ✓ · 2.67 + 1.33 = 4 mA ✓
 
-### Worked example 2
+### Mixed example 2
 
 *V* = 24 V, *R*<sub>1</sub> = 2 kΩ in series with the parallel of *R*<sub>2</sub> = 6 kΩ and the series of *R*<sub>3</sub> = 1 kΩ and *R*<sub>4</sub> = 2 kΩ.
 
