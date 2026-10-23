@@ -15,7 +15,7 @@ The lecture notes, exercises, examples, and projects in this section form part o
 
 <!-- Add the programme topics here -->
 
-1. [**Voltage, current, resistance and Ohm's law**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) — voltage, ideal and real voltage sources, current, resistance, Ohm's law and V–I characteristic · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf)
+1. [**Voltage, current, resistance and Ohm's law**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) — voltage, ideal and real voltage sources, current, resistance, Ohm's law and V–I characteristic, resistances in series and in parallel · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf)
 2. [**Voltage and current dividers, power and energy**](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html) — voltage and current dividers with two resistances, potentiometer, power in watts and energy in watt-hours · [📄 PDF](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf)
 
 _More topics coming soon._

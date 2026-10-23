@@ -152,6 +152,74 @@ Nelle formule si usano V, A e Ω. Con l'elettronica è comoda anche la coppia **
 - **Calcolo della resistenza.** *V* = 9 V, *I* = 3 mA = 0,003 A → *R* = 9 / 0,003 = 3000 Ω = **3 kΩ**.
 - **Con la coppia kΩ e mA.** *V* = 5 V, *R* = 2,2 kΩ → *I* = 5 / 2,2 ≈ **2,27 mA**.
 
+## Resistenze in serie e in parallelo
+
+![Tre resistenze in serie (a sinistra) e tre resistenze in parallelo (a destra)](img/serie-parallelo.svg){: width="640"}
+
+### Resistenze in serie
+
+Più resistenze sono **in serie** quando sono collegate una dopo l'altra, **senza diramazioni**: sono attraversate dalla **stessa corrente**.
+
+> **Resistenza equivalente in serie:** *R*<sub>eq</sub> = *R*<sub>1</sub> + *R*<sub>2</sub> + *R*<sub>3</sub> + …
+
+- La corrente è **la stessa** in tutte le resistenze.
+- La tensione totale è la **somma** delle tensioni: *V* = *V*<sub>1</sub> + *V*<sub>2</sub> + *V*<sub>3</sub>.
+- *R*<sub>eq</sub> è sempre **più grande** della resistenza più grande.
+
+### Resistenze in parallelo
+
+Più resistenze sono **in parallelo** quando sono collegate **tra gli stessi due nodi**: hanno ai capi **la stessa tensione**.
+
+> **Resistenza equivalente in parallelo:** 1 / *R*<sub>eq</sub> = 1 / *R*<sub>1</sub> + 1 / *R*<sub>2</sub> + 1 / *R*<sub>3</sub> + …
+>
+> **Due resistenze in parallelo:** *R*<sub>eq</sub> = *R*<sub>1</sub> · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)
+>
+> ***n* resistenze uguali in parallelo:** *R*<sub>eq</sub> = *R* / *n*
+
+- La tensione è **la stessa** su tutte le resistenze.
+- La corrente totale è la **somma** delle correnti: *I* = *I*<sub>1</sub> + *I*<sub>2</sub> + *I*<sub>3</sub>.
+- *R*<sub>eq</sub> è sempre **più piccola** della resistenza più piccola.
+
+Il simbolo ∥ si legge "in parallelo con": *R*<sub>2</sub> ∥ *R*<sub>3</sub>.
+
+### Come si risolve un circuito con resistenze in serie e in parallelo
+
+- **1.** **Riconosci i gruppi** di resistenze sicuramente in serie o in parallelo, partendo dalla parte del circuito **più lontana dal generatore**.
+- **2.** **Sostituisci** ogni gruppo con la sua resistenza equivalente e **ridisegna** il circuito.
+- **3.** **Ripeti** finché resta una sola resistenza, la *R*<sub>eq</sub> vista dal generatore.
+- **4.** Calcola la **corrente totale** con la legge di Ohm: *I* = *V* / *R*<sub>eq</sub>.
+- **5.** **Torna indietro** sugli schemi ridisegnati e calcola tensioni e correnti di ogni resistenza con la legge di Ohm: nella serie la corrente è la stessa, nel parallelo la tensione è la stessa.
+- **6.** **Verifica** i risultati: la somma delle tensioni in serie deve dare la tensione totale, la somma delle correnti in parallelo la corrente totale.
+
+### Esempio svolto 1
+
+*V* = 12 V, *R*<sub>1</sub> = 1 kΩ in serie al parallelo di *R*<sub>2</sub> = 3 kΩ e *R*<sub>3</sub> = 6 kΩ.
+
+![Riduzione del circuito: R2 e R3 in parallelo, poi la serie con R1](img/riduzione-1.svg)
+
+- **parallelo:** *R*<sub>23</sub> = *R*<sub>2</sub> ∥ *R*<sub>3</sub> = 3 · 6 / (3 + 6) = 18 / 9 = **2 kΩ**
+- **serie:** *R*<sub>eq</sub> = *R*<sub>1</sub> + *R*<sub>23</sub> = 1 + 2 = **3 kΩ**
+- **corrente totale:** *I* = *V* / *R*<sub>eq</sub> = 12 V / 3 kΩ = **4 mA** (è la corrente che attraversa *R*<sub>1</sub>)
+- **tensione su *R*<sub>1</sub>:** *V*<sub>1</sub> = *R*<sub>1</sub> · *I* = 1 kΩ · 4 mA = **4 V**
+- **tensione sul parallelo:** *V*<sub>23</sub> = *R*<sub>23</sub> · *I* = 2 kΩ · 4 mA = **8 V** (la stessa su *R*<sub>2</sub> e *R*<sub>3</sub>)
+- **correnti nel parallelo:** *I*<sub>2</sub> = 8 V / 3 kΩ ≈ **2,67 mA** · *I*<sub>3</sub> = 8 V / 6 kΩ ≈ **1,33 mA**
+- **verifiche:** 4 + 8 = 12 V ✓ · 2,67 + 1,33 = 4 mA ✓
+
+### Esempio svolto 2
+
+*V* = 24 V, *R*<sub>1</sub> = 2 kΩ in serie al parallelo tra *R*<sub>2</sub> = 6 kΩ e la serie di *R*<sub>3</sub> = 1 kΩ e *R*<sub>4</sub> = 2 kΩ.
+
+![Riduzione del circuito in quattro passi](img/riduzione-2.svg)
+
+- **passo 2, serie:** *R*<sub>34</sub> = *R*<sub>3</sub> + *R*<sub>4</sub> = 1 + 2 = **3 kΩ**
+- **passo 3, parallelo:** *R*<sub>P</sub> = *R*<sub>2</sub> ∥ *R*<sub>34</sub> = 6 · 3 / (6 + 3) = 18 / 9 = **2 kΩ**
+- **passo 4, serie:** *R*<sub>eq</sub> = *R*<sub>1</sub> + *R*<sub>P</sub> = 2 + 2 = **4 kΩ**
+- **corrente totale:** *I* = 24 V / 4 kΩ = **6 mA**
+- **tensioni:** *V*<sub>1</sub> = 2 kΩ · 6 mA = **12 V** · *V*<sub>P</sub> = 2 kΩ · 6 mA = **12 V**
+- **correnti nel parallelo:** *I*<sub>2</sub> = 12 V / 6 kΩ = **2 mA** · *I*<sub>34</sub> = 12 V / 3 kΩ = **4 mA**
+- **tensioni su *R*<sub>3</sub> e *R*<sub>4</sub>:** *V*<sub>3</sub> = 1 kΩ · 4 mA = **4 V** · *V*<sub>4</sub> = 2 kΩ · 4 mA = **8 V**
+- **verifiche:** 12 + 12 = 24 V ✓ · 2 + 4 = 6 mA ✓ · 4 + 8 = 12 V ✓
+
 ## Multipli e sottomultipli
 
 | Prefisso | Simbolo | Fattore | Esempio |
@@ -170,6 +238,10 @@ Nelle formule si usano V, A e Ω. Con l'elettronica è comoda anche la coppia **
 > **Resistenza di un filo:** *R* = *ρ* · *L* / *S*
 >
 > **Generatore reale:** *V* = *E* − *R*<sub>i</sub> · *I*
+>
+> **Serie:** *R*<sub>eq</sub> = *R*<sub>1</sub> + *R*<sub>2</sub> + …
+>
+> **Parallelo:** 1 / *R*<sub>eq</sub> = 1 / *R*<sub>1</sub> + 1 / *R*<sub>2</sub> + …  ;  due resistenze: *R*<sub>eq</sub> = *R*<sub>1</sub> · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)
 
 <!-- PDF:FINE -->
 

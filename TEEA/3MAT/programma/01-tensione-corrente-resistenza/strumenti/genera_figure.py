@@ -18,7 +18,6 @@ IMG.mkdir(exist_ok=True)
 
 PREAMBOLO = r"""
 \documentclass[border=4pt]{standalone}
-\usepackage[T1]{fontenc}
 \usepackage[siunitx, american voltages, american currents, american resistors]{circuitikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.17}
@@ -128,6 +127,88 @@ FIGURE = {
   \addplot[resistenza!55, densely dotted] {x/4.7}; \node[resistenza!55, anchor=west] at (axis cs:12.3,2.55) {$R = 4{,}7\,\mathrm{k\Omega}$};
 \end{axis}
 \end{tikzpicture}
+""",
+# 7) resistenze in serie e in parallelo
+'serie-parallelo': r"""
+\begin{circuitikz}[scale=1]
+  \draw (0,0) node[ocirc]{} node[left]{A} -- (0.3,0)
+        to[R, l=\color{resistenza}$R_1$, color=resistenza] (2.3,0)
+        to[R, l=\color{resistenza}$R_2$, color=resistenza] (4.3,0)
+        to[R, l=\color{resistenza}$R_3$, color=resistenza] (6.3,0) -- (6.6,0) node[ocirc]{} node[right]{B};
+  \draw[corrente, -{Latex[length=2.5mm]}, line width=1pt] (0.35,0.55) -- node[above]{$I$} (1.0,0.55);
+  \begin{scope}[xshift=8.6cm]
+  \draw (0,0) node[ocirc]{} node[left]{A} -- (0.6,0);
+  \draw (0.6,1.6) -- (0.6,-1.6) (3.0,1.6) -- (3.0,-1.6);
+  \draw (0.6,1.6) to[R, l=\color{resistenza}$R_1$, color=resistenza] (3.0,1.6);
+  \draw (0.6,0) to[R, l=\color{resistenza}$R_2$, color=resistenza] (3.0,0);
+  \draw (0.6,-1.6) to[R, l=\color{resistenza}$R_3$, color=resistenza] (3.0,-1.6);
+  \draw (3.0,0) -- (3.6,0) node[ocirc]{} node[right]{B};
+  \fill (0.6,0) circle (2pt) (3.0,0) circle (2pt);
+  \end{scope}
+\end{circuitikz}
+""",
+
+# 8) esempio 1: R1 in serie al parallelo R2 // R3 e riduzione passo passo
+'riduzione-1': r"""
+\begin{circuitikz}[scale=0.9, transform shape]
+  \newcommand{\gen}[1]{\draw (#1,0) to[european voltage source, l_={\color{tensione}$12\,\mathrm{V}$}, color=tensione] (#1,3); \piu{(#1-0.36,2.02)} \draw (#1,0) node[sground]{};}
+  \newcommand{\passo}[2]{\node[draw, circle, inner sep=1.5pt, font=\small\bfseries] at #1 {#2};}
+  % (1) circuito di partenza
+  \passo{(-0.9,3.6)}{1}
+  \gen{0}
+  \draw (0,3) to[short, i>^={\color{corrente}$I$}] (0.6,3) to[R, l={\color{resistenza}$R_1 = 1\,\mathrm{k\Omega}$}, color=resistenza] (2.9,3) -- (5.0,3);
+  \draw (3.4,3) to[R, l_={\color{resistenza}$R_2 = 3\,\mathrm{k\Omega}$}, color=resistenza, *-*] (3.4,0);
+  \draw (5.0,3) to[R, l^={\color{resistenza}$R_3 = 6\,\mathrm{k\Omega}$}, color=resistenza] (5.0,0) -- (0,0);
+  % (2) parallelo sostituito
+  \begin{scope}[xshift=9.6cm]
+  \passo{(-0.9,3.6)}{2}
+  \gen{0}
+  \draw (0,3) -- (0.6,3) to[R, l={\color{resistenza}$R_1 = 1\,\mathrm{k\Omega}$}, color=resistenza] (2.9,3) -- (3.4,3)
+        to[R, l^={\color{resistenza}$R_{23} = 2\,\mathrm{k\Omega}$}, color=resistenza] (3.4,0) -- (0,0);
+  \end{scope}
+  % (3) resistenza equivalente
+  \begin{scope}[xshift=17.2cm]
+  \passo{(-0.9,3.6)}{3}
+  \gen{0}
+  \draw (0,3) -- (2.2,3) to[R, l^={\color{resistenza}$R_{eq} = 3\,\mathrm{k\Omega}$}, color=resistenza] (2.2,0) -- (0,0);
+  \end{scope}
+\end{circuitikz}
+""",
+
+# 9) esempio 2: R1 in serie a [R2 // (R3 + R4)], riduzione in quattro passi (2 righe)
+'riduzione-2': r"""
+\begin{circuitikz}[scale=0.9, transform shape]
+  \newcommand{\gen}[1]{\draw (#1,0) to[european voltage source, l_={\color{tensione}$24\,\mathrm{V}$}, color=tensione] (#1,4); \piu{(#1-0.36,2.52)} \draw (#1,0) node[sground]{};}
+  \newcommand{\passo}[2]{\node[draw, circle, inner sep=1.5pt, font=\small\bfseries] at #1 {#2};}
+  % (1) di partenza
+  \passo{(-0.9,4.6)}{1}
+  \gen{0}
+  \draw (0,4) to[short, i>^={\color{corrente}$I$}] (0.6,4) to[R, l={\color{resistenza}$R_1 = 2\,\mathrm{k\Omega}$}, color=resistenza] (2.9,4) -- (5.0,4);
+  \draw (3.4,4) to[R, l_={\color{resistenza}$R_2 = 6\,\mathrm{k\Omega}$}, color=resistenza, *-*] (3.4,0);
+  \draw (5.0,4) to[R, l^={\color{resistenza}$R_3 = 1\,\mathrm{k\Omega}$}, color=resistenza] (5.0,2)
+        to[R, l^={\color{resistenza}$R_4 = 2\,\mathrm{k\Omega}$}, color=resistenza] (5.0,0) -- (0,0);
+  % (2) serie R3 + R4
+  \begin{scope}[xshift=9.6cm]
+  \passo{(-0.9,4.6)}{2}
+  \gen{0}
+  \draw (0,4) -- (0.6,4) to[R, l={\color{resistenza}$R_1 = 2\,\mathrm{k\Omega}$}, color=resistenza] (2.9,4) -- (5.0,4);
+  \draw (3.4,4) to[R, l_={\color{resistenza}$R_2 = 6\,\mathrm{k\Omega}$}, color=resistenza, *-*] (3.4,0);
+  \draw (5.0,4) to[R, l^={\color{resistenza}$R_{34} = 3\,\mathrm{k\Omega}$}, color=resistenza] (5.0,0) -- (0,0);
+  \end{scope}
+  % (3) parallelo R2 // R34
+  \begin{scope}[yshift=-6.4cm]
+  \passo{(-0.9,4.6)}{3}
+  \gen{0}
+  \draw (0,4) -- (0.6,4) to[R, l={\color{resistenza}$R_1 = 2\,\mathrm{k\Omega}$}, color=resistenza] (2.9,4) -- (3.4,4)
+        to[R, l^={\color{resistenza}$R_{P} = 2\,\mathrm{k\Omega}$}, color=resistenza] (3.4,0) -- (0,0);
+  \end{scope}
+  % (4) equivalente
+  \begin{scope}[xshift=9.6cm, yshift=-6.4cm]
+  \passo{(-0.9,4.6)}{4}
+  \gen{0}
+  \draw (0,4) -- (2.2,4) to[R, l^={\color{resistenza}$R_{eq} = 4\,\mathrm{k\Omega}$}, color=resistenza] (2.2,0) -- (0,0);
+  \end{scope}
+\end{circuitikz}
 """,
 }
 

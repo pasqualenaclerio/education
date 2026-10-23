@@ -15,7 +15,7 @@ Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezion
 
 <!-- Aggiungere qui gli argomenti del programma -->
 
-1. [**Tensione, corrente, resistenza e legge di Ohm**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/) — tensione, generatori di tensione ideali e reali, corrente, resistenza, legge di Ohm e caratteristica V–I · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-tensione-corrente-resistenza.pdf)
+1. [**Tensione, corrente, resistenza e legge di Ohm**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/) — tensione, generatori di tensione ideali e reali, corrente, resistenza, legge di Ohm e caratteristica V–I, resistenze in serie e in parallelo · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-tensione-corrente-resistenza.pdf)
 2. [**Partitori di tensione e di corrente, potenza ed energia**](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/) — partitore di tensione e di corrente con due resistenze, potenziometro, potenza in watt ed energia in wattora · [📄 PDF](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-partitori-potenza-energia.pdf)
 
 _Altri argomenti in aggiornamento._

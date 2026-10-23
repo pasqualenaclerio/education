@@ -66,7 +66,7 @@ blockquote p { margin: 3px 0; }
 table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 9.5pt; break-inside: avoid; }
 th, td { border-bottom: 1px solid #c9d4ce; padding: 4px 6px; text-align: left; vertical-align: top; }
 th { background: #eef3f0; }
-img { display: block; max-width: 100%; max-height: 62mm; margin: 8px auto; break-inside: avoid; }
+img { display: block; max-width: 100%; max-height: 85mm; margin: 8px auto; break-inside: avoid; }
 p:has(> img) { break-inside: avoid; }
 /* il testo che introduce una formula, una figura o una tabella resta sulla stessa pagina */
 p:has(+ blockquote), p:has(+ p > img), p:has(+ table), p:has(+ ul) { break-after: avoid; }
