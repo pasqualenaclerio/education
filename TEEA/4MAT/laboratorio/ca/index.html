@@ -11,12 +11,21 @@
 <link rel="stylesheet" href="css/tema.css">
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/componenti.css">
+<script src="js/tema.js"></script>
 </head>
 <body>
 <div class="wrap">
 <header>
   <h1>Laboratorio di corrente alternata</h1>
   <p>Un vettore che ruota sulla circonferenza disegna una sinusoide. Cambia ampiezza, fase, frequenza e carico e guarda come si spostano tensione e corrente.</p>
+  <label class="tl theme-pick">Tema
+    <select id="theme">
+      <option value="auto">Automatico (come il dispositivo)</option>
+      <option value="white">Bianco</option>
+      <option value="paper">Grigio chiaro</option>
+      <option value="dark">Scuro</option>
+    </select>
+  </label>
 </header>
 
 <div class="layout">

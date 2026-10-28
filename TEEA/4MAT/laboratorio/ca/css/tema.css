@@ -4,22 +4,36 @@
    --volt = tensione, --curr = corrente, --phase = sfasamento, --power = potenza
    ========================================================================== */
 
-/* Tema chiaro */
+/* Il tema si sceglie dal menu "Tema" in alto (vedi js/tema.js):
+     nessun attributo      -> Automatico: bianco o scuro come il dispositivo
+     data-theme="white"    -> Bianco
+     data-theme="paper"    -> Grigio chiaro
+     data-theme="dark"     -> Scuro                                         */
+
+/* Bianco (anche il tema chiaro dell'automatico) */
 :root{
+  --paper:#FFFFFF; --panel:#FFFFFF; --ink:#1C2A33; --muted:#5B6B73; --grid:#E2E8E5; --line:#C5CFCA;
+  --volt:#1F5FBF; --curr:#C2352B; --phase:#B87C00; --power:#7A3FA0; --soft:#F1F4F3;
+  color-scheme:light;
+}
+
+/* Grigio chiaro */
+:root[data-theme="paper"]{
   --paper:#EEF2EF; --panel:#FFFFFF; --ink:#1C2A33; --muted:#5B6B73; --grid:#DCE4E0; --line:#B9C6C0;
   --volt:#1F5FBF; --curr:#C2352B; --phase:#B87C00; --power:#7A3FA0; --soft:#E6ECEA;
   color-scheme:light;
 }
 
-/* Tema scuro (segue l'impostazione del dispositivo) */
+/* Scuro automatico, quando il dispositivo è in modalità scura */
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
+  :root:not([data-theme]){
     --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
     --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --power:#C792EA; --soft:#1F2C32;
     color-scheme:dark;
   }
 }
-/* Tema scuro forzato con <html data-theme="dark"> */
+
+/* Scuro scelto dal menu */
 :root[data-theme="dark"]{
   --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
   --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --power:#C792EA; --soft:#1F2C32;

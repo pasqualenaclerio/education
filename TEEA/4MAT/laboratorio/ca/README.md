@@ -29,6 +29,7 @@ laboratorio-ca/
 │   ├── layout.css              Colonne, spaziature, adattamento a smartphone
 │   └── componenti.css          Check list, slider, pulsanti, schede
 ├── js/
+│   ├── tema.js                 Tema bianco, grigio chiaro, scuro o automatico
 │   ├── stato.js                Valori iniziali di tutte le grandezze
 │   ├── formato.js              Come vengono scritti numeri, angoli, tempi
 │   ├── fisica.js               Calcoli: impedenza, corrente, sfasamento, potenze
@@ -63,6 +64,7 @@ vanno caricati nell'ordine scritto in fondo a `index.html`.
 | Margine della scala verticale automatica           | `js/stato.js`, `MARGINE_SCALA`     |
 | Quanto appare più piccola la corrente              | `js/stato.js`, `RAPPORTO_VISIVO_CORRENTE` |
 | Colori di tensione, corrente, sfasamento           | `css/tema.css`                     |
+| Colori di sfondo dei temi (bianco, grigio, scuro)  | `css/tema.css`                     |
 | Volume massimo del suono                           | `js/audio.js`, `VOLUME_MAX`        |
 
 Esempio: per partire con la tensione di rete efficace di 230 V, in

@@ -16,22 +16,36 @@
    --volt = tensione, --curr = corrente, --phase = sfasamento, --power = potenza
    ========================================================================== */
 
-/* Tema chiaro */
+/* Il tema si sceglie dal menu "Tema" in alto (vedi js/tema.js):
+     nessun attributo      -> Automatico: bianco o scuro come il dispositivo
+     data-theme="white"    -> Bianco
+     data-theme="paper"    -> Grigio chiaro
+     data-theme="dark"     -> Scuro                                         */
+
+/* Bianco (anche il tema chiaro dell'automatico) */
 :root{
+  --paper:#FFFFFF; --panel:#FFFFFF; --ink:#1C2A33; --muted:#5B6B73; --grid:#E2E8E5; --line:#C5CFCA;
+  --volt:#1F5FBF; --curr:#C2352B; --phase:#B87C00; --power:#7A3FA0; --soft:#F1F4F3;
+  color-scheme:light;
+}
+
+/* Grigio chiaro */
+:root[data-theme="paper"]{
   --paper:#EEF2EF; --panel:#FFFFFF; --ink:#1C2A33; --muted:#5B6B73; --grid:#DCE4E0; --line:#B9C6C0;
   --volt:#1F5FBF; --curr:#C2352B; --phase:#B87C00; --power:#7A3FA0; --soft:#E6ECEA;
   color-scheme:light;
 }
 
-/* Tema scuro (segue l'impostazione del dispositivo) */
+/* Scuro automatico, quando il dispositivo è in modalità scura */
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
+  :root:not([data-theme]){
     --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
     --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --power:#C792EA; --soft:#1F2C32;
     color-scheme:dark;
   }
 }
-/* Tema scuro forzato con <html data-theme="dark"> */
+
+/* Scuro scelto dal menu */
 :root[data-theme="dark"]{
   --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
   --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --power:#C792EA; --soft:#1F2C32;
@@ -61,6 +75,8 @@ body{margin:0;background:var(--paper);color:var(--ink)}
 header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 20px;margin-bottom:16px}
 h1{font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:-.02em;line-height:1.1;margin:0}
 header p{margin:0;color:var(--muted);max-width:60ch}
+/* menu del tema in alto a destra */
+.theme-pick{margin-left:auto;align-self:center}
 h2{font-size:1.15rem;margin:0 0 10px}
 
 /* Due colonne: check list a sinistra, oscilloscopio a destra */
@@ -165,12 +181,57 @@ dd{margin:0;font-variant-numeric:tabular-nums;font-weight:700}
 .explain{background:var(--soft);border-radius:8px;padding:12px 14px;margin:0;max-width:72ch}
 
 </style>
+<script>
+/* js/tema.js */
+/* ==========================================================================
+   TEMA (bianco, grigio chiaro, scuro o automatico)
+   Questo file è caricato nell'<head>, prima del resto, così la pagina
+   compare subito con il tema giusto. La scelta viene ricordata dal browser.
+   ========================================================================== */
+window.LAB = window.LAB || {};
+
+(function (L) {
+  const CHIAVE = 'lab-ca-tema';
+  const TEMI = ['auto', 'white', 'paper', 'dark'];
+
+  L.applyTheme = function (tema) {
+    if (tema === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', tema);
+  };
+
+  let salvato = 'auto';
+  try { salvato = localStorage.getItem(CHIAVE) || 'auto'; } catch (e) { /* memoria non disponibile */ }
+  if (!TEMI.includes(salvato)) salvato = 'auto';
+  L.applyTheme(salvato);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const sel = document.getElementById('theme');
+    if (!sel) return;
+    sel.value = salvato;
+    sel.addEventListener('change', () => {
+      L.applyTheme(sel.value);
+      try { localStorage.setItem(CHIAVE, sel.value); } catch (e) { /* ignora */ }
+      // i grafici leggono i colori dal CSS: vanno riletti e ridisegnati
+      if (L.readColors) { L.readColors(); if (L.zplane) L.zplane.draw(); }
+    });
+  });
+})(window.LAB);
+
+</script>
 </head>
 <body>
 <div class="wrap">
 <header>
   <h1>Laboratorio di corrente alternata</h1>
   <p>Un vettore che ruota sulla circonferenza disegna una sinusoide. Cambia ampiezza, fase, frequenza e carico e guarda come si spostano tensione e corrente.</p>
+  <label class="tl theme-pick">Tema
+    <select id="theme">
+      <option value="auto">Automatico (come il dispositivo)</option>
+      <option value="white">Bianco</option>
+      <option value="paper">Grigio chiaro</option>
+      <option value="dark">Scuro</option>
+    </select>
+  </label>
 </header>
 
 <div class="layout">

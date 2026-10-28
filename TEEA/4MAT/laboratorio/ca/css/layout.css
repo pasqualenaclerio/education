@@ -12,6 +12,8 @@ body{margin:0;background:var(--paper);color:var(--ink)}
 header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 20px;margin-bottom:16px}
 h1{font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:-.02em;line-height:1.1;margin:0}
 header p{margin:0;color:var(--muted);max-width:60ch}
+/* menu del tema in alto a destra */
+.theme-pick{margin-left:auto;align-self:center}
 h2{font-size:1.15rem;margin:0 0 10px}
 
 /* Due colonne: check list a sinistra, oscilloscopio a destra */
