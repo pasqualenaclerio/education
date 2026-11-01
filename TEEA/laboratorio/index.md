@@ -24,6 +24,7 @@ Le web app sono strumenti interattivi da utilizzare direttamente nel browser dur
 <div class="app-grid">
 <a class="app" href="/education/TEEA/4MAT/laboratorio/ca/"><strong>Corrente alternata</strong><span>Fasori, sinusoidi, sfasamento, impedenza R-L-C, potenza e valori efficaci.</span><em>▶ START</em></a>
 <a class="app" href="/education/TEEA/4MAT/laboratorio/filtri_rc/"><strong>Filtri RC</strong><span>Filtri passa basso, passa alto e passa banda su segnali con armoniche e su audio con rumore.</span><em>▶ START</em></a>
+<a class="app" href="/education/TEEA/4MAT/laboratorio/laboratorio-impedenze/"><strong>Laboratorio delle impedenze</strong><span>Impedenza da tensione e corrente; impedenza di R, L e C in serie e in parallelo, risonanza, fasori da trascinare.</span><em>▶ START</em></a>
 </div>
 
 [Pagina del laboratorio 4MAT](/education/TEEA/4MAT/laboratorio/)
