@@ -1,0 +1,94 @@
+% Soluzioni dell'esercitazione TEEA 3MAT — Argomento 3: resistività, temperatura, potenza ed energia
+% Per rigenerare il PDF (dalla cartella strumenti, due volte):
+%   pdflatex -output-directory=../../../materiali -jobname=soluzioni-esercitazione-resistivita-potenza-energia-3MAT soluzioni.tex
+\input{stile-esercitazione}
+\input{schemi-esercizi}
+\piede{Soluzioni esercitazione TEEA 3MAT}
+\newcommand{\pas}[1]{\par\hspace*{4mm}$\displaystyle #1$\par}
+\newcommand{\ris}[1]{\par\vspace{1mm}\hspace*{4mm}\colorbox{grigio}{\strut\ #1\ }\par}
+
+\begin{document}
+
+\intestazione{SOLUZIONI ESERCITAZIONE}{Resistività, temperatura, potenza ed energia -- Soluzioni}
+
+\nota{I valori sono arrotondati a tre cifre significative. Nella formula $R = \rho \cdot L / S$ la lunghezza va in
+metri e la sezione in mm$^2$. Un conduttore con sezione di $1\U{mm^2}$ lungo $1\U{m}$ ha un volume di $1\U{cm^3}$.}
+
+\tipo{Resistenza di un conduttore}
+
+\esercizio{1}{Cavo di rame: $L = 50\U{m}$, $S = 1{,}5\U{mm^2}$}
+\pas{\text{a) } R_{Cu} = \rho_{Cu} \cdot \frac{L}{S} = 0{,}0175 \cdot \frac{50}{1{,}5} = 0{,}583\U{\Omega}}
+\pas{\text{b) } S_{Al} = S_{Cu} \cdot \frac{\rho_{Al}}{\rho_{Cu}} = 1{,}5 \cdot 1{,}6 = 2{,}4\U{mm^2} \qquad \Big(\text{oppure } S_{Al} = \rho_{Al} \cdot \frac{L}{R} = 0{,}028 \cdot \frac{50}{0{,}583} = 2{,}4\U{mm^2}\Big)}
+\pas{\text{c) } d_{Cu} = \sqrt{\frac{4 \cdot 1{,}5}{\pi}} = 1{,}38\U{mm} \qquad d_{Al} = \sqrt{\frac{4 \cdot 2{,}4}{\pi}} = 1{,}75\U{mm}}
+\pas{\text{d) volume rame} = 1{,}5 \cdot 50 = 75\U{cm^3} \ \Rightarrow\ \text{peso} = 75 \cdot 8{,}96 = 672\U{g}}
+\pas{\phantom{\text{d) }}\text{volume alluminio} = 2{,}4 \cdot 50 = 120\U{cm^3} \ \Rightarrow\ \text{peso} = 120 \cdot 2{,}70 = 324\U{g}}
+\ris{$R = 0{,}583\U{\Omega}$ \quad $S_{Al} = 2{,}4\U{mm^2}$ \quad $d_{Cu} = 1{,}38\U{mm}$, $d_{Al} = 1{,}75\U{mm}$ \quad rame $672\U{g}$, alluminio $324\U{g}$}
+
+\esercizio{2}{Linea aerea in alluminio: $L = 2\U{km} = 2000\U{m}$, $S = 150\U{mm^2}$}
+\pas{\text{a) } R_{Al} = 0{,}028 \cdot \frac{2000}{150} = 0{,}373\U{\Omega} \qquad \text{b) } S_{Cu} = \frac{150}{1{,}6} = 93{,}8\U{mm^2}}
+\pas{\text{c) } 1\U{km} \text{ di alluminio: } 150 \cdot 1000 = 150\,000\U{cm^3} \Rightarrow 150\,000 \cdot 2{,}70 = 405\,000\U{g} = 405\U{kg}}
+\pas{\phantom{\text{c) }} 1\U{km} \text{ di rame: } 93{,}75 \cdot 1000 = 93\,750\U{cm^3} \Rightarrow 93\,750 \cdot 8{,}96 = 840\,000\U{g} = 840\U{kg}}
+\pas{\text{d) a parità di resistenza l'alluminio pesa meno della metà e costa meno: tralicci più leggeri e distanti}}
+\ris{$R = 0{,}373\U{\Omega}$ \quad $S_{Cu} = 93{,}8\U{mm^2}$ \quad alluminio $405\U{kg/km}$, rame $840\U{kg/km}$}
+
+\esercizio{3}{Pista: $L = 80\U{mm} = 0{,}08\U{m}$, $w = 0{,}8\U{mm}$, $t = 35\U{\mu m} = 0{,}035\U{mm}$, $I = 3\U{A}$}
+\pas{\text{a) } S = w \cdot t = 0{,}8 \cdot 0{,}035 = 0{,}028\U{mm^2} \qquad R = 0{,}0175 \cdot \frac{0{,}08}{0{,}028} = 0{,}05\U{\Omega}}
+\pas{\text{b) } V = R \cdot I = 0{,}05 \cdot 3 = 0{,}15\U{V} \qquad P = R \cdot I^2 = 0{,}05 \cdot 3^2 = 0{,}45\U{W}}
+\pas{\text{c) metà resistenza} \Rightarrow \text{sezione doppia} \Rightarrow w = 2 \cdot 0{,}8 = 1{,}6\U{mm}}
+\ris{$S = 0{,}028\U{mm^2}$ \quad $R = 0{,}05\U{\Omega}$ \quad $V = 0{,}15\U{V}$ \quad $P = 0{,}45\U{W}$ \quad $w = 1{,}6\U{mm}$}
+
+\tipo{Resistenza e temperatura, effetto Joule}
+
+\esercizio{4}{Avvolgimento in rame: $R_0 = 4\U{\Omega}$ a $T_0 = 20\U{^\circ C}$}
+\pas{\text{a) } R_{90} = R_0 \cdot [1 + \alpha \cdot (T - T_0)] = 4 \cdot (1 + 0{,}0039 \cdot 70) = 4 \cdot 1{,}273 = 5{,}09\U{\Omega}}
+\pas{\text{b) } \frac{R}{R_0} = 1 + \alpha \cdot \Delta T \ \Rightarrow\ \Delta T = \frac{R / R_0 - 1}{\alpha} = \frac{4{,}8 / 4 - 1}{0{,}0039} = \frac{0{,}2}{0{,}0039} = 51{,}3\U{^\circ C} \qquad T = 20 + 51{,}3 = 71{,}3\U{^\circ C}}
+\ris{$R_{90} = 5{,}09\U{\Omega}$ \quad $\Delta T = 51{,}3\U{^\circ C}$ \quad $T = 71{,}3\U{^\circ C}$}
+
+\newpage
+\esercizio{5}{Cavo di rame: $R_0 = 0{,}5\U{\Omega}$ a $20\U{^\circ C}$, $I = 16\U{A}$}
+\pas{\text{a) } P_{20} = R \cdot I^2 = 0{,}5 \cdot 16^2 = 128\U{W} \qquad Q = P \cdot \Delta t = 128\U{W} \cdot 3600\U{s} = 460\,800\U{J} = 128\U{Wh}}
+\pas{\text{b) } R_{60} = 0{,}5 \cdot (1 + 0{,}0039 \cdot 40) = 0{,}5 \cdot 1{,}156 = 0{,}578\U{\Omega} \qquad P_{60} = 0{,}578 \cdot 16^2 = 148\U{W}}
+\pas{\text{c) } E_{20} = 128 \cdot 8 = 1024\U{Wh} \qquad E_{60} = 148 \cdot 8 = 1184\U{Wh}}
+\pas{\text{la potenza aumenta: la corrente è imposta dal carico e } P = R \cdot I^2 \text{ cresce con } R}
+\ris{$P_{20} = 128\U{W}$ \quad $Q = 460\,800\U{J} = 128\U{Wh}$ \quad $R_{60} = 0{,}578\U{\Omega}$ \quad $P_{60} = 148\U{W}$ \quad $E$: $1024 \to 1184\U{Wh}$}
+
+\tipo{Computo energetico e spesa}
+
+\esercizio{6}{Consumi dell'appartamento, $30$ giorni, $0{,}25$ euro/kWh}
+\vspace{1mm}
+{\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}l c c >{\centering\arraybackslash}X >{\centering\arraybackslash}X@{}}
+\toprule
+\textbf{Apparecchio} & \textbf{Potenza} & \textbf{Uso al giorno} & \textbf{Energia al giorno} & \textbf{Energia al mese}\\
+\midrule
+bollitore & $2000\U{W}$ & $15\U{min} = 0{,}25\U{h}$ & $2000 \cdot 0{,}25 = 500\U{Wh}$ & $15\U{kWh}$\\
+scaldabagno & $1200\U{W}$ & $2\U{h}$ & $1200 \cdot 2 = 2400\U{Wh}$ & $72\U{kWh}$\\
+4 lampade LED & $4 \cdot 8 = 32\U{W}$ & $6\U{h}$ & $32 \cdot 6 = 192\U{Wh}$ & $5{,}76\U{kWh}$\\
+computer & $200\U{W}$ & $4\U{h}$ & $200 \cdot 4 = 800\U{Wh}$ & $24\U{kWh}$\\
+\midrule
+\textbf{totale} & & & $\mathbf{3892\U{Wh}}$ & $\mathbf{116{,}76\U{kWh}}$\\
+\bottomrule
+\end{tabularx}}
+\pas{\text{spesa mensile} = 116{,}76 \cdot 0{,}25 = 29{,}19 \text{ euro}}
+\ris{totale $116{,}76\U{kWh}$ al mese \quad spesa $29{,}19$ euro \quad consuma di più lo scaldabagno ($72\U{kWh}$ al mese)}
+
+\tipo{Partitori e consumi}
+
+\esercizio{7}{$V = 24\U{V}$, $R_C = 4{,}45\U{\Omega}$, cavo di rame $1{,}5\U{mm^2}$, lunghezza totale $15 + 15 = 30\U{m}$}
+\pas{\text{a) } R_L = 0{,}0175 \cdot \frac{30}{1{,}5} = 0{,}35\U{\Omega} \qquad R_L + R_C = 0{,}35 + 4{,}45 = 4{,}8\U{\Omega}}
+\pas{\text{b) } V_C = V \cdot \frac{R_C}{R_L + R_C} = 24 \cdot \frac{4{,}45}{4{,}8} = 22{,}25\U{V} \qquad V_L = 24 \cdot \frac{0{,}35}{4{,}8} = 1{,}75\U{V} \qquad 22{,}25 + 1{,}75 = 24\U{V}\ \checkmark}
+\pas{\text{c) } I = \frac{24}{4{,}8} = 5\U{A} \qquad P_C = 22{,}25 \cdot 5 = 111{,}25\U{W} \qquad P_L = 0{,}35 \cdot 5^2 = 8{,}75\U{W} \qquad \eta = \frac{V_C}{V} = \frac{22{,}25}{24} = 0{,}927}
+\pas{\text{d) } E_C = 111{,}25 \cdot 6 = 667{,}5\U{Wh} \qquad E_L = 8{,}75 \cdot 6 = 52{,}5\U{Wh}}
+\pas{\text{e) } R_L = 0{,}0175 \cdot \frac{30}{2{,}5} = 0{,}21\U{\Omega} \qquad V_C = 24 \cdot \frac{4{,}45}{4{,}66} = 22{,}9\U{V} \qquad \eta = \frac{22{,}9}{24} = 0{,}955}
+\ris{$R_L = 0{,}35\U{\Omega}$ \quad $V_C = 22{,}25\U{V}$ \quad $I = 5\U{A}$ \quad $\eta = 92{,}7\,\%$ \quad $E_C = 667{,}5\U{Wh}$ \quad $E_L = 52{,}5\U{Wh}$}
+\ris{con il cavo da $2{,}5\U{mm^2}$: $R_L = 0{,}21\U{\Omega}$ \quad $V_C = 22{,}9\U{V}$ \quad $\eta = 95{,}5\,\%$}
+
+\esercizio{8}{$I = 6\U{A}$, $R_1 = 8\U{\Omega}$, $R_2 = 24\U{\Omega}$, $4\U{h}$ al giorno per $30$ giorni}
+\pas{\text{a) } I_1 = I \cdot \frac{R_2}{R_1 + R_2} = 6 \cdot \frac{24}{32} = 4{,}5\U{A} \qquad I_2 = 6 \cdot \frac{8}{32} = 1{,}5\U{A} \qquad V = R_1 \cdot I_1 = 8 \cdot 4{,}5 = 36\U{V}}
+\pas{\text{b) } P_1 = R_1 \cdot I_1^2 = 8 \cdot 4{,}5^2 = 162\U{W} \qquad P_2 = 24 \cdot 1{,}5^2 = 54\U{W} \qquad P_{tot} = V \cdot I = 36 \cdot 6 = 216\U{W}\ \checkmark}
+\pas{\text{c) } t = 4 \cdot 30 = 120\U{h} \qquad E_1 = 162 \cdot 120 = 19\,440\U{Wh} = 19{,}44\U{kWh}}
+\pas{\phantom{\text{c) }} E_2 = 54 \cdot 120 = 6480\U{Wh} = 6{,}48\U{kWh} \qquad \text{costo} = (19{,}44 + 6{,}48) \cdot 0{,}25 = 6{,}48 \text{ euro}}
+\pas{\text{d) consuma di più } R_1\text{: in parallelo la tensione è la stessa e } P = V^2 / R \text{ è più grande se } R \text{ è più piccola}}
+\ris{$I_1 = 4{,}5\U{A}$, $I_2 = 1{,}5\U{A}$ \quad $P_1 = 162\U{W}$, $P_2 = 54\U{W}$ \quad $E_1 = 19{,}44\U{kWh}$, $E_2 = 6{,}48\U{kWh}$ \quad $6{,}48$ euro}
+
+\end{document}

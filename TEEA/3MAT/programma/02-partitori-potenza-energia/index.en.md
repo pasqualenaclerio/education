@@ -7,7 +7,7 @@ title: Voltage and current dividers, power and energy — TEEA 3MAT
 
 ### TEEA — 3MAT · Topic 2
 
-<a class="btn btn-pdf" href="pdf/02-dividers-power-energy.pdf" download>Download the explanation as PDF</a>
+<a class="btn btn-pdf" href="pdf/02-dividers-power-energy.pdf" download>Download the explanation as PDF</a> <a class="btn btn-pdf" href="pdf/02-formulario-partitori-potenza-energia.pdf" download>Download the formula sheet</a>
 
 ---
 

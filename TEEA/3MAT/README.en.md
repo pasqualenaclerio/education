@@ -8,15 +8,15 @@ The lecture notes, exercises, examples, and projects included in this folder for
 
 ## Topics
 
-<!--
-Add the programme topics here, for example:
+- **LV01** [Voltage, current, resistance and Ohm's law](programma/01-tensione-corrente-resistenza/index.en.md) — [📄 PDF](programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf)
+- **LV02** [Voltage and current dividers, power and energy](programma/02-partitori-potenza-energia/index.en.md) — [📄 PDF](programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf)
+- **LV03** [Resistivity, temperature, power and energy](programma/03-resistivita-potenza-energia/index.en.md) — [📄 PDF](programma/03-resistivita-potenza-energia/pdf/03-resistivity-power-energy.pdf)
 
-- Topic 1
-- Topic 2
-- Topic 3
--->
+## Materials
 
-_Programme currently being updated._
+- Formula sheets *(in Italian)*: [LV01](programma/01-tensione-corrente-resistenza/pdf/01-formulario-tensione-corrente-resistenza.pdf) · [LV02](programma/02-partitori-potenza-energia/pdf/02-formulario-partitori-potenza-energia.pdf) · [LV03](programma/03-resistivita-potenza-energia/pdf/03-formulario-resistivita-potenza-energia.pdf)
+- LV02 exercises *(in Italian)*: [exercises](materiali/esercitazione-partitori-potenza-energia-3MAT.pdf) · [solutions](materiali/soluzioni-esercitazione-partitori-potenza-energia-3MAT.pdf)
+- LV03 exercises *(in Italian)*: [exercises](materiali/esercitazione-resistivita-potenza-energia-3MAT.pdf) · [solutions](materiali/soluzioni-esercitazione-resistivita-potenza-energia-3MAT.pdf)
 
 ## Laboratory
 

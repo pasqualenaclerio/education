@@ -17,6 +17,7 @@ Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezion
 
 1. [**Tensione, corrente, resistenza e legge di Ohm**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/) — tensione, generatori di tensione ideali e reali, corrente, resistenza, legge di Ohm e caratteristica V–I, resistenze in serie e in parallelo · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-tensione-corrente-resistenza.pdf)
 2. [**Partitori di tensione e di corrente, potenza ed energia**](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/) — partitore di tensione e di corrente con due resistenze, potenziometro, potenza in watt ed energia in wattora · [📄 PDF](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-partitori-potenza-energia.pdf)
+3. [**Resistività, temperatura, potenza ed energia**](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/) — resistenza di un conduttore, rame e alluminio, piste dei circuiti stampati, resistenza e temperatura, effetto Joule, energia in Wh e kWh, computo dei consumi, partitori come modello di linea e carichi · [📄 PDF](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/pdf/03-resistivita-potenza-energia.pdf)
 
 _Altri argomenti in aggiornamento._
 
@@ -40,6 +41,18 @@ Tutte le formule dell'argomento [LV02](/education/TEEA/3MAT/programma/02-partito
 8 esercizi sull'argomento [LV02](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/): partitore di tensione e di corrente, progetto di un partitore, potenziometro, potenza nominale dei resistori, energia in Wh e kWh e costo.
 
 <a class="btn btn-pdf" href="/education/TEEA/3MAT/materiali/esercitazione-partitori-potenza-energia-3MAT.pdf" download>Esercizi</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-partitori-potenza-energia-3MAT.pdf" download>Soluzioni</a>
+
+### Formulario: resistività, temperatura, potenza ed energia
+
+Tutte le formule dell'argomento [LV03](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/) in una pagina, senza spiegazioni.
+
+<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/pdf/03-formulario-resistivita-potenza-energia.pdf" download>Formulario</a>
+
+### Esercitazione: resistività, temperatura, potenza ed energia
+
+8 esercizi sull'argomento [LV03](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/): resistenza di un conduttore, rame e alluminio, piste dei circuiti stampati, resistenza e temperatura, effetto Joule, computo dei consumi, linea e carico, carichi in parallelo.
+
+<a class="btn btn-pdf" href="/education/TEEA/3MAT/materiali/esercitazione-resistivita-potenza-energia-3MAT.pdf" download>Esercizi</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-resistivita-potenza-energia-3MAT.pdf" download>Soluzioni</a>
 
 _Altri materiali in aggiornamento._
 

@@ -7,7 +7,7 @@ title: Partitori di tensione e di corrente, potenza ed energia — TEEA 3MAT
 
 ### TEEA — 3MAT · Argomento 2
 
-<a class="btn btn-pdf" href="pdf/02-partitori-potenza-energia.pdf" download>Scarica la spiegazione in PDF</a>
+<a class="btn btn-pdf" href="pdf/02-partitori-potenza-energia.pdf" download>Scarica la spiegazione in PDF</a> <a class="btn btn-pdf" href="pdf/02-formulario-partitori-potenza-energia.pdf" download>Scarica il formulario</a>
 
 ---
 
