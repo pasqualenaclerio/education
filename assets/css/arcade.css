@@ -88,6 +88,18 @@ blockquote { margin: 18px 0; padding: 12px 16px; background: var(--bianco); bord
              border-left: 12px solid var(--ciano); }
 blockquote p { margin: 4px 0; }
 
+/* riquadri delle lezioni:  <div class="riquadro lab" markdown="1"> <p class="tit">Titolo</p> … </div>
+   regole = convenzioni · lab = prova nel laboratorio · domande = verifica con risposte in <details> */
+.riquadro { --colore: var(--giallo); margin: 24px 0; padding: 14px 18px 10px; background: var(--bianco);
+            border: 3px solid var(--inchiostro); box-shadow: 6px 6px 0 var(--colore); }
+.riquadro .tit { display: inline-block; margin: 0 0 6px; padding: 6px 9px; font-family: var(--pixel); font-size: 10px;
+                 line-height: 1.5; background: var(--colore); color: var(--inchiostro); }
+.riquadro.lab { --colore: var(--verde); }
+.riquadro.domande { --colore: var(--rosa); }
+.riquadro.domande .tit { color: var(--bianco); }
+.riquadro details { margin: 10px 0 4px; border-top: 2px dashed #e6d8bd; padding-top: 8px; }
+.riquadro summary { cursor: pointer; font-family: var(--pixel); font-size: 10px; color: var(--rosa); }
+
 /* tabelle */
 .tabella, table { width: 100%; }
 table { border-collapse: collapse; background: var(--bianco); border: 3px solid var(--inchiostro); margin: 18px 0;

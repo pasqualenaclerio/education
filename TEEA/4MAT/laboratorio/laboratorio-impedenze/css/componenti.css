@@ -1,0 +1,158 @@
+/* =====================================================================
+   COMPONENTI: menu, campi, pulsanti, piani dei fasori, risultati.
+   ===================================================================== */
+
+/* simbolo di fasore: lettera con la barretta sopra */
+.vec{text-decoration:overline; text-decoration-thickness:.07em; text-underline-offset:.1em; font-weight:700}
+
+/* ---------- menu dei modi ---------- */
+.menu{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:16px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--soft)}
+.menu button{
+  all:unset; box-sizing:border-box; cursor:pointer; padding:12px 18px; display:flex; flex-direction:column; gap:2px;
+  border-bottom:4px solid transparent; color:var(--muted);
+}
+.menu button + button{border-left:1px solid var(--line)}
+.menu button b{font-family:var(--font-titoli); font-weight:700; font-size:1.12rem; color:var(--ink)}
+.menu button span{font-size:.9rem}
+.menu button[aria-checked="true"]{background:var(--panel); border-bottom-color:var(--imp); color:var(--ink)}
+.menu button:hover{background:var(--panel)}
+.menu button:focus-visible{outline:3px solid var(--imp); outline-offset:-3px}
+@media (max-width:600px){ .menu{grid-template-columns:1fr} .menu button + button{border-left:0; border-top:1px solid var(--line)} }
+
+/* ---------- gruppi di comandi ---------- */
+.comandi{display:flex; flex-direction:column; gap:4px; padding:10px 14px}
+.gruppo{border:0; margin:0; padding:10px 0 12px; border-bottom:1px solid var(--soft); min-width:0}
+.gruppo:last-child{border-bottom:0}
+.gruppo legend{font-family:var(--font-titoli); font-weight:700; font-size:1.05rem; padding:0; margin-bottom:6px; display:flex; align-items:center; gap:8px}
+.gruppo legend::before{content:""; width:10px; height:10px; border-radius:50%; background:var(--c, var(--line))}
+.volt{--c:var(--volt)} .curr{--c:var(--curr)} .imp{--c:var(--imp)}
+.res{--c:var(--res)} .ind{--c:var(--ind)} .cap{--c:var(--cap)}
+.gruppo[hidden]{display:none}
+
+.campo{display:grid; grid-template-columns:minmax(78px,auto) 1fr 34px; align-items:center; gap:8px; margin:6px 0}
+.campo label{color:var(--muted); font-size:.95rem}
+.campo .u{color:var(--muted)}
+input[inputmode]{
+  font:inherit; font-variant-numeric:tabular-nums; width:100%; min-width:0; padding:6px 9px; border-radius:7px;
+  border:1px solid var(--line); background:var(--paper); color:var(--ink); text-align:right;
+}
+input[inputmode]:focus{outline:2px solid var(--c, var(--imp)); outline-offset:0; border-color:transparent}
+input[inputmode].errato{border-color:var(--warn); background:color-mix(in srgb, var(--warn) 10%, var(--paper))}
+input[type=range]{width:100%; accent-color:var(--c, var(--imp)); margin:4px 0 2px}
+select{font:inherit; padding:5px 8px; border-radius:7px; border:1px solid var(--line); background:var(--panel); color:var(--ink)}
+
+.notazione{margin:0 0 4px; font-size:1.02rem; color:var(--c)}
+.deriva{margin:4px 0 0; color:var(--muted); font-size:.92rem}
+.aiuto{margin:8px 0 0; color:var(--muted); font-size:.85rem}
+
+button{font:inherit; color:inherit}
+.esempi{display:flex; flex-wrap:wrap; gap:6px}
+.esempi button, .risonanza button{
+  cursor:pointer; padding:5px 10px; border-radius:7px; border:1px solid var(--line); background:var(--paper); font-size:.9rem;
+}
+.esempi button:hover, .risonanza button:hover{border-color:var(--imp)}
+button:focus-visible{outline:3px solid var(--imp); outline-offset:2px}
+
+/* ---------- scelta dei componenti ---------- */
+.tipi{display:grid; grid-template-columns:repeat(7,1fr); gap:4px}
+.tipi button, .collegamento button{
+  cursor:pointer; padding:7px 0; border-radius:7px; border:1px solid var(--line); background:var(--paper);
+  font-family:var(--font-titoli); font-weight:700; font-size:.95rem; letter-spacing:.02em;
+}
+.tipi button[aria-checked="true"], .collegamento button[aria-checked="true"]{background:var(--imp); border-color:var(--imp); color:var(--panel)}
+.collegamento{display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:6px}
+.collegamento button{font-family:var(--font-testo); font-weight:400}
+.collegamento button:disabled{opacity:.45; cursor:not-allowed}
+.schema{display:block; width:100%; height:auto; margin-top:10px; color:var(--ink)}
+.schema .s-res{color:var(--res)} .schema .s-ind{color:var(--ind)} .schema .s-cap{color:var(--cap)}
+.schema text{font-family:var(--font-testo); font-size:13px; font-weight:700; fill:currentColor}
+
+.risonanza{padding:10px 0 4px}
+.risonanza p{margin:0 0 6px; font-size:.93rem; color:var(--muted)}
+.risonanza[hidden]{display:none}
+
+/* ---------- piani dei fasori ---------- */
+.piano figcaption, .risultato h2{font-family:var(--font-titoli); font-weight:700; font-size:1.15rem; margin:0 0 4px}
+.svg-piano{display:block; width:100%; height:auto; max-height:76vh; aspect-ratio:1; margin:0 auto; user-select:none; -webkit-user-select:none}
+.svg-piano.mini{max-width:300px; margin-top:12px}
+.scala{margin:4px 0 0; font-size:.88rem; color:var(--muted); text-align:center}
+.nota-par{margin:6px 0 0; font-size:.9rem; color:var(--ink); background:var(--soft); border-radius:7px; padding:6px 10px}
+.nota-par:empty{display:none}
+
+.griglia line{stroke:var(--grid); stroke-width:1}
+.assi line{stroke:var(--axis); stroke-width:1.5}
+.assi path{fill:var(--axis)}
+.vietato{fill:var(--vietato)}
+.nota-vietato{fill:var(--warn); font-size:12px; font-family:var(--font-testo); opacity:.8}
+.etichetta-asse{fill:var(--muted); font-size:14px; font-family:var(--font-testo); font-style:italic}
+
+.fr line{stroke:var(--c); stroke-linecap:round}
+.fr path{fill:var(--c)}
+.fr.cava path{fill:var(--panel); stroke:var(--c); stroke-width:2}
+.proiez{stroke:var(--c); stroke-width:1.3; stroke-dasharray:4 4; opacity:.85}
+.arco{fill:none; stroke:var(--phase); stroke-width:2}
+.et{font-family:var(--font-testo); font-size:16px; font-weight:700; fill:var(--c);
+    paint-order:stroke; stroke:var(--panel); stroke-width:4px; stroke-linejoin:round}
+.et.piccola{font-size:13.5px; font-weight:400}
+.et .sop{text-decoration:overline}
+
+.maniglia{cursor:grab; outline:none; touch-action:none}
+.maniglia .presa{fill:transparent}
+.maniglia .punto{fill:var(--panel); stroke:var(--c); stroke-width:3}
+.maniglia:hover .punto, .maniglia:focus-visible .punto{fill:var(--c)}
+.maniglia:focus-visible .presa{fill:color-mix(in srgb, var(--c) 18%, transparent)}
+.trascina, .trascina .maniglia{cursor:grabbing}
+
+/* ---------- risultati ---------- */
+.risultato .fasore{font-family:var(--font-titoli); font-weight:700; font-size:clamp(1.4rem,2vw,1.8rem); line-height:1.15; margin:4px 0 10px; color:var(--imp); font-variant-numeric:tabular-nums}
+.valori{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0 0 10px}
+.valori div{background:var(--soft); border-radius:8px; padding:6px 10px}
+.valori dt{font-size:.82rem; color:var(--muted)}
+.valori dd{margin:0; font-weight:700; font-size:1.1rem; font-variant-numeric:tabular-nums}
+.calcolo{font-size:.95rem}
+.calcolo p{margin:4px 0}
+.natura{margin:10px 0 0; padding:8px 10px; border-left:4px solid var(--imp); background:var(--soft); border-radius:0 7px 7px 0; font-size:.95rem}
+.natura.avviso{border-left-color:var(--warn)}
+
+/* ---------- forma complessa ---------- */
+.interruttore{margin:18px 0 0; padding:12px 16px; border:1px dashed var(--line); border-radius:10px}
+.interruttore label{display:flex; gap:10px; align-items:center; cursor:pointer; font-weight:700}
+.interruttore input{width:20px; height:20px; accent-color:var(--imp)}
+.blocco h3{font-family:var(--font-titoli); font-size:1.05rem; margin:0 0 6px; display:flex; align-items:center; gap:8px}
+.blocco h3::before{content:""; width:10px; height:10px; border-radius:50%; background:var(--c, var(--line))}
+.blocco .campo{grid-template-columns:9.6em 1fr 28px}
+.formula{margin:8px 0 0; font-size:1rem; font-variant-numeric:tabular-nums}
+.formula span.r{color:var(--res)} .formula span.x{color:var(--ind)}
+.passaggi{margin-top:12px; font-size:.97rem}
+.passaggi p{margin:5px 0}
+.passaggi .r{color:var(--res); font-weight:700}
+.passaggi .xl{color:var(--ind); font-weight:700}
+.passaggi .xc{color:var(--cap); font-weight:700}
+.complessa > .passaggi{border-top:1px solid var(--soft); padding-top:10px}
+.equivalente{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; border-top:1px solid var(--soft); margin-top:10px; padding-top:8px}
+.equivalente .campo{margin:0; grid-template-columns:auto 90px 28px}
+.equivalente p{margin:0}
+sup{font-size:.72em}
+
+@media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important} }
+
+/* il piano piccolo dell'impedenza: testi e tratti più grandi perché viene rimpicciolito */
+.mini .et{font-size:26px; stroke-width:6px}
+.mini .et.piccola{font-size:22px}
+.mini .etichetta-asse{font-size:24px}
+.mini .assi line{stroke-width:2.5}
+.mini .griglia line{stroke-width:1.5}
+.mini .arco{stroke-width:3.5}
+.mini .proiez{stroke-width:2.2}
+.mini .nota-vietato{font-size:20px}
+.mini .maniglia .punto{stroke-width:4.5}
+
+/* telefoni: il piano viene rimpicciolito, quindi scritte e tratti più grandi
+   (il fattore 1.45 è anche in js/main.js) */
+@media (max-width: 600px){
+  .svg-piano:not(.mini) .et{font-size:23px; stroke-width:5px}
+  .svg-piano:not(.mini) .et.piccola{font-size:19.5px}
+  .svg-piano:not(.mini) .etichetta-asse{font-size:20px}
+  .svg-piano:not(.mini) .nota-vietato{font-size:17px}
+  .svg-piano:not(.mini) .arco{stroke-width:3}
+}

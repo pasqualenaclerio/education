@@ -16,6 +16,14 @@ Add the programme topics here, for example:
 - Topic 3
 -->
 
+- **LV01** — [Direct and alternating electrical signals](programma/01-segnali-continui-alternati/index.en.md) · [PDF](programma/01-segnali-continui-alternati/pdf/01-dc-ac-signals.pdf)
+- **LV02** — [Impedance](programma/02-impedenza/index.en.md) · [PDF](programma/02-impedenza/pdf/02-impedance.pdf) · [Formula sheet](programma/02-impedenza/pdf/02-formulario-impedenza.pdf) *(in Italian)*
+
+## Materials
+
+- [Exercises: sine waves, oscilloscope and phasors](materiali/esercitazione-sinusoidi-4MAT.pdf) · [Solutions](materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf) *(in Italian)*
+- [Exercises: impedance and phasors](materiali/esercitazione-impedenze-4MAT.pdf) *(in Italian)*
+
 _Programme currently being updated._
 
 ## Laboratory

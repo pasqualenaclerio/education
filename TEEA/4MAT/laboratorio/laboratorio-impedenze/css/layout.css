@@ -1,0 +1,54 @@
+/* =====================================================================
+   LAYOUT: disposizione delle parti della pagina.
+   ===================================================================== */
+*{box-sizing:border-box}
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-testo); font-size:16px; line-height:1.45;
+}
+.wrap{max-width:1380px; margin:0 auto; padding:20px 20px 28px}
+
+.testa{display:flex; gap:24px; align-items:flex-start; justify-content:space-between; margin-bottom:18px}
+.testa h1{font-family:var(--font-titoli); font-weight:700; font-size:clamp(1.7rem,3.2vw,2.5rem); line-height:1.05; margin:0 0 6px; letter-spacing:-.01em}
+.testa .sotto{margin:0; color:var(--muted); max-width:68ch}
+.tema{display:flex; gap:8px; align-items:center; color:var(--muted); font-size:.92rem; white-space:nowrap}
+
+/* le tre colonne di ogni modo: comandi | piano | risultato */
+.modo{
+  display:grid; gap:16px;
+  grid-template-columns:minmax(250px,290px) minmax(0,1fr) minmax(270px,340px);
+  align-items:start;
+}
+.modo[hidden]{display:none}
+
+@media (max-width:1150px){
+  .modo{grid-template-columns:minmax(250px,300px) minmax(0,1fr)}
+  .modo .risultato{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  .wrap{padding:14px 12px 24px}
+  .testa{flex-direction:column; gap:10px}
+  .modo{grid-template-columns:1fr}
+  .modo .piano{order:-1}
+}
+
+.pannello{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px}
+.piano{margin:0; padding:12px 14px}
+
+.complessa{margin-top:12px}
+.complessa[hidden]{display:none}
+.colonne3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+.colonne2{display:grid; grid-template-columns:minmax(260px,1fr) minmax(0,1.6fr); gap:22px}
+@media (max-width:900px){ .colonne3,.colonne2{grid-template-columns:1fr} }
+
+.piede{
+  display:flex; justify-content:flex-end; align-items:center; gap:10px;
+  margin-top:22px; color:var(--muted); font-size:.85rem;
+}
+.piede img{height:30px; width:auto}

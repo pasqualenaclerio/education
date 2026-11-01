@@ -1,0 +1,139 @@
+% Formulario TEEA 4MAT — Argomento 2: l'impedenza
+% Per rigenerare il PDF (dalla cartella strumenti, due volte per il numero di pagine):
+%   pdflatex -output-directory=../pdf -jobname=02-formulario-impedenza formulario.tex
+% ---------------------------------------------------------------------------
+%  Stile comune dei formulari TEEA (pdfLaTeX, solo pacchetti standard
+%  presenti in TeX Live e MiKTeX). Testo in Computer Modern Sans.
+% ---------------------------------------------------------------------------
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper, top=14mm, bottom=16mm, left=14mm, right=14mm, headheight=0pt, footskip=8mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\ohm}{\ensuremath{\Omega}}
+\newcommand{\uA}{\ensuremath{\mu}}
+\newcommand{\per}{\ensuremath{\cdot}}
+\usepackage{xcolor, tikz, multicol, booktabs, array, fancyhdr, lastpage, tabularx}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{arrows.meta}
+
+\definecolor{verde}{HTML}{159957}
+\definecolor{blu}{HTML}{155799}
+\definecolor{inchiostro}{HTML}{1B2936}
+\definecolor{tenue}{HTML}{606C71}
+\definecolor{fondo}{HTML}{EEF3F0}
+\definecolor{tensione}{HTML}{2152C0}
+\definecolor{corrente}{HTML}{B3205F}
+\definecolor{resistenza}{HTML}{0B7A62}
+\color{inchiostro}
+
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{7mm}
+\renewcommand{\arraystretch}{1.25}
+
+% unità di misura in tondo e virgola decimale
+\newcommand{\U}[1]{\,\mathrm{#1}}
+\newcommand{\virg}{{,}}
+
+% riquadro di un argomento
+\newtcolorbox{blocco}[1]{enhanced, breakable=false, colback=white, colframe=verde, boxrule=0.6pt,
+  leftrule=3pt, arc=1.5pt, left=6pt, right=6pt, top=4pt, bottom=5pt,
+  title={\bfseries #1}, coltitle=verde, colbacktitle=fondo, fonttitle=\normalsize,
+  toptitle=1pt, bottomtitle=1pt, before skip=0pt, after skip=4.5mm}
+
+% formula grande centrata
+\newcommand{\F}[1]{\par\smallskip{\centering\Large$\displaystyle #1$\par}\smallskip}
+% legenda dei simboli
+\newcommand{\leg}[1]{{\small\color{tenue}#1}\par}
+
+% intestazione del formulario
+\newcommand{\intestazione}[3]{%
+  {\color{verde}\bfseries\small #1}\par\vspace{1mm}
+  {\fontsize{19}{23}\selectfont\bfseries #2}\par\vspace{1mm}
+  {\small\color{tenue} #3}\par\vspace{2mm}
+  {\color{verde}\rule{\linewidth}{1.6pt}}\par\vspace{4mm}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\scriptsize\color{tenue}Prof. Pasquale Naclerio \per{} TEEA 4MAT \per{} Formulario}
+\fancyfoot[R]{\scriptsize\color{tenue}Pagina \thepage\ di \pageref{LastPage}}
+
+\begin{document}
+
+\intestazione{TEEA --- 4MAT \per{} Argomento 2 \per{} FORMULARIO}
+             {L'impedenza}
+             {Prof. Pasquale Naclerio \per{} Manutenzione e Assistenza Tecnica}
+
+\begin{multicols}{2}
+
+\begin{blocco}{Impedenza}
+\F{\bar{Z} = |Z| \angle \varphi}
+\F{|Z| = \frac{|V|}{|I|} \qquad \varphi = \varphi_V - \varphi_I}
+\leg{$|Z|$ in \ohm{} \quad $\varphi$ in gradi, tra $-180^\circ$ e $+180^\circ$ \quad moduli = valori efficaci}
+\end{blocco}
+
+\begin{blocco}{Legge di Ohm in alternata}
+\F{|I| = \frac{|V|}{|Z|} \qquad \varphi_I = \varphi_V - \varphi}
+\F{|V| = |Z| \cdot |I| \qquad \varphi_V = \varphi_I + \varphi}
+\end{blocco}
+
+\begin{blocco}{Tipo di carico}
+{\small
+\begin{tabularx}{\linewidth}{@{}l X l@{}}
+\toprule
+$\varphi$ & carico & corrente\\
+\midrule
+$0^\circ$ & resistivo puro & in fase\\
+$0^\circ < \varphi < 90^\circ$ & ohmico-induttivo & in ritardo\\
+$+90^\circ$ & induttivo puro & ritardo $90^\circ$\\
+$-90^\circ < \varphi < 0^\circ$ & ohmico-capacitivo & in anticipo\\
+$-90^\circ$ & capacitivo puro & anticipo $90^\circ$\\
+\bottomrule
+\end{tabularx}}
+\leg{con R, L, C: $|\varphi| \le 90^\circ$}
+\end{blocco}
+
+\begin{blocco}{Componenti ideali}
+\F{\bar{Z}_R = R \angle 0^\circ}
+\F{X_L = 2\pi f L \qquad \bar{Z}_L = X_L \angle {+90^\circ}}
+\F{X_C = \frac{1}{2\pi f C} \qquad \bar{Z}_C = X_C \angle {-90^\circ}}
+\leg{$2\pi f = \omega$ \quad $L$ in H, $C$ in F, $f$ in Hz}
+\leg{in continua: L = cortocircuito, C = circuito aperto}
+\leg{$1\U{mH} = 10^{-3}\U{H}$ \quad $1\,\mu\mathrm{F} = 10^{-6}\U{F}$ \quad $1\U{nF} = 10^{-9}\U{F}$ \quad $1\U{kHz} = 10^{3}\U{Hz}$}
+\end{blocco}
+
+\columnbreak
+
+\begin{blocco}{Formule inverse}
+\F{f = \frac{X_L}{2\pi L} \qquad L = \frac{X_L}{2\pi f}}
+\F{f = \frac{1}{2\pi C X_C} \qquad C = \frac{1}{2\pi f X_C}}
+\end{blocco}
+
+\begin{blocco}{Circuiti in serie (stessa corrente)}
+\F{X = X_L - X_C}
+\F{|Z| = \sqrt{R^2 + X^2} \qquad \varphi = \arctan\frac{X}{R}}
+\F{V_R = R\,|I| \qquad V_X = |X|\,|I|}
+\F{|V| = \sqrt{V_R^2 + V_X^2}}
+\leg{$X > 0$: induttivo \quad $X < 0$: capacitivo \quad RL: $X = X_L$ \quad RC: $X = -X_C$}
+\end{blocco}
+
+\begin{blocco}{Circuiti in parallelo (stessa tensione)}
+\F{I_R = \frac{|V|}{R} \quad I_L = \frac{|V|}{X_L} \quad I_C = \frac{|V|}{X_C}}
+\F{|I| = \sqrt{I_R^2 + (I_C - I_L)^2}}
+\F{\varphi_I = \arctan\frac{I_C - I_L}{I_R}}
+\F{|Z| = \frac{|V|}{|I|} \qquad \varphi = -\varphi_I}
+\leg{con $\bar{V}$ a $0^\circ$ \quad $I_R$ a $0^\circ$, $I_L$ a $-90^\circ$, $I_C$ a $+90^\circ$}
+\end{blocco}
+
+\begin{blocco}{Risonanza ($X_L = X_C$)}
+\F{f_0 = \frac{1}{2\pi\sqrt{L C}}}
+\leg{serie: $\bar{Z} = R \angle 0^\circ$, $|Z|$ minima, corrente massima e in fase}
+\leg{parallelo: $\bar{Z} = R \angle 0^\circ$, $|Z|$ massima, corrente minima}
+\end{blocco}
+
+
+
+\end{multicols}
+
+\end{document}

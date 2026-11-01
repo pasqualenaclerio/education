@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratorio delle impedenze</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tema.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/componenti.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="testa">
+  <div>
+    <h1>Laboratorio delle impedenze</h1>
+    <p class="sotto">L’impedenza dice quanto un circuito si oppone alla corrente alternata e di quanto la sposta rispetto alla tensione. Puoi scrivere i numeri oppure trascinare le punte dei fasori.</p>
+  </div>
+  <label class="tema">Aspetto
+    <select id="selTema">
+      <option value="auto">Automatico</option>
+      <option value="light">Chiaro</option>
+      <option value="dark">Scuro</option>
+    </select>
+  </label>
+</header>
+
+<!-- MENU: sceglie quale parte del laboratorio è visibile -->
+<nav class="menu" role="radiogroup" aria-label="Che cosa vuoi esplorare">
+  <button type="button" role="radio" aria-checked="true" data-modo="vi">
+    <b>Impedenza da tensione e corrente</b>
+    <span>Muovi i fasori di V e I e ricavi Z = V / I</span>
+  </button>
+  <button type="button" role="radio" aria-checked="false" data-modo="comp">
+    <b>Impedenza dei componenti</b>
+    <span>Resistenza, induttore, condensatore e loro combinazioni</span>
+  </button>
+</nav>
+
+<!-- ===================== MODO 1: IMPEDENZA DA V E I ===================== -->
+<section id="modoVI" class="modo" aria-label="Impedenza da tensione e corrente">
+
+  <div class="pannello comandi">
+    <fieldset class="gruppo volt">
+      <legend>Tensione <span class="vec">V</span></legend>
+      <p class="notazione" id="vNot"></p>
+      <div class="campo"><label for="vMod">Modulo</label><input id="vMod" inputmode="decimal" autocomplete="off"><span class="u">V</span></div>
+      <div class="campo"><label for="vFase">Fase</label><input id="vFase" inputmode="decimal" autocomplete="off"><span class="u">°</span></div>
+      <input type="range" id="vFaseR" min="-180" max="180" step="1" aria-label="Fase della tensione">
+    </fieldset>
+
+    <fieldset class="gruppo curr">
+      <legend>Corrente <span class="vec">I</span></legend>
+      <p class="notazione" id="iNot"></p>
+      <div class="campo"><label for="iMod">Modulo</label><input id="iMod" inputmode="decimal" autocomplete="off"><span class="u">A</span></div>
+      <div class="campo"><label for="iFase">Fase</label><input id="iFase" inputmode="decimal" autocomplete="off"><span class="u">°</span></div>
+      <input type="range" id="iFaseR" min="-180" max="180" step="1" aria-label="Fase della corrente">
+    </fieldset>
+
+    <fieldset class="gruppo">
+      <legend>Esempi pronti</legend>
+      <div class="esempi" id="esempiVI">
+        <button type="button" data-sf="0">Corrente in fase</button>
+        <button type="button" data-sf="-30">In ritardo di 30°</button>
+        <button type="button" data-sf="-90">In ritardo di 90°</button>
+        <button type="button" data-sf="45">In anticipo di 45°</button>
+        <button type="button" data-sf="90">In anticipo di 90°</button>
+      </div>
+      <p class="aiuto">Gli esempi spostano solo la fase della corrente rispetto alla tensione.</p>
+    </fieldset>
+  </div>
+
+  <figure class="pannello piano">
+    <figcaption>Fasori di tensione e corrente</figcaption>
+    <svg id="svgVI" class="svg-piano" role="group" aria-label="Piano dei fasori di tensione e corrente"></svg>
+    <p class="scala" id="scalaVI"></p>
+    <p class="aiuto">Trascina le punte delle frecce. Da tastiera: Tab sceglie la freccia, i tasti freccia la spostano (con Maiusc a passi più grandi).</p>
+  </figure>
+
+  <div class="pannello risultato">
+    <h2>Impedenza <span class="vec">Z</span></h2>
+    <p class="fasore" id="zNotVI"></p>
+    <dl class="valori">
+      <div><dt>Modulo |Z|</dt><dd id="zModVI"></dd></div>
+      <div><dt>Angolo φ</dt><dd id="zFaseVI"></dd></div>
+    </dl>
+    <div class="calcolo" id="calcVI"></div>
+    <p class="natura" id="natVI"></p>
+    <svg id="svgZ" class="svg-piano mini" role="group" aria-label="Piano dell’impedenza"></svg>
+    <p class="scala" id="scalaZ"></p>
+    <p class="aiuto">Trascinando <span class="vec">Z</span> cambia la corrente, la tensione resta ferma.</p>
+  </div>
+</section>
+
+<!-- ===================== MODO 2: IMPEDENZA DEI COMPONENTI ===================== -->
+<section id="modoComp" class="modo" aria-label="Impedenza dei componenti" hidden>
+
+  <div class="pannello comandi">
+    <fieldset class="gruppo">
+      <legend>Che cosa c’è nel circuito</legend>
+      <div class="tipi" role="radiogroup" aria-label="Componenti" id="tipi">
+        <button type="button" role="radio" data-tipo="R">R</button>
+        <button type="button" role="radio" data-tipo="L">L</button>
+        <button type="button" role="radio" data-tipo="C">C</button>
+        <button type="button" role="radio" data-tipo="RL">RL</button>
+        <button type="button" role="radio" data-tipo="RC">RC</button>
+        <button type="button" role="radio" data-tipo="LC">LC</button>
+        <button type="button" role="radio" data-tipo="RLC">RLC</button>
+      </div>
+      <div class="collegamento" role="radiogroup" aria-label="Collegamento" id="coll">
+        <button type="button" role="radio" data-coll="serie">In serie</button>
+        <button type="button" role="radio" data-coll="parallelo">In parallelo</button>
+      </div>
+      <svg id="schema" class="schema" role="img" aria-label="Schema del circuito"></svg>
+    </fieldset>
+
+    <fieldset class="gruppo">
+      <legend>Frequenza</legend>
+      <div class="campo"><label for="fVal">f</label><input id="fVal" inputmode="decimal" autocomplete="off"><span class="u">Hz</span></div>
+      <input type="range" id="fR" min="0" max="1000" step="1" aria-label="Frequenza">
+      <p class="deriva" id="omega"></p>
+    </fieldset>
+
+    <fieldset class="gruppo res" data-per="R">
+      <legend>Resistenza</legend>
+      <div class="campo"><label for="rVal">R</label><input id="rVal" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <input type="range" id="rR" min="0" max="1000" step="1" aria-label="Resistenza">
+    </fieldset>
+
+    <fieldset class="gruppo ind" data-per="L">
+      <legend>Induttore</legend>
+      <div class="campo"><label for="lVal">L</label><input id="lVal" inputmode="decimal" autocomplete="off"><span class="u">mH</span></div>
+      <input type="range" id="lR" min="0" max="1000" step="1" aria-label="Induttanza">
+      <p class="deriva" id="xlTxt"></p>
+    </fieldset>
+
+    <fieldset class="gruppo cap" data-per="C">
+      <legend>Condensatore</legend>
+      <div class="campo"><label for="cVal">C</label><input id="cVal" inputmode="decimal" autocomplete="off"><span class="u">µF</span></div>
+      <input type="range" id="cR" min="0" max="1000" step="1" aria-label="Capacità">
+      <p class="deriva" id="xcTxt"></p>
+    </fieldset>
+
+    <div class="risonanza" id="boxRis">
+      <p id="risTxt"></p>
+      <button type="button" id="goRis">Porta f alla risonanza</button>
+    </div>
+  </div>
+
+  <figure class="pannello piano">
+    <figcaption>Fasori delle impedenze</figcaption>
+    <svg id="svgComp" class="svg-piano" role="group" aria-label="Piano delle impedenze dei componenti"></svg>
+    <p class="scala" id="scalaComp"></p>
+    <p class="nota-par" id="notaPar"></p>
+    <p class="aiuto" id="aiutoComp"></p>
+  </figure>
+
+  <div class="pannello risultato">
+    <h2>Impedenza <span class="vec">Z</span></h2>
+    <p class="fasore" id="zNotC"></p>
+    <dl class="valori">
+      <div><dt>Modulo |Z|</dt><dd id="zModC"></dd></div>
+      <div><dt>Angolo φ</dt><dd id="zFaseC"></dd></div>
+    </dl>
+    <div class="calcolo" id="calcC"></div>
+    <p class="natura" id="natC"></p>
+  </div>
+</section>
+
+<!-- ===================== SPUNTA IN FONDO: FORMA COMPLESSA ===================== -->
+<div class="interruttore">
+  <label><input type="checkbox" id="chkComplessa"> Mostra anche la forma complessa: parte reale (resistenza R) e parte immaginaria (reattanza X)</label>
+</div>
+
+<section id="complessaVI" class="pannello complessa" hidden aria-label="Forma complessa di tensione, corrente e impedenza">
+  <div class="colonne3">
+    <div class="blocco volt">
+      <h3>Tensione <span class="vec">V</span></h3>
+      <div class="campo"><label for="vRe">Parte reale</label><input id="vRe" inputmode="decimal" autocomplete="off"><span class="u">V</span></div>
+      <div class="campo"><label for="vIm">Parte immaginaria</label><input id="vIm" inputmode="decimal" autocomplete="off"><span class="u">V</span></div>
+      <p class="formula" id="vCompl"></p>
+    </div>
+    <div class="blocco curr">
+      <h3>Corrente <span class="vec">I</span></h3>
+      <div class="campo"><label for="iRe">Parte reale</label><input id="iRe" inputmode="decimal" autocomplete="off"><span class="u">A</span></div>
+      <div class="campo"><label for="iIm">Parte immaginaria</label><input id="iIm" inputmode="decimal" autocomplete="off"><span class="u">A</span></div>
+      <p class="formula" id="iCompl"></p>
+    </div>
+    <div class="blocco imp">
+      <h3>Impedenza <span class="vec">Z</span></h3>
+      <div class="campo"><label for="zRe">Resistenza R</label><input id="zRe" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <div class="campo"><label for="zIm">Reattanza X</label><input id="zIm" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <p class="formula" id="zCompl"></p>
+    </div>
+  </div>
+  <div class="passaggi" id="passVI"></div>
+  <div class="equivalente">
+    <div class="campo corto"><label for="fEq">Alla frequenza</label><input id="fEq" inputmode="decimal" autocomplete="off"><span class="u">Hz</span></div>
+    <p id="eqTxt"></p>
+  </div>
+</section>
+
+<section id="complessaComp" class="pannello complessa" hidden aria-label="Forma complessa dell’impedenza dei componenti">
+  <div class="colonne2">
+    <div class="blocco imp">
+      <h3>Impedenza totale <span class="vec">Z</span></h3>
+      <div class="campo"><label for="zcRe">Resistenza R</label><input id="zcRe" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <div class="campo"><label for="zcIm">Reattanza X</label><input id="zcIm" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <p class="formula" id="zcCompl"></p>
+      <p class="aiuto" id="zcAiuto"></p>
+    </div>
+    <div class="blocco">
+      <h3>Come si ottiene</h3>
+      <div class="passaggi" id="passC"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="piede">
+  <span>© 2026 prof. Pasquale Naclerio</span>
+  <img src="assets/logo-pn.png" alt="Logo prof. Pasquale Naclerio" onerror="this.remove()">
+</footer>
+
+</div>
+
+<script src="js/stato.js"></script>
+<script src="js/complessi.js"></script>
+<script src="js/formato.js"></script>
+<script src="js/disegno/piano.js"></script>
+<script src="js/disegno/schema.js"></script>
+<script src="js/modo-vi.js"></script>
+<script src="js/modo-componenti.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

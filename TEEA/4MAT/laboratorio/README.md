@@ -15,6 +15,7 @@ laboratorio/
 ## Web app
 
 - [`ca`](ca/) — **Corrente alternata**: fasori, sinusoidi, sfasamento, impedenza (R, L, C, RLC serie), potenza e valori efficaci
+- [`laboratorio-impedenze`](laboratorio-impedenze/) — **Laboratorio delle impedenze**: impedenza da tensione e corrente; impedenza di R, L e C in serie e in parallelo, risonanza, fasori da trascinare
 - [`filtri_rc`](filtri_rc/) — **Filtri RC**: filtri passivi RC passa basso, passa alto e passa banda applicati a segnali con armoniche e a un brano audio con rumore
 
 ---

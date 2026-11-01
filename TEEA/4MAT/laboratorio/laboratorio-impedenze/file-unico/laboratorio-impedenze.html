@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratorio delle impedenze</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMxQzJBMzMiLz4KICA8cGF0aCBkPSJNMTAgNTIgSDU2IE0xMCA1MiBWOCIgc3Ryb2tlPSIjNkY4MTdBIiBzdHJva2Utd2lkdGg9IjIuNSIvPgogIDxwYXRoIGQ9Ik0xMCA1MiBMNDYgMTgiIHN0cm9rZT0iI0M3OTJFQSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNTIgMTIgTDM2IDE2IEw0OCAyOCBaIiBmaWxsPSIjQzc5MkVBIi8+CiAgPHRleHQgeD0iNDQiIHk9IjU2IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiNGMDk4NUUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlo8L3RleHQ+Cjwvc3ZnPgo=" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   TEMA: colori e caratteri.
+   Per cambiare un colore basta modificare il valore qui sotto.
+   Le tre versioni (chiaro, scuro automatico, scuro scelto) devono
+   avere gli stessi nomi di variabili.
+   ===================================================================== */
+:root{
+  --paper:#EEF2EF;   /* sfondo della pagina            */
+  --panel:#FFFFFF;   /* sfondo dei pannelli            */
+  --ink:#1C2A33;     /* testo                          */
+  --muted:#5B6B73;   /* testo secondario               */
+  --grid:#DCE4E0;    /* quadretti del piano            */
+  --line:#B9C6C0;    /* bordi                          */
+  --axis:#6F817A;    /* assi del piano                 */
+  --soft:#E6ECEA;    /* sfondi leggeri                 */
+
+  --volt:#1F5FBF;    /* tensione                       */
+  --curr:#C2352B;    /* corrente                       */
+  --phase:#B87C00;   /* angolo φ                       */
+  --imp:#7A3FA0;     /* impedenza Z                    */
+  --res:#A4511A;     /* resistenza R                   */
+  --ind:#1E7A4C;     /* induttore, reattanza positiva  */
+  --cap:#0B7287;     /* condensatore, reattanza negativa */
+  --warn:#A23B2A;    /* avvisi                         */
+  --vietato:rgba(162,59,42,.06);
+
+  --font-testo:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-titoli:"Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
+    --axis:#71858D; --soft:#1F2C32;
+    --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --imp:#C792EA; --res:#F0985E; --ind:#5FD39A; --cap:#4FC8DC;
+    --warn:#FF8A75; --vietato:rgba(255,138,117,.07);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11181C; --panel:#182227; --ink:#E4ECEE; --muted:#93A3AA; --grid:#223038; --line:#3A4B53;
+  --axis:#71858D; --soft:#1F2C32;
+  --volt:#72A6FF; --curr:#FF7D6E; --phase:#F2B73A; --imp:#C792EA; --res:#F0985E; --ind:#5FD39A; --cap:#4FC8DC;
+  --warn:#FF8A75; --vietato:rgba(255,138,117,.07);
+  color-scheme:dark;
+}
+
+</style>
+<style>
+/* =====================================================================
+   LAYOUT: disposizione delle parti della pagina.
+   ===================================================================== */
+*{box-sizing:border-box}
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-testo); font-size:16px; line-height:1.45;
+}
+.wrap{max-width:1380px; margin:0 auto; padding:20px 20px 28px}
+
+.testa{display:flex; gap:24px; align-items:flex-start; justify-content:space-between; margin-bottom:18px}
+.testa h1{font-family:var(--font-titoli); font-weight:700; font-size:clamp(1.7rem,3.2vw,2.5rem); line-height:1.05; margin:0 0 6px; letter-spacing:-.01em}
+.testa .sotto{margin:0; color:var(--muted); max-width:68ch}
+.tema{display:flex; gap:8px; align-items:center; color:var(--muted); font-size:.92rem; white-space:nowrap}
+
+/* le tre colonne di ogni modo: comandi | piano | risultato */
+.modo{
+  display:grid; gap:16px;
+  grid-template-columns:minmax(250px,290px) minmax(0,1fr) minmax(270px,340px);
+  align-items:start;
+}
+.modo[hidden]{display:none}
+
+@media (max-width:1150px){
+  .modo{grid-template-columns:minmax(250px,300px) minmax(0,1fr)}
+  .modo .risultato{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  .wrap{padding:14px 12px 24px}
+  .testa{flex-direction:column; gap:10px}
+  .modo{grid-template-columns:1fr}
+  .modo .piano{order:-1}
+}
+
+.pannello{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px}
+.piano{margin:0; padding:12px 14px}
+
+.complessa{margin-top:12px}
+.complessa[hidden]{display:none}
+.colonne3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+.colonne2{display:grid; grid-template-columns:minmax(260px,1fr) minmax(0,1.6fr); gap:22px}
+@media (max-width:900px){ .colonne3,.colonne2{grid-template-columns:1fr} }
+
+.piede{
+  display:flex; justify-content:flex-end; align-items:center; gap:10px;
+  margin-top:22px; color:var(--muted); font-size:.85rem;
+}
+.piede img{height:30px; width:auto}
+
+</style>
+<style>
+/* =====================================================================
+   COMPONENTI: menu, campi, pulsanti, piani dei fasori, risultati.
+   ===================================================================== */
+
+/* simbolo di fasore: lettera con la barretta sopra */
+.vec{text-decoration:overline; text-decoration-thickness:.07em; text-underline-offset:.1em; font-weight:700}
+
+/* ---------- menu dei modi ---------- */
+.menu{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:16px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--soft)}
+.menu button{
+  all:unset; box-sizing:border-box; cursor:pointer; padding:12px 18px; display:flex; flex-direction:column; gap:2px;
+  border-bottom:4px solid transparent; color:var(--muted);
+}
+.menu button + button{border-left:1px solid var(--line)}
+.menu button b{font-family:var(--font-titoli); font-weight:700; font-size:1.12rem; color:var(--ink)}
+.menu button span{font-size:.9rem}
+.menu button[aria-checked="true"]{background:var(--panel); border-bottom-color:var(--imp); color:var(--ink)}
+.menu button:hover{background:var(--panel)}
+.menu button:focus-visible{outline:3px solid var(--imp); outline-offset:-3px}
+@media (max-width:600px){ .menu{grid-template-columns:1fr} .menu button + button{border-left:0; border-top:1px solid var(--line)} }
+
+/* ---------- gruppi di comandi ---------- */
+.comandi{display:flex; flex-direction:column; gap:4px; padding:10px 14px}
+.gruppo{border:0; margin:0; padding:10px 0 12px; border-bottom:1px solid var(--soft); min-width:0}
+.gruppo:last-child{border-bottom:0}
+.gruppo legend{font-family:var(--font-titoli); font-weight:700; font-size:1.05rem; padding:0; margin-bottom:6px; display:flex; align-items:center; gap:8px}
+.gruppo legend::before{content:""; width:10px; height:10px; border-radius:50%; background:var(--c, var(--line))}
+.volt{--c:var(--volt)} .curr{--c:var(--curr)} .imp{--c:var(--imp)}
+.res{--c:var(--res)} .ind{--c:var(--ind)} .cap{--c:var(--cap)}
+.gruppo[hidden]{display:none}
+
+.campo{display:grid; grid-template-columns:minmax(78px,auto) 1fr 34px; align-items:center; gap:8px; margin:6px 0}
+.campo label{color:var(--muted); font-size:.95rem}
+.campo .u{color:var(--muted)}
+input[inputmode]{
+  font:inherit; font-variant-numeric:tabular-nums; width:100%; min-width:0; padding:6px 9px; border-radius:7px;
+  border:1px solid var(--line); background:var(--paper); color:var(--ink); text-align:right;
+}
+input[inputmode]:focus{outline:2px solid var(--c, var(--imp)); outline-offset:0; border-color:transparent}
+input[inputmode].errato{border-color:var(--warn); background:color-mix(in srgb, var(--warn) 10%, var(--paper))}
+input[type=range]{width:100%; accent-color:var(--c, var(--imp)); margin:4px 0 2px}
+select{font:inherit; padding:5px 8px; border-radius:7px; border:1px solid var(--line); background:var(--panel); color:var(--ink)}
+
+.notazione{margin:0 0 4px; font-size:1.02rem; color:var(--c)}
+.deriva{margin:4px 0 0; color:var(--muted); font-size:.92rem}
+.aiuto{margin:8px 0 0; color:var(--muted); font-size:.85rem}
+
+button{font:inherit; color:inherit}
+.esempi{display:flex; flex-wrap:wrap; gap:6px}
+.esempi button, .risonanza button{
+  cursor:pointer; padding:5px 10px; border-radius:7px; border:1px solid var(--line); background:var(--paper); font-size:.9rem;
+}
+.esempi button:hover, .risonanza button:hover{border-color:var(--imp)}
+button:focus-visible{outline:3px solid var(--imp); outline-offset:2px}
+
+/* ---------- scelta dei componenti ---------- */
+.tipi{display:grid; grid-template-columns:repeat(7,1fr); gap:4px}
+.tipi button, .collegamento button{
+  cursor:pointer; padding:7px 0; border-radius:7px; border:1px solid var(--line); background:var(--paper);
+  font-family:var(--font-titoli); font-weight:700; font-size:.95rem; letter-spacing:.02em;
+}
+.tipi button[aria-checked="true"], .collegamento button[aria-checked="true"]{background:var(--imp); border-color:var(--imp); color:var(--panel)}
+.collegamento{display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:6px}
+.collegamento button{font-family:var(--font-testo); font-weight:400}
+.collegamento button:disabled{opacity:.45; cursor:not-allowed}
+.schema{display:block; width:100%; height:auto; margin-top:10px; color:var(--ink)}
+.schema .s-res{color:var(--res)} .schema .s-ind{color:var(--ind)} .schema .s-cap{color:var(--cap)}
+.schema text{font-family:var(--font-testo); font-size:13px; font-weight:700; fill:currentColor}
+
+.risonanza{padding:10px 0 4px}
+.risonanza p{margin:0 0 6px; font-size:.93rem; color:var(--muted)}
+.risonanza[hidden]{display:none}
+
+/* ---------- piani dei fasori ---------- */
+.piano figcaption, .risultato h2{font-family:var(--font-titoli); font-weight:700; font-size:1.15rem; margin:0 0 4px}
+.svg-piano{display:block; width:100%; height:auto; max-height:76vh; aspect-ratio:1; margin:0 auto; user-select:none; -webkit-user-select:none}
+.svg-piano.mini{max-width:300px; margin-top:12px}
+.scala{margin:4px 0 0; font-size:.88rem; color:var(--muted); text-align:center}
+.nota-par{margin:6px 0 0; font-size:.9rem; color:var(--ink); background:var(--soft); border-radius:7px; padding:6px 10px}
+.nota-par:empty{display:none}
+
+.griglia line{stroke:var(--grid); stroke-width:1}
+.assi line{stroke:var(--axis); stroke-width:1.5}
+.assi path{fill:var(--axis)}
+.vietato{fill:var(--vietato)}
+.nota-vietato{fill:var(--warn); font-size:12px; font-family:var(--font-testo); opacity:.8}
+.etichetta-asse{fill:var(--muted); font-size:14px; font-family:var(--font-testo); font-style:italic}
+
+.fr line{stroke:var(--c); stroke-linecap:round}
+.fr path{fill:var(--c)}
+.fr.cava path{fill:var(--panel); stroke:var(--c); stroke-width:2}
+.proiez{stroke:var(--c); stroke-width:1.3; stroke-dasharray:4 4; opacity:.85}
+.arco{fill:none; stroke:var(--phase); stroke-width:2}
+.et{font-family:var(--font-testo); font-size:16px; font-weight:700; fill:var(--c);
+    paint-order:stroke; stroke:var(--panel); stroke-width:4px; stroke-linejoin:round}
+.et.piccola{font-size:13.5px; font-weight:400}
+.et .sop{text-decoration:overline}
+
+.maniglia{cursor:grab; outline:none; touch-action:none}
+.maniglia .presa{fill:transparent}
+.maniglia .punto{fill:var(--panel); stroke:var(--c); stroke-width:3}
+.maniglia:hover .punto, .maniglia:focus-visible .punto{fill:var(--c)}
+.maniglia:focus-visible .presa{fill:color-mix(in srgb, var(--c) 18%, transparent)}
+.trascina, .trascina .maniglia{cursor:grabbing}
+
+/* ---------- risultati ---------- */
+.risultato .fasore{font-family:var(--font-titoli); font-weight:700; font-size:clamp(1.4rem,2vw,1.8rem); line-height:1.15; margin:4px 0 10px; color:var(--imp); font-variant-numeric:tabular-nums}
+.valori{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0 0 10px}
+.valori div{background:var(--soft); border-radius:8px; padding:6px 10px}
+.valori dt{font-size:.82rem; color:var(--muted)}
+.valori dd{margin:0; font-weight:700; font-size:1.1rem; font-variant-numeric:tabular-nums}
+.calcolo{font-size:.95rem}
+.calcolo p{margin:4px 0}
+.natura{margin:10px 0 0; padding:8px 10px; border-left:4px solid var(--imp); background:var(--soft); border-radius:0 7px 7px 0; font-size:.95rem}
+.natura.avviso{border-left-color:var(--warn)}
+
+/* ---------- forma complessa ---------- */
+.interruttore{margin:18px 0 0; padding:12px 16px; border:1px dashed var(--line); border-radius:10px}
+.interruttore label{display:flex; gap:10px; align-items:center; cursor:pointer; font-weight:700}
+.interruttore input{width:20px; height:20px; accent-color:var(--imp)}
+.blocco h3{font-family:var(--font-titoli); font-size:1.05rem; margin:0 0 6px; display:flex; align-items:center; gap:8px}
+.blocco h3::before{content:""; width:10px; height:10px; border-radius:50%; background:var(--c, var(--line))}
+.blocco .campo{grid-template-columns:9.6em 1fr 28px}
+.formula{margin:8px 0 0; font-size:1rem; font-variant-numeric:tabular-nums}
+.formula span.r{color:var(--res)} .formula span.x{color:var(--ind)}
+.passaggi{margin-top:12px; font-size:.97rem}
+.passaggi p{margin:5px 0}
+.passaggi .r{color:var(--res); font-weight:700}
+.passaggi .xl{color:var(--ind); font-weight:700}
+.passaggi .xc{color:var(--cap); font-weight:700}
+.complessa > .passaggi{border-top:1px solid var(--soft); padding-top:10px}
+.equivalente{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; border-top:1px solid var(--soft); margin-top:10px; padding-top:8px}
+.equivalente .campo{margin:0; grid-template-columns:auto 90px 28px}
+.equivalente p{margin:0}
+sup{font-size:.72em}
+
+@media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important} }
+
+/* il piano piccolo dell'impedenza: testi e tratti più grandi perché viene rimpicciolito */
+.mini .et{font-size:26px; stroke-width:6px}
+.mini .et.piccola{font-size:22px}
+.mini .etichetta-asse{font-size:24px}
+.mini .assi line{stroke-width:2.5}
+.mini .griglia line{stroke-width:1.5}
+.mini .arco{stroke-width:3.5}
+.mini .proiez{stroke-width:2.2}
+.mini .nota-vietato{font-size:20px}
+.mini .maniglia .punto{stroke-width:4.5}
+
+/* telefoni: il piano viene rimpicciolito, quindi scritte e tratti più grandi
+   (il fattore 1.45 è anche in js/main.js) */
+@media (max-width: 600px){
+  .svg-piano:not(.mini) .et{font-size:23px; stroke-width:5px}
+  .svg-piano:not(.mini) .et.piccola{font-size:19.5px}
+  .svg-piano:not(.mini) .etichetta-asse{font-size:20px}
+  .svg-piano:not(.mini) .nota-vietato{font-size:17px}
+  .svg-piano:not(.mini) .arco{stroke-width:3}
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="testa">
+  <div>
+    <h1>Laboratorio delle impedenze</h1>
+    <p class="sotto">L’impedenza dice quanto un circuito si oppone alla corrente alternata e di quanto la sposta rispetto alla tensione. Puoi scrivere i numeri oppure trascinare le punte dei fasori.</p>
+  </div>
+  <label class="tema">Aspetto
+    <select id="selTema">
+      <option value="auto">Automatico</option>
+      <option value="light">Chiaro</option>
+      <option value="dark">Scuro</option>
+    </select>
+  </label>
+</header>
+
+<!-- MENU: sceglie quale parte del laboratorio è visibile -->
+<nav class="menu" role="radiogroup" aria-label="Che cosa vuoi esplorare">
+  <button type="button" role="radio" aria-checked="true" data-modo="vi">
+    <b>Impedenza da tensione e corrente</b>
+    <span>Muovi i fasori di V e I e ricavi Z = V / I</span>
+  </button>
+  <button type="button" role="radio" aria-checked="false" data-modo="comp">
+    <b>Impedenza dei componenti</b>
+    <span>Resistenza, induttore, condensatore e loro combinazioni</span>
+  </button>
+</nav>
+
+<!-- ===================== MODO 1: IMPEDENZA DA V E I ===================== -->
+<section id="modoVI" class="modo" aria-label="Impedenza da tensione e corrente">
+
+  <div class="pannello comandi">
+    <fieldset class="gruppo volt">
+      <legend>Tensione <span class="vec">V</span></legend>
+      <p class="notazione" id="vNot"></p>
+      <div class="campo"><label for="vMod">Modulo</label><input id="vMod" inputmode="decimal" autocomplete="off"><span class="u">V</span></div>
+      <div class="campo"><label for="vFase">Fase</label><input id="vFase" inputmode="decimal" autocomplete="off"><span class="u">°</span></div>
+      <input type="range" id="vFaseR" min="-180" max="180" step="1" aria-label="Fase della tensione">
+    </fieldset>
+
+    <fieldset class="gruppo curr">
+      <legend>Corrente <span class="vec">I</span></legend>
+      <p class="notazione" id="iNot"></p>
+      <div class="campo"><label for="iMod">Modulo</label><input id="iMod" inputmode="decimal" autocomplete="off"><span class="u">A</span></div>
+      <div class="campo"><label for="iFase">Fase</label><input id="iFase" inputmode="decimal" autocomplete="off"><span class="u">°</span></div>
+      <input type="range" id="iFaseR" min="-180" max="180" step="1" aria-label="Fase della corrente">
+    </fieldset>
+
+    <fieldset class="gruppo">
+      <legend>Esempi pronti</legend>
+      <div class="esempi" id="esempiVI">
+        <button type="button" data-sf="0">Corrente in fase</button>
+        <button type="button" data-sf="-30">In ritardo di 30°</button>
+        <button type="button" data-sf="-90">In ritardo di 90°</button>
+        <button type="button" data-sf="45">In anticipo di 45°</button>
+        <button type="button" data-sf="90">In anticipo di 90°</button>
+      </div>
+      <p class="aiuto">Gli esempi spostano solo la fase della corrente rispetto alla tensione.</p>
+    </fieldset>
+  </div>
+
+  <figure class="pannello piano">
+    <figcaption>Fasori di tensione e corrente</figcaption>
+    <svg id="svgVI" class="svg-piano" role="group" aria-label="Piano dei fasori di tensione e corrente"></svg>
+    <p class="scala" id="scalaVI"></p>
+    <p class="aiuto">Trascina le punte delle frecce. Da tastiera: Tab sceglie la freccia, i tasti freccia la spostano (con Maiusc a passi più grandi).</p>
+  </figure>
+
+  <div class="pannello risultato">
+    <h2>Impedenza <span class="vec">Z</span></h2>
+    <p class="fasore" id="zNotVI"></p>
+    <dl class="valori">
+      <div><dt>Modulo |Z|</dt><dd id="zModVI"></dd></div>
+      <div><dt>Angolo φ</dt><dd id="zFaseVI"></dd></div>
+    </dl>
+    <div class="calcolo" id="calcVI"></div>
+    <p class="natura" id="natVI"></p>
+    <svg id="svgZ" class="svg-piano mini" role="group" aria-label="Piano dell’impedenza"></svg>
+    <p class="scala" id="scalaZ"></p>
+    <p class="aiuto">Trascinando <span class="vec">Z</span> cambia la corrente, la tensione resta ferma.</p>
+  </div>
+</section>
+
+<!-- ===================== MODO 2: IMPEDENZA DEI COMPONENTI ===================== -->
+<section id="modoComp" class="modo" aria-label="Impedenza dei componenti" hidden>
+
+  <div class="pannello comandi">
+    <fieldset class="gruppo">
+      <legend>Che cosa c’è nel circuito</legend>
+      <div class="tipi" role="radiogroup" aria-label="Componenti" id="tipi">
+        <button type="button" role="radio" data-tipo="R">R</button>
+        <button type="button" role="radio" data-tipo="L">L</button>
+        <button type="button" role="radio" data-tipo="C">C</button>
+        <button type="button" role="radio" data-tipo="RL">RL</button>
+        <button type="button" role="radio" data-tipo="RC">RC</button>
+        <button type="button" role="radio" data-tipo="LC">LC</button>
+        <button type="button" role="radio" data-tipo="RLC">RLC</button>
+      </div>
+      <div class="collegamento" role="radiogroup" aria-label="Collegamento" id="coll">
+        <button type="button" role="radio" data-coll="serie">In serie</button>
+        <button type="button" role="radio" data-coll="parallelo">In parallelo</button>
+      </div>
+      <svg id="schema" class="schema" role="img" aria-label="Schema del circuito"></svg>
+    </fieldset>
+
+    <fieldset class="gruppo">
+      <legend>Frequenza</legend>
+      <div class="campo"><label for="fVal">f</label><input id="fVal" inputmode="decimal" autocomplete="off"><span class="u">Hz</span></div>
+      <input type="range" id="fR" min="0" max="1000" step="1" aria-label="Frequenza">
+      <p class="deriva" id="omega"></p>
+    </fieldset>
+
+    <fieldset class="gruppo res" data-per="R">
+      <legend>Resistenza</legend>
+      <div class="campo"><label for="rVal">R</label><input id="rVal" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <input type="range" id="rR" min="0" max="1000" step="1" aria-label="Resistenza">
+    </fieldset>
+
+    <fieldset class="gruppo ind" data-per="L">
+      <legend>Induttore</legend>
+      <div class="campo"><label for="lVal">L</label><input id="lVal" inputmode="decimal" autocomplete="off"><span class="u">mH</span></div>
+      <input type="range" id="lR" min="0" max="1000" step="1" aria-label="Induttanza">
+      <p class="deriva" id="xlTxt"></p>
+    </fieldset>
+
+    <fieldset class="gruppo cap" data-per="C">
+      <legend>Condensatore</legend>
+      <div class="campo"><label for="cVal">C</label><input id="cVal" inputmode="decimal" autocomplete="off"><span class="u">µF</span></div>
+      <input type="range" id="cR" min="0" max="1000" step="1" aria-label="Capacità">
+      <p class="deriva" id="xcTxt"></p>
+    </fieldset>
+
+    <div class="risonanza" id="boxRis">
+      <p id="risTxt"></p>
+      <button type="button" id="goRis">Porta f alla risonanza</button>
+    </div>
+  </div>
+
+  <figure class="pannello piano">
+    <figcaption>Fasori delle impedenze</figcaption>
+    <svg id="svgComp" class="svg-piano" role="group" aria-label="Piano delle impedenze dei componenti"></svg>
+    <p class="scala" id="scalaComp"></p>
+    <p class="nota-par" id="notaPar"></p>
+    <p class="aiuto" id="aiutoComp"></p>
+  </figure>
+
+  <div class="pannello risultato">
+    <h2>Impedenza <span class="vec">Z</span></h2>
+    <p class="fasore" id="zNotC"></p>
+    <dl class="valori">
+      <div><dt>Modulo |Z|</dt><dd id="zModC"></dd></div>
+      <div><dt>Angolo φ</dt><dd id="zFaseC"></dd></div>
+    </dl>
+    <div class="calcolo" id="calcC"></div>
+    <p class="natura" id="natC"></p>
+  </div>
+</section>
+
+<!-- ===================== SPUNTA IN FONDO: FORMA COMPLESSA ===================== -->
+<div class="interruttore">
+  <label><input type="checkbox" id="chkComplessa"> Mostra anche la forma complessa: parte reale (resistenza R) e parte immaginaria (reattanza X)</label>
+</div>
+
+<section id="complessaVI" class="pannello complessa" hidden aria-label="Forma complessa di tensione, corrente e impedenza">
+  <div class="colonne3">
+    <div class="blocco volt">
+      <h3>Tensione <span class="vec">V</span></h3>
+      <div class="campo"><label for="vRe">Parte reale</label><input id="vRe" inputmode="decimal" autocomplete="off"><span class="u">V</span></div>
+      <div class="campo"><label for="vIm">Parte immaginaria</label><input id="vIm" inputmode="decimal" autocomplete="off"><span class="u">V</span></div>
+      <p class="formula" id="vCompl"></p>
+    </div>
+    <div class="blocco curr">
+      <h3>Corrente <span class="vec">I</span></h3>
+      <div class="campo"><label for="iRe">Parte reale</label><input id="iRe" inputmode="decimal" autocomplete="off"><span class="u">A</span></div>
+      <div class="campo"><label for="iIm">Parte immaginaria</label><input id="iIm" inputmode="decimal" autocomplete="off"><span class="u">A</span></div>
+      <p class="formula" id="iCompl"></p>
+    </div>
+    <div class="blocco imp">
+      <h3>Impedenza <span class="vec">Z</span></h3>
+      <div class="campo"><label for="zRe">Resistenza R</label><input id="zRe" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <div class="campo"><label for="zIm">Reattanza X</label><input id="zIm" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <p class="formula" id="zCompl"></p>
+    </div>
+  </div>
+  <div class="passaggi" id="passVI"></div>
+  <div class="equivalente">
+    <div class="campo corto"><label for="fEq">Alla frequenza</label><input id="fEq" inputmode="decimal" autocomplete="off"><span class="u">Hz</span></div>
+    <p id="eqTxt"></p>
+  </div>
+</section>
+
+<section id="complessaComp" class="pannello complessa" hidden aria-label="Forma complessa dell’impedenza dei componenti">
+  <div class="colonne2">
+    <div class="blocco imp">
+      <h3>Impedenza totale <span class="vec">Z</span></h3>
+      <div class="campo"><label for="zcRe">Resistenza R</label><input id="zcRe" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <div class="campo"><label for="zcIm">Reattanza X</label><input id="zcIm" inputmode="decimal" autocomplete="off"><span class="u">Ω</span></div>
+      <p class="formula" id="zcCompl"></p>
+      <p class="aiuto" id="zcAiuto"></p>
+    </div>
+    <div class="blocco">
+      <h3>Come si ottiene</h3>
+      <div class="passaggi" id="passC"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="piede">
+  <span>© 2026 prof. Pasquale Naclerio</span>
+  <img src="data:image/png;base64,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" alt="Logo prof. Pasquale Naclerio" onerror="this.remove()">
+</footer>
+
+</div>
+
+<script>
+/* =====================================================================
+   STATO E IMPOSTAZIONI
+   Qui ci sono i valori di partenza e le regole generali del laboratorio.
+   Tutti i file condividono l'oggetto globale LAB.
+   ===================================================================== */
+window.LAB = window.LAB || {};
+(function (L) {
+
+  // ---- valori con cui si apre la pagina ----
+  L.S = {
+    modo: 'vi',            // 'vi' = impedenza da V e I, 'comp' = impedenza dei componenti
+    complessa: false,      // spunta "forma complessa"
+
+    // modo 1: fasori di tensione e corrente (modulo e fase in gradi)
+    V: { mod: 230, fase: 0 },
+    I: { mod: 4.6, fase: -30 },
+    fEq: 50,               // frequenza usata per il circuito equivalente (Hz)
+
+    // modo 2: componenti
+    tipo: 'RL',            // 'R','L','C','RL','RC','LC','RLC'
+    coll: 'serie',         // 'serie' oppure 'parallelo'
+    f: 50,                 // Hz
+    R: 100,                // ohm
+    L: 0.3183,             // henry  (100 ohm a 50 Hz)
+    C: 63.66e-6            // farad  (50 ohm a 50 Hz)
+  };
+
+  // ---- regole del disegno ----
+  L.MARGINE_SCALA = 1.15;            // spazio libero tra la freccia più lunga e il bordo
+  L.RAPPORTO_VISIVO_CORRENTE = 0.75; // la corrente appare al massimo 3/4 della tensione
+  L.AGGANCIO_ANGOLO = 2;             // trascinando, vicino a multipli di 15° l'angolo si aggancia (gradi)
+  L.CIFRE = 3;                       // cifre significative mostrate
+
+  // fondo scala "rotondi" (moltiplicati per potenze di 10)
+  L.PASSI_SCALA = [1, 1.5, 2, 2.5, 3, 4, 5, 7.5, 10];   // divisi per 5 quadretti danno valori rotondi
+
+  // intervalli dei cursori (scala logaritmica)
+  L.CURSORI = {
+    f: [1, 100000],        // Hz
+    R: [0.1, 100000],      // ohm
+    L: [1e-6, 10],         // henry
+    C: [1e-9, 1e-2]        // farad
+  };
+
+  L.niceCeil = function (x) {
+    if (!(x > 0) || !isFinite(x)) return 1;
+    const e = Math.pow(10, Math.floor(Math.log10(x)));
+    for (const m of L.PASSI_SCALA) if (m * e >= x * 0.9999) return +(m * e).toPrecision(12);
+    return 10 * e;
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   NUMERI COMPLESSI
+   Un numero complesso è un oggetto { re, im }. Gli angoli sono in gradi.
+   ===================================================================== */
+(function (L) {
+  const GR = Math.PI / 180;
+  const C = L.C = {};
+
+  C.cart = (re, im) => ({ re, im });
+  C.pol = (mod, gradi) => ({ re: mod * Math.cos(gradi * GR), im: mod * Math.sin(gradi * GR) });
+  C.add = (a, b) => ({ re: a.re + b.re, im: a.im + b.im });
+  C.mul = (a, b) => ({ re: a.re * b.re - a.im * b.im, im: a.re * b.im + a.im * b.re });
+  C.div = (a, b) => {
+    const d = b.re * b.re + b.im * b.im;
+    return { re: (a.re * b.re + a.im * b.im) / d, im: (a.im * b.re - a.re * b.im) / d };
+  };
+  C.inv = a => C.div({ re: 1, im: 0 }, a);
+  C.mod = a => Math.hypot(a.re, a.im);
+  C.arg = a => Math.atan2(a.im, a.re) / GR;
+
+  // riporta un angolo nell'intervallo (-180°, 180°]
+  C.wrap = g => {
+    let x = ((g + 180) % 360 + 360) % 360 - 180;
+    if (x === -180) x = 180;
+    return x;
+  };
+  C.GR = GR;
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   FORMATO DEI NUMERI
+   Virgola decimale, segno meno tipografico, prefissi (m, µ, k, ...).
+   ===================================================================== */
+(function (L) {
+  const F = L.F = {};
+  const PREF = { '-12': 'p', '-9': 'n', '-6': 'µ', '-3': 'm', '0': '', '3': 'k', '6': 'M', '9': 'G' };
+
+  F.sig = (x, n = L.CIFRE) => (x === 0 || !isFinite(x)) ? x : +x.toPrecision(n);
+
+  // numero con n cifre significative, senza notazione esponenziale
+  F.num = (x, n = L.CIFRE) => {
+    if (!isFinite(x)) return '∞';
+    let v = F.sig(x, n);
+    if (Math.abs(v) < 1e-12) v = 0;
+    const s = v.toLocaleString('it-IT', { maximumSignificantDigits: n, useGrouping: false });
+    return s.replace('-', '−');
+  };
+
+  // numero con prefisso: 0,0012 H -> 1,2 mH
+  F.eng = (x, unita, n = L.CIFRE) => {
+    if (!isFinite(x)) return '∞ ' + unita;
+    if (x === 0 || Math.abs(x) < 1e-15) return '0 ' + unita;
+    let e = Math.floor(Math.log10(Math.abs(x)) / 3) * 3;
+    e = Math.max(-12, Math.min(9, e));
+    let v = F.sig(x / Math.pow(10, e), n);
+    if (Math.abs(v) >= 1000 && e < 9) { e += 3; v = F.sig(x / Math.pow(10, e), n); }
+    return F.num(v, n) + ' ' + PREF[e] + unita;
+  };
+
+  // angolo in gradi con al massimo un decimale
+  F.deg = x => {
+    let v = Math.round(x * 10) / 10;
+    if (Object.is(v, -0) || Math.abs(v) < 0.05) v = 0;
+    return v.toLocaleString('it-IT', { maximumFractionDigits: 1, useGrouping: false }).replace('-', '−') + '°';
+  };
+
+  // numero da scrivere dentro un campo (meno normale, più cifre)
+  F.campo = (x, n = 4) => F.num(x, n).replace('−', '-');
+
+  // legge un numero scritto dall'utente: accetta la virgola e il segno meno tipografico
+  F.leggi = s => {
+    const t = String(s).trim().replace(/\s+/g, '').replace(',', '.').replace('−', '-');
+    if (t === '' || t === '-' || t === '.') return NaN;
+    return Number(t);
+  };
+
+  // numero complesso in forma algebrica: 43,3 + j25 Ω
+  F.compl = (z, unita, n = L.CIFRE) => {
+    const re = Math.abs(z.re) < 1e-12 ? 0 : z.re, im = Math.abs(z.im) < 1e-12 ? 0 : z.im;
+    const segno = im < 0 ? ' − ' : ' + ';
+    return F.num(re, n) + segno + 'j' + F.num(Math.abs(im), n) + (unita ? ' ' + unita : '');
+  };
+
+  // fasore in notazione polare: 50 Ω ∠ 30°
+  F.fasore = (mod, fase, unita) => F.num(mod) + ' ' + unita + ' ∠ ' + F.deg(fase);
+
+  // parentesi attorno ai numeri negativi nei passaggi: 0° − (−30°)
+  F.par = s => (s.startsWith('−') ? '(' + s + ')' : s);
+})(window.LAB);
+
+/* =====================================================================
+   CAMPI NUMERICI
+   Mentre si scrive il valore viene applicato subito; uscendo dal campo
+   il numero viene riscritto in forma ordinata. Un valore non valido
+   colora il bordo del campo e non viene applicato.
+   ===================================================================== */
+(function (L) {
+  L.legaCampo = function (el, applica, valida, rinfresca) {
+    const ok = v => isFinite(v) && (!valida || valida(v));
+    el.addEventListener('input', () => {
+      const v = L.F.leggi(el.value);
+      const buono = ok(v);
+      el.classList.toggle('errato', !buono && el.value.trim() !== '');
+      if (buono) applica(v);
+    });
+    el.addEventListener('blur', () => { el.classList.remove('errato'); rinfresca(); });
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') el.blur(); });
+  };
+  // scrive in un campo solo se l'utente non ci sta scrivendo
+  L.scrivi = (el, testo) => { if (document.activeElement !== el) el.value = testo; };
+  L.$ = id => document.getElementById(id);
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   PIANO DEI FASORI
+   Strumenti per disegnare griglia, assi, frecce, archi e maniglie
+   trascinabili. Le coordinate "normalizzate" valgono 1 al fondo scala.
+   La "vista" dice quale parte del piano si vede: il piano di tensione e
+   corrente è centrato, quello dei componenti mostra quasi solo la metà
+   destra (la resistenza non è mai negativa) e così le frecce sono più lunghe.
+   ===================================================================== */
+(function (L) {
+  const W = 520, O = 260, RAD = 226, DIV = 5;
+  const P = L.P = { W, O, RAD, DIV };
+  const f = n => n.toFixed(1);
+  const LIM = 0.06;
+  // sui telefoni il piano è piccolo e le scritte vengono ingrandite (vedi componenti.css)
+  P.TELEFONO = '(max-width: 600px)';
+  P.scalaTesto = 1;
+
+  // vista centrata (da -1 a 1 in tutte e due le direzioni)
+  P.VISTA_CENTRATA = { xMin: -1, xMax: 1, yMin: -1, yMax: 1 };
+  // vista a destra: poco spazio per R < 0, molto per R > 0
+  P.VISTA_DESTRA = { xMin: -0.2, xMax: (W - 20 - (20 + 0.2 * RAD)) / RAD, yMin: -1, yMax: 1 };
+  let V = null;
+  P.usa = vista => {
+    V = Object.assign({}, vista);
+    V.ox = O + (-(V.xMin + V.xMax) / 2) * RAD;   // centro dell'origine in coordinate SVG
+    V.oy = O;
+    return V;
+  };
+  P.usa(P.VISTA_CENTRATA);
+
+  // da coordinate normalizzate a coordinate SVG (y verso l'alto)
+  P.px = (x, y) => {
+    x = Math.max(V.xMin - LIM, Math.min(V.xMax + LIM, x));
+    y = Math.max(V.yMin - LIM, Math.min(V.yMax + LIM, y));
+    return [V.ox + x * RAD, V.oy - y * RAD];
+  };
+  P.polN = (r, gradi) => [r * Math.cos(gradi * L.C.GR), r * Math.sin(gradi * L.C.GR)];
+
+  // griglia a quadretti, assi con le frecce, semipiano R<0 facoltativo
+  P.griglia = (opz = {}) => {
+    const passo = RAD / DIV, ox = V.ox, oy = V.oy;
+    const xa = ox + V.xMin * RAD, xb = ox + V.xMax * RAD, ya = oy - V.yMax * RAD, yb = oy - V.yMin * RAD;
+    let s = '<g class="griglia">';
+    for (let k = Math.ceil(V.xMin * DIV - 1e-9); k <= Math.floor(V.xMax * DIV + 1e-9); k++) {
+      const p = f(ox + k * passo);
+      s += `<line x1="${p}" y1="${ya}" x2="${p}" y2="${yb}"/>`;
+    }
+    for (let k = -DIV; k <= DIV; k++) {
+      const p = f(oy + k * passo);
+      s += `<line x1="${f(xa)}" y1="${p}" x2="${f(xb)}" y2="${p}"/>`;
+    }
+    s += '</g>';
+    if (opz.semipiano && V.xMin < 0) {   // a sinistra: resistenza negativa
+      const larg = -V.xMin * RAD;
+      s += `<rect class="vietato" x="${f(xa)}" y="${ya}" width="${f(larg)}" height="${yb - ya}"/>`;
+      if (larg > 150) s += `<text class="nota-vietato" x="${f(xa + larg / 2)}" y="${yb - 12}" text-anchor="middle">${opz.semipiano}</text>`;
+    }
+    s += `<g class="assi"><line x1="${f(xa - 4)}" y1="${oy}" x2="${f(xb + 8)}" y2="${oy}"/><line x1="${f(ox)}" y1="${yb + 4}" x2="${f(ox)}" y2="${ya - 8}"/>`;
+    s += `<path d="M${f(xb + 16)} ${oy} l-11 -5.5 v11z"/><path d="M${f(ox)} ${ya - 16} l-5.5 11 h11z"/></g>`;
+    const [ex, ey] = opz.assi || ['', ''];
+    if (ex) s += `<text class="etichetta-asse" x="${f(xb + 14)}" y="${oy + 22}" text-anchor="end">${ex}</text>`;
+    if (ey) s += `<text class="etichetta-asse" x="${f(ox + 10)}" y="${ya - 2}">${ey}</text>`;
+    return s;
+  };
+
+  // freccia da a a b (coordinate normalizzate)
+  P.freccia = (a, b, colore, opz = {}) => {
+    const [x1, y1] = P.px(a[0], a[1]), [x2, y2] = P.px(b[0], b[1]);
+    const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy);
+    if (len < 1.5) return '';
+    const k = opz.k || 1, w = (opz.w || 3) * k, ux = dx / len, uy = dy / len;
+    const h = Math.min(15 * k, len * 0.55), hw = h * 0.42;
+    const bx = x2 - ux * h * 0.8, by = y2 - uy * h * 0.8;
+    const hx = x2 - ux * h, hy = y2 - uy * h;
+    const tratto = opz.tratto ? ' stroke-dasharray="7 6"' : '';
+    return `<g class="fr${opz.cava ? ' cava' : ''}" style="--c:${colore}">` +
+      `<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(bx)}" y2="${f(by)}" stroke-width="${w}"${tratto}/>` +
+      `<path d="M${f(x2)} ${f(y2)} L${f(hx - uy * hw)} ${f(hy + ux * hw)} L${f(hx + uy * hw)} ${f(hy - ux * hw)}Z"/></g>`;
+  };
+
+  // linea tratteggiata sottile (proiezioni sugli assi)
+  P.linea = (a, b, colore) => {
+    const [x1, y1] = P.px(a[0], a[1]), [x2, y2] = P.px(b[0], b[1]);
+    return `<line class="proiez" style="--c:${colore}" x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}"/>`;
+  };
+
+  // testo in un punto; dir = direzione verso cui spostarlo (vettore normalizzato)
+  P.testo = (p, testo, colore, opz = {}) => {
+    let [x, y] = P.px(p[0], p[1]);
+    const d = opz.dir || [0, 0], dist = opz.dist ?? 16;
+    const n = Math.hypot(d[0], d[1]) || 1, ux = d[0] / n, uy = -d[1] / n;
+    x += ux * dist; y += uy * dist;
+    let anc = opz.anc || (ux > 0.35 ? 'start' : ux < -0.35 ? 'end' : 'middle');
+    if (uy > 0.35) y += 10; else if (Math.abs(uy) <= 0.35) y += 5;
+    // larghezza stimata del testo: lo si tiene dentro il riquadro
+    const car = testo.replace(/<tspan[^>]*font-size[^>]*>[^<]*<\/tspan>/g, 'x').replace(/<[^>]+>/g, '').length;
+    const largo = car * (opz.piccola ? 7.6 : 9) * (opz.scala || P.scalaTesto), m = 4;
+    if (anc === 'start') x = Math.min(x, W - m - largo);
+    else if (anc === 'end') x = Math.max(x, m + largo);
+    else x = Math.max(m + largo / 2, Math.min(W - m - largo / 2, x));
+    y = Math.max(18, Math.min(W - 6, y));
+    return `<text class="et${opz.piccola ? ' piccola' : ''}" style="--c:${colore}" x="${f(x)}" y="${f(y)}" text-anchor="${anc}">${testo}</text>`;
+  };
+
+  // etichetta posta oltre la punta della freccia
+  P.etichettaPunta = (a, b, testo, colore, opz = {}) => {
+    const d = [b[0] - a[0], b[1] - a[1]];
+    return P.testo(b, testo, colore, Object.assign({ dir: d, dist: 18 }, opz));
+  };
+
+  // lettera con la barretta sopra (fasore)
+  P.vec = (lettera, pedice) => `<tspan class="sop">${lettera}</tspan>` + (pedice ? `<tspan font-size="11" dy="4">${pedice}</tspan><tspan dy="-4"></tspan>` : '');
+
+  // arco dell'angolo da a1 a a2 (gradi), raggio r normalizzato
+  P.arco = (a1, a2, r, testo) => {
+    if (Math.abs(a2 - a1) < 0.5) return '';
+    const p1 = P.px(...P.polN(r, a1)), p2 = P.px(...P.polN(r, a2));
+    const grande = Math.abs(a2 - a1) > 180 ? 1 : 0, verso = a2 > a1 ? 0 : 1;
+    let s = `<path class="arco" d="M${f(p1[0])} ${f(p1[1])} A${f(r * RAD)} ${f(r * RAD)} 0 ${grande} ${verso} ${f(p2[0])} ${f(p2[1])}"/>`;
+    if (testo) {
+      const m = (a1 + a2) / 2;
+      s += P.testo(P.polN(r, m), testo, 'var(--phase)', { dir: P.polN(1, m), dist: 14, piccola: true });
+    }
+    return s;
+  };
+
+  // maniglia trascinabile
+  P.maniglia = (id, p, colore, descr, k = 1) => {
+    const [x, y] = P.px(p[0], p[1]);
+    return `<g class="maniglia" data-h="${id}" tabindex="0" role="button" aria-label="${descr}" style="--c:${colore}">` +
+      `<circle class="presa" cx="${f(x)}" cy="${f(y)}" r="${22 * k}"/><circle class="punto" cx="${f(x)}" cy="${f(y)}" r="${7 * k}"/></g>`;
+  };
+
+  /* -------------------------------------------------------------------
+     Piano interattivo: gestisce trascinamento con mouse, dita e tastiera.
+     cb.inizio(id)   all'inizio del trascinamento
+     cb.sposta(id, x, y)   durante il trascinamento (coordinate normalizzate)
+     cb.fine(id)     al rilascio
+     ------------------------------------------------------------------- */
+  P.Piano = class {
+    constructor(svg, cb, vista = P.VISTA_CENTRATA) {
+      this.svg = svg; this.cb = cb; this.drag = null; this.fuoco = null; this.pos = {};
+      this.vista = P.usa(vista);
+      svg.setAttribute('viewBox', `0 0 ${W} ${W}`);
+
+      svg.addEventListener('pointerdown', e => {
+        const h = e.target.closest('[data-h]');
+        if (!h) return;
+        e.preventDefault();
+        this.drag = h.dataset.h;
+        try { svg.setPointerCapture(e.pointerId); } catch (_) {}
+        svg.classList.add('trascina');
+        cb.inizio && cb.inizio(this.drag);
+        this.muovi(e);
+      });
+      svg.addEventListener('pointermove', e => { if (this.drag) { e.preventDefault(); this.muovi(e); } });
+      const fine = () => {
+        if (!this.drag) return;
+        const id = this.drag; this.drag = null;
+        svg.classList.remove('trascina');
+        cb.fine && cb.fine(id);
+      };
+      svg.addEventListener('pointerup', fine);
+      svg.addEventListener('pointercancel', fine);
+      svg.addEventListener('lostpointercapture', fine);
+
+      svg.addEventListener('focusin', e => { const h = e.target.closest('[data-h]'); this.fuoco = h ? h.dataset.h : null; });
+      svg.addEventListener('keydown', e => {
+        const h = e.target.closest('[data-h]');
+        if (!h) return;
+        const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key];
+        if (!d) return;
+        e.preventDefault();
+        const id = h.dataset.h, p = this.pos[id] || [0, 0], passo = e.shiftKey ? 0.05 : 0.01;
+        cb.inizio && cb.inizio(id);
+        P.usa(this.vista);
+        cb.sposta(id, p[0] + d[0] * passo, p[1] + d[1] * passo, true);
+        cb.fine && cb.fine(id);
+      });
+    }
+    muovi(e) {
+      const pt = this.svg.createSVGPoint();
+      pt.x = e.clientX; pt.y = e.clientY;
+      const q = pt.matrixTransform(this.svg.getScreenCTM().inverse());
+      const v = this.vista;
+      let x = (q.x - v.ox) / RAD, y = (v.oy - q.y) / RAD;
+      x = Math.max(v.xMin - 0.03, Math.min(v.xMax + 0.03, x));
+      y = Math.max(v.yMin - 0.03, Math.min(v.yMax + 0.03, y));
+      P.usa(this.vista);
+      this.cb.sposta(this.drag, x, y, false);
+    }
+    // ridisegna il contenuto e rimette il fuoco sulla maniglia che lo aveva
+    // da chiamare prima di disegnare con questo piano
+    prepara() { P.usa(this.vista); }
+    disegna(html, pos) {
+      const aveva = this.fuoco && this.svg.contains(document.activeElement);
+      this.svg.innerHTML = html;
+      this.pos = pos || {};
+      if (aveva) {
+        const el = this.svg.querySelector(`[data-h="${this.fuoco}"]`);
+        if (el) el.focus({ preventScroll: true });
+      }
+    }
+  };
+
+  // angolo con aggancio ai multipli di 15°
+  P.aggancia = gradi => {
+    let g = Math.round(gradi);
+    const m = Math.round(gradi / 15) * 15;
+    if (Math.abs(gradi - m) <= L.AGGANCIO_ANGOLO) g = m;
+    return L.C.wrap(g);
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   SCHEMA DEL CIRCUITO
+   Disegna i componenti scelti, in serie o in parallelo, tra i morsetti A e B.
+   Resistore con il simbolo rettangolare (norme CEI/IEC).
+   ===================================================================== */
+(function (L) {
+  const f = n => n.toFixed(1);
+  const CLASSE = { R: 's-res', L: 's-ind', C: 's-cap' };
+
+  // componente orizzontale centrato in (cx, y), con i reofori da x1 a x2
+  function simbolo(k, cx, y, x1, x2) {
+    let s = `<g class="${CLASSE[k]}" fill="none" stroke="currentColor" stroke-width="2.2">`;
+    if (k === 'R') {
+      s += `<path d="M${f(x1)} ${y} H${f(cx - 19)} M${f(cx + 19)} ${y} H${f(x2)}"/><rect x="${f(cx - 19)}" y="${y - 7}" width="38" height="14" rx="1"/>`;
+    } else if (k === 'L') {
+      let d = `M${f(x1)} ${y} H${f(cx - 20)}`;
+      for (let i = 0; i < 4; i++) d += ` a5 5 0 0 1 10 0`;
+      d += ` H${f(x2)}`;
+      s += `<path d="${d}"/>`;
+    } else {
+      s += `<path d="M${f(x1)} ${y} H${f(cx - 4)} M${f(cx + 4)} ${y} H${f(x2)}"/>`;
+      s += `<path d="M${f(cx - 4)} ${y - 13} V${y + 13} M${f(cx + 4)} ${y - 13} V${y + 13}" stroke-width="3"/>`;
+    }
+    s += '</g>';
+    return s;
+  }
+  const etichetta = (k, x, y) => `<text class="${CLASSE[k]}" x="${f(x)}" y="${f(y)}" text-anchor="middle" stroke="none">${k}</text>`;
+  const morsetto = (x, y, nome) =>
+    `<circle cx="${x}" cy="${y}" r="4" fill="var(--panel)" stroke="currentColor" stroke-width="2"/>` +
+    `<text x="${x}" y="${y + 20}" text-anchor="middle" fill="var(--muted)" stroke="none">${nome}</text>`;
+
+  L.schema = function (tipo, coll) {
+    const comp = tipo.split('');
+    const XA = 14, XB = 246;
+    if (comp.length === 1 || coll === 'serie') {
+      const H = 74, y = 34;
+      const passo = (XB - XA) / comp.length;
+      let s = '';
+      comp.forEach((k, i) => {
+        const x1 = XA + i * passo, x2 = x1 + passo, cx = (x1 + x2) / 2;
+        s += simbolo(k, cx, y, i === 0 ? XA + 4 : x1, i === comp.length - 1 ? XB - 4 : x2);
+        s += etichetta(k, cx, y - (k === 'C' ? 19 : 14));
+      });
+      s += morsetto(XA, y, 'A') + morsetto(XB, y, 'B');
+      return { viewBox: `0 0 260 ${H}`, html: s };
+    }
+    // parallelo
+    const n = comp.length, sp = 38, top = 24, H = top + (n - 1) * sp + 34;
+    const xs = 48, xd = 212, ym = top + (n - 1) * sp / 2;
+    let s = `<g fill="none" stroke="currentColor" stroke-width="2.2">` +
+      `<path d="M${xs} ${top} V${top + (n - 1) * sp} M${xd} ${top} V${top + (n - 1) * sp}"/>` +
+      `<path d="M${XA + 4} ${ym} H${xs} M${xd} ${ym} H${XB - 4}"/></g>`;
+    comp.forEach((k, i) => {
+      const y = top + i * sp;
+      s += simbolo(k, 130, y, xs, xd);
+      s += etichetta(k, 130 + (k === 'L' ? 34 : 32), y - 6);
+      // pallini solo dove i fili si incontrano davvero (non agli angoli)
+      if (i > 0 && i < n - 1) s += `<circle cx="${xs}" cy="${y}" r="3" fill="currentColor"/><circle cx="${xd}" cy="${y}" r="3" fill="currentColor"/>`;
+    });
+    s += `<circle cx="${xs}" cy="${ym}" r="3" fill="currentColor"/><circle cx="${xd}" cy="${ym}" r="3" fill="currentColor"/>`;
+    s += morsetto(XA, ym, 'A') + morsetto(XB, ym, 'B');
+    return { viewBox: `0 0 260 ${H}`, html: s };
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   MODO 1: IMPEDENZA DA TENSIONE E CORRENTE
+   Si muovono i fasori V e I (con i numeri o trascinandoli) e si
+   ricava Z = V / I.  Trascinando Z cambia la corrente, V resta ferma.
+   ===================================================================== */
+(function (L) {
+  const S = L.S, C = L.C, F = L.F, P = L.P, $ = L.$;
+  const VI = L.VI = {};
+  let sc = null;            // fondo scala: { Vs, Is, Zs }
+  let pianoVI, pianoZ;
+
+  /* ---------- descrizione del tipo di carico (usata anche dal modo 2) ---------- */
+  L.natura = (phi, zm) => {
+    const a = Math.abs(phi), fa = F.deg(a);
+    if (zm === 0) return { t: '<b>Impedenza nulla</b>: a questa frequenza il circuito si comporta come un cortocircuito.' };
+    if (!isFinite(zm)) return { t: '<b>Impedenza infinita</b>: a questa frequenza il circuito si comporta come un circuito aperto, non passa corrente.' };
+    if (a < 0.05) return { t: '<b>Puramente resistivo</b>: tensione e corrente sono in fase.' };
+    if (a > 90.05) return { t: `<b>Resistenza negativa</b>: uno sfasamento di ${fa} non si ottiene con resistori, induttori e condensatori. Servirebbe un circuito che fornisce energia, non che la assorbe.`, avviso: true };
+    if (Math.abs(a - 90) < 0.05) return phi > 0
+      ? { t: '<b>Puramente induttivo</b>: la corrente è in ritardo di 90° sulla tensione.' }
+      : { t: '<b>Puramente capacitivo</b>: la corrente è in anticipo di 90° sulla tensione.' };
+    return phi > 0
+      ? { t: `<b>Ohmico-induttivo</b>: la corrente è in ritardo di ${fa} sulla tensione.` }
+      : { t: `<b>Ohmico-capacitivo</b>: la corrente è in anticipo di ${fa} sulla tensione.` };
+  };
+
+  // toglie i residui di arrotondamento (es. 1e-14 invece di 0)
+  const pulisci = z => {
+    const m = C.mod(z), e = 1e-9 * m;
+    return { re: Math.abs(z.re) < e ? 0 : z.re, im: Math.abs(z.im) < e ? 0 : z.im };
+  };
+
+  function dati() {
+    const zm = S.V.mod / S.I.mod;
+    const diff = S.V.fase - S.I.fase, phi = C.wrap(diff);
+    return {
+      V: pulisci(C.pol(S.V.mod, S.V.fase)),
+      I: pulisci(C.pol(S.I.mod, S.I.fase)),
+      zm, phi, diff,
+      Z: pulisci(C.pol(zm, phi))
+    };
+  }
+
+  function riscala(d) {
+    const Vs = L.niceCeil(S.V.mod * L.MARGINE_SCALA);
+    const hv = S.V.mod / Vs;
+    const Is = L.niceCeil(S.I.mod / (hv * L.RAPPORTO_VISIVO_CORRENTE));
+    const Zs = L.niceCeil(d.zm * L.MARGINE_SCALA);
+    sc = { Vs, Is, Zs };
+  }
+
+  /* ---------- disegno ---------- */
+  const proiezioni = (p, col) => P.linea(p, [p[0], 0], col) + P.linea(p, [0, p[1]], col);
+
+  function disegnaVI(d) {
+    pianoVI.prepara();
+    const pv = P.polN(S.V.mod / sc.Vs, S.V.fase), pi = P.polN(S.I.mod / sc.Is, S.I.fase);
+    let s = P.griglia({ assi: S.complessa ? ['Re', 'Im'] : ['0°', '90°'] });
+    if (S.complessa) s += proiezioni(pv, 'var(--volt)') + proiezioni(pi, 'var(--curr)');
+    const rArco = Math.min(0.22, 0.8 * Math.min(Math.hypot(...pv), Math.hypot(...pi)));
+    s += P.arco(S.I.fase, S.I.fase + d.phi, rArco, 'φ = ' + F.deg(d.phi));
+    s += P.freccia([0, 0], pv, 'var(--volt)', { w: 3.5 });
+    s += P.freccia([0, 0], pi, 'var(--curr)', { w: 3 });
+    s += P.etichettaPunta([0, 0], pv, P.vec('V'), 'var(--volt)');
+    s += P.etichettaPunta([0, 0], pi, P.vec('I'), 'var(--curr)');
+    s += P.maniglia('V', pv, 'var(--volt)', 'Punta del fasore della tensione');
+    s += P.maniglia('I', pi, 'var(--curr)', 'Punta del fasore della corrente');
+    pianoVI.disegna(s, { V: pv, I: pi });
+    $('scalaVI').textContent = `Un quadretto vale ${F.eng(sc.Vs / P.DIV, 'V')} per la tensione e ${F.eng(sc.Is / P.DIV, 'A')} per la corrente.`;
+  }
+
+  function disegnaZ(d) {
+    pianoZ.prepara();
+    const k = 1.7;   // il piano è piccolo: tratti più spessi
+    const pz = P.polN(d.zm / sc.Zs, d.phi);
+    let s = P.griglia({ semipiano: 'R < 0', assi: S.complessa ? ['Re', 'Im'] : ['0°', '90°'] });
+    if (S.complessa) {
+      const colX = d.Z.im >= 0 ? 'var(--ind)' : 'var(--cap)';
+      // le parti nulle non si disegnano, altrimenti le scritte si sovrappongono
+      if (d.Z.re !== 0) {
+        s += P.freccia([0, 0], [pz[0], 0], 'var(--res)', { w: 2.5, k });
+        s += P.testo([pz[0] / 2, 0], 'R = ' + F.eng(d.Z.re, 'Ω'), 'var(--res)', { dir: [0, d.Z.im >= 0 ? -1 : 1], dist: 26, piccola: true, scala: 1.65 });
+      }
+      if (d.Z.im !== 0) {
+        s += P.freccia([pz[0], 0], pz, colX, { w: 2.5, k });
+        s += P.testo([pz[0], pz[1] / 2], 'X = ' + F.eng(d.Z.im, 'Ω'), colX, { dir: [pz[0] >= 0 ? 1 : -1, 0], dist: 14, piccola: true, scala: 1.65 });
+      }
+    }
+    s += P.arco(0, d.phi, Math.min(0.3, 0.7 * Math.hypot(...pz)), F.deg(d.phi));
+    s += P.freccia([0, 0], pz, 'var(--imp)', { w: 3.5, k });
+    s += P.etichettaPunta([0, 0], pz, P.vec('Z'), 'var(--imp)', { dist: 24, scala: 1.65 });
+    s += P.maniglia('Z', pz, 'var(--imp)', 'Punta del fasore dell’impedenza', k);
+    pianoZ.disegna(s, { Z: pz });
+    $('scalaZ').textContent = `Un quadretto vale ${F.eng(sc.Zs / P.DIV, 'Ω')}.`;
+  }
+
+  /* ---------- testi e campi ---------- */
+  function testi(d) {
+    $('vNot').innerHTML = `<span class="vec">V</span> = ${F.eng(S.V.mod, 'V')} ∠ ${F.deg(S.V.fase)}`;
+    $('iNot').innerHTML = `<span class="vec">I</span> = ${F.eng(S.I.mod, 'A')} ∠ ${F.deg(S.I.fase)}`;
+    $('zNotVI').innerHTML = `<span class="vec">Z</span> = ${F.eng(d.zm, 'Ω')} ∠ ${F.deg(d.phi)}`;
+    $('zModVI').textContent = F.eng(d.zm, 'Ω');
+    $('zFaseVI').textContent = F.deg(d.phi);
+
+    let fase = `φ = φ<sub>V</sub> − φ<sub>I</sub> = ${F.deg(S.V.fase)} − ${F.par(F.deg(S.I.fase))} = ${F.deg(d.diff)}`;
+    if (Math.abs(d.diff - d.phi) > 0.01) fase += ` cioè ${F.deg(d.phi)} (si riporta l’angolo tra −180° e 180°)`;
+    $('calcVI').innerHTML =
+      `<p>|Z| = |V| / |I| = ${F.eng(S.V.mod, 'V')} / ${F.eng(S.I.mod, 'A')} = ${F.eng(d.zm, 'Ω')}</p><p>${fase}</p>`;
+
+    const n = L.natura(d.phi, d.zm);
+    $('natVI').innerHTML = n.t;
+    $('natVI').classList.toggle('avviso', !!n.avviso);
+
+    L.scrivi($('vMod'), F.campo(S.V.mod));
+    L.scrivi($('vFase'), F.campo(S.V.fase));
+    L.scrivi($('iMod'), F.campo(S.I.mod));
+    L.scrivi($('iFase'), F.campo(S.I.fase));
+    L.scrivi($('vFaseR'), Math.round(S.V.fase));
+    L.scrivi($('iFaseR'), Math.round(S.I.fase));
+  }
+
+  function complessa(d) {
+    const sp = (z, u) => F.compl(z, u);
+    const esp = (m, g, u) => `${F.num(m)} · e<sup>j${F.deg(g)}</sup> ${u}`;
+    const colX = d.Z.im >= 0 ? 'x' : 'x" style="color:var(--cap)';
+    $('vCompl').innerHTML = `<span class="vec">V</span> = ${sp(d.V, 'V')}<br>= ${esp(S.V.mod, S.V.fase, 'V')}`;
+    $('iCompl').innerHTML = `<span class="vec">I</span> = ${sp(d.I, 'A')}<br>= ${esp(S.I.mod, S.I.fase, 'A')}`;
+    $('zCompl').innerHTML = `<span class="vec">Z</span> = <span class="r">${F.num(d.Z.re)}</span> ${d.Z.im < 0 ? '−' : '+'} <span class="${colX}">j${F.num(Math.abs(d.Z.im))}</span> Ω<br>= ${esp(d.zm, d.phi, 'Ω')}`;
+
+    L.scrivi($('vRe'), F.campo(d.V.re)); L.scrivi($('vIm'), F.campo(d.V.im));
+    L.scrivi($('iRe'), F.campo(d.I.re)); L.scrivi($('iIm'), F.campo(d.I.im));
+    L.scrivi($('zRe'), F.campo(d.Z.re)); L.scrivi($('zIm'), F.campo(d.Z.im));
+
+    // passaggi della divisione con il coniugato
+    const a = d.I.re, b = d.I.im, coniug = { re: a, im: -b };
+    const num = C.mul(d.V, coniug), den = a * a + b * b;
+    const p = x => F.par(F.num(x));
+    $('passVI').innerHTML =
+      `<p><b>Divisione in forma complessa.</b> <span class="vec">Z</span> = <span class="vec">V</span> / <span class="vec">I</span> = (${sp(d.V)}) / (${sp(d.I)}). ` +
+      `Si moltiplicano numeratore e denominatore per il coniugato della corrente, (${sp(coniug)}):</p>` +
+      `<p><span class="vec">Z</span> = (${sp(d.V)}) · (${sp(coniug)}) / (${p(a)}² + ${p(b)}²) = (${sp(num)}) / ${F.num(den)} = ` +
+      `<span class="r">${F.num(d.Z.re)}</span> ${d.Z.im < 0 ? '−' : '+'} j${F.num(Math.abs(d.Z.im))} Ω</p>` +
+      `<p><b>Dalla forma polare alla forma complessa.</b> ` +
+      `<span class="r">R</span> = |Z| · cos φ = ${F.num(d.zm)} · cos ${F.par(F.deg(d.phi))} = <span class="r">${F.eng(d.Z.re, 'Ω')}</span>, ` +
+      `<span class="xl">X</span> = |Z| · sin φ = ${F.num(d.zm)} · sin ${F.par(F.deg(d.phi))} = <span class="xl">${F.eng(d.Z.im, 'Ω')}</span></p>` +
+      `<p>La parte reale è la resistenza, la parte immaginaria è la reattanza: se X è positiva il carico è induttivo, se è negativa è capacitivo.</p>`;
+
+    // circuito equivalente serie alla frequenza scelta
+    L.scrivi($('fEq'), F.campo(S.fEq));
+    const w = 2 * Math.PI * S.fEq, tol = 1e-6 * d.zm;
+    let t;
+    if (d.Z.re < -tol) t = 'Con una resistenza negativa non esiste un circuito equivalente fatto solo di R, L e C.';
+    else {
+      const parti = [];
+      if (d.Z.re > tol) parti.push(`una resistenza <span class="r">R = ${F.eng(d.Z.re, 'Ω')}</span>`);
+      if (d.Z.im > tol) parti.push(`un induttore <span class="xl">L = X / ω = ${F.eng(d.Z.im / w, 'H')}</span>`);
+      if (d.Z.im < -tol) parti.push(`un condensatore <span class="xc">C = 1 / (ω · |X|) = ${F.eng(1 / (w * -d.Z.im), 'F')}</span>`);
+      t = 'questa impedenza equivale a ' + parti.join(' in serie con ') + '.';
+    }
+    $('eqTxt').innerHTML = t;
+  }
+
+  VI.aggiorna = function (riscalare = true) {
+    const d = dati();
+    if (riscalare || !sc) riscala(d);
+    disegnaVI(d);
+    disegnaZ(d);
+    testi(d);
+    if (S.complessa) complessa(d);
+  };
+
+  /* ---------- avvio: collega campi, cursori e trascinamenti ---------- */
+  VI.avvia = function () {
+    const ag = () => VI.aggiorna(true);
+    const pos = v => v > 0;
+    L.legaCampo($('vMod'), v => { S.V.mod = v; ag(); }, pos, ag);
+    L.legaCampo($('iMod'), v => { S.I.mod = v; ag(); }, pos, ag);
+    L.legaCampo($('vFase'), v => { S.V.fase = C.wrap(v); ag(); }, null, ag);
+    L.legaCampo($('iFase'), v => { S.I.fase = C.wrap(v); ag(); }, null, ag);
+    $('vFaseR').addEventListener('input', e => { S.V.fase = +e.target.value; ag(); });
+    $('iFaseR').addEventListener('input', e => { S.I.fase = +e.target.value; ag(); });
+
+    $('esempiVI').addEventListener('click', e => {
+      const b = e.target.closest('[data-sf]');
+      if (!b) return;
+      S.I.fase = C.wrap(S.V.fase + Number(b.dataset.sf));
+      ag();
+    });
+
+    // forma complessa: si possono scrivere parte reale e immaginaria
+    const daCart = (re, im, obj) => { const z = { re, im }; if (C.mod(z) === 0) return; obj.mod = C.mod(z); obj.fase = C.arg(z); ag(); };
+    const cur = () => dati();
+    L.legaCampo($('vRe'), v => daCart(v, cur().V.im, S.V), null, ag);
+    L.legaCampo($('vIm'), v => daCart(cur().V.re, v, S.V), null, ag);
+    L.legaCampo($('iRe'), v => daCart(v, cur().I.im, S.I), null, ag);
+    L.legaCampo($('iIm'), v => daCart(cur().I.re, v, S.I), null, ag);
+    const daZ = (re, im) => {
+      const z = { re, im }, m = C.mod(z);
+      if (m === 0) return;
+      S.I.mod = S.V.mod / m; S.I.fase = C.wrap(S.V.fase - C.arg(z)); ag();
+    };
+    L.legaCampo($('zRe'), v => daZ(v, cur().Z.im), null, ag);
+    L.legaCampo($('zIm'), v => daZ(cur().Z.re, v), null, ag);
+    L.legaCampo($('fEq'), v => { S.fEq = v; ag(); }, pos, ag);
+
+    // trascinamento
+    pianoVI = new P.Piano($('svgVI'), {
+      sposta(id, x, y, tastiera) {
+        const r = Math.hypot(x, y), g = Math.atan2(y, x) / C.GR;
+        const a = tastiera ? C.wrap(Math.round(g)) : P.aggancia(g);   // da tastiera niente aggancio
+        if (id === 'V') { S.V.mod = Math.max(F.sig(r * sc.Vs), F.sig(sc.Vs * 0.02)); S.V.fase = a; }
+        else { S.I.mod = Math.max(F.sig(r * sc.Is), F.sig(sc.Is * 0.02)); S.I.fase = a; }
+        VI.aggiorna(false);
+      },
+      fine() { VI.aggiorna(true); }
+    });
+    pianoZ = new P.Piano($('svgZ'), {
+      sposta(id, x, y, tastiera) {
+        const zm = Math.max(F.sig(Math.hypot(x, y) * sc.Zs), F.sig(sc.Zs * 0.02));
+        const g = Math.atan2(y, x) / C.GR, phi = tastiera ? C.wrap(Math.round(g)) : P.aggancia(g);
+        S.I.mod = F.sig(S.V.mod / zm, 6);
+        S.I.fase = C.wrap(S.V.fase - phi);
+        VI.aggiorna(false);
+      },
+      fine() { VI.aggiorna(true); }
+    });
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   MODO 2: IMPEDENZA DEI COMPONENTI
+   R, L, C da soli o combinati, in serie o in parallelo.
+   Si cambiano i valori con i numeri, con i cursori o trascinando
+   le punte dei fasori delle impedenze.
+   ===================================================================== */
+(function (L) {
+  const S = L.S, C = L.C, F = L.F, P = L.P, $ = L.$;
+  const CO = L.CO = {};
+  let sc = null, piano;
+  const COL = { R: 'var(--res)', L: 'var(--ind)', C: 'var(--cap)' };
+  const NOME = { R: 'della resistenza', L: 'dell’induttore', C: 'del condensatore' };
+
+  const ha = k => S.tipo.includes(k);
+  const singolo = () => S.tipo.length === 1;
+  const inSerie = () => singolo() || S.coll === 'serie';
+  const max = Math.max, min = Math.min;
+
+  /* ---------- calcolo ---------- */
+  function dati() {
+    const w = 2 * Math.PI * S.f;
+    const XL = ha('L') ? w * S.L : 0, XC = ha('C') ? 1 / (w * S.C) : 0, R = ha('R') ? S.R : 0;
+    const d = { w, XL, XC, R, inf: false, Y: null };
+    if (inSerie()) {
+      let X = XL - XC;
+      if (Math.abs(X) < 1e-9 * max(XL, XC)) X = 0;      // risonanza: niente residui
+      d.Z = { re: R, im: X };
+    } else {
+      const G = ha('R') ? 1 / S.R : 0, BC = ha('C') ? w * S.C : 0, BL = ha('L') ? 1 / (w * S.L) : 0;
+      let B = BC - BL;
+      if (Math.abs(B) < 1e-9 * max(BC, BL)) B = 0;
+      Object.assign(d, { G, BC, BL, B, Y: { re: G, im: B } });
+      if (G === 0 && B === 0) { d.inf = true; d.Z = { re: Infinity, im: 0 }; }
+      else {
+        const Z = C.inv(d.Y), e = 1e-9 * C.mod(Z);
+        d.Z = { re: Math.abs(Z.re) < e ? 0 : Z.re, im: Math.abs(Z.im) < e ? 0 : Z.im };
+      }
+    }
+    d.zm = d.inf ? Infinity : C.mod(d.Z);
+    d.phi = (d.inf || d.zm === 0) ? 0 : C.arg(d.Z);
+    if (ha('L') && ha('C')) d.f0 = 1 / (2 * Math.PI * Math.sqrt(S.L * S.C));
+    return d;
+  }
+
+  // il piano mostra quasi solo la metà destra: in orizzontale c'è circa
+  // il doppio dello spazio che in verticale
+  function riscala(d) {
+    const xExt = max(d.R, d.inf ? 0 : d.Z.re);
+    let yExt;
+    if (inSerie()) {
+      const alto = ha('L') ? d.XL : 0, basso = min(0, alto - d.XC);
+      yExt = max(alto, -basso);
+    } else yExt = max(d.XL, d.XC, d.inf ? 0 : Math.abs(d.Z.im));
+    sc = { Zs: L.niceCeil(max(xExt / 1.7, yExt * L.MARGINE_SCALA)) };
+  }
+
+  /* ---------- modifica dei valori ---------- */
+  function limita() {
+    const K = L.CURSORI, cl = (v, r) => min(r[1], max(r[0], v));
+    S.R = F.sig(cl(S.R, K.R)); S.L = F.sig(cl(S.L, K.L)); S.C = F.sig(cl(S.C, K.C)); S.f = cl(S.f, K.f);
+  }
+
+  // imposta l'impedenza totale (parte reale e immaginaria) cambiando i componenti adatti
+  function impostaZ(re, im) {
+    const d = dati(), w = d.w, t = (sc ? sc.Zs : 1) * 0.005, k = S.tipo;
+    if (singolo()) {
+      if (k === 'R') S.R = max(re, t);
+      if (k === 'L') S.L = max(im, t) / w;
+      if (k === 'C') S.C = 1 / (w * max(-im, t));
+    } else if (inSerie()) {
+      if (ha('R')) S.R = max(re, t);
+      if (ha('C')) S.C = 1 / (w * max((ha('L') ? d.XL : 0) - im, t));   // l'ultimo della catena è C
+      else S.L = max(im, t) / w;
+    } else {
+      re = ha('R') ? max(re, t) : 0;
+      if (k === 'RL') im = max(im, t);
+      if (k === 'RC') im = min(im, -t);
+      if (!ha('R') && Math.abs(im) < t) im = im < 0 ? -t : t;
+      const Y = C.inv({ re, im });
+      if (ha('R')) S.R = 1 / Y.re;
+      if (k === 'RC') S.C = Y.im / w;
+      else S.L = 1 / (w * max((ha('C') ? w * S.C : 0) - Y.im, 1e-12));   // C resta fisso
+    }
+    limita();
+  }
+
+  function sposta(id, x, y) {
+    const X = x * sc.Zs, Yv = y * sc.Zs, t = sc.Zs * 0.005, w = 2 * Math.PI * S.f;
+    if (id === 'R') S.R = max(X, t);
+    else if (id === 'L') S.L = max(Yv, t) / w;
+    else if (id === 'C') S.C = 1 / (w * max(-Yv, t));
+    else impostaZ(X, Yv);
+    limita();
+    CO.aggiorna(false);
+  }
+
+  /* ---------- disegno ---------- */
+  const ped = (l, p) => P.vec(l, p);
+  // etichetta di Z a metà freccia, dalla parte opposta ai componenti
+  function etichettaZ(pz, testo, phi) {
+    const g = phi * C.GR, nrm = phi >= 0 ? [-Math.sin(g), Math.cos(g)] : [Math.sin(g), -Math.cos(g)];
+    const anc = Math.abs(nrm[0]) > 0.8 ? undefined : 'middle';
+    return P.testo([pz[0] * 0.55, pz[1] * 0.55], testo, 'var(--imp)', { dir: nrm, dist: 16, anc });
+  }
+
+  function disegna(d) {
+    piano.prepara();
+    const n = v => v / sc.Zs, cx = S.complessa;
+    let s = P.griglia({ semipiano: 'R negativa: non realizzabile', assi: cx ? ['Re', 'Im'] : ['0°', '90°'] });
+    const pos = {}, man = [];
+    const pz = d.inf ? null : [n(d.Z.re), n(d.Z.im)];
+    const colX = d.Z.im >= 0 ? 'var(--ind)' : 'var(--cap)';
+    const valZ = cx && !d.inf ? ' = ' + F.compl(d.Z, 'Ω') : '';
+    const sopra = d.Z.im >= 0 ? -1 : 1;   // da che parte scrivere l'etichetta di R
+
+    if (pz && Math.hypot(...pz) > 0.03)
+      s += P.arco(0, d.phi, min(0.2, 0.6 * Math.hypot(...pz)), 'φ = ' + F.deg(d.phi));
+
+    if (singolo()) {
+      const k = S.tipo;
+      const p = k === 'R' ? [n(d.R), 0] : k === 'L' ? [0, n(d.XL)] : [0, -n(d.XC)];
+      const nomi = { R: ' = R', L: ' = jX<tspan font-size="11" dy="4">L</tspan><tspan dy="-4"></tspan>', C: ' = −jX<tspan font-size="11" dy="4">C</tspan><tspan dy="-4"></tspan>' };
+      s += P.freccia([0, 0], p, COL[k], { w: 4 });
+      s += P.etichettaPunta([0, 0], p, ped('Z') + (cx ? nomi[k] + valZ : ''), COL[k]);
+      man.push([k, p, COL[k], 'Punta del fasore ' + NOME[k]]);
+    } else if (inSerie()) {
+      // catena punta-coda: R, poi L, poi C
+      let cur = [0, 0];
+      const due = ha('L') && ha('C'), off = due ? 0.022 : 0;
+      if (ha('R')) {
+        const p = [n(d.R), 0];
+        s += P.freccia(cur, p, COL.R, { w: 3 });
+        s += P.testo([p[0] / 2, 0], ped('Z', 'R') + (cx ? ' = ' + F.eng(d.R, 'Ω') : ''), COL.R, { dir: [0, sopra], dist: 18, piccola: cx });
+        man.push(['R', p, COL.R, 'Punta del fasore della resistenza']);
+        cur = p;
+      }
+      if (ha('L')) {
+        const a = [cur[0] - off, cur[1]], p = [cur[0] - off, cur[1] + n(d.XL)];
+        s += P.freccia(a, p, COL.L, { w: 3 });
+        s += P.testo([p[0], a[1] + (p[1] - a[1]) * 0.72], ped('Z', 'L') + (cx ? ' = j' + F.eng(d.XL, 'Ω') : ''), COL.L, { dir: [due ? -1 : 1, 0], dist: 10, piccola: cx });
+        if (ha('C')) man.push(['L', p, COL.L, 'Punta del fasore dell’induttore']);
+        cur = [cur[0], p[1]];
+      }
+      if (ha('C')) {
+        const a = [cur[0] + off, cur[1]], p = [cur[0] + off, cur[1] - n(d.XC)];
+        if (due) s += P.linea([cur[0] - off, cur[1]], a, COL.C);
+        s += P.freccia(a, p, COL.C, { w: 3 });
+        s += P.testo([p[0], (a[1] + p[1]) / 2], ped('Z', 'C') + (cx ? ' = −j' + F.eng(d.XC, 'Ω') : ''), COL.C, { dir: [1, 0], dist: 10, piccola: cx });
+      }
+      s += P.freccia([0, 0], pz, 'var(--imp)', { w: 4.5 });
+      s += etichettaZ(pz, ped('Z'), d.phi);   // in serie il valore si legge dalla somma delle frecce
+      man.push(['Z', pz, 'var(--imp)', 'Punta del fasore dell’impedenza totale']);
+    } else {
+      // parallelo: impedenze dei singoli componenti tratteggiate, Z totale piena
+      const comp = { R: [n(d.R), 0], L: [0, n(d.XL)], C: [0, -n(d.XC)] };
+      for (const k of S.tipo) {
+        const p = comp[k];
+        s += P.freccia([0, 0], p, COL[k], { w: 2.5, tratto: true, cava: true });
+        const v = { R: ' = ' + F.eng(d.R, 'Ω'), L: ' = j' + F.eng(d.XL, 'Ω'), C: ' = −j' + F.eng(d.XC, 'Ω') }[k];
+        s += k === 'R'
+          ? P.testo(p, ped('Z', k) + (cx ? v : ''), COL[k], { dir: [0, sopra], dist: 18, piccola: cx })
+          : P.etichettaPunta([0, 0], p, ped('Z', k) + (cx ? v : ''), COL[k], { piccola: cx });
+        man.push([k, p, COL[k], 'Punta del fasore ' + NOME[k]]);
+      }
+      if (pz) {
+        if (cx) {   // triangolo: parte reale e parte immaginaria di Z
+          if (d.Z.re !== 0 && d.Z.im !== 0) {
+            s += P.freccia([0, 0], [pz[0], 0], 'var(--res)', { w: 2 });
+            s += P.freccia([pz[0], 0], pz, colX, { w: 2 });
+            s += P.testo([pz[0] / 2, 0], 'R = ' + F.eng(d.Z.re, 'Ω'), 'var(--res)', { dir: [0, sopra], dist: 18, piccola: true });
+            s += P.testo([pz[0], pz[1] * 0.78], 'X = ' + F.eng(d.Z.im, 'Ω'), colX, { dir: [1, 0], dist: 10, piccola: true });
+          }
+        }
+        s += P.freccia([0, 0], pz, 'var(--imp)', { w: 4.5 });
+        s += P.etichettaPunta([0, 0], pz, ped('Z') + valZ, 'var(--imp)', { dist: 20 });
+        man.push(['Z', pz, 'var(--imp)', 'Punta del fasore dell’impedenza totale']);
+      } else {
+        s += P.testo([0.9, 0.12], 'Z infinita: la sua freccia', 'var(--imp)', { anc: 'middle', dist: 0 });
+        s += P.testo([0.9, 0.04], 'uscirebbe dal piano', 'var(--imp)', { anc: 'middle', dist: 0 });
+      }
+    }
+    for (const [id, p, col, descr] of man) { s += P.maniglia(id, p, col, descr); pos[id] = p; }
+    piano.disegna(s, pos);
+    $('scalaComp').textContent = `Un quadretto vale ${F.eng(sc.Zs / P.DIV, 'Ω')}.`;
+  }
+
+  /* ---------- testi ---------- */
+  const sub = (x, p) => `${x}<sub>${p}</sub>`;
+  function testi(d) {
+    const k = S.tipo;
+    $('zNotC').innerHTML = `<span class="vec">Z</span> = ` + (d.inf ? '∞' : `${F.eng(d.zm, 'Ω')} ∠ ${F.deg(d.phi)}`);
+    $('zModC').textContent = F.eng(d.zm, 'Ω');
+    $('zFaseC').textContent = d.inf || d.zm === 0 ? '—' : F.deg(d.phi);
+
+    const XL = sub('X', 'L'), XC = sub('X', 'C');
+    const r = [];
+    if (singolo()) {
+      if (k === 'R') r.push(`|Z| = R = ${F.eng(d.R, 'Ω')} e φ = 0°: il resistore non sposta la corrente rispetto alla tensione.`);
+      if (k === 'L') r.push(`|Z| = ${XL} = ωL = ${F.eng(d.XL, 'Ω')} e φ = +90°. La reattanza cresce con la frequenza.`);
+      if (k === 'C') r.push(`|Z| = ${XC} = 1 / (ωC) = ${F.eng(d.XC, 'Ω')} e φ = −90°. La reattanza diminuisce al crescere della frequenza.`);
+    } else if (inSerie()) {
+      const parti = [ha('L') ? XL : '', ha('C') ? '− ' + XC : ''].filter(Boolean).join(' ').replace(/^− /, '−');
+      const num = [ha('L') ? F.num(d.XL) : '', ha('C') ? '− ' + F.num(d.XC) : ''].filter(Boolean).join(' ').replace(/^− /, '−');
+      r.push(ha('L') && ha('C')
+        ? `Reattanza totale: X = ${parti} = ${num} = ${F.eng(d.Z.im, 'Ω')}`
+        : `Reattanza: X = ${parti} = ${F.eng(d.Z.im, 'Ω')}`);
+      if (ha('R')) {
+        r.push(`|Z| = √(R² + X²) = √(${F.num(d.R)}² + ${F.par(F.num(d.Z.im))}²) = ${F.eng(d.zm, 'Ω')}`);
+        r.push(`φ = arctan(X / R) = arctan(${F.num(d.Z.im)} / ${F.num(d.R)}) = ${F.deg(d.phi)}`);
+      } else {
+        r.push(`Senza resistenza |Z| = |X| = ${F.eng(d.zm, 'Ω')} e φ vale +90° o −90° secondo il segno di X.`);
+      }
+    } else {
+      r.push('In parallelo non si sommano le impedenze: si sommano le correnti dei rami.');
+      const tB = [ha('C') ? `1/${XC}` : '', ha('L') ? `− 1/${XL}` : ''].filter(Boolean).join(' ').replace(/^− /, '−');
+      const nB = [ha('C') ? `1/${F.num(d.XC)}` : '', ha('L') ? `− 1/${F.num(d.XL)}` : ''].filter(Boolean).join(' ').replace(/^− /, '−');
+      if (ha('R')) {
+        r.push(`|Z| = 1 / √((1/R)² + (${tB})²) = 1 / √((1/${F.num(d.R)})² + (${nB})²) = ${F.eng(d.zm, 'Ω')}`);
+        const tPhi = [ha('L') ? `1/${XL}` : '', ha('C') ? `− 1/${XC}` : ''].filter(Boolean).join(' ').replace(/^− /, '−');
+        r.push(`φ = arctan(R · (${tPhi})) = ${F.deg(d.phi)}`);
+      } else {
+        r.push(`|Z| = 1 / |${tB}| = 1 / |${nB}| = ${F.eng(d.zm, 'Ω')}`);
+      }
+    }
+    $('calcC').innerHTML = r.map(x => `<p>${x}</p>`).join('');
+
+    const nat = L.natura(d.phi, d.zm);
+    let t = nat.t;
+    if (d.f0 && Math.abs(S.f - d.f0) / d.f0 < 1e-3) {
+      t += inSerie()
+        ? ' Siamo alla risonanza: le reattanze di L e C si annullano e l’impedenza è la più piccola possibile.'
+        : ' Siamo alla risonanza: le correnti in L e C si compensano e l’impedenza è la più grande possibile.';
+    }
+    $('natC').innerHTML = t;
+    $('natC').classList.toggle('avviso', !!nat.avviso);
+
+    $('omega').textContent = `ω = 2πf = ${F.num(d.w)} rad/s`;
+    $('xlTxt').innerHTML = `${XL} = ωL = ${F.eng(d.XL, 'Ω')}`;
+    $('xcTxt').innerHTML = `${XC} = 1 / (ωC) = ${F.eng(d.XC, 'Ω')}`;
+    const boxRis = $('boxRis');
+    boxRis.hidden = !d.f0;
+    if (d.f0) $('risTxt').innerHTML = `Frequenza di risonanza: f<sub>0</sub> = 1 / (2π√(LC)) = ${F.eng(d.f0, 'Hz')}`;
+
+    $('notaPar').textContent = !inSerie() ? 'In parallelo la freccia di Z non è la somma delle frecce tratteggiate: si sommano le correnti dei rami e da quella totale si ricava Z.' : '';
+    let aiuto;
+    if (singolo()) aiuto = 'Trascina la punta della freccia lungo il suo asse.';
+    else if (inSerie()) aiuto = 'In serie le impedenze si sommano mettendo le frecce una dopo l’altra. Trascina la punta di ogni freccia: quella di Z cambia ' + (ha('R') ? 'R e ' : '') + (ha('C') ? 'C' : 'L') + '.';
+    else aiuto = 'Trascina le punte tratteggiate per cambiare un componente, oppure la punta di Z: cambiano ' + (ha('R') ? 'R e ' : '') + (k === 'RC' ? 'C' : 'L') + (ha('L') && ha('C') ? ', C resta fisso' : '') + '.';
+    $('aiutoComp').textContent = aiuto + ' Da tastiera: Tab e tasti freccia.';
+  }
+
+  function campi(d) {
+    const K = L.CURSORI, lg = (v, r) => Math.round(1000 * Math.log(v / r[0]) / Math.log(r[1] / r[0]));
+    L.scrivi($('fVal'), F.campo(S.f)); L.scrivi($('fR'), lg(S.f, K.f));
+    L.scrivi($('rVal'), F.campo(S.R)); L.scrivi($('rR'), lg(S.R, K.R));
+    L.scrivi($('lVal'), F.campo(S.L * 1e3)); L.scrivi($('lR'), lg(S.L, K.L));
+    L.scrivi($('cVal'), F.campo(S.C * 1e6)); L.scrivi($('cR'), lg(S.C, K.C));
+    for (const fs of document.querySelectorAll('#modoComp [data-per]')) fs.hidden = !ha(fs.dataset.per);
+    for (const b of document.querySelectorAll('#tipi [data-tipo]')) b.setAttribute('aria-checked', b.dataset.tipo === S.tipo);
+    for (const b of document.querySelectorAll('#coll [data-coll]')) {
+      b.disabled = singolo();
+      b.setAttribute('aria-checked', !singolo() && b.dataset.coll === S.coll);
+    }
+    const sch = L.schema(S.tipo, S.coll);
+    $('schema').setAttribute('viewBox', sch.viewBox);
+    $('schema').innerHTML = sch.html;
+  }
+
+  function complessa(d) {
+    const XL = sub('X', 'L'), XC = sub('X', 'C'), Zk = k => `<span class="vec">Z</span><sub>${k}</sub>`;
+    const Zv = '<span class="vec">Z</span>', Yv = '<span class="vec">Y</span>';
+    if (d.inf) {
+      $('zcCompl').innerHTML = `${Zv} = ∞: Ȳ = 0, nessuna corrente può passare.`;
+    } else {
+      const colX = d.Z.im >= 0 ? 'var(--ind)' : 'var(--cap)';
+      $('zcCompl').innerHTML = `${Zv} = <span class="r">${F.num(d.Z.re)}</span> ${d.Z.im < 0 ? '−' : '+'} <span style="color:${colX}">j${F.num(Math.abs(d.Z.im))}</span> Ω` +
+        (d.zm > 0 ? `<br>= ${F.num(d.zm)} · e<sup>j${F.deg(d.phi)}</sup> Ω` : '');
+    }
+    L.scrivi($('zcRe'), d.inf ? '∞' : F.campo(d.Z.re));
+    L.scrivi($('zcIm'), d.inf ? '∞' : F.campo(d.Z.im));
+    $('zcRe').disabled = !ha('R');
+    $('zcIm').disabled = S.tipo === 'R';
+    let aiuto;
+    if (singolo()) aiuto = { R: 'Per un resistore si può cambiare solo la parte reale.', L: 'Per un induttore si può cambiare solo la parte immaginaria.', C: 'Per un condensatore si può cambiare solo la parte immaginaria (negativa).' }[S.tipo];
+    else if (inSerie()) aiuto = 'Scrivendo R e X cambiano ' + (ha('R') ? 'R e ' : '') + (ha('C') ? 'C' : 'L') + (ha('L') && ha('C') ? ' (L resta fisso)' : '') + '.';
+    else aiuto = 'Scrivendo R e X cambiano ' + (ha('R') ? 'R e ' : '') + (S.tipo === 'RC' ? 'C' : 'L') + (ha('L') && ha('C') ? ' (C resta fisso)' : '') + '.';
+    $('zcAiuto').textContent = aiuto;
+
+    const righe = ['<p><b>Impedenza di ciascun componente</b></p>'];
+    if (ha('R')) righe.push(`<p>${Zk('R')} = R = <span class="r">${F.eng(d.R, 'Ω')}</span> (solo parte reale)</p>`);
+    if (ha('L')) righe.push(`<p>${Zk('L')} = j${XL} = jωL = <span class="xl">j${F.eng(d.XL, 'Ω')}</span> (solo parte immaginaria, positiva)</p>`);
+    if (ha('C')) righe.push(`<p>${Zk('C')} = −j${XC} = −j / (ωC) = <span class="xc">−j${F.eng(d.XC, 'Ω')}</span> (solo parte immaginaria, negativa)</p>`);
+
+    if (singolo()) {
+      // niente da sommare
+    } else if (inSerie()) {
+      const simb = S.tipo.split('').map(Zk).join(' + ');
+      const num = [ha('R') ? F.num(d.R) : '', ha('L') ? '+ j' + F.num(d.XL) : '', ha('C') ? '− j' + F.num(d.XC) : ''].filter(Boolean).join(' ').replace(/^\+ /, '');
+      righe.push(`<p><b>In serie le impedenze si sommano</b>: ${Zv} = ${simb} = ${num} = ${F.compl(d.Z, 'Ω')}</p>`);
+    } else {
+      righe.push(`<p><b>In parallelo si sommano le ammettenze</b>, cioè gli inversi delle impedenze (in siemens, S):</p>`);
+      if (ha('R')) righe.push(`<p>1 / ${Zk('R')} = 1 / R = ${F.eng(d.G, 'S')}</p>`);
+      if (ha('L')) righe.push(`<p>1 / ${Zk('L')} = 1 / (j${XL}) = −j / ${XL} = −j${F.eng(d.BL, 'S')}</p>`);
+      if (ha('C')) righe.push(`<p>1 / ${Zk('C')} = 1 / (−j${XC}) = j / ${XC} = j${F.eng(d.BC, 'S')}</p>`);
+      righe.push(`<p>${Yv} = G + jB = ${F.compl(d.Y, 'S')}</p>`);
+      if (d.inf) righe.push('<p>L’ammettenza è zero, quindi l’impedenza è infinita.</p>');
+      else righe.push(`<p>${Zv} = 1 / ${Yv} = (G − jB) / (G² + B²) = ${F.compl({ re: d.G, im: -d.B })} / ${F.num(d.G * d.G + d.B * d.B)} = ${F.compl(d.Z, 'Ω')}</p>`);
+    }
+    if (!d.inf) {
+      righe.push(`<p><b>Parte reale</b>: resistenza <span class="r">R = ${F.eng(d.Z.re, 'Ω')}</span>. ` +
+        `<b>Parte immaginaria</b>: reattanza <span class="${d.Z.im >= 0 ? 'xl' : 'xc'}">X = ${F.eng(d.Z.im, 'Ω')}</span>` +
+        (d.Z.im > 0 ? ', positiva quindi induttiva.' : d.Z.im < 0 ? ', negativa quindi capacitiva.' : ', nulla.') + '</p>');
+    }
+    $('passC').innerHTML = righe.join('');
+  }
+
+  CO.aggiorna = function (riscalare = true) {
+    const d = dati();
+    if (riscalare || !sc) riscala(d);
+    disegna(d);
+    testi(d);
+    campi(d);
+    if (S.complessa) complessa(d);
+  };
+
+  /* ---------- avvio ---------- */
+  CO.avvia = function () {
+    const ag = () => CO.aggiorna(true);
+    const K = L.CURSORI, dalCursore = (v, r) => F.sig(r[0] * Math.pow(r[1] / r[0], v / 1000));
+    const pos = v => v > 0;
+
+    $('tipi').addEventListener('click', e => { const b = e.target.closest('[data-tipo]'); if (b) { S.tipo = b.dataset.tipo; ag(); } });
+    $('coll').addEventListener('click', e => { const b = e.target.closest('[data-coll]'); if (b && !b.disabled) { S.coll = b.dataset.coll; ag(); } });
+
+    L.legaCampo($('fVal'), v => { S.f = v; ag(); }, pos, ag);
+    L.legaCampo($('rVal'), v => { S.R = v; ag(); }, pos, ag);
+    L.legaCampo($('lVal'), v => { S.L = v / 1e3; ag(); }, pos, ag);
+    L.legaCampo($('cVal'), v => { S.C = v / 1e6; ag(); }, pos, ag);
+    $('fR').addEventListener('input', e => { S.f = dalCursore(+e.target.value, K.f); ag(); });
+    $('rR').addEventListener('input', e => { S.R = dalCursore(+e.target.value, K.R); ag(); });
+    $('lR').addEventListener('input', e => { S.L = dalCursore(+e.target.value, K.L); ag(); });
+    $('cR').addEventListener('input', e => { S.C = dalCursore(+e.target.value, K.C); ag(); });
+    $('goRis').addEventListener('click', () => { const d = dati(); if (d.f0) { S.f = d.f0; ag(); } });
+
+    const cur = () => dati().Z;
+    L.legaCampo($('zcRe'), v => { impostaZ(v, cur().im); ag(); }, null, ag);
+    L.legaCampo($('zcIm'), v => { impostaZ(cur().re, v); ag(); }, null, ag);
+
+    piano = new P.Piano($('svgComp'), { sposta, fine() { CO.aggiorna(true); } }, P.VISTA_DESTRA);
+  };
+})(window.LAB);
+
+</script>
+<script>
+/* =====================================================================
+   AVVIO: menu dei modi, spunta della forma complessa, tema chiaro/scuro.
+   ===================================================================== */
+(function (L) {
+  const S = L.S, $ = L.$;
+  const CHIAVE_TEMA = 'laboratorio-impedenze-tema';
+
+  function mostraModo() {
+    const vi = S.modo === 'vi';
+    $('modoVI').hidden = !vi;
+    $('modoComp').hidden = vi;
+    $('complessaVI').hidden = !(vi && S.complessa);
+    $('complessaComp').hidden = !(!vi && S.complessa);
+    for (const b of document.querySelectorAll('.menu [data-modo]')) b.setAttribute('aria-checked', b.dataset.modo === S.modo);
+    (vi ? L.VI : L.CO).aggiorna(true);
+  }
+
+  function applicaTema(v) {
+    if (v === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', v);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    L.VI.avvia();
+    L.CO.avvia();
+
+    // menu: scelta del modo (anche con le frecce della tastiera)
+    const menu = document.querySelector('.menu');
+    menu.addEventListener('click', e => {
+      const b = e.target.closest('[data-modo]');
+      if (b) { S.modo = b.dataset.modo; mostraModo(); }
+    });
+    menu.addEventListener('keydown', e => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+      e.preventDefault();
+      S.modo = S.modo === 'vi' ? 'comp' : 'vi';
+      mostraModo();
+      menu.querySelector(`[data-modo="${S.modo}"]`).focus();
+    });
+
+    // spunta in fondo: forma complessa
+    $('chkComplessa').addEventListener('change', e => { S.complessa = e.target.checked; mostraModo(); });
+    $('chkComplessa').checked = S.complessa;
+
+    // tema: automatico, chiaro o scuro (la scelta resta memorizzata su questo browser)
+    let tema = 'auto';
+    try { tema = localStorage.getItem(CHIAVE_TEMA) || 'auto'; } catch (_) {}
+    $('selTema').value = tema;
+    applicaTema(tema);
+    $('selTema').addEventListener('change', e => {
+      applicaTema(e.target.value);
+      try { localStorage.setItem(CHIAVE_TEMA, e.target.value); } catch (_) {}
+    });
+
+    // sui telefoni scritte più grandi nei piani
+    const mq = window.matchMedia(L.P.TELEFONO);
+    const telefono = () => { L.P.scalaTesto = mq.matches ? 1.45 : 1; };
+    telefono();
+    mq.addEventListener('change', () => { telefono(); L.VI.aggiorna(true); L.CO.aggiorna(true); });
+
+    // il modo nascosto si prepara comunque, così è pronto al primo clic
+    L.CO.aggiorna(true);
+    mostraModo();
+  });
+})(window.LAB);
+
+</script>
+</body>
+</html>

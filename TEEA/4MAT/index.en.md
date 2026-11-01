@@ -16,6 +16,7 @@ The lecture notes, exercises, examples, and projects in this section form part o
 <!-- Add the programme topics here -->
 
 1. [**Direct and alternating electrical signals**](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html) — DC and AC signals, sine wave, amplitude, period, frequency, angular frequency *ω*, radians, phase and phasors · [📄 PDF](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-dc-ac-signals.pdf)
+1. [**Impedance**](/education/TEEA/4MAT/programma/02-impedenza/index.en.html) — how a load limits and shifts the current: impedance, Ohm's law in AC, reactance of L and C, series circuits (impedance triangle, resonance) and parallel circuits (current triangle) · [📄 PDF](/education/TEEA/4MAT/programma/02-impedenza/pdf/02-impedance.pdf)
 
 _More topics coming soon._
 
@@ -35,6 +36,18 @@ All the formulas of topic [LV01](/education/TEEA/4MAT/programma/01-segnali-conti
 
 <a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Solutions</a>
 
+### Formula sheet: impedance
+
+All the formulas of topic [LV02](/education/TEEA/4MAT/programma/02-impedenza/index.en.html) on one page, without explanations *(in Italian)*.
+
+<a class="btn btn-pdf" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-formulario-impedenza.pdf" download>Formula sheet</a>
+
+### Exercises: impedance and phasors
+
+13 exercises on topic [LV02 – Impedance](/education/TEEA/4MAT/programma/02-impedenza/index.en.html), to be solved with phasors and checked with the Impedance lab: impedance from voltage and current, reactance of inductors and capacitors, series and parallel circuits *(in Italian)*.
+
+<a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf" download>Exercises</a>
+
 ### Review: voltage and current dividers
 
 From the 3rd year: voltage and current dividers with two resistances and potentiometer, with power and energy.
@@ -48,6 +61,7 @@ _More materials coming soon._
 <div class="app-grid">
 <a class="app" href="/education/TEEA/4MAT/laboratorio/ca/"><strong>Alternating current</strong><span>Phasors, sine waves, phase shift, R-L-C impedance, power and RMS values (in Italian).</span><em>▶ START</em></a>
 <a class="app" href="/education/TEEA/4MAT/laboratorio/filtri_rc/"><strong>RC filters</strong><span>Low-pass, high-pass and band-pass filters on signals with harmonics and noisy audio (in Italian).</span><em>▶ START</em></a>
+<a class="app" href="/education/TEEA/4MAT/laboratorio/laboratorio-impedenze/"><strong>Impedance lab</strong><span>Impedance from voltage and current; impedance of R, L and C in series and in parallel, resonance, draggable phasors (in Italian).</span><em>▶ START</em></a>
 </div>
 
 ➡️ [All TEEA laboratory web apps](/education/TEEA/laboratorio/index.en.html)
