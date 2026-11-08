@@ -13,48 +13,22 @@ Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezion
 
 ## Programma
 
-<!-- Aggiungere qui gli argomenti del programma -->
+<!--
+Ogni lezione è una card LV con i suoi materiali in pulsantini (metti solo quelli che esistono):
+PDF = spiegazione · form = formulario · es = esercizi · sol = soluzioni
+1. [**Titolo**](/education/TEEA/4MAT/programma/NN-nome/) — descrizione <span class="chips-mat"><a class="chip" href="/education/TEEA/4MAT/programma/NN-nome/pdf/NN-nome.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/4MAT/programma/NN-nome/pdf/NN-formulario-nome.pdf" download>Formulario</a> <a class="chip es" href="/education/TEEA/4MAT/materiali/esercitazione-argomento-4MAT.pdf" title="N esercizi: …" download>Esercizi</a> <a class="chip sol" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-argomento-4MAT.pdf" download>Soluzioni</a></span>
+-->
 
-1. [**Segnali elettrici continui e alternati**](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/) — segnale continuo e alternato, sinusoide, ampiezza, periodo, frequenza, pulsazione *ω*, radianti, fase e fasori · [📄 PDF](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-segnali-continui-alternati.pdf)
-1. [**L'impedenza**](/education/TEEA/4MAT/programma/02-impedenza/) — come un carico limita e sfasa la corrente: impedenza, legge di Ohm in alternata, reattanza di L e C, circuiti in serie (triangolo dell'impedenza, risonanza) e in parallelo (triangolo delle correnti) · [📄 PDF](/education/TEEA/4MAT/programma/02-impedenza/pdf/02-impedenza.pdf)
+1. [**Segnali elettrici continui e alternati**](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/) — segnale continuo e alternato, sinusoide, ampiezza, periodo, frequenza, pulsazione *ω*, radianti, fase e fasori <span class="chips-mat"><a class="chip" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-segnali-continui-alternati.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf" download>Formulario</a> <a class="chip es" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" title="12 esercizi: dalla funzione v(t) all’oscilloscopio e dall’oscilloscopio alla funzione, con fasori e forma fasoriale" download>Esercizi</a> <a class="chip sol" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Soluzioni</a></span>
+2. [**L'impedenza**](/education/TEEA/4MAT/programma/02-impedenza/) — come un carico limita e sfasa la corrente: impedenza, legge di Ohm in alternata, reattanza di L e C, circuiti in serie (triangolo dell'impedenza, risonanza) e in parallelo (triangolo delle correnti) <span class="chips-mat"><a class="chip" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-impedenza.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-formulario-impedenza.pdf" download>Formulario</a> <a class="chip es" href="/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf" title="13 esercizi con i fasori, da controllare con il Laboratorio delle impedenze: impedenza da tensione e corrente, reattanza di L e C, circuiti in serie e in parallelo" download>Esercizi</a></span>
 
 _Altri argomenti in aggiornamento._
 
-## Materiali
+## Altri materiali
 
-<!-- Aggiungere qui i collegamenti a dispense, esercitazioni e progetti -->
+<!-- Solo materiali che non appartengono a una lezione di questa classe (ripassi, materiali di altre classi…) -->
 
-### Formulario: segnali elettrici continui e alternati
-
-Tutte le formule dell'argomento [LV01](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/) in una pagina, senza spiegazioni.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf" download>Formulario</a>
-
-### Esercitazione: segnali sinusoidali, oscilloscopio e fasori
-
-12 esercizi sull'argomento [LV01 – Segnali elettrici continui e alternati](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/): dalla funzione *v*(*t*) all'oscilloscopio (fase in gradi e in radianti) e dall'oscilloscopio alla funzione, con fasori e forma fasoriale.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" download>Esercizi</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Soluzioni</a>
-
-### Formulario: l'impedenza
-
-Tutte le formule dell'argomento [LV02](/education/TEEA/4MAT/programma/02-impedenza/) in una pagina, senza spiegazioni.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-formulario-impedenza.pdf" download>Formulario</a>
-
-### Esercitazione: impedenze e fasori
-
-13 esercizi sull'argomento [LV02 – L'impedenza](/education/TEEA/4MAT/programma/02-impedenza/), da risolvere con i fasori e da controllare con il Laboratorio delle impedenze: impedenza da tensione e corrente, reattanza di induttori e condensatori, circuiti in serie e in parallelo.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf" download>Esercizi</a>
-
-### Ripasso: partitori di tensione e di corrente
-
-Dalla 3ª: partitore di tensione e di corrente con due resistenze e potenziometro, con potenza ed energia.
-
-<a class="btn" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/">Vai alla spiegazione</a> <a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-partitori-potenza-energia.pdf" download>PDF</a>
-
-_Altri materiali in aggiornamento._
+**Ripasso dalla 3ª: partitori di tensione e di corrente** — partitore con due resistenze e potenziometro, con potenza ed energia. <span class="chips-mat"><a class="chip vai" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/">Spiegazione</a> <a class="chip" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-partitori-potenza-energia.pdf" download>PDF</a></span>
 
 ## Laboratorio
 

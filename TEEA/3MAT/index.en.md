@@ -13,48 +13,17 @@ The lecture notes, exercises, examples, and projects in this section form part o
 
 ## Topics
 
-<!-- Add the programme topics here -->
+<!--
+Each topic is an LV card with its materials as small buttons (only the ones that exist):
+PDF = lesson notes · form = formula sheet · es = exercises · sol = solutions
+1. [**Title**](/education/TEEA/3MAT/programma/NN-name/index.en.html) — description <span class="chips-mat"><a class="chip" href="/education/TEEA/3MAT/programma/NN-name/pdf/NN-name-en.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/3MAT/programma/NN-name/pdf/NN-formulario-name.pdf" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/3MAT/materiali/esercitazione-topic-3MAT.pdf" title="N exercises (in Italian): …" download>Exercises</a> <a class="chip sol" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-topic-3MAT.pdf" download>Solutions</a></span>
+-->
 
-1. [**Voltage, current, resistance and Ohm's law**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) — voltage, ideal and real voltage sources, current, resistance, Ohm's law and V–I characteristic, resistances in series and in parallel · [📄 PDF](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf)
-2. [**Voltage and current dividers, power and energy**](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html) — voltage and current dividers with two resistances, potentiometer, power in watts and energy in watt-hours · [📄 PDF](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf)
-3. [**Resistivity, temperature, power and energy**](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/index.en.html) — resistance of a conductor, copper and aluminium, printed circuit board tracks, resistance and temperature, Joule effect, energy in Wh and kWh, energy accounting, dividers as a model of lines and loads · [📄 PDF](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/pdf/03-resistivity-power-energy.pdf)
+1. [**Voltage, current, resistance and Ohm's law**](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) — voltage, ideal and real voltage sources, current, resistance, Ohm's law and V–I characteristic, resistances in series and in parallel <span class="chips-mat"><a class="chip" href="/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-voltage-current-resistance.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-formulario-tensione-corrente-resistenza.pdf" title="In Italian" download>Formula sheet</a></span>
+2. [**Voltage and current dividers, power and energy**](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html) — voltage and current dividers with two resistances, potentiometer, power in watts and energy in watt-hours <span class="chips-mat"><a class="chip" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-formulario-partitori-potenza-energia.pdf" title="In Italian" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/3MAT/materiali/esercitazione-partitori-potenza-energia-3MAT.pdf" title="8 exercises (in Italian): voltage and current dividers, designing a divider, potentiometer, rated power, energy in Wh and kWh and cost" download>Exercises</a> <a class="chip sol" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-partitori-potenza-energia-3MAT.pdf" title="In Italian" download>Solutions</a></span>
+3. [**Resistivity, temperature, power and energy**](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/index.en.html) — resistance of a conductor, copper and aluminium, printed circuit board tracks, resistance and temperature, Joule effect, energy in Wh and kWh, energy accounting, dividers as a model of lines and loads <span class="chips-mat"><a class="chip" href="/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/pdf/03-resistivity-power-energy.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/pdf/03-formulario-resistivita-potenza-energia.pdf" title="In Italian" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/3MAT/materiali/esercitazione-resistivita-potenza-energia-3MAT.pdf" title="8 exercises (in Italian): resistance of a conductor, copper and aluminium, PCB tracks, resistance and temperature, Joule effect, energy accounting, line and load, loads in parallel" download>Exercises</a> <a class="chip sol" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-resistivita-potenza-energia-3MAT.pdf" title="In Italian" download>Solutions</a></span>
 
-_More topics coming soon._
-
-## Materials
-
-<!-- Add links to lecture notes, exercises, and projects here -->
-
-### Formula sheet: voltage, current, resistance and Ohm's law
-
-All the formulas of topic [LV01](/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/index.en.html) on one page, without explanations *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/01-tensione-corrente-resistenza/pdf/01-formulario-tensione-corrente-resistenza.pdf" download>Formula sheet</a>
-### Formula sheet: dividers, power and energy
-
-All the formulas of topic [LV02](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html) on one page, without explanations *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-formulario-partitori-potenza-energia.pdf" download>Formula sheet</a>
-
-### Exercises: dividers, power and energy
-
-8 exercises on topic [LV02](/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html): voltage and current dividers, designing a divider, potentiometer, rated power of resistors, energy in Wh and kWh and cost *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/3MAT/materiali/esercitazione-partitori-potenza-energia-3MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-partitori-potenza-energia-3MAT.pdf" download>Solutions</a>
-
-### Formula sheet: resistivity, temperature, power and energy
-
-All the formulas of topic [LV03](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/index.en.html) on one page, without explanations *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/pdf/03-formulario-resistivita-potenza-energia.pdf" download>Formula sheet</a>
-
-### Exercises: resistivity, temperature, power and energy
-
-8 exercises on topic [LV03](/education/TEEA/3MAT/programma/03-resistivita-potenza-energia/index.en.html): resistance of a conductor, copper and aluminium, printed circuit board tracks, resistance and temperature, Joule effect, energy accounting, line and load, loads in parallel *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/3MAT/materiali/esercitazione-resistivita-potenza-energia-3MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/3MAT/materiali/soluzioni-esercitazione-resistivita-potenza-energia-3MAT.pdf" download>Solutions</a>
-
-_More materials coming soon._
+_More topics coming soon. Formula sheets, exercises and solutions are in Italian._
 
 ## Laboratory
 

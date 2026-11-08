@@ -13,15 +13,13 @@ The lecture notes, exercises, examples, and projects in this section form part o
 
 ## Topics
 
-<!-- Add the programme topics here -->
+<!--
+Each topic is an LV card with its materials as small buttons (only the ones that exist):
+PDF = lesson notes · form = formula sheet · es = exercises · sol = solutions
+1. [**Title**](/education/TEEA/5MAT/programma/NN-name/index.en.html) — description <span class="chips-mat"><a class="chip" href="/education/TEEA/5MAT/programma/NN-name/pdf/NN-name-en.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/5MAT/programma/NN-name/pdf/NN-formulario-name.pdf" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/5MAT/materiali/esercitazione-topic-5MAT.pdf" title="N exercises (in Italian): …" download>Exercises</a> <a class="chip sol" href="/education/TEEA/5MAT/materiali/soluzioni-esercitazione-topic-5MAT.pdf" download>Solutions</a></span>
+-->
 
 _Programme currently being updated._
-
-## Materials
-
-<!-- Add links to lecture notes, exercises, and projects here -->
-
-_Materials currently being updated._
 
 ## Laboratory
 

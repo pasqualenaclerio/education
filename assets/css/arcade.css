@@ -134,6 +134,24 @@ pre code { background: none; padding: 0; }
 .btn-rosa { background: var(--rosa); color: var(--bianco); }
 .btn-rosa:hover { background: #ee4d82; color: var(--bianco); }
 
+/* ---------- materiali delle lezioni: pulsantini dentro le card LV del Programma ----------
+   <span class="chips-mat"><a class="chip" href="…" download>PDF</a> <a class="chip form" …>Formulario</a>
+   <a class="chip es" …>Esercizi</a> <a class="chip sol" …>Soluzioni</a></span>
+   chip = PDF della spiegazione (bianco) · form = formulario (ciano) · es = esercizi (giallo)
+   sol = soluzioni (rosa) · vai = link a una pagina invece che a un PDF */
+.chips-mat { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 10px 0 2px; }
+a.chip { display: inline-block; font-family: var(--pixel); font-size: 10px; line-height: 1.4; text-decoration: none;
+         color: var(--inchiostro); background: var(--bianco); border: 2px solid var(--inchiostro);
+         box-shadow: 0 3px 0 var(--inchiostro); padding: 7px 9px; transition: transform .06s, box-shadow .06s; }
+a.chip::before { content: '⬇ '; }
+a.chip.vai::before { content: '▶ '; }
+a.chip.form { background: var(--ciano); }
+a.chip.es   { background: var(--giallo); }
+a.chip.sol  { background: var(--rosa); color: var(--bianco); }
+a.chip:hover { color: var(--inchiostro); filter: brightness(1.08); }
+a.chip.sol:hover { color: var(--bianco); }
+a.chip:active { transform: translateY(3px); box-shadow: 0 0 0 var(--inchiostro); }
+
 /* ---------- schede (discipline, classi) ---------- */
 .schede { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; margin: 16px 0 8px; }
 .scheda { --colore: var(--giallo); border: 4px solid var(--inchiostro); box-shadow: 6px 6px 0 var(--inchiostro);
@@ -195,6 +213,6 @@ a.app:active { transform: translateY(6px); box-shadow: 0 0 0 var(--inchiostro); 
 /* ---------- stampa ---------- */
 @media print {
   body { background: #fff; font-size: 11pt; }
-  .testata, .piede, .salta, .btn { display: none; }
+  .testata, .piede, .salta, .btn, .chips-mat { display: none; }
   .scheda, a.app, .pagina ol > li { box-shadow: none; }
 }

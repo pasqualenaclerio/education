@@ -8,23 +8,16 @@ Le dispense, le esercitazioni, gli esempi e gli eventuali progetti presenti in q
 
 ## Programma
 
-<!--
-Aggiungere qui gli argomenti del programma, ad esempio:
+Ogni lezione con i suoi materiali: spiegazione in PDF, formulario, esercitazione e soluzioni.
 
-- Argomento 1
-- Argomento 2
-- Argomento 3
--->
-
-- **LV01** — [Segnali elettrici continui e alternati](programma/01-segnali-continui-alternati/) · [PDF](programma/01-segnali-continui-alternati/pdf/01-segnali-continui-alternati.pdf)
-- **LV02** — [L'impedenza](programma/02-impedenza/) · [PDF](programma/02-impedenza/pdf/02-impedenza.pdf) · [Formulario](programma/02-impedenza/pdf/02-formulario-impedenza.pdf)
-
-## Materiali
-
-- [Esercitazione: segnali sinusoidali, oscilloscopio e fasori](materiali/esercitazione-sinusoidi-4MAT.pdf) · [Soluzioni](materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf)
-- [Esercitazione: impedenze e fasori](materiali/esercitazione-impedenze-4MAT.pdf)
+- **LV01** [Segnali elettrici continui e alternati](programma/01-segnali-continui-alternati/) — [📄 PDF](programma/01-segnali-continui-alternati/pdf/01-segnali-continui-alternati.pdf) · [Formulario](programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf) · [Esercizi](materiali/esercitazione-sinusoidi-4MAT.pdf) · [Soluzioni](materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf)
+- **LV02** [L'impedenza](programma/02-impedenza/) — [📄 PDF](programma/02-impedenza/pdf/02-impedenza.pdf) · [Formulario](programma/02-impedenza/pdf/02-formulario-impedenza.pdf) · [Esercizi](materiali/esercitazione-impedenze-4MAT.pdf)
 
 _Programma in aggiornamento._
+
+## Altri materiali
+
+- Ripasso dalla 3ª: [partitori di tensione e di corrente](../3MAT/programma/02-partitori-potenza-energia/) · [📄 PDF](../3MAT/programma/02-partitori-potenza-energia/pdf/02-partitori-potenza-energia.pdf)
 
 ## Laboratorio
 

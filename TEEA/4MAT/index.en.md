@@ -13,48 +13,22 @@ The lecture notes, exercises, examples, and projects in this section form part o
 
 ## Topics
 
-<!-- Add the programme topics here -->
+<!--
+Each topic is an LV card with its materials as small buttons (only the ones that exist):
+PDF = lesson notes · form = formula sheet · es = exercises · sol = solutions
+1. [**Title**](/education/TEEA/4MAT/programma/NN-name/index.en.html) — description <span class="chips-mat"><a class="chip" href="/education/TEEA/4MAT/programma/NN-name/pdf/NN-name-en.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/4MAT/programma/NN-name/pdf/NN-formulario-name.pdf" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/4MAT/materiali/esercitazione-topic-4MAT.pdf" title="N exercises (in Italian): …" download>Exercises</a> <a class="chip sol" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-topic-4MAT.pdf" download>Solutions</a></span>
+-->
 
-1. [**Direct and alternating electrical signals**](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html) — DC and AC signals, sine wave, amplitude, period, frequency, angular frequency *ω*, radians, phase and phasors · [📄 PDF](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-dc-ac-signals.pdf)
-1. [**Impedance**](/education/TEEA/4MAT/programma/02-impedenza/index.en.html) — how a load limits and shifts the current: impedance, Ohm's law in AC, reactance of L and C, series circuits (impedance triangle, resonance) and parallel circuits (current triangle) · [📄 PDF](/education/TEEA/4MAT/programma/02-impedenza/pdf/02-impedance.pdf)
+1. [**Direct and alternating electrical signals**](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html) — DC and AC signals, sine wave, amplitude, period, frequency, angular frequency *ω*, radians, phase and phasors <span class="chips-mat"><a class="chip" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-dc-ac-signals.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf" title="In Italian" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" title="12 exercises (in Italian): from v(t) to the oscilloscope and back, with phasors and phasor form" download>Exercises</a> <a class="chip sol" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" title="In Italian" download>Solutions</a></span>
+2. [**Impedance**](/education/TEEA/4MAT/programma/02-impedenza/index.en.html) — how a load limits and shifts the current: impedance, Ohm's law in AC, reactance of L and C, series circuits (impedance triangle, resonance) and parallel circuits (current triangle) <span class="chips-mat"><a class="chip" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-impedance.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-formulario-impedenza.pdf" title="In Italian" download>Formula sheet</a> <a class="chip es" href="/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf" title="13 exercises (in Italian) with phasors, to be checked with the Impedance lab: impedance from voltage and current, reactance of L and C, series and parallel circuits" download>Exercises</a></span>
 
-_More topics coming soon._
+_More topics coming soon. Formula sheets, exercises and solutions are in Italian._
 
-## Materials
+## More materials
 
-<!-- Add links to lecture notes, exercises, and projects here -->
+<!-- Only materials that do not belong to a topic of this class (reviews, materials from other classes…) -->
 
-### Formula sheet: direct and alternating electrical signals
-
-All the formulas of topic [LV01](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html) on one page, without explanations *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf" download>Formula sheet</a>
-
-### Exercises: sine waves, oscilloscope and phasors
-
-12 exercises on topic [LV01 – Direct and alternating electrical signals](/education/TEEA/4MAT/programma/01-segnali-continui-alternati/index.en.html): from the function *v*(*t*) to the oscilloscope (phase in degrees and radians) and from the oscilloscope to the function, with phasors and phasor form *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-sinusoidi-4MAT.pdf" download>Exercises</a> <a class="btn btn-pdf btn-rosa" style="background:#e4366f;color:#fff" href="/education/TEEA/4MAT/materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf" download>Solutions</a>
-
-### Formula sheet: impedance
-
-All the formulas of topic [LV02](/education/TEEA/4MAT/programma/02-impedenza/index.en.html) on one page, without explanations *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/programma/02-impedenza/pdf/02-formulario-impedenza.pdf" download>Formula sheet</a>
-
-### Exercises: impedance and phasors
-
-13 exercises on topic [LV02 – Impedance](/education/TEEA/4MAT/programma/02-impedenza/index.en.html), to be solved with phasors and checked with the Impedance lab: impedance from voltage and current, reactance of inductors and capacitors, series and parallel circuits *(in Italian)*.
-
-<a class="btn btn-pdf" href="/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf" download>Exercises</a>
-
-### Review: voltage and current dividers
-
-From the 3rd year: voltage and current dividers with two resistances and potentiometer, with power and energy.
-
-<a class="btn" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html">Go to the explanation</a> <a class="btn btn-pdf" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf" download>PDF</a>
-
-_More materials coming soon._
+**Review from the 3rd year: voltage and current dividers** — dividers with two resistances and potentiometer, with power and energy. <span class="chips-mat"><a class="chip vai" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/index.en.html">Explanation</a> <a class="chip" href="/education/TEEA/3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf" download>PDF</a></span>
 
 ## Laboratory
 

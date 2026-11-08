@@ -13,15 +13,13 @@ Le dispense, le esercitazioni, gli esempi e i progetti presenti in questa sezion
 
 ## Programma
 
-<!-- Aggiungere qui gli argomenti del programma -->
+<!--
+Ogni lezione è una card LV con i suoi materiali in pulsantini (metti solo quelli che esistono):
+PDF = spiegazione · form = formulario · es = esercizi · sol = soluzioni
+1. [**Titolo**](/education/TEEA/5MAT/programma/NN-nome/) — descrizione <span class="chips-mat"><a class="chip" href="/education/TEEA/5MAT/programma/NN-nome/pdf/NN-nome.pdf" download>PDF</a> <a class="chip form" href="/education/TEEA/5MAT/programma/NN-nome/pdf/NN-formulario-nome.pdf" download>Formulario</a> <a class="chip es" href="/education/TEEA/5MAT/materiali/esercitazione-argomento-5MAT.pdf" title="N esercizi: …" download>Esercizi</a> <a class="chip sol" href="/education/TEEA/5MAT/materiali/soluzioni-esercitazione-argomento-5MAT.pdf" download>Soluzioni</a></span>
+-->
 
 _Programma in aggiornamento._
-
-## Materiali
-
-<!-- Aggiungere qui i collegamenti a dispense, esercitazioni e progetti -->
-
-_Materiali in aggiornamento._
 
 ## Laboratorio
 

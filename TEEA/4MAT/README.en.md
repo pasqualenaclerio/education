@@ -8,23 +8,16 @@ The lecture notes, exercises, examples, and projects included in this folder for
 
 ## Topics
 
-<!--
-Add the programme topics here, for example:
+Each topic with its materials: lesson notes in PDF, formula sheet, exercises and solutions (formula sheets, exercises and solutions in Italian).
 
-- Topic 1
-- Topic 2
-- Topic 3
--->
-
-- **LV01** — [Direct and alternating electrical signals](programma/01-segnali-continui-alternati/index.en.md) · [PDF](programma/01-segnali-continui-alternati/pdf/01-dc-ac-signals.pdf)
-- **LV02** — [Impedance](programma/02-impedenza/index.en.md) · [PDF](programma/02-impedenza/pdf/02-impedance.pdf) · [Formula sheet](programma/02-impedenza/pdf/02-formulario-impedenza.pdf) *(in Italian)*
-
-## Materials
-
-- [Exercises: sine waves, oscilloscope and phasors](materiali/esercitazione-sinusoidi-4MAT.pdf) · [Solutions](materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf) *(in Italian)*
-- [Exercises: impedance and phasors](materiali/esercitazione-impedenze-4MAT.pdf) *(in Italian)*
+- **LV01** [Direct and alternating electrical signals](programma/01-segnali-continui-alternati/index.en.md) — [📄 PDF](programma/01-segnali-continui-alternati/pdf/01-dc-ac-signals.pdf) · [Formula sheet](programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf) · [Exercises](materiali/esercitazione-sinusoidi-4MAT.pdf) · [Solutions](materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf)
+- **LV02** [Impedance](programma/02-impedenza/index.en.md) — [📄 PDF](programma/02-impedenza/pdf/02-impedance.pdf) · [Formula sheet](programma/02-impedenza/pdf/02-formulario-impedenza.pdf) · [Exercises](materiali/esercitazione-impedenze-4MAT.pdf)
 
 _Programme currently being updated._
+
+## More materials
+
+- Review from the 3rd year: [voltage and current dividers](../3MAT/programma/02-partitori-potenza-energia/index.en.md) · [📄 PDF](../3MAT/programma/02-partitori-potenza-energia/pdf/02-dividers-power-energy.pdf)
 
 ## Laboratory
 
