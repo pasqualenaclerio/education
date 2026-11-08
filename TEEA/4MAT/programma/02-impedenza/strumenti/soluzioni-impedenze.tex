@@ -1,0 +1,111 @@
+% Soluzioni dell'esercitazione TEEA 4MAT — Argomento 2: impedenze e fasori
+% Stesso stile delle soluzioni sulle sinusoidi (tabelle per tipo di esercizio).
+% Per rigenerare il PDF (dalla cartella strumenti, due volte per il numero di pagine):
+%   pdflatex -output-directory=../../../materiali -jobname=soluzioni-esercitazione-impedenze-4MAT soluzioni-impedenze.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper, top=14mm, bottom=18mm, left=16mm, right=16mm, footskip=9mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[table]{xcolor}
+\usepackage{amsmath, amssymb, graphicx, fancyhdr, lastpage, tabularx, array}
+\usepackage[most]{tcolorbox}
+\usepackage{needspace}
+
+\definecolor{scuro}{HTML}{2F3338}
+\definecolor{tipo}{HTML}{4DA7AD}
+\definecolor{grigio}{HTML}{E9ECEF}
+\definecolor{riga}{HTML}{F4F4F4}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\newcommand{\U}[1]{\,\mathrm{#1}}
+\newcommand{\ang}[1]{\angle\,{#1}^\circ}
+
+\newcommand{\intestazione}[2]{%
+  \begin{minipage}[c]{20mm}\includegraphics[width=18mm]{logo-isis.png}\end{minipage}%
+  \begin{minipage}[c]{\dimexpr\linewidth-20mm}
+    {\fontsize{20}{24}\selectfont\bfseries\color{scuro} #1}\par\vspace{1mm}
+    {\footnotesize\bfseries Indirizzo: IP14 -- MANUTENZIONE E ASSISTENZA TECNICA \quad -- \quad Classe 4MAT}
+  \end{minipage}\par\vspace{2mm}
+  {\color{scuro}\rule{\linewidth}{0.8pt}}\par\vspace{3mm}
+  \begin{tcolorbox}[colback=grigio, colframe=grigio, arc=0pt, left=6pt, top=5pt, bottom=5pt]
+    {\Large\bfseries\color{scuro} #2}
+  \end{tcolorbox}}
+\newcommand{\tipo}[1]{\par\needspace{9\baselineskip}\vspace{2mm}{\large\bfseries\color{tipo} #1}\par\vspace{-1.5mm}{\color{tipo}\rule{\linewidth}{0.5pt}}\par\vspace{0.5mm}}
+\newcommand{\formule}[1]{\par\vspace{0.5mm}{\small\raggedright #1\par}}
+
+% tabelle: intestazione e righe alterne in grigio chiaro, come nell'esempio
+\newenvironment{tabella}[1]
+  {\par\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.35}\rowcolors{2}{white}{riga}\tabularx{\linewidth}{#1}\rowcolor{riga}}
+  {\endtabularx\par}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\scriptsize I.S.I.S. Sacile-Brugnera | sede: ``Piero Della Valentina'' | Esercitazione TEEA 4MAT -- Impedenze e fasori}
+\fancyfoot[R]{\scriptsize Pagina \thepage\ di \pageref{LastPage}}
+
+\begin{document}
+
+\intestazione{SOLUZIONI ESERCITAZIONE}{Impedenze e fasori -- Soluzioni}
+
+I moduli sono valori efficaci e i risultati sono arrotondati a tre cifre significative. L'angolo dell'impedenza è
+$\varphi = \varphi_V - \varphi_I$: con $\varphi$ positivo la corrente è \emph{in ritardo} sulla tensione (carico induttivo),
+con $\varphi$ negativo è \emph{in anticipo} (carico capacitivo). Nei diagrammi la scala è una scelta possibile, non l'unica:
+per esempio nell'esercizio 1 un quadretto può valere $50\U{V}$ per la tensione e $1\U{A}$ per la corrente.
+
+\tipo{Tipo 1 -- Impedenza da tensione e corrente}
+
+\begin{tabella}{@{}C{7mm} P{18mm} P{20mm} P{27mm} P{31mm} P{21mm} L@{}}
+\textbf{Es.} & $\boldsymbol{\bar V}$ & $\boldsymbol{\bar I}$ & $\boldsymbol{|Z| = |V|/|I|}$ & $\boldsymbol{\varphi = \varphi_V - \varphi_I}$ & $\boldsymbol{\bar Z}$ & \textbf{Tipo di carico}\\
+1  & $230\U{V}\ang{0}$  & $4{,}6\U{A}\ang{-30}$ & $230/4{,}6 = 50\U{\Omega}$ & $0^\circ - (-30^\circ) = 30^\circ$ & $50\U{\Omega}\ang{30}$ & ohmico-induttivo: $I$ in ritardo di $30^\circ$\\
+2  & $12\U{V}\ang{20}$  & $0{,}2\U{A}\ang{65}$  & $12/0{,}2 = 60\U{\Omega}$ & $20^\circ - 65^\circ = -45^\circ$ & $60\U{\Omega}\ang{-45}$ & ohmico-capacitivo: $I$ in \textbf{anticipo} di $45^\circ$\\
+3a & $50\U{V}\ang{90}$  & $2\U{A}\ang{0}$       & $50/2 = 25\U{\Omega}$ & $90^\circ - 0^\circ = 90^\circ$ & $25\U{\Omega}\ang{90}$ & induttivo puro: $I$ in ritardo di $90^\circ$\\
+3b & $10\U{V}\ang{-10}$ & $50\U{mA}\ang{-10}$   & $10/0{,}05 = 200\U{\Omega}$ & $-10^\circ - (-10^\circ) = 0^\circ$ & $200\U{\Omega}\ang{0}$ & resistivo puro: $I$ in fase con $V$\\
+\end{tabella}
+
+\vspace{1mm}
+\begin{tabella}{@{}C{7mm} P{18mm} P{20mm} P{27mm} P{31mm} P{21mm} L@{}}
+\textbf{Es.} & $\boldsymbol{\bar V}$ & $\boldsymbol{\bar Z}$ & $\boldsymbol{|I| = |V|/|Z|}$ & $\boldsymbol{\varphi_I = \varphi_V - \varphi}$ & $\boldsymbol{\bar I}$ & \textbf{Corrente}\\
+4 & $24\U{V}\ang{0}$ & $120\U{\Omega}\ang{60}$ & $24/120 = 0{,}2\U{A}$ & $0^\circ - 60^\circ = -60^\circ$ & $0{,}2\U{A}\ang{-60}$ & in ritardo di $60^\circ$ (ohmico-induttivo)\\
+\end{tabella}
+\formule{Nel laboratorio, per l'esercizio 4, basta scrivere \mbox{$I = 0{,}2\U{A}$} con fase \mbox{$-60^\circ$} e controllare che compaia \mbox{$\bar Z = 120\U{\Omega}\ang{60}$}.}
+
+\tipo{Tipo 2 -- Reattanza di induttori e condensatori}
+
+\begin{tabella}{@{}C{7mm} P{23mm} P{64mm} P{23mm} L@{}}
+\textbf{Es.} & \textbf{Componente} & \textbf{Reattanza} & $\boldsymbol{\bar Z}$ \textbf{a 50 Hz} & \textbf{Che cosa succede}\\
+5 & $L = 100\U{mH}$ & $50\U{Hz}$: $X_L = 2\pi \cdot 50 \cdot 0{,}1 = 31{,}4\U{\Omega}$\newline $500\U{Hz}$: $X_L = 2\pi \cdot 500 \cdot 0{,}1 = 314\U{\Omega}$ & $31{,}4\U{\Omega}\ang{90}$ & $f \times 10$ $\Rightarrow$ $X_L \times 10$: $X_L$ è proporzionale a $f$\\
+6 & $C = 10\U{\mu F}$ & $50\U{Hz}$: $X_C = 1/(2\pi \cdot 50 \cdot 10^{-5}) = 318\U{\Omega}$\newline $1\U{kHz}$: $X_C = 1/(2\pi \cdot 1000 \cdot 10^{-5}) = 15{,}9\U{\Omega}$ & $318\U{\Omega}\ang{-90}$ & se $f$ aumenta $X_C$ diminuisce ($f \times 20$ $\Rightarrow$ $X_C / 20$)\\
+7a & $L = 50\U{mH}$ & $f = X_L/(2\pi L) = 100/(2\pi \cdot 0{,}05) = 318\U{Hz}$ & -- & a $318\U{Hz}$ l'induttore ha $X_L = 100\U{\Omega}$\\
+7b & $C = 2{,}2\U{\mu F}$ & $f = 1/(2\pi C X_C)$\newline $\phantom{f} = 1/(2\pi \cdot 2{,}2 \cdot 10^{-6} \cdot 100) = 723\U{Hz}$ & -- & a $723\U{Hz}$ il condensatore ha $X_C = 100\U{\Omega}$\\
+\end{tabella}
+\formule{Reattanze: \mbox{$X_L = 2\pi f L$} \quad \mbox{$X_C = 1/(2\pi f C)$} \qquad Impedenze: \mbox{$\bar Z_L = X_L\ang{+90}$} \quad \mbox{$\bar Z_C = X_C\ang{-90}$} \qquad \mbox{$L$} in H, \mbox{$C$} in F.}
+
+\tipo{Tipo 3 -- Circuiti in serie: il triangolo dell'impedenza}
+
+\begin{tabella}{@{}C{8mm} P{30mm} P{42mm} P{25mm} P{22mm} L@{}}
+\textbf{Es.} & \textbf{Dati} & \textbf{Reattanza totale} $\boldsymbol{X}$ & $\boldsymbol{|Z|}$ & $\boldsymbol{\varphi}$ & $\boldsymbol{\bar Z}$ \textbf{e corrente}\\
+8 & $R = 30\U{\Omega}$, $L = 63{,}7\U{mH}$, $f = 100\U{Hz}$ & $X_L = 2\pi \cdot 100 \cdot 0{,}0637 = 40\U{\Omega}$ & $\sqrt{30^2 + 40^2} = 50\U{\Omega}$ & $\arctan\frac{40}{30} = 53{,}1^\circ$ & $50\U{\Omega}\ang{53{,}1}$, ohmico-induttivo;\newline $|I| = 100/50 = 2\U{A}$, in ritardo di $53{,}1^\circ$\\
+9 & $R = 60\U{\Omega}$, $C = 26{,}5\U{\mu F}$, $f = 100\U{Hz}$ & $X_C = 1/(2\pi \cdot 100 \cdot 26{,}5 \cdot 10^{-6}) = 60\U{\Omega}$, quindi $X = -60\U{\Omega}$ & $\sqrt{60^2 + 60^2} = 84{,}9\U{\Omega}$ & $\arctan\frac{-60}{60} = -45^\circ$ & $84{,}9\U{\Omega}\ang{-45}$,\newline ohmico-capacitivo\\
+10 & $R = 40\U{\Omega}$, $X_L = 80\U{\Omega}$, $X_C = 50\U{\Omega}$ & $X = 80 - 50 = 30\U{\Omega}$ & $\sqrt{40^2 + 30^2} = 50\U{\Omega}$ & $\arctan\frac{30}{40} = 36{,}9^\circ$ & $50\U{\Omega}\ang{36{,}9}$;\newline $|I| = 100/50 = 2\U{A}$, in \textbf{ritardo} di $36{,}9^\circ$\\
+11a & $R = 20\U{\Omega}$, $L = 10\U{mH}$, $C = 10\U{\mu F}$ & $f_0 = 1/(2\pi\sqrt{0{,}01 \cdot 10^{-5}}) = 503\U{Hz}$: $X_L = X_C$, $X = 0$ & $|Z| = R = 20\U{\Omega}$ & $0^\circ$ & $20\U{\Omega}\ang{0}$: risonanza, $|Z|$ minima, corrente massima e in fase\\
+11b & stesso circuito a $f = 1\U{kHz}$ & $X_L = 62{,}8\U{\Omega}$, $X_C = 15{,}9\U{\Omega}$, $X = 46{,}9\U{\Omega}$ & $\sqrt{20^2 + 46{,}9^2} = 51{,}0\U{\Omega}$ & $\arctan\frac{46{,}9}{20} = 66{,}9^\circ$ & $51{,}0\U{\Omega}\ang{66{,}9}$: sopra $f_0$ prevale L, ohmico-induttivo\\
+\end{tabella}
+\formule{In serie: stessa corrente, si sommano le impedenze punta-coda \qquad \mbox{$X = X_L - X_C$} \qquad \mbox{$|Z| = \sqrt{R^2 + X^2}$} \qquad \mbox{$\varphi = \arctan(X/R)$} \qquad \mbox{$X > 0$} induttivo, \mbox{$X < 0$} capacitivo.}
+
+\tipo{Tipo 4 -- Circuiti in parallelo: i fasori delle correnti}
+
+\begin{tabella}{@{}C{8mm} P{30mm} P{18mm} P{22mm} P{33mm} P{30mm} L@{}}
+\textbf{Es.} & \textbf{Dati} & $\boldsymbol{I_R}$ & $\boldsymbol{I_L}$ \textbf{o} $\boldsymbol{I_C}$ & $\boldsymbol{|I|}$ \textbf{e} $\boldsymbol{\varphi_I}$ & $\boldsymbol{\bar Z}$ & \textbf{Circuito}\\
+12 & $R = 40\U{\Omega}$, $X_L = 30\U{\Omega}$, $\bar V = 120\U{V}\ang{0}$ & $120/40 = 3\U{A}$, a $0^\circ$ & $120/30 = 4\U{A}$, a $-90^\circ$ & $\sqrt{3^2 + 4^2} = 5\U{A}$\newline $-\arctan(4/3) = -53{,}1^\circ$ & $120/5 = 24\U{\Omega}$\newline $\bar Z = 24\U{\Omega}\ang{53{,}1}$ & ohmico-induttivo\\
+13 & $R = 20\U{\Omega}$, $X_C = 15\U{\Omega}$, $\bar V = 60\U{V}\ang{0}$ & $60/20 = 3\U{A}$, a $0^\circ$ & $60/15 = 4\U{A}$, a $+90^\circ$ & $\sqrt{3^2 + 4^2} = 5\U{A}$\newline $+\arctan(4/3) = +53{,}1^\circ$ & $60/5 = 12\U{\Omega}$\newline $\bar Z = 12\U{\Omega}\ang{-53{,}1}$ & ohmico-capacitivo\\
+\end{tabella}
+\formule{In parallelo: stessa tensione, si sommano le correnti dei rami (non le impedenze) \qquad \mbox{$|I| = \sqrt{I_R^2 + (I_C - I_L)^2}$} \qquad \mbox{$|Z| = |V|/|I|$} \qquad \mbox{$\varphi = -\varphi_I$} \qquad \mbox{$|Z|$} è più piccola di ogni ramo: \mbox{$24\U{\Omega} < 30, 40\U{\Omega}$}; \ \mbox{$12\U{\Omega} < 15, 20\U{\Omega}$}.}
+
+\end{document}

@@ -510,7 +510,7 @@ In the [Laboratorio delle impedenze](/education/TEEA/4MAT/laboratorio/laboratori
 
 📐 All the formulas on one page: [impedance formula sheet](pdf/02-formulario-impedenza.pdf) *(in Italian)*.
 
-✏️ To practise: [exercises on impedance and phasors](/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf) (13 exercises, *in Italian*).
+✏️ To practise: [exercises on impedance and phasors](/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf) (13 exercises) and [solutions](/education/TEEA/4MAT/materiali/soluzioni-esercitazione-impedenze-4MAT.pdf) *(in Italian)*.
 
 ➡️ To check your results use the web apps [Laboratorio delle impedenze](/education/TEEA/4MAT/laboratorio/laboratorio-impedenze/) and [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/) *(in Italian)*.
 

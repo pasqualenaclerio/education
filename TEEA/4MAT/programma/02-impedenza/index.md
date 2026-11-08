@@ -510,7 +510,7 @@ Nel [Laboratorio delle impedenze](/education/TEEA/4MAT/laboratorio/laboratorio-i
 
 📐 Tutte le formule in una pagina: [formulario dell'impedenza](pdf/02-formulario-impedenza.pdf).
 
-✏️ Per allenarti: [esercitazione su impedenze e fasori](/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf) (13 esercizi).
+✏️ Per allenarti: [esercitazione su impedenze e fasori](/education/TEEA/4MAT/materiali/esercitazione-impedenze-4MAT.pdf) (13 esercizi) e [soluzioni](/education/TEEA/4MAT/materiali/soluzioni-esercitazione-impedenze-4MAT.pdf).
 
 ➡️ Per verificare i risultati usa le web app [Laboratorio delle impedenze](/education/TEEA/4MAT/laboratorio/laboratorio-impedenze/) e [Corrente alternata](/education/TEEA/4MAT/laboratorio/ca/).
 

@@ -11,7 +11,7 @@ Le dispense, le esercitazioni, gli esempi e gli eventuali progetti presenti in q
 Ogni lezione con i suoi materiali: spiegazione in PDF, formulario, esercitazione e soluzioni.
 
 - **LV01** [Segnali elettrici continui e alternati](programma/01-segnali-continui-alternati/) — [📄 PDF](programma/01-segnali-continui-alternati/pdf/01-segnali-continui-alternati.pdf) · [Formulario](programma/01-segnali-continui-alternati/pdf/01-formulario-segnali-continui-alternati.pdf) · [Esercizi](materiali/esercitazione-sinusoidi-4MAT.pdf) · [Soluzioni](materiali/soluzioni-esercitazione-sinusoidi-4MAT.pdf)
-- **LV02** [L'impedenza](programma/02-impedenza/) — [📄 PDF](programma/02-impedenza/pdf/02-impedenza.pdf) · [Formulario](programma/02-impedenza/pdf/02-formulario-impedenza.pdf) · [Esercizi](materiali/esercitazione-impedenze-4MAT.pdf)
+- **LV02** [L'impedenza](programma/02-impedenza/) — [📄 PDF](programma/02-impedenza/pdf/02-impedenza.pdf) · [Formulario](programma/02-impedenza/pdf/02-formulario-impedenza.pdf) · [Esercizi](materiali/esercitazione-impedenze-4MAT.pdf) · [Soluzioni](materiali/soluzioni-esercitazione-impedenze-4MAT.pdf)
 
 _Programma in aggiornamento._
 
