@@ -281,23 +281,81 @@ In serie **dissipa di più la resistenza più grande**: la corrente è la stessa
 
 ## Il partitore di corrente: carichi in parallelo
 
-Quando più carichi sono collegati **in parallelo**, hanno tutti la stessa tensione e la corrente totale si divide tra loro come in un **partitore di corrente**. Ogni carico consuma la sua parte di energia.
+Quando più carichi sono collegati **in parallelo**, hanno tutti la stessa tensione e la corrente totale si divide tra loro come in un **partitore di corrente**. Ogni carico consuma la sua parte di energia. Il caso più comune è proprio l'**impianto elettrico di casa**.
 
-![Due carichi in parallelo visti come un partitore di corrente](img/carichi-parallelo.svg){: width="380"}
+### Dallo schema dell'impianto allo schema elettrico
 
-### Esempio svolto: due carichi in parallelo
+Nello **schema dell'impianto** (impianto civile) ci sono tre conduttori: la **fase** F, il **neutro** N e il **conduttore di protezione** PE, collegato a terra. Le due lampade H<sub>1</sub> e H<sub>2</sub> sono collegate tra la fase e il neutro e sono comandate insieme dall'**interruttore** S, che sta sulla fase. Il PE è collegato alle parti metalliche delle lampade.
 
-Una corrente *I* = 3 A alimenta due carichi resistivi in parallelo: *R*<sub>1</sub> = 6 Ω e *R*<sub>2</sub> = 12 Ω. Funzionano 5 h al giorno.
+![Schema dell'impianto: fase, neutro e PE, interruttore S e due lampade H1 e H2](img/impianto-due-lampade.svg){: width="340"}
 
-- **correnti (partitore):** *I*<sub>1</sub> = 3 · 12 / (6 + 12) = **2 A**; *I*<sub>2</sub> = 3 · 6 / 18 = **1 A** (verifica: 2 + 1 = 3 A ✓)
-- **tensione ai capi:** *V* = *R*<sub>1</sub> · *I*<sub>1</sub> = 6 · 2 = **12 V**
-- **potenze:** *P*<sub>1</sub> = 6 · 2<sup>2</sup> = **24 W**; *P*<sub>2</sub> = 12 · 1<sup>2</sup> = **12 W**; totale 12 · 3 = 36 W ✓
-- **energia in un giorno:** *E*<sub>1</sub> = 24 · 5 = **120 Wh**; *E*<sub>2</sub> = 12 · 5 = **60 Wh**; totale **180 Wh**
-- **in un mese:** 180 · 30 = 5400 Wh = 5,4 kWh, cioè 5,4 · 0,25 = **1,35 €**
+Per fare i calcoli si ridisegna lo stesso impianto come **schema elettrico**:
 
-In parallelo **dissipa di più la resistenza più piccola**: la tensione è la stessa e *P* = *V*<sup>2</sup> / *R*. È il contrario di quello che succede in serie.
+- la rete, tra fase e neutro, diventa un **generatore** da *V* = 230 V;
+- l'interruttore S **chiuso** è un tratto di filo; **aperto** interrompe la corrente di tutte e due le lampade;
+- il PE nel funzionamento normale **non porta corrente**, quindi nello schema elettrico non compare;
+- le due lampade sono collegate agli **stessi due punti** (la fase dopo S e il neutro): sono **in parallelo**.
 
-**Confronto.** Le stesse due resistenze collegate **in serie** a 12 V: *I* = 12 / 18 ≈ 0,67 A; *P*<sub>1</sub> = 6 · 0,67<sup>2</sup> ≈ 2,7 W; *P*<sub>2</sub> = 12 · 0,67<sup>2</sup> ≈ 5,3 W. Ora è la resistenza **più grande** a dissipare di più.
+![Lo stesso impianto come schema elettrico: generatore, interruttore S e due lampade in parallelo](img/carichi-parallelo.svg){: width="440"}
+
+La tensione di rete in realtà è **alternata** (la studierete in quarta). Per i carichi resistivi, come le lampade a incandescenza, i calcoli di potenza ed energia si fanno con 230 V come se fosse continua.
+
+> **Carichi in parallelo:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V*  ;  *I* = *I*<sub>1</sub> + *I*<sub>2</sub>
+>
+> **Corrente e resistenza di un carico (dati di targa):** *I* = *P* / *V*  ;  *R* = *V*<sup>2</sup> / *P*
+
+In questo circuito, **idealmente** (fili senza resistenza), le due lampade hanno la stessa tensione del generatore: *V*<sub>1</sub> = *V*<sub>2</sub> = *V* = 230 V.
+
+### Esempio svolto: due lampade da 75 W
+
+H<sub>1</sub> e H<sub>2</sub> sono due **lampade a incandescenza** con potenza *P* = **75 W** a 230 V. Restano accese 5 h al giorno; prezzo dell'energia **0,25 €/kWh**, un mese = 30 giorni.
+
+- **corrente di ogni lampada:** da *P* = *V* · *I* si ricava *I* = *P* / *V*: *I*<sub>1</sub> = 75 / 230 ≈ **0,33 A**; *I*<sub>2</sub> = 75 / 230 ≈ **0,33 A**
+- **corrente totale** (nella fase e nell'interruttore S): *I* = *I*<sub>1</sub> + *I*<sub>2</sub> = 150 / 230 ≈ **0,65 A**. Sommando i valori già arrotondati si ottiene 0,66 A: la piccola differenza dipende solo dall'arrotondamento.
+- **resistenza di ogni lampada accesa:** *R* = *V*<sup>2</sup> / *P* = 230<sup>2</sup> / 75 ≈ **705 Ω**
+- **verifica con il partitore di corrente:** *I*<sub>1</sub> = *I* · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>) = 0,65 · 705 / 1410 ≈ **0,33 A** ✓. Con due carichi **uguali** la corrente si divide **a metà**.
+- **potenza totale:** *P*<sub>tot</sub> = 75 + 75 = **150 W** (verifica: *V* · *I* = 230 · 0,65 ≈ 150 W ✓)
+
+**Il computo energetico.**
+
+| Lampada | Potenza | Uso al giorno | Energia al giorno | Energia al mese |
+|---|---|---|---|---|
+| H<sub>1</sub> | 75 W | 5 h | 375 Wh | 11,25 kWh |
+| H<sub>2</sub> | 75 W | 5 h | 375 Wh | 11,25 kWh |
+| **totale** | **150 W** | | **750 Wh = 0,75 kWh** | **22,5 kWh** |
+
+- **spesa mensile per l'energia:** 22,5 · 0,25 ≈ **5,63 €**
+- **con due lampade LED da 10 W**, che danno all'incirca la stessa luce: *P*<sub>tot</sub> = 20 W, *I* = 20 / 230 ≈ 0,09 A, energia 20 · 5 = 100 Wh al giorno, cioè **3 kWh** al mese = **0,75 €**. Si risparmiano circa **4,88 € al mese** (l'87 % in meno): la lampada a incandescenza trasforma quasi tutta l'energia in **calore** per effetto Joule, non in luce.
+
+### Lampade diverse: dove passa più corrente
+
+Ora H<sub>1</sub> è da **100 W** e H<sub>2</sub> da **60 W**, sempre a 230 V.
+
+- **resistenze:** *R*<sub>1</sub> = 230<sup>2</sup> / 100 = **529 Ω**; *R*<sub>2</sub> = 230<sup>2</sup> / 60 ≈ **882 Ω**
+- **corrente totale:** *I* = (100 + 60) / 230 ≈ **0,696 A**
+- **partitore di corrente:** *I*<sub>1</sub> = 0,696 · 882 / (529 + 882) ≈ **0,435 A**; *I*<sub>2</sub> = 0,696 · 529 / 1411 ≈ **0,261 A** (verifica: 100 / 230 ≈ 0,435 A e 60 / 230 ≈ 0,261 A ✓)
+- **energia in 5 h:** *E*<sub>1</sub> = 100 · 5 = **500 Wh**; *E*<sub>2</sub> = 60 · 5 = **300 Wh**; totale **800 Wh**
+
+La corrente più grande passa nella lampada con la **resistenza più piccola**, che è quella di potenza più alta. In parallelo **dissipa di più la resistenza più piccola**: la tensione è la stessa e *P* = *V*<sup>2</sup> / *R*.
+
+**Confronto: le stesse lampade in serie.** Collegate in serie a 230 V: *I* = 230 / (529 + 882) ≈ 0,163 A; *P*<sub>1</sub> = 529 · 0,163<sup>2</sup> ≈ **14 W**; *P*<sub>2</sub> = 882 · 0,163<sup>2</sup> ≈ **23 W**. In serie è la lampada da 60 W a dissipare di più, ed entrambe fanno pochissima luce (il calcolo è indicativo: con meno corrente il filamento è più freddo e la sua resistenza diminuisce). Per questo in casa i carichi si collegano **in parallelo**: ognuno riceve 230 V e può essere acceso e spento da solo.
+
+### Nella realtà: la resistenza della linea
+
+I cavi che portano la corrente dal quadro alle lampade hanno una loro resistenza *R*<sub>L</sub> (andata e ritorno). Le due lampade sono ancora collegate agli stessi due punti, quindi *V*<sub>1</sub> = *V*<sub>2</sub>, ma **non sono più uguali a *V***: una parte della tensione si perde sulla linea. Linea e lampade formano un **partitore di tensione**, come nell'esempio del camper.
+
+![Le due lampade alimentate attraverso la resistenza della linea](img/lampade-linea.svg){: width="440"}
+
+> **Con la resistenza della linea:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V* · *R*<sub>P</sub> / (*R*<sub>L</sub> + *R*<sub>P</sub>) < *V*  (*R*<sub>P</sub> = resistenza equivalente delle lampade in parallelo)
+
+**Esempio.** Le due lampade da 75 W sono a 20 m dal quadro, con un cavo di rame da 1,5 mm².
+
+- **resistenza della linea:** *L* = 2 · 20 = 40 m; *R*<sub>L</sub> = 0,0175 · 40 / 1,5 ≈ **0,47 Ω**
+- **resistenza delle lampade in parallelo:** due resistenze uguali, *R*<sub>P</sub> = 705 / 2 ≈ **353 Ω**
+- **tensione sulle lampade:** *V*<sub>1</sub> = *V*<sub>2</sub> = 230 · 353 / (0,47 + 353) ≈ **229,7 V**; sulla linea si perdono circa **0,3 V**
+- **potenza persa nella linea:** *P*<sub>L</sub> = 0,47 · 0,65<sup>2</sup> ≈ **0,2 W**, cioè 0,2 · 5 · 30 = 30 Wh al mese
+
+Con carichi piccoli come due lampade la perdita è trascurabile: per questo nei calcoli si usa *V*<sub>1</sub> = *V*<sub>2</sub> = *V*. Con carichi potenti (forno, stufa, piano a induzione) la corrente è molto più grande e la caduta sulla linea diventa importante: ecco perché i cavi si scelgono con la sezione adatta alla corrente.
 
 ## Riepilogo delle formule
 
@@ -315,7 +373,9 @@ In parallelo **dissipa di più la resistenza più piccola**: la tensione è la s
 >
 > **Linea e carico:** *V*<sub>C</sub> = *V* · *R*<sub>C</sub> / (*R*<sub>L</sub> + *R*<sub>C</sub>)  ;  *η* = *V*<sub>C</sub> / *V*
 >
-> **Carichi in parallelo:** *I*<sub>1</sub> = *I* · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)  ;  *I*<sub>2</sub> = *I* · *R*<sub>1</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)
+> **Carico (dati di targa):** *I* = *P* / *V*  ;  *R* = *V*<sup>2</sup> / *P*
+>
+> **Carichi in parallelo:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V*  ;  *I* = *I*<sub>1</sub> + *I*<sub>2</sub>  ;  *I*<sub>1</sub> = *I* · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)  ;  *I*<sub>2</sub> = *I* · *R*<sub>1</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)
 
 <!-- PDF:FINE -->
 

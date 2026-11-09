@@ -135,15 +135,68 @@ FIGURE = {
 \end{circuitikz}
 """,
 
-# 6) due carichi in parallelo: partitore di corrente
+# 6) schema dell'impianto civile: F, N, PE, interruttore S, lampade H1 e H2
+'impianto-due-lampade': r"""
+\begin{circuitikz}
+  % sbarre di fase, neutro e conduttore di protezione
+  \draw[line width=1.3pt] (0,6) -- (6.4,6);   \node[left] at (0,6)   {$\mathrm{F}$};
+  \draw[line width=1.3pt] (0,0.9) -- (6.4,0.9); \node[left] at (0,0.9) {$\mathrm{N}$};
+  \draw[line width=1.3pt] (0,0) -- (6.4,0);   \node[left] at (0,0)   {$\mathrm{PE}$};
+  \draw (6.4,0) -- (6.4,-0.15) node[sground]{};
+  % interruttore S sulla fase
+  \draw (1.2,6) node[circ]{} -- (1.2,5.6) to[nos, l_={$S$}] (1.2,4.0) -- (1.2,3.6);
+  \draw (1.2,3.6) node[circ]{} -- (3.9,3.6) -- (3.9,3.3);
+  % lampade tra fase (dopo S) e neutro
+  \draw (1.2,3.6) -- (1.2,3.3) to[lamp, l_={$H_1$}] (1.2,1.6) -- (1.2,0.9) node[circ]{};
+  \draw (3.9,3.3) to[lamp, l_={$H_2$}] (3.9,1.6) -- (3.9,0.9) node[circ]{};
+  % conduttore di protezione verso le parti metalliche delle lampade
+  \draw (1.2,2.45) ++(0.46,0) node[circ, scale=0.7]{} -- ++(0.62,0) -- ++(0,-2.45) node[circ]{};
+  \draw (3.9,2.45) ++(0.46,0) node[circ, scale=0.7]{} -- ++(0.62,0) -- ++(0,-2.45) node[circ]{};
+\end{circuitikz}
+""",
+
+# 7) lo stesso impianto come schema elettrico: due lampade in parallelo (partitore di corrente)
 'carichi-parallelo': r"""
 \begin{circuitikz}
-  \draw (0,4.4) node[ocirc]{} to[short, i>^={$I = 3\,\mathrm{A}$}] (0,3.2);
-  \draw (-1.6,3.2) -- (1.6,3.2);
-  \draw (0,3.2) node[circ]{};
-  \draw (-1.6,3.2) to[short, i>^={$I_1$}] (-1.6,2.6) to[R, l_={$R_1 = 6\,\Omega$}] (-1.6,0.6) -- (-1.6,0.3) -- (1.6,0.3);
-  \draw (1.6,3.2) to[short, i>_={$I_2$}] (1.6,2.6) to[R, l^={$R_2 = 12\,\Omega$}] (1.6,0.6) -- (1.6,0.3);
-  \draw (0,0.3) node[circ]{} -- (0,0.1) node[sground]{};
+  % generatore: cerchio attraversato dal filo, segno + vicino
+  \draw (0,0) -- (0,4);
+  \draw[fill=white] (0,2) circle (0.5); \draw (0,1.5) -- (0,2.5);
+  \node at (-0.32,2.75) {$+$};
+  \node[left, tensione] at (-0.6,2) {$V = 230\,\mathrm{V}$};
+  \node[above left] at (0,4) {$\mathrm{F}$};
+  \node[below left] at (0,0) {$\mathrm{N}$};
+  % linea di fase con l'interruttore S
+  \draw (0,4) -- (1.2,4) to[nos, l={$S$}] (2.6,4) -- (4.0,4) node[circ]{} -- (6.8,4);
+  \draw[corrente, -{Latex[length=2mm]}] (0.25,4.3) -- node[above]{$I$} (1.0,4.3);
+  % lampade in parallelo
+  \draw (4.0,4) -- (4.0,3.2) to[lamp, l^={$H_1$}] (4.0,0.8) -- (4.0,0) node[circ]{};
+  \draw (6.8,4) -- (6.8,3.2) to[lamp, l^={$H_2$}] (6.8,0.8) -- (6.8,0);
+  \draw (0,0) -- (6.8,0);
+  \draw[corrente, -{Latex[length=2mm]}] (4.28,3.9) -- node[right]{$I_1$} (4.28,3.3);
+  \draw[corrente, -{Latex[length=2mm]}] (7.08,3.9) -- node[right]{$I_2$} (7.08,3.3);
+  % tensioni sulle lampade
+  \draw[tensione, -{Latex[length=2mm]}] (3.2,0.8) -- node[left]{$V_1$} (3.2,3.2);
+  \draw[tensione, -{Latex[length=2mm]}] (6.0,0.8) -- node[left]{$V_2$} (6.0,3.2);
+\end{circuitikz}
+""",
+
+# 8) le stesse lampade con la resistenza della linea: V1 = V2 ma minori di V
+'lampade-linea': r"""
+\begin{circuitikz}
+  \draw (0,0) -- (0,4);
+  \draw[fill=white] (0,2) circle (0.5); \draw (0,1.5) -- (0,2.5);
+  \node at (-0.32,2.75) {$+$};
+  \node[left, tensione] at (-0.6,2) {$V$};
+  \draw (0,4) -- (0.4,4) to[R, l_={$R_L$}] (2.4,4) to[nos, l={$S$}] (3.6,4) -- (4.6,4) node[circ]{} -- (7.4,4);
+  \draw[corrente, -{Latex[length=2mm]}] (3.75,4.3) -- node[above]{$I$} (4.45,4.3);
+  \draw[tensione, -{Latex[length=2mm]}] (2.3,4.85) -- node[above]{$V_L$} (0.5,4.85);
+  \draw (4.6,4) -- (4.6,3.2) to[lamp, l^={$H_1$}] (4.6,0.8) -- (4.6,0) node[circ]{};
+  \draw (7.4,4) -- (7.4,3.2) to[lamp, l^={$H_2$}] (7.4,0.8) -- (7.4,0);
+  \draw (0,0) -- (7.4,0);
+  \draw[corrente, -{Latex[length=2mm]}] (4.88,3.9) -- node[right]{$I_1$} (4.88,3.3);
+  \draw[corrente, -{Latex[length=2mm]}] (7.68,3.9) -- node[right]{$I_2$} (7.68,3.3);
+  \draw[tensione, -{Latex[length=2mm]}] (3.8,0.8) -- node[left]{$V_1$} (3.8,3.2);
+  \draw[tensione, -{Latex[length=2mm]}] (6.6,0.8) -- node[left]{$V_2$} (6.6,3.2);
 \end{circuitikz}
 """,
 }

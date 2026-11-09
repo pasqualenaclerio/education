@@ -281,23 +281,81 @@ In series **the larger resistance dissipates more**: the current is the same and
 
 ## The current divider: loads in parallel
 
-When several loads are connected **in parallel**, they all have the same voltage and the total current is shared among them as in a **current divider**. Each load uses its own share of energy.
+When several loads are connected **in parallel**, they all have the same voltage and the total current is shared among them as in a **current divider**. Each load uses its own share of energy. The most common case is the **electrical installation of a home**.
 
-![Two loads in parallel seen as a current divider](img/carichi-parallelo.svg){: width="380"}
+### From the installation diagram to the circuit diagram
 
-### Worked example: two loads in parallel
+The **installation diagram** (domestic installation) has three conductors: the **phase** F, the **neutral** N and the **protective conductor** PE, connected to earth. The two lamps H<sub>1</sub> and H<sub>2</sub> are connected between phase and neutral and are switched together by the **switch** S, placed on the phase. The PE is connected to the metal parts of the lamps.
 
-A current *I* = 3 A supplies two resistive loads in parallel: *R*<sub>1</sub> = 6 Ω and *R*<sub>2</sub> = 12 Ω. They run 5 h a day.
+![Installation diagram: phase, neutral and PE, switch S and two lamps H1 and H2](img/impianto-due-lampade.svg){: width="340"}
 
-- **currents (divider):** *I*<sub>1</sub> = 3 · 12 / (6 + 12) = **2 A**; *I*<sub>2</sub> = 3 · 6 / 18 = **1 A** (check: 2 + 1 = 3 A ✓)
-- **voltage across them:** *V* = *R*<sub>1</sub> · *I*<sub>1</sub> = 6 · 2 = **12 V**
-- **powers:** *P*<sub>1</sub> = 6 · 2<sup>2</sup> = **24 W**; *P*<sub>2</sub> = 12 · 1<sup>2</sup> = **12 W**; total 12 · 3 = 36 W ✓
-- **energy in a day:** *E*<sub>1</sub> = 24 · 5 = **120 Wh**; *E*<sub>2</sub> = 12 · 5 = **60 Wh**; total **180 Wh**
-- **in a month:** 180 · 30 = 5400 Wh = 5.4 kWh, that is 5.4 · 0.25 = **€1.35**
+To do the calculations, the same installation is redrawn as a **circuit diagram**:
 
-In parallel **the smaller resistance dissipates more**: the voltage is the same and *P* = *V*<sup>2</sup> / *R*. It is the opposite of what happens in series.
+- the mains, between phase and neutral, becomes a **source** of *V* = 230 V;
+- the switch S **closed** is just a piece of wire; **open**, it cuts off the current of both lamps;
+- in normal operation the PE **carries no current**, so it does not appear in the circuit diagram;
+- the two lamps are connected to the **same two points** (the phase after S and the neutral): they are **in parallel**.
 
-**Comparison.** The same two resistances connected **in series** at 12 V: *I* = 12 / 18 ≈ 0.67 A; *P*<sub>1</sub> = 6 · 0.67<sup>2</sup> ≈ 2.7 W; *P*<sub>2</sub> = 12 · 0.67<sup>2</sup> ≈ 5.3 W. Now it is the **larger** resistance that dissipates more.
+![The same installation as a circuit diagram: source, switch S and two lamps in parallel](img/carichi-parallelo.svg){: width="440"}
+
+The mains voltage is actually **alternating** (you will study it in the fourth year). For resistive loads, such as incandescent lamps, power and energy are calculated with 230 V as if it were DC.
+
+> **Loads in parallel:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V*  ;  *I* = *I*<sub>1</sub> + *I*<sub>2</sub>
+>
+> **Current and resistance of a load (rating plate):** *I* = *P* / *V*  ;  *R* = *V*<sup>2</sup> / *P*
+
+In this circuit, **ideally** (wires with no resistance), the two lamps have the same voltage as the source: *V*<sub>1</sub> = *V*<sub>2</sub> = *V* = 230 V.
+
+### Worked example: two 75 W lamps
+
+H<sub>1</sub> and H<sub>2</sub> are two **incandescent lamps** with power *P* = **75 W** at 230 V. They stay on 5 h a day; energy price **€0.25/kWh**, one month = 30 days.
+
+- **current of each lamp:** from *P* = *V* · *I* we get *I* = *P* / *V*: *I*<sub>1</sub> = 75 / 230 ≈ **0.33 A**; *I*<sub>2</sub> = 75 / 230 ≈ **0.33 A**
+- **total current** (in the phase and in the switch S): *I* = *I*<sub>1</sub> + *I*<sub>2</sub> = 150 / 230 ≈ **0.65 A**. Adding the already rounded values gives 0.66 A: the small difference is only due to rounding.
+- **resistance of each lamp when on:** *R* = *V*<sup>2</sup> / *P* = 230<sup>2</sup> / 75 ≈ **705 Ω**
+- **check with the current divider:** *I*<sub>1</sub> = *I* · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>) = 0.65 · 705 / 1410 ≈ **0.33 A** ✓. With two **equal** loads the current splits **in half**.
+- **total power:** *P*<sub>tot</sub> = 75 + 75 = **150 W** (check: *V* · *I* = 230 · 0.65 ≈ 150 W ✓)
+
+**Energy accounting.**
+
+| Lamp | Power | Use per day | Energy per day | Energy per month |
+|---|---|---|---|---|
+| H<sub>1</sub> | 75 W | 5 h | 375 Wh | 11.25 kWh |
+| H<sub>2</sub> | 75 W | 5 h | 375 Wh | 11.25 kWh |
+| **total** | **150 W** | | **750 Wh = 0.75 kWh** | **22.5 kWh** |
+
+- **monthly energy cost:** 22.5 · 0.25 ≈ **€5.63**
+- **with two 10 W LED lamps**, giving roughly the same light: *P*<sub>tot</sub> = 20 W, *I* = 20 / 230 ≈ 0.09 A, energy 20 · 5 = 100 Wh a day, that is **3 kWh** a month = **€0.75**. The saving is about **€4.88 a month** (87 % less): the incandescent lamp turns almost all its energy into **heat** by the Joule effect, not into light.
+
+### Different lamps: where more current flows
+
+Now H<sub>1</sub> is **100 W** and H<sub>2</sub> is **60 W**, still at 230 V.
+
+- **resistances:** *R*<sub>1</sub> = 230<sup>2</sup> / 100 = **529 Ω**; *R*<sub>2</sub> = 230<sup>2</sup> / 60 ≈ **882 Ω**
+- **total current:** *I* = (100 + 60) / 230 ≈ **0.696 A**
+- **current divider:** *I*<sub>1</sub> = 0.696 · 882 / (529 + 882) ≈ **0.435 A**; *I*<sub>2</sub> = 0.696 · 529 / 1411 ≈ **0.261 A** (check: 100 / 230 ≈ 0.435 A and 60 / 230 ≈ 0.261 A ✓)
+- **energy in 5 h:** *E*<sub>1</sub> = 100 · 5 = **500 Wh**; *E*<sub>2</sub> = 60 · 5 = **300 Wh**; total **800 Wh**
+
+The larger current flows in the lamp with the **smaller resistance**, which is the one with the higher power. In parallel **the smaller resistance dissipates more**: the voltage is the same and *P* = *V*<sup>2</sup> / *R*.
+
+**Comparison: the same lamps in series.** Connected in series at 230 V: *I* = 230 / (529 + 882) ≈ 0.163 A; *P*<sub>1</sub> = 529 · 0.163<sup>2</sup> ≈ **14 W**; *P*<sub>2</sub> = 882 · 0.163<sup>2</sup> ≈ **23 W**. In series it is the 60 W lamp that dissipates more, and both give very little light (the calculation is only indicative: with less current the filament is cooler and its resistance decreases). This is why loads in a home are connected **in parallel**: each one gets 230 V and can be switched on and off on its own.
+
+### In practice: the resistance of the line
+
+The cables carrying the current from the distribution board to the lamps have their own resistance *R*<sub>L</sub> (outgoing and return). The two lamps are still connected to the same two points, so *V*<sub>1</sub> = *V*<sub>2</sub>, but they are **no longer equal to *V***: part of the voltage is lost on the line. Line and lamps form a **voltage divider**, as in the camper van example.
+
+![The two lamps supplied through the resistance of the line](img/lampade-linea.svg){: width="440"}
+
+> **With the line resistance:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V* · *R*<sub>P</sub> / (*R*<sub>L</sub> + *R*<sub>P</sub>) < *V*  (*R*<sub>P</sub> = equivalent resistance of the lamps in parallel)
+
+**Example.** The two 75 W lamps are 20 m from the distribution board, with a 1.5 mm² copper cable.
+
+- **line resistance:** *L* = 2 · 20 = 40 m; *R*<sub>L</sub> = 0.0175 · 40 / 1.5 ≈ **0.47 Ω**
+- **resistance of the lamps in parallel:** two equal resistances, *R*<sub>P</sub> = 705 / 2 ≈ **353 Ω**
+- **voltage across the lamps:** *V*<sub>1</sub> = *V*<sub>2</sub> = 230 · 353 / (0.47 + 353) ≈ **229.7 V**; about **0.3 V** is lost on the line
+- **power lost in the line:** *P*<sub>L</sub> = 0.47 · 0.65<sup>2</sup> ≈ **0.2 W**, that is 0.2 · 5 · 30 = 30 Wh a month
+
+With small loads such as two lamps the loss is negligible: this is why calculations use *V*<sub>1</sub> = *V*<sub>2</sub> = *V*. With powerful loads (oven, heater, induction hob) the current is much larger and the voltage drop on the line becomes important: this is why cables are chosen with a cross-section suited to the current.
 
 ## Formula summary
 
@@ -315,7 +373,9 @@ In parallel **the smaller resistance dissipates more**: the voltage is the same 
 >
 > **Line and load:** *V*<sub>C</sub> = *V* · *R*<sub>C</sub> / (*R*<sub>L</sub> + *R*<sub>C</sub>)  ;  *η* = *V*<sub>C</sub> / *V*
 >
-> **Loads in parallel:** *I*<sub>1</sub> = *I* · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)  ;  *I*<sub>2</sub> = *I* · *R*<sub>1</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)
+> **Load (rating plate):** *I* = *P* / *V*  ;  *R* = *V*<sup>2</sup> / *P*
+>
+> **Loads in parallel:** *V*<sub>1</sub> = *V*<sub>2</sub> = *V*  ;  *I* = *I*<sub>1</sub> + *I*<sub>2</sub>  ;  *I*<sub>1</sub> = *I* · *R*<sub>2</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)  ;  *I*<sub>2</sub> = *I* · *R*<sub>1</sub> / (*R*<sub>1</sub> + *R*<sub>2</sub>)
 
 <!-- PDF:FINE -->
 
