@@ -216,3 +216,14 @@ a.app:active { transform: translateY(6px); box-shadow: 0 0 0 var(--inchiostro); 
   .testata, .piede, .salta, .btn, .chips-mat { display: none; }
   .scheda, a.app, .pagina ol > li { box-shadow: none; }
 }
+
+/* ---------- citazioni della home (_includes/citazioni.html) ---------- */
+.citazioni { max-width: 680px; margin: 26px 0 8px; padding: 14px 16px; background: var(--bianco);
+             border: 3px solid var(--inchiostro); box-shadow: 6px 6px 0 var(--inchiostro); cursor: pointer; }
+.citazioni-pixel { display: none; image-rendering: pixelated; margin: 0; }
+.citazioni-testo p { margin: 0; font-style: italic; }
+.citazioni-testo .citazioni-autore { margin-top: 6px; text-align: right; font-style: normal; color: var(--tenue); }
+.citazioni.attivo .citazioni-pixel { display: block; }
+.citazioni.attivo .citazioni-testo { position: absolute; width: 1px; height: 1px; overflow: hidden;
+                                     clip: rect(0 0 0 0); white-space: nowrap; }
+@media print { .citazioni { display: none; } }

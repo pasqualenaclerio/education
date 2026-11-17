@@ -11,6 +11,8 @@ Benvenuto in **education**, un progetto didattico che raccoglie dispense, eserci
 
 Il materiale è rivolto principalmente al percorso **MAT – Manutenzione e Assistenza Tecnica** ed è organizzato per disciplina e classe.
 
+{% include citazioni.html %}
+
 ## Scegli la disciplina
 
 <div class="schede">

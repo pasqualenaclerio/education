@@ -1,0 +1,14 @@
+{%- comment -%}
+  Riquadro delle citazioni della home.
+  Uso:  {% include citazioni.html %}   (in index.md e index.en.md)
+  Le citazioni stanno in _data/citazioni.yml, l'animazione in assets/js/citazioni.js.
+  Senza JavaScript si vede la prima citazione come testo normale.
+{%- endcomment -%}
+{%- assign prima = site.data.citazioni | first -%}
+{%- if page.name contains '.en.' and prima.en -%}{%- assign t = prima.en -%}{%- else -%}{%- assign t = prima.testo -%}{%- endif -%}
+<figure class="citazioni" aria-label="{% if page.name contains '.en.' %}Quote{% else %}Citazione{% endif %}">
+<canvas class="citazioni-pixel" aria-hidden="true"></canvas>
+<div class="citazioni-testo" aria-live="polite"><p>«{{ t }}»</p><p class="citazioni-autore">— {{ prima.autore }}</p></div>
+</figure>
+<script type="application/json" id="citazioni-dati">{{ site.data.citazioni | jsonify }}</script>
+<script src="{{ site.baseurl }}/assets/js/citazioni.js" defer></script>

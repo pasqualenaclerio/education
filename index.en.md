@@ -11,6 +11,8 @@ Welcome to **education**, a teaching project collecting lecture notes, exercises
 
 The materials are mainly intended for the **MAT – Manutenzione e Assistenza Tecnica** (*Maintenance and Technical Assistance*) vocational pathway and are organised by subject and class.
 
+{% include citazioni.html %}
+
 ## Choose a subject
 
 <div class="schede">

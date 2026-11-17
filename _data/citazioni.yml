@@ -1,0 +1,94 @@
+# =====================================================================
+#  Citazioni della home (riquadro con i pixel che si ricompongono)
+#  La pagina ne sceglie una a caso e la cambia ogni 8 secondi.
+#
+#  Per AGGIUNGERE una citazione copia un blocco qui sotto e cambia il testo:
+#    - testo:  la citazione (obbligatorio), sempre tra virgolette doppie "…"
+#      autore: chi l'ha detta (obbligatorio), tra virgolette doppie
+#      en:     traduzione per la home inglese (facoltativo: se manca,
+#              anche la home inglese mostra il testo italiano)
+#
+#  Regole:
+#  - il trattino "-" sta all'inizio della riga, "autore" ed "en" sono
+#    rientrati di due spazi (allineati sotto "testo");
+#  - gli apostrofi vanno bene ("s'impara"); se dentro al testo servono
+#    delle virgolette, usa « » e non " ;
+#  - testo al massimo ~150 caratteri, autore al massimo ~35;
+#  - solo lettere latine (anche accentate): il carattere pixel non ha
+#    l'alfabeto greco, per questo il proverbio greco è in italiano;
+#  - per NASCONDERE una citazione senza cancellarla metti # davanti
+#    alle sue righe.
+# =====================================================================
+
+- testo: "L'educazione è cosa di cuore."
+  autore: "Don Bosco"
+  en: "Education is a matter of the heart."
+
+# Lettera da Roma, 10 maggio 1884
+- testo: "Il maestro visto solo in cattedra è maestro e non più, ma se va in ricreazione coi giovani diventa come fratello."
+  autore: "Don Bosco"
+  en: "A teacher seen only at the desk is a teacher and nothing more; but if he joins the young at recreation, he becomes like a brother."
+
+# Lettera da Roma, 10 maggio 1884
+- testo: "Chi sa di essere amato, ama."
+  autore: "Don Bosco"
+  en: "Whoever knows they are loved, loves."
+
+# «Χαλεπὰ τὰ καλά». Platone lo riporta come proverbio (Ippia maggiore,
+# Repubblica, Cratilo); la tradizione antica lo attribuisce a Solone.
+- testo: "Le cose belle sono difficili."
+  autore: "Proverbio greco, citato da Platone"
+  en: "Beautiful things are difficult."
+
+# Plutarco, «L'arte di ascoltare» (resa libera del passo)
+- testo: "La mente non è un vaso da riempire, ma un fuoco da accendere."
+  autore: "da Plutarco"
+  en: "The mind is not a vessel to be filled, but a fire to be kindled."
+
+# «Lettera a una professoressa», 1967 (scuola di don Lorenzo Milani)
+- testo: "La scuola ha un problema solo: i ragazzi che perde."
+  autore: "Scuola di Barbiana"
+  en: "School has only one problem: the children it loses."
+
+# Seneca, «Lettere a Lucilio», 7: «Homines dum docent discunt»
+- testo: "Gli uomini, mentre insegnano, imparano."
+  autore: "Seneca"
+  en: "People learn while they teach."
+
+- testo: "Tristo è quel discepolo che non avanza il suo maestro."
+  autore: "Leonardo da Vinci"
+  en: "Poor is the pupil who does not surpass his master."
+
+# Confucio, «Dialoghi» (Lunyu), II, 15
+- testo: "Imparare senza riflettere è fatica perduta; riflettere senza imparare è pericoloso."
+  autore: "Confucio"
+  en: "Learning without thought is labour lost; thought without learning is perilous."
+
+# Dante, «Paradiso», V, 41-42
+- testo: "Non fa scienza, sanza lo ritenere, avere inteso."
+  autore: "Dante Alighieri"
+  en: "Understanding without remembering does not make knowledge."
+
+# Gianni Rodari, «Grammatica della fantasia», 1973
+- testo: "Tutti gli usi della parola a tutti: non perché tutti siano artisti, ma perché nessuno sia schiavo."
+  autore: "Gianni Rodari"
+  en: "Every use of words for everyone: not so that all may be artists, but so that no one may be a slave."
+
+# Seneca, «Ercole furioso»: «non est ad astra mollis e terris via»
+- testo: "Non c'è via facile dalla terra alle stelle."
+  autore: "Seneca"
+  en: "There is no easy way from the earth to the stars."
+
+# Riportata da Diogene Laerzio, «Vite dei filosofi», V
+- testo: "Le radici dell'educazione sono amare, ma i frutti sono dolci."
+  autore: "Aristotele"
+  en: "The roots of education are bitter, but the fruit is sweet."
+
+# Motto attribuito dalla tradizione, non documentato con certezza
+- testo: "Ancora imparo."
+  autore: "Michelangelo (attribuito)"
+  en: "I am still learning."
+
+- testo: "Sbagliando s'impara."
+  autore: "Proverbio"
+  en: "We learn by making mistakes."
