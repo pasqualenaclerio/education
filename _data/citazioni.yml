@@ -89,10 +89,6 @@
   autore: "Michelangelo (attribuito)"
   en: "I am still learning."
 
-- testo: "Sbagliando s'impara."
-  autore: "Proverbio"
-  en: "We learn by making mistakes."
-
 - testo: "L'ignoranza genera fiducia più spesso della conoscenza."
   autore: "Charles Darwin"
   en: "Ignorance more frequently begets confidence than does knowledge."
@@ -104,3 +100,132 @@
 - testo: "Se non riesci a spiegarlo in modo semplice, non l’hai capito abbastanza bene."
   autore: "Richard Feynman"
   en: "If you can't explain it simply, you don't understand it well enough."
+
+# Aristotele, Metafisica, I, 1, 980a21
+- testo: "Tutti gli uomini desiderano per natura sapere."
+  autore: "Aristotele"
+  en: "All men by nature desire to know."
+
+# Platone, Apologia di Socrate, 38a
+- testo: "Una vita senza esame non è degna di essere vissuta."
+  autore: "Socrate, riportato da Platone"
+  en: "The unexamined life is not worth living."
+
+# Orazio, Epistole, I, 2, 40-41
+# «Dimidium facti qui coepit habet; sapere aude, incipe»
+- testo: "Chi ha cominciato ha già fatto metà dell'opera: osa essere saggio, comincia."
+  autore: "Orazio"
+  en: "He who has begun is half done: dare to be wise, begin."
+
+# Immanuel Kant, Risposta alla domanda: che cos'è l'Illuminismo?, 1784
+# «Habe Mut, dich deines eigenen Verstandes zu bedienen!»
+- testo: "Abbi il coraggio di servirti della tua propria intelligenza."
+  autore: "Immanuel Kant"
+  en: "Have courage to use your own understanding."
+
+# Michel de Montaigne, Saggi, I, 26, Dell'educazione dei fanciulli
+- testo: "È meglio avere una testa ben fatta che una testa ben piena."
+  autore: "Michel de Montaigne"
+  en: "Better a well-formed mind than a well-filled one."
+
+# Michel de Montaigne, Saggi, I, 26
+# «Savoir par coeur n'est pas savoir»
+- testo: "Sapere a memoria non è sapere."
+  autore: "Michel de Montaigne"
+  en: "Knowing by heart is not truly knowing."
+
+  # John Dewey, My Pedagogic Creed, 1897
+- testo: "L'educazione è un processo di vita, non una preparazione alla vita futura."
+  autore: "John Dewey"
+  en: "Education is a process of living and not a preparation for future living."
+
+# Paulo Freire, Pedagogia dell'autonomia, 1996
+- testo: "Insegnare non è trasferire conoscenza, ma creare le possibilità per produrla o costruirla."
+  autore: "Paulo Freire"
+  en: "Teaching is not transferring knowledge, but creating the possibilities for its production or construction."
+
+# Paulo Freire, Pedagogia degli oppressi, 1970
+- testo: "Nessuno educa nessuno, nessuno educa sé stesso: gli uomini si educano insieme, mediati dal mondo."
+  autore: "Paulo Freire"
+  en: "No one educates anyone else, nor does anyone educate themselves alone: people educate one another, mediated by the world."
+
+# Don Giovanni Bosco, Lettera da Roma, 10 maggio 1884
+- testo: "Che i giovani non solo siano amati, ma che essi stessi conoscano di essere amati."
+  autore: "Don Giovanni Bosco"
+  en: "Young people must not only be loved, but must know that they are loved."
+
+# Scuola di Barbiana, Lettera a una professoressa, 1967
+- testo: "Non c'è nulla che sia più ingiusto quanto far parti uguali fra disuguali."
+  autore: "Scuola di Barbiana"
+  en: "Nothing is more unjust than treating unequals equally."
+
+# Seneca, Lettere a Lucilio, VI, 5
+# «Longum iter est per praecepta, breve et efficax per exempla»
+- testo: "Lunga è la strada degli insegnamenti, breve ed efficace quella degli esempi."
+  autore: "Seneca"
+  en: "The way is long through precepts, but short and effective through examples."
+
+# Gianni Rodari, Il libro degli errori, 1964
+- testo: "Gli errori sono necessari, utili come il pane e spesso anche belli."
+  autore: "Gianni Rodari"
+  en: "Mistakes are necessary, as useful as bread, and often beautiful too."
+
+# Hannah Arendt, La crisi dell'istruzione, 1958
+# Estratto dal passaggio conclusivo
+- testo: "L'educazione è il momento in cui decidiamo se amiamo abbastanza il mondo da assumerci la responsabilità."
+  autore: "Hannah Arendt"
+  en: "Education is the point at which we decide whether we love the world enough to assume responsibility for it..."
+
+  # Galileo Galilei, Il Saggiatore, 1623
+# Estratto dal celebre passo sul libro della natura
+- testo: "La filosofia è scritta in questo grandissimo libro che continuamente ci sta aperto innanzi a gli occhi (io dico l'universo)."
+  autore: "Galileo Galilei"
+  en: "Philosophy is written in this grand book that continually lies open before our eyes (I mean the universe)."
+
+# Gaston Bachelard, La formazione dello spirito scientifico, 1938
+# «Rien ne va de soi. Rien n'est donné. Tout est construit.»
+- testo: "Nulla va da sé. Nulla è dato. Tutto è costruito."
+  autore: "Gaston Bachelard"
+  en: "Nothing is self-evident. Nothing is given. Everything is constructed."
+
+# Richard Feynman, Cargo Cult Science, 1974
+- testo: "Il primo principio è che non devi ingannare te stesso, e tu sei la persona più facile da ingannare."
+  autore: "Richard Feynman"
+  en: "The first principle is that you must not fool yourself—and you are the easiest person to fool."
+
+# Carl Sagan, Il mondo infestato dai demoni, 1995
+- testo: "La scienza è un modo di pensare molto più che un insieme di conoscenze."
+  autore: "Carl Sagan"
+  en: "Science is a way of thinking much more than it is a body of knowledge."
+
+# Bertrand Russell, The Triumph of Stupidity, 1933
+- testo: "La causa fondamentale del problema è che, nel mondo moderno, gli stupidi sono sicurissimi di sé mentre gli intelligenti sono pieni di dubbi."
+  autore: "Bertrand Russell"
+  en: "The fundamental cause of the trouble is that in the modern world the stupid are cocksure while the intelligent are full of doubt."
+
+# Karl Popper, Congetture e confutazioni, 1963
+- testo: "La nostra conoscenza può essere soltanto finita, mentre la nostra ignoranza deve necessariamente essere infinita."
+  autore: "Karl Popper"
+  en: "Our knowledge can only be finite, while our ignorance must necessarily be infinite."
+
+# Karl Popper, La società aperta e i suoi nemici, 1945
+- testo: "Io posso avere torto e tu puoi avere ragione, e con uno sforzo potremmo avvicinarci alla verità."
+  autore: "Karl Popper"
+  en: "I may be wrong and you may be right, and by an effort, we may get nearer to the truth."
+
+  # William Bruce Cameron, Informal Sociology, 1963
+- testo: "Non tutto ciò che può essere contato conta, e non tutto ciò che conta può essere contato."
+  autore: "William Bruce Cameron"
+  en: "Not everything that can be counted counts, and not everything that counts can be counted."
+
+# Seneca, Lettere a Lucilio, CVI, 12
+# «Non vitae, sed scholae discimus»
+# Nel testo originale è una critica alla cultura fine a sé stessa
+- testo: "Non impariamo per la vita, ma per la scuola."
+  autore: "Seneca"
+  en: "We learn not for life, but for school."
+
+# Isaac Newton, lettera a Robert Hooke, 5 febbraio 1676
+- testo: "Se ho visto più lontano, è perché stavo sulle spalle dei giganti."
+  autore: "Isaac Newton"
+  en: "If I have seen further it is by standing on the shoulders of giants."
