@@ -92,3 +92,15 @@
 - testo: "Sbagliando s'impara."
   autore: "Proverbio"
   en: "We learn by making mistakes."
+
+- testo: "L'ignoranza genera fiducia più spesso della conoscenza."
+  autore: "Charles Darwin"
+  en: "Ignorance more frequently begets confidence than does knowledge."
+
+- testo: "Quando una metrica si trasforma in un obiettivo, smette di essere una buona metrica."
+  autore: "Charles Goodhart"
+  en: "When a measure becomes a target, it ceases to be a good measure."
+
+- testo: "Se non riesci a spiegarlo in modo semplice, non l’hai capito abbastanza bene."
+  autore: "Richard Feynman"
+  en: "If you can't explain it simply, you don't understand it well enough."
