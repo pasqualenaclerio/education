@@ -104,6 +104,8 @@
     var p1 = document.createElement('p'); p1.textContent = '«' + testo(q) + '»';
     var p2 = document.createElement('p'); p2.className = 'citazioni-autore'; p2.textContent = '— ' + q.autore;
     txt.appendChild(p1); txt.appendChild(p2);
+    if (soloTesto) { programma(); return; }
+    if (colonne() !== W) { misura(); P = []; }
 
     var T = mescola(pixel(q)), n = P.length, m = T.length, N = Math.max(n, m), A = [];
     for (var i = 0; i < N; i++) {
@@ -143,21 +145,63 @@
     timer = setTimeout(function () { if (fermo || document.hidden) programma(); else prossima(); }, PAUSA);
   }
 
-  function avvia() {
-    misura();
-    box.classList.add('attivo');           /* nasconde il testo (resta per gli screen reader) */
-    prossima();
+  /* Il carattere pixel è davvero caricato? In Press Start 2P ogni lettera
+     è larga 8 px, anche la «i»; nel carattere di riserva è molto più stretta. */
+  function fontPronto() {
+    oc.font = FONT;
+    return Math.abs(oc.measureText('iiiiiiii').width - 64) < 2;
+  }
+
+  var avviato = false, soloTesto = false;
+
+  function ascolta() {
     box.addEventListener('mouseenter', function () { fermo = true; });
     box.addEventListener('mouseleave', function () { fermo = false; });
     box.addEventListener('click', function () { clearTimeout(timer); prossima(); });
-    var largo = W;
-    window.addEventListener('resize', function () {
-      var w = colonne();
-      if (w === largo) return;
-      largo = w; misura(); P = []; mostra(Q[cur]);
-    });
+    function adatta() {
+      if (soloTesto || colonne() === W) return;
+      misura(); P = []; mostra(Q[cur]);
+    }
+    if (window.ResizeObserver) new ResizeObserver(adatta).observe(box);
+    else window.addEventListener('resize', adatta);
   }
 
-  if (document.fonts && document.fonts.load) document.fonts.load(FONT).then(avvia, avvia);
-  else avvia();
+  /* modo pixel: si nasconde il testo (resta per gli screen reader) e si disegna */
+  function pixelOn() {
+    soloTesto = false;
+    misura();
+    box.classList.add('attivo');
+    P = [];
+    if (cur < 0) prossima(); else mostra(Q[cur]);
+  }
+
+  function avvia(fontOk) {
+    if (avviato) return;
+    avviato = true;
+    ascolta();
+    if (fontOk) { pixelOn(); return; }
+    /* carattere pixel non disponibile: le citazioni girano come testo normale;
+       se il carattere arriva più tardi si passa ai pixel */
+    soloTesto = true;
+    prossima();
+    if (document.fonts && document.fonts.addEventListener)
+      document.fonts.addEventListener('loadingdone', function () { if (soloTesto && fontPronto()) pixelOn(); });
+  }
+
+  var prove = 0;
+  function aspettaFont() {
+    if (fontPronto()) avvia(true);
+    else if (++prove > 40) avvia(false);      /* dopo 10 secondi si rinuncia */
+    else setTimeout(aspettaFont, 250);
+  }
+
+  /* si parte a pagina caricata del tutto (stile e caratteri), così le misure sono giuste */
+  function parti() {
+    if (document.fonts && document.fonts.load) document.fonts.load(FONT, '«Aa»').then(aspettaFont, aspettaFont);
+    else aspettaFont();
+  }
+  if (window.__citazioni) return;
+  window.__citazioni = true;
+  if (document.readyState === 'complete') parti();
+  else window.addEventListener('load', parti);
 })();
